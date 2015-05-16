@@ -1,0 +1,45 @@
+#@base <http://purl.org/ontology/studio/mobile-example#> .
+@prefix mb: <rdf/mobile.n3#> .
+@prefix mt: <http://purl.org/ontology/studio/multitrack#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <#> .
+
+ex:voc a mt:AudioTrack;
+	mb:hasPath "voc.m4a" .
+ex:riddim a mt:AudioTrack;
+	mb:hasPath "riddim.m4a" .
+ex:dnb a mt:AudioTrack;
+	mb:hasPath "dnb.m4a" .
+	
+ex:accelerometerX a mb:AccelerometerControl;
+  mb:dimensionIndex 0 .
+	
+ex:accelerometerY a mb:AccelerometerControl;
+  mb:dimensionIndex 1 .
+
+ex:vocMapping1 a mb:Mapping;
+	mb:fromControl ex:accelerometerX;
+	mb:toTrack ex:voc;
+	mb:toParameter mb:Pan .
+
+ex:vocMapping2 a mb:Mapping;
+	mb:fromControl ex:accelerometerY;
+	mb:toTrack ex:voc;
+	mb:toParameter mb:Distance .
+	
+ex:riddimMapping a mb:Mapping;
+	mb:fromControl mb:SliderControl;
+	mb:toTrack ex:riddim;
+	mb:toParameter mb:Pan;
+	mb:hasMultiplier -1 .
+
+ex:dnbMapping a mb:Mapping;
+	mb:fromControl ex:SliderControl;
+	mb:toTrack ex:dnb;
+	mb:toParameter mb:Distance;
+	mb:hasMultiplier -1 .
+
+ex:j4j a mb:Rendering;
+	mt:track ex:voc, ex:riddim, ex:dnb;
+	mb:hasMapping ex:vocMapping1, ex:vocMapping2, ex:riddimMapping, ex:dnbMapping;
+	rdfs:label "J4J Remix" .

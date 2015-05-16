@@ -1,0 +1,101 @@
+#@base <http://purl.org/ontology/studio/mobile#> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix mt: <http://purl.org/ontology/studio/multitrack#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix mb: <#> .
+
+
+<#>
+	a owl:Ontology;
+	rdfs:comment "An ontology for describing playback rendering features on mobile devices" .
+
+mb:Rendering
+	a owl:Class;
+	rdfs:subClassOf mt:MultitrackProject;
+  rdfs:comment "" .
+
+mb:Mapping
+	a owl:Class;
+	rdfs:comment "" .
+
+mb:LinearMapping
+	a owl:Class;
+	rdfs:subClassOf mb:Mapping;
+	rdfs:comment "" .
+	
+mb:MobileControl 
+	a owl:Class;
+	rdfs:comment "" .
+
+mb:AccelerometerControl
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+	
+mb:SliderControl
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+	
+mb:Amplitude
+	a owl:Class;
+	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:comment "" .
+	
+mb:Pan
+	a owl:Class;
+	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:comment "" .
+	
+mb:Distance
+	a owl:Class;
+	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:comment "" .
+	
+
+
+
+mb:hasMapping
+	a owl:ObjectProperty, owl:AntisymmetricProperty;
+	rdfs:domain mb:Rendering;
+	rdfs:range mb:Mapping;
+	rdfs:comment "" .
+
+mb:fromControl
+	a owl:ObjectProperty, owl:AntisymmetricProperty;
+	rdfs:domain mb:Mapping;
+	rdfs:range mb:MobileControl;
+	rdfs:comment "" .
+
+mb:toTrack
+	a owl:ObjectProperty, owl:AntisymmetricProperty;
+	rdfs:domain mb:Mapping;
+	rdfs:range mt:AudioTrack;
+	rdfs:comment "" .
+
+mb:toParameter
+	a owl:ObjectProperty, owl:AntisymmetricProperty;
+	rdfs:domain mb:Mapping;
+	rdfs:range mt:AutomationParameter;
+	rdfs:comment "" .
+	
+mb:hasMultiplier
+	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
+	rdfs:domain mb:Mapping;
+	rdfs:range xsd:integer;
+	rdfs:comment "" .
+	
+mb:hasPath
+	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:InverseFunctionalProperty;
+	rdfs:domain mt:AudioTrack;
+	rdfs:range xsd:string;
+	rdfs:comment "" .
+	
+mb:dimensionIndex
+	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty;
+	rdfs:domain mb:AccelerometerControl;
+	rdfs:range xsd:integer;
+	rdfs:comment "" .
+	

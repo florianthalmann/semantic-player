@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+		<script src="https://w3.scripts.mit.edu/rdflib.js/dist/rdflib.js"></script>
+		<script src="lib/rdfstore/dist/rdfstore.js"></script>
+		<script src="js/AudioSampleLoader.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+		<script src="js/mapping.js"></script>
+		<script src="js/controller.js"></script>
+		<script src="js/parameter.js"></script>
+		<script src="js/rendering.js"></script>
+		<script src="js/track.js"></script>
+		<script src="js/accelerometerwatcher.js"></script>
+  </head>
+  <body ng-app="semanticplayer">
+
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">Semantic Player</h1>
+      </ion-header-bar>
+      <ion-content>
+				<div class="item range range-energized center">
+					<input type="range" name="panning" min="-10" max="10" step=".1" ng-model="slider1Controller.value" ng-change="slider1Controller.updateMappings()">
+				</div>
+				<div class="item range range-energized center">
+					<input type="range" name="panning" min="-10" max="10" step=".1" ng-model="slider2Controller.value" ng-change="slider2Controller.updateMappings()">
+				</div>
+      </ion-content>
+    </ion-pane>
+  </body>
+</html>
