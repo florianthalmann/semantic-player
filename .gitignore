@@ -5,3 +5,6 @@ node_modules/
 platforms/
 plugins/
 www/lib/
+resources/android/
+resources/ios/
+**/.DS_Store
