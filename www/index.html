@@ -37,11 +37,8 @@
         <h1 class="title">Semantic Player</h1>
       </ion-header-bar>
       <ion-content>
-				<div class="item range range-energized center">
-					<input type="range" name="panning" min="-10" max="10" step=".1" ng-model="slider1Controller.value" ng-change="slider1Controller.updateMappings()">
-				</div>
-				<div class="item range range-energized center">
-					<input type="range" name="panning" min="-10" max="10" step=".1" ng-model="slider2Controller.value" ng-change="slider2Controller.updateMappings()">
+				<div class="item range range-energized center" ng-repeat="s in sliderControllers">
+					<input type="range" name="panning" min="-10" max="10" step=".1" ng-model="s.value" ng-change="s.updateMappings()">
 				</div>
       </ion-content>
     </ion-pane>

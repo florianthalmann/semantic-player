@@ -1,4 +1,4 @@
-function Track(fileName, audioCtx, rendering) {
+function Track(filePath, audioCtx, rendering) {
 	
 	this.pan = new Parameter(this, 0);
 	this.distance = new Parameter(this, 1);
@@ -12,9 +12,8 @@ function Track(fileName, audioCtx, rendering) {
 	audioSource.connect(panner);
 	//audioSource.loop = true;
 	
-	console.log(fileName);
-  var audioLoader = new AudioSampleLoader();
-  audioLoader.src = fileName;
+	var audioLoader = new AudioSampleLoader();
+  audioLoader.src = filePath;
   audioLoader.ctx = audioCtx;
   audioLoader.onload = function() {
     audioSource.buffer = audioLoader.response;

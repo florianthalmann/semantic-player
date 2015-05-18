@@ -29,7 +29,17 @@ mb:MobileControl
 	a owl:Class;
 	rdfs:comment "" .
 
-mb:AccelerometerControl
+mb:AccelerometerX
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+	
+mb:AccelerometerY
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+
+mb:AccelerometerZ
 	a owl:Class;
 	rdfs:subClassOf mb:MobileControl;
 	rdfs:comment "" .
@@ -91,11 +101,5 @@ mb:hasPath
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:InverseFunctionalProperty;
 	rdfs:domain mt:AudioTrack;
 	rdfs:range xsd:string;
-	rdfs:comment "" .
-	
-mb:dimensionIndex
-	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty;
-	rdfs:domain mb:AccelerometerControl;
-	rdfs:range xsd:integer;
 	rdfs:comment "" .
 	
