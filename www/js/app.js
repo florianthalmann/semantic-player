@@ -34,7 +34,7 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 		var multitrackRdfUri = "http://purl.org/ontology/studio/multitrack";
 		var rdfsUri = "http://www.w3.org/2000/01/rdf-schema";
 		
-		var rendering;
+		$rootScope.rendering;
 		var accelerometerWatcher;
 		$rootScope.sliderControllers = [];
 		
@@ -42,9 +42,13 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 		$rootScope.dmos = ["example"];
 		//container for model primitives (angular needs an object to contain them!?)
 		$rootScope.vars = {};
+		$rootScope.vars.selectedDmo = $rootScope.dmos[0];
+		loadSelectedDmo();
 		var dmoUri;
 		
-		$rootScope.dmoSelected = function() {
+		$rootScope.dmoSelected = loadSelectedDmo;
+		
+		function loadSelectedDmo() {
 			if ($rootScope.vars.selectedDmo) {
 				dmoUri = dmoFolder+$rootScope.vars.selectedDmo;
 				var dmoRdfUri = dmoUri+"/example.n3";
@@ -76,7 +80,7 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 				for (var i = 0; i < results.length; i++) {
 					trackPaths.push(dmoUri+"/"+results[i].path.value);
 				}
-				rendering = new Rendering(label, trackPaths);
+				$rootScope.rendering = new Rendering(label, trackPaths, $rootScope);
 				loadMappings(store, renderingUri);
 			});
 		}
@@ -99,7 +103,7 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 				var accelerometerWatcher;
 				for (var i = 0; i < results.length; i++) {
 					var control = getControl(results[i].control.value);
-					var track = rendering.getTrackForPath(dmoUri+"/"+results[i].trackPath.value);
+					var track = $rootScope.rendering.getTrackForPath(dmoUri+"/"+results[i].trackPath.value);
 					var parameter = getParameter(track, results[i].parameter.value);
 					var multiplier = results[i].multiplier.value;
 					new Mapping(control, parameter, multiplier);
