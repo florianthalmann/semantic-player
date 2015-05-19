@@ -13,16 +13,16 @@ function Track(filePath, audioCtx, rendering) {
 	//audioSource.loop = true;
 	
 	var audioLoader = new AudioSampleLoader();
-  audioLoader.src = filePath;
-  audioLoader.ctx = audioCtx;
-  audioLoader.onload = function() {
-    audioSource.buffer = audioLoader.response;
+	audioLoader.src = filePath;
+	audioLoader.ctx = audioCtx;
+	audioLoader.onload = function() {
+		audioSource.buffer = audioLoader.response;
 		rendering.tellReady();
-  };
-  audioLoader.onerror = function() {
-    console.log("Error loading Audio");
-  };
-  audioLoader.send();
+	};
+	audioLoader.onerror = function() {
+		console.log("Error loading Audio");
+	};
+	audioLoader.send();
 	
 	this.play = function() {
 		audioSource.start(0);

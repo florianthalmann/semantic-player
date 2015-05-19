@@ -1,63 +1,84 @@
 var $http = angular.injector(['ng']).get('$http');
 
-angular.module('semanticplayer', ['ionic'])
+angular.module('semanticplayer', ['ionic', 'ngCordova'])
 
-.run(function($ionicPlatform, $rootScope) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+.run(function($ionicPlatform, $rootScope, $cordovaFile) {
+	$ionicPlatform.ready(function() {
+		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
+		if(window.cordova && window.cordova.plugins.Keyboard) {
+			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		}
+		if(window.StatusBar) {
+			StatusBar.styleDefault();
+		}
 		
-		var dmoUri = "audio/example";
+		/* DIDNT WORK IN BROWSER....
+		ionic.Platform.ready(function(){
+			console.log("READY");
+			/*$cordovaFile.checkDir('/audio/example/')
+			.then(function (success) {
+					console.log(success);
+				}, function (error) { 
+					console.log(error);
+				});
+				
+			$cordovaFile.readAsText($cordovaFile.file.applicationDirectory, "audio/example/example.n3")
+				.then(function (success) {
+					console.log("HEEEYY"+success);
+			}, function (error) {
+					console.log(error);
+			});
+		});*/
+		
+		var mobileRdfUri = "rdf/mobile.n3";
+		var multitrackRdfUri = "http://purl.org/ontology/studio/multitrack";
+		var rdfsUri = "http://www.w3.org/2000/01/rdf-schema";
 		
 		var rendering;
 		var accelerometerWatcher;
 		$rootScope.sliderControllers = [];
 		
-		//TODO MAKE LIST WITH FILE PACKAGES
+		var dmoFolder = "audio/";
+		$rootScope.dmos = ["example"];
+		//container for model primitives (angular needs an object to contain them!?)
+		$rootScope.vars = {};
+		var dmoUri;
 		
-		
-		/* WORKING RDFSTORE SAMPLE */
-		var dmoRdfUri = dmoUri+"/example.n3";
-		var mobileRdfUri = "rdf/mobile.n3";
-		var multitrackRdfUri = "http://purl.org/ontology/studio/multitrack";
-		var rdfsUri = "http://www.w3.org/2000/01/rdf-schema";
-		
-		$http.get(dmoRdfUri).success(function(data) {
-			rdfstore.create(function(err, store) {
-			  store.load('text/turtle', data, function(err, results) {
-					if (err) {
-						console.log(err);
-					}
-					store.execute("SELECT ?rendering ?label \
-														WHERE { ?rendering a <"+mobileRdfUri+"#Rendering> . \
-																		?rendering <"+rdfsUri+"#label> ?label }", function(err, results) {
-						for (var i = 0; i < results.length; i++) {
-							//TODO MAKE LIST WITH SEVERAL SELECTABLE RENDERINGS!!
-							loadRendering(store, results[i].rendering.value, results[i].label.value);
-						}
-			    });
-					
-			  });
-			});
-		});
+		$rootScope.dmoSelected = function() {
+			if ($rootScope.vars.selectedDmo) {
+				dmoUri = dmoFolder+$rootScope.vars.selectedDmo;
+				var dmoRdfUri = dmoUri+"/example.n3";
+				$http.get(dmoRdfUri).success(function(data) {
+					rdfstore.create(function(err, store) {
+						store.load('text/turtle', data, function(err, results) {
+							if (err) {
+								console.log(err);
+							}
+							store.execute("SELECT ?rendering ?label \
+							WHERE { ?rendering a <"+mobileRdfUri+"#Rendering> . \
+							?rendering <"+rdfsUri+"#label> ?label }", function(err, results) {
+								for (var i = 0; i < results.length; i++) {
+									//TODO MAKE LIST WITH SEVERAL SELECTABLE RENDERINGS!!
+									loadRendering(store, results[i].rendering.value, results[i].label.value);
+								}
+							});
+						});
+					});
+				});
+			}
+		}
 		
 		var loadRendering = function(store, renderingUri, label) {
 			store.execute("SELECT ?label ?path \
-				 								WHERE { <"+renderingUri+"> <"+multitrackRdfUri+"#track> ?track . \
-																?track <"+mobileRdfUri+"#hasPath> ?path }", function(err, results) {
+			WHERE { <"+renderingUri+"> <"+multitrackRdfUri+"#track> ?track . \
+			?track <"+mobileRdfUri+"#hasPath> ?path }", function(err, results) {
 				var trackPaths = [];
 				for (var i = 0; i < results.length; i++) {
 					trackPaths.push(dmoUri+"/"+results[i].path.value);
 				}
 				rendering = new Rendering(label, trackPaths);
 				loadMappings(store, renderingUri);
-	    });
+			});
 		}
 		
 		var loadMappings = function(store, renderingUri) {
@@ -65,16 +86,16 @@ angular.module('semanticplayer', ['ionic'])
 				for (var i = 0; i < results.length; i++) {
 					loadMapping(store, results[i].mapping.value);
 				}
-	    });
+			});
 		}
 		
 		var loadMapping = function(store, mappingUri) {
 			store.execute("SELECT ?control ?trackPath ?parameter ?multiplier \
-	 											WHERE { <"+mappingUri+"> <"+mobileRdfUri+"#fromControl> ?control . \
-																<"+mappingUri+"> <"+mobileRdfUri+"#toTrack> ?track . \
-																?track <"+mobileRdfUri+"#hasPath> ?trackPath . \
-																<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
-			 													<"+mappingUri+"> <"+mobileRdfUri+"#hasMultiplier> ?multiplier}", function(err, results) {
+			WHERE { <"+mappingUri+"> <"+mobileRdfUri+"#fromControl> ?control . \
+			<"+mappingUri+"> <"+mobileRdfUri+"#toTrack> ?track . \
+			?track <"+mobileRdfUri+"#hasPath> ?trackPath . \
+			<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
+			<"+mappingUri+"> <"+mobileRdfUri+"#hasMultiplier> ?multiplier}", function(err, results) {
 				var accelerometerWatcher;
 				for (var i = 0; i < results.length; i++) {
 					var control = getControl(results[i].control.value);
@@ -124,24 +145,5 @@ angular.module('semanticplayer', ['ionic'])
 			}
 		}
 		
-		/* WORKING RDFLIB SAMPLE FOR THE RECORD (DOESNT WORK WITH LOCAL FILES) */
-		/*var kb = $rdf.graph();
-		var fetch = $rdf.fetcher(kb);
-		
-		subj = "http://bblfish.net/people/henry/card#me";
-		pred = "http://xmlns.com/foaf/0.1/knows";
-		query = function() {
-			preds = kb.each($rdf.sym(subj));
-			knowns = kb.each($rdf.sym(subj), $rdf.sym(pred));
-		}
-	  doc = (function(uri){return uri.slice(0, uri.indexOf('#'));})(subj);
-	  fetch.nowOrWhenFetched(doc, undefined, function() {
-			query();
-			console.log(knowns);
-			for (var i = 0; i < knowns.length; i++) {
-				console.log(knowns[i].value);
-			}
-	  });*/
-		
-  });
+	});
 })

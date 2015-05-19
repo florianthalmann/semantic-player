@@ -14,7 +14,7 @@
 mb:Rendering
 	a owl:Class;
 	rdfs:subClassOf mt:MultitrackProject;
-  rdfs:comment "" .
+	rdfs:comment "" .
 
 mb:Mapping
 	a owl:Class;

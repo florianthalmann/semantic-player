@@ -1,7 +1,7 @@
 function Rendering(name, filePaths) {
 	
-  window.AudioContext = window.AudioContext || window.webkitAudioContext;
-  var audioCtx = new AudioContext();
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+	var audioCtx = new AudioContext();
 	
 	var name = name;
 	this.tracks = [];
