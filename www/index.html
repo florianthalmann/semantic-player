@@ -17,7 +17,7 @@
 		<script src="lib/ngCordova/dist/ng-cordova.js"></script>
 		<script src="cordova.js"></script>
 		<script src="lib/rdfstore/dist/rdfstore.js"></script>
-		<script src="js/AudioSampleLoader.js"></script>
+		<script src="lib/AudioSampleLoader.js"></script>
 
 		<!-- your app's js -->
 		<script src="js/app.js"></script>
@@ -27,8 +27,9 @@
 		<script src="js/rendering.js"></script>
 		<script src="js/track.js"></script>
 		<script src="js/accelerometerwatcher.js"></script>
+		<script src="js/ontologyloader.js"></script>
 	</head>
-	<body ng-app="semanticplayer">
+	<body ng-app="semanticplayer" ng-controller="playercontroller">
 		<ion-pane>
 			<ion-header-bar class="bar-stable">
 				<h1 class="title">Semantic Player</h1>
