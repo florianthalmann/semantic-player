@@ -43,27 +43,41 @@ mb:AccelerometerZ
 	a owl:Class;
 	rdfs:subClassOf mb:MobileControl;
 	rdfs:comment "" .
-	
+
+mb:GeolocationLatitude
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+
+mb:GeolocationLongitude
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+
+mb:GeolocationDistance
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+
 mb:SliderControl
 	a owl:Class;
 	rdfs:subClassOf mb:MobileControl;
 	rdfs:comment "" .
-	
+
 mb:Amplitude
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
-	
+
 mb:Pan
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
-	
+
 mb:Distance
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
-	
 
 
 
@@ -90,13 +104,13 @@ mb:toParameter
 	rdfs:domain mb:Mapping;
 	rdfs:range mt:AutomationParameter;
 	rdfs:comment "" .
-	
+
 mb:hasMultiplier
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
 	rdfs:domain mb:Mapping;
 	rdfs:range xsd:integer;
 	rdfs:comment "" .
-	
+
 mb:hasPath
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:InverseFunctionalProperty;
 	rdfs:domain mt:AudioTrack;

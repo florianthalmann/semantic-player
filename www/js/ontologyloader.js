@@ -4,7 +4,7 @@ function OntologyLoader(dmoUri, $scope) {
 	var multitrackRdfUri = "http://purl.org/ontology/studio/multitrack";
 	var rdfsUri = "http://www.w3.org/2000/01/rdf-schema";
 	
-	var accelerometerWatcher;
+	var accelerometerWatcher, geolocationWatcher;
 	
 	this.loadDmo = function(rdfUri) {
 		$http.get(dmoUri+rdfUri).success(function(data) {
@@ -71,7 +71,13 @@ function OntologyLoader(dmoUri, $scope) {
 			return getAccelerometerControl(1);
 		}	else if (controlUri == mobileRdfUri+"#AccelerometerZ") {
 			return getAccelerometerControl(2);
-		} else if (controlUri == mobileRdfUri+"#SliderControl") {
+		} else if (controlUri == mobileRdfUri+"#GeolocationLatitude") {
+			return getGeolocationControl(0);
+		}	else if (controlUri == mobileRdfUri+"#GeolocationLongitude") {
+			return getGeolocationControl(1);
+		}	else if (controlUri == mobileRdfUri+"#GeolocationDistance") {
+			return getGeolocationControl(2);
+		}	else if (controlUri == mobileRdfUri+"#SliderControl") {
 			var sliderControl = new Control($scope);
 			$scope.sliderControls.push(sliderControl);
 			$scope.$apply();
@@ -80,15 +86,28 @@ function OntologyLoader(dmoUri, $scope) {
 	}
 	
 	var getAccelerometerControl = function(index) {
-		if (!accelerometerWatcher) {
-			accelerometerWatcher = new AccelerometerWatcher();
+		if (!$scope.accelerometerWatcher) {
+			$scope.accelerometerWatcher = new AccelerometerWatcher();
 		}
 		if (index == 0) {
-			return accelerometerWatcher.xControl;
+			return $scope.accelerometerWatcher.xControl;
 		} else if (index == 1) {
-			return accelerometerWatcher.yControl;
+			return $scope.accelerometerWatcher.yControl;
 		} else {
-			return accelerometerWatcher.zControl;
+			return $scope.accelerometerWatcher.zControl;
+		}
+	}
+	
+	var getGeolocationControl = function(index) {
+		if (!$scope.geolocationWatcher) {
+			$scope.geolocationWatcher = new GeolocationWatcher();
+		}
+		if (index == 0) {
+			return $scope.geolocationWatcher.latitudeControl;
+		} else if (index == 1) {
+			return $scope.geolocationWatcher.longitudeControl;
+		} else {
+			return $scope.geolocationWatcher.distanceControl;
 		}
 	}
 	

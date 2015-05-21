@@ -16,6 +16,8 @@ angular.module('semanticplayer', ['ionic'])
 
 .controller('renderingController', function($scope) {
 	$scope.rendering;
+	$scope.accelerometerWatcher;
+	$scope.geolocationWatcher;
 	$scope.sliderControls = [];
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};

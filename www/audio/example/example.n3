@@ -29,13 +29,25 @@ ex:riddimMapping a mb:Mapping;
 	mb:toParameter mb:Pan;
 	mb:hasMultiplier 1 .
 
+ex:riddimMapping2 a mb:Mapping;
+	mb:fromControl mb:GeolocationDistance;
+	mb:toTrack ex:riddim;
+	mb:toParameter mb:Distance;
+	mb:hasMultiplier .1 .
+
 ex:dnbMapping a mb:Mapping;
 	mb:fromControl mb:SliderControl;
 	mb:toTrack ex:dnb;
 	mb:toParameter mb:Distance;
 	mb:hasMultiplier 1 .
 
+ex:dnbMapping2 a mb:Mapping;
+	mb:fromControl mb:GeolocationDistance;
+	mb:toTrack ex:dnb;
+	mb:toParameter mb:Distance;
+	mb:hasMultiplier .1 .
+
 ex:j4j a mb:Rendering;
 	mt:track ex:voc, ex:riddim, ex:dnb;
-	mb:hasMapping ex:vocMapping1, ex:vocMapping2, ex:riddimMapping, ex:dnbMapping;
+	mb:hasMapping ex:vocMapping1, ex:vocMapping2, ex:riddimMapping, ex:riddimMapping2, ex:dnbMapping, ex:dnbMapping2;
 	rdfs:label "J4J Remix" .

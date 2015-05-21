@@ -14,7 +14,7 @@ function Parameter(owner, initialValue) {
 		//update values of all other controllers connected to this parameter
 		for (var i = 0; i < this.mappings.length; i++) {
 			if (this.mappings[i] != mapping) {
-				this.mappings[i].updateController(value);
+				this.mappings[i].updateControl(value);
 			}
 		}
 	}

@@ -27,6 +27,7 @@
 		<script src="js/rendering.js"></script>
 		<script src="js/track.js"></script>
 		<script src="js/accelerometerwatcher.js"></script>
+		<script src="js/geolocationwatcher.js"></script>
 		<script src="js/ontologyloader.js"></script>
 	</head>
 	<body ng-app="semanticplayer" ng-controller="renderingController">
@@ -58,6 +59,11 @@
 					<ion-item class="range range-energized center" ng-repeat="s in sliderControls">
 						<input type="range" name="slider" min="-10" max="10" step=".1" ng-model="s.value" ng-change="s.updateMappings()">
 					</ion-item>
+					<ion-item>
+						Latitude: {{ geolocationWatcher.latitudeControl.value }}<br>
+						Longitude: {{ geolocationWatcher.longitudeControl.value }}<br>
+						Distance: {{ geolocationWatcher.distanceControl.value }}<br>
+						Accuracy: {{ geolocationWatcher.accuracyControl.value }}
 				</ion-list>
 			</ion-content>
 		</ion-pane>
