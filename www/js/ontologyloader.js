@@ -4,6 +4,8 @@ function OntologyLoader(dmoUri, $scope) {
 	var multitrackRdfUri = "http://purl.org/ontology/studio/multitrack";
 	var rdfsUri = "http://www.w3.org/2000/01/rdf-schema";
 	
+	var accelerometerWatcher;
+	
 	this.loadDmo = function(rdfUri) {
 		$http.get(dmoUri+rdfUri).success(function(data) {
 			rdfstore.create(function(err, store) {
@@ -52,7 +54,6 @@ function OntologyLoader(dmoUri, $scope) {
 		?track <"+mobileRdfUri+"#hasPath> ?trackPath . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#hasMultiplier> ?multiplier}", function(err, results) {
-			var accelerometerWatcher;
 			for (var i = 0; i < results.length; i++) {
 				var control = getControl(results[i].control.value);
 				var track = $scope.rendering.getTrackForPath(dmoUri+"/"+results[i].trackPath.value);
@@ -71,23 +72,23 @@ function OntologyLoader(dmoUri, $scope) {
 		}	else if (controlUri == mobileRdfUri+"#AccelerometerZ") {
 			return getAccelerometerControl(2);
 		} else if (controlUri == mobileRdfUri+"#SliderControl") {
-			var sliderController = new Controller($scope);
-			$scope.sliderControllers.push(sliderController);
+			var sliderControl = new Control($scope);
+			$scope.sliderControls.push(sliderControl);
 			$scope.$apply();
-			return sliderController;
+			return sliderControl;
 		}
 	}
 	
 	var getAccelerometerControl = function(index) {
-		if (!$scope.accelerometerWatcher) {
-			$scope.accelerometerWatcher = new AccelerometerWatcher();
+		if (!accelerometerWatcher) {
+			accelerometerWatcher = new AccelerometerWatcher();
 		}
 		if (index == 0) {
-			return $scope.accelerometerWatcher.xController;
+			return accelerometerWatcher.xControl;
 		} else if (index == 1) {
-			return $scope.accelerometerWatcher.yController;
+			return accelerometerWatcher.yControl;
 		} else {
-			return $scope.accelerometerWatcher.zController;
+			return accelerometerWatcher.zControl;
 		}
 	}
 	

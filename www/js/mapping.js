@@ -1,4 +1,4 @@
-function Mapping(controller, parameter, multiplier) {
+function Mapping(control, parameter, multiplier) {
 	
 	//TODO HERE WE'LL REALIZE VARIOUS KINDS OF MAPPINGS (LINEAR, EXP, ETC)
 	
@@ -9,14 +9,14 @@ function Mapping(controller, parameter, multiplier) {
 		parameter.update(this, value);
 	}
 	
-	this.updateController = function(value) {
+	this.updateControl = function(value) {
 		if (multiplier) {
 			value /= multiplier;
 		}
-		controller.updateValue(value);
+		control.updateValue(value);
 	}
 	
-	controller.addMapping(this);
+	control.addMapping(this);
 	parameter.addMapping(this);
 	
 }

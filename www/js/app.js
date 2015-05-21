@@ -1,6 +1,6 @@
 var $http = angular.injector(['ng']).get('$http');
 
-angular.module('semanticplayer', ['ionic', 'ngCordova'])
+angular.module('semanticplayer', ['ionic'])
 
 .run(function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
@@ -14,10 +14,9 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 	});
 })
 
-.controller('playercontroller', function($scope) {
+.controller('renderingController', function($scope) {
 	$scope.rendering;
-	$scope.accelerometerWatcher;
-	$scope.sliderControllers = [];
+	$scope.sliderControls = [];
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
 	$scope.dmos = ["example"];
@@ -30,7 +29,7 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 		}
 	}
 	
-	//INIT
+	//INIT SELECTION
 	$scope.vars.selectedDmo = $scope.dmos[0];
 	$scope.dmoSelected();
 });

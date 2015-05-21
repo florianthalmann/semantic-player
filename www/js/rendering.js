@@ -17,15 +17,12 @@ function Rendering(name, filePaths, $scope) {
 	this.tellReady = function() {
 		readyCount++;
 		if (readyCount == this.tracks.length) {
-			tracksLoaded = true;
-			if ($scope) {
-				$scope.$apply();
-			}
+			this.tracksLoaded = true;
 		}
 	}
 	
 	this.play = function() {
-		if (tracksLoaded) {
+		if (this.tracksLoaded) {
 			for (var i = 0; i < this.tracks.length; i++) {
 				this.tracks[i].play();
 			}
@@ -33,7 +30,7 @@ function Rendering(name, filePaths, $scope) {
 	}
 	
 	this.pause = function() {
-		if (tracksLoaded) {
+		if (this.tracksLoaded) {
 			for (var i = 0; i < this.tracks.length; i++) {
 				this.tracks[i].pause();
 			}
@@ -41,7 +38,7 @@ function Rendering(name, filePaths, $scope) {
 	}
 	
 	this.stop = function() {
-		if (tracksLoaded) {
+		if (this.tracksLoaded) {
 			for (var i = 0; i < this.tracks.length; i++) {
 				this.tracks[i].stop();
 			}

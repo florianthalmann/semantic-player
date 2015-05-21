@@ -1,9 +1,11 @@
 function AccelerometerWatcher() {
 	
-	var xController = new Controller();
-	var yController = new Controller();
-	this.xController = xController;
-	this.yController = yController;
+	var xControl = new Control();
+	var yControl = new Control();
+	var zControl = new Control();
+	this.xControl = xControl;
+	this.yControl = yControl;
+	this.zControl = zControl;
 	
 	// The watch id references the current `watchAcceleration`
 	var watchID = null;
@@ -31,8 +33,9 @@ function AccelerometerWatcher() {
 	// onSuccess: Get a snapshot of the current acceleration
 	//
 	function onSuccess(acceleration) {
-		xController.updateMappings(acceleration.x);
-		yController.updateMappings(acceleration.y);
+		xControl.updateMappings(acceleration.x);
+		yControl.updateMappings(acceleration.y);
+		zControl.updateMappings(acceleration.z);
 	}
 
 	// Stop watching the acceleration

@@ -45,8 +45,9 @@ function Track(filePath, audioCtx, rendering) {
 	this.stop = function() {
 		if (isPlaying) {
 			stopAndReInitAudioSource();
-			currentPosition = 0;
 		}
+		//even in case it is paused
+		currentPosition = 0;
 	}
 	
 	function stopAndReInitAudioSource() {
