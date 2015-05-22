@@ -1,7 +1,7 @@
 function GeolocationWatcher() {
 	
-	var latitudeControl = new Control();
-	var longitudeControl = new Control();
+	var latitudeControl = new Control(3);
+	var longitudeControl = new Control(3);
 	var accuracyControl = new Control();
 	var distanceControl = new Control();
 	this.latitudeControl = latitudeControl;
@@ -9,31 +9,31 @@ function GeolocationWatcher() {
 	this.accuracyControl = accuracyControl;
 	this.distanceControl = distanceControl;
 	
-	var initialLatitude, initialLongitude;
+	this.reset = function() {
+		latitudeControl.reset();
+		longitudeControl.reset();
+	}
 	
 	var watchID = null;
+	this.reset();
 	startWatch();
-
+	
 	function startWatch() {
 		var options = {
 			enableHighAccuracy: true,
-			timeout: 10000,
-			maximumAge: 300
+			timeout: 30000,
+			maximumAge: 3000
 		};
 		watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
 	}
 	
 	function onSuccess(position) {
-		if (!initialLatitude || !initialLongitude) {
-			initialLatitude = position.coords.latitude;
-			initialLongitude = position.coords.longitude;
-		} else {
-			latitudeControl.updateMappings(position.coords.latitude-initialLatitude);
-			longitudeControl.updateMappings(position.coords.longitude-initialLongitude);
-			accuracyControl.updateMappings(position.coords.accuracy);
-			currentDistance = latLonToMeters(initialLatitude, initialLongitude, position.coords.latitude, position.coords.longitude);
+		latitudeControl.updateMappings(position.coords.latitude);
+		longitudeControl.updateMappings(position.coords.longitude);
+		accuracyControl.updateMappings(position.coords.accuracy);
+		if (latitudeControl.referenceValue && longitudeControl.referenceValue) {
+			currentDistance = latLonToMeters(latitudeControl.referenceValue, longitudeControl.referenceValue, position.coords.latitude, position.coords.longitude);
 			distanceControl.updateMappings(currentDistance);
-			//console.log('success in geolocation watcher');
 		}
 	}
 	

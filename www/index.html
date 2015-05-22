@@ -26,9 +26,10 @@
 		<script src="js/parameter.js"></script>
 		<script src="js/rendering.js"></script>
 		<script src="js/track.js"></script>
-		<script src="js/accelerometerwatcher.js"></script>
-		<script src="js/geolocationwatcher.js"></script>
-		<script src="js/compasswatcher.js"></script>
+		<script src="js/watchers/watcher.js"></script>
+		<script src="js/watchers/accelerometerwatcher.js"></script>
+		<script src="js/watchers/geolocationwatcher.js"></script>
+		<script src="js/watchers/compasswatcher.js"></script>
 		<script src="js/ontologyloader.js"></script>
 	</head>
 	<body ng-app="semanticplayer" ng-controller="renderingController">
@@ -59,6 +60,11 @@
 					</ion-item>
 					<ion-item class="range range-energized center" ng-repeat="s in sliderControls">
 						<input type="range" name="slider" min="-10" max="10" step=".1" ng-model="s.value" ng-change="s.updateMappings()">
+					</ion-item>
+					<ion-item>
+						<button class="button button-positive" ng-click="compasswatcher.reset(); geolocationwatcher.reset()">
+							Reset Sensors
+						</button>
 					</ion-item>
 					<ion-item>
 						Latitude: {{ geolocationWatcher.latitudeControl.value }}<br>

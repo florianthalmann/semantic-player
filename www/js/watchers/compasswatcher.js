@@ -1,17 +1,13 @@
 function CompassWatcher() {
 	
-	var headingControl = new Control();
-	var trueHeadingControl = new Control();
+	var headingControl = new Control(3);
+	var trueHeadingControl = new Control(3);
 	var accuracyControl = new Control();
 	this.headingControl = headingControl;
 	this.trueHeadingControl = trueHeadingControl;
 	this.accuracyControl = accuracyControl;
 	
-	var initialHeading, initialTrueHeading;
-	
 	var watchID = null;
-
-	console.log("start compass");
 	startWatch();
 
 	function startWatch() {
@@ -20,14 +16,9 @@ function CompassWatcher() {
 	}
 	
 	function onSuccess(heading) {
-		if (!initialHeading) {
-			initialHeading = heading.magneticHeading;
-			initialTrueHeading = heading.trueHeading;
-		} else {
-			headingControl.updateMappings(heading.magneticHeading-initialHeading);
-			trueHeadingControl.updateMappings(heading.trueHeading-initialTrueHeading);
-			accuracyControl.updateMappings(heading.headingAccuracy);
-		}
+		headingControl.updateMappings(heading.magneticHeading);
+		trueHeadingControl.updateMappings(heading.trueHeading);
+		accuracyControl.updateMappings(heading.headingAccuracy);
 	}
 	
 	function stopWatch() {

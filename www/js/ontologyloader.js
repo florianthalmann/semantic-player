@@ -80,7 +80,7 @@ function OntologyLoader(dmoUri, $scope) {
 		}	else if (controlUri == mobileRdfUri+"#CompassHeading") {
 			return getCompassControl(0);
 		}	else if (controlUri == mobileRdfUri+"#Slider") {
-			var sliderControl = new Control($scope);
+			var sliderControl = new Control(0, $scope);
 			$scope.sliderControls.push(sliderControl);
 			$scope.$apply();
 			return sliderControl;
