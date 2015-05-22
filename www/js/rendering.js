@@ -3,6 +3,9 @@ function Rendering(name, filePaths, $scope) {
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	var audioCtx = new AudioContext();
 	
+	//horizontal listener orientation in degrees
+	this.listenerOrientation = new Parameter(this, 0);
+	
 	var name = name;
 	this.tracks = [];
 	var pathToTrackIndex = {};
@@ -18,6 +21,7 @@ function Rendering(name, filePaths, $scope) {
 		readyCount++;
 		if (readyCount == this.tracks.length) {
 			this.tracksLoaded = true;
+			$scope.$apply();
 		}
 	}
 	
@@ -47,6 +51,11 @@ function Rendering(name, filePaths, $scope) {
 	
 	this.getTrackForPath = function(filePath) {
 		return this.tracks[pathToTrackIndex[filePath]];
+	}
+	
+	this.update = function() {
+		var angleInRadians = this.listenerOrientation.value * (Math.PI/180);
+		audioCtx.listener.setOrientation(Math.sin(angleInRadians), 0, -Math.cos(angleInRadians), 0, 1, 0);
 	}
 	
 }

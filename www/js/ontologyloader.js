@@ -77,7 +77,9 @@ function OntologyLoader(dmoUri, $scope) {
 			return getGeolocationControl(1);
 		}	else if (controlUri == mobileRdfUri+"#GeolocationDistance") {
 			return getGeolocationControl(2);
-		}	else if (controlUri == mobileRdfUri+"#SliderControl") {
+		}	else if (controlUri == mobileRdfUri+"#CompassHeading") {
+			return getCompassControl(0);
+		}	else if (controlUri == mobileRdfUri+"#Slider") {
 			var sliderControl = new Control($scope);
 			$scope.sliderControls.push(sliderControl);
 			$scope.$apply();
@@ -111,6 +113,17 @@ function OntologyLoader(dmoUri, $scope) {
 		}
 	}
 	
+	var getCompassControl = function(index) {
+		if (!$scope.compassWatcher) {
+			$scope.compassWatcher = new CompassWatcher();
+		}
+		if (index == 0) {
+			return $scope.compassWatcher.headingControl;
+		} else {
+			return $scope.compassWatcher.accuracyControl;
+		}
+	}
+	
 	var getParameter = function(track, parameterUri) {
 		if (parameterUri == mobileRdfUri+"#Amplitude") {
 			return track.amplitude;
@@ -118,6 +131,8 @@ function OntologyLoader(dmoUri, $scope) {
 			return track.pan;
 		}	else if (parameterUri == mobileRdfUri+"#Distance") {
 			return track.distance;
+		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation") {
+			return $scope.rendering.listenerOrientation;
 		}
 	}
 	

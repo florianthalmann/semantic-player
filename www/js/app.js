@@ -18,15 +18,16 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.rendering;
 	$scope.accelerometerWatcher;
 	$scope.geolocationWatcher;
+	$scope.compassWatcher;
 	$scope.sliderControls = [];
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["example"];
+	$scope.dmos = ["spacial", "mixing"];
 	
 	$scope.dmoSelected = function() {
 		if ($scope.vars.selectedDmo) {
 			var dmoUri = "audio/"+$scope.vars.selectedDmo;
-			var rdfUri = "/example.n3";
+			var rdfUri = "/config.n3";
 			new OntologyLoader(dmoUri, $scope).loadDmo(rdfUri);
 		}
 	}

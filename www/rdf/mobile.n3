@@ -24,7 +24,10 @@ mb:LinearMapping
 	a owl:Class;
 	rdfs:subClassOf mb:Mapping;
 	rdfs:comment "" .
-	
+
+
+#Controls
+
 mb:MobileControl 
 	a owl:Class;
 	rdfs:comment "" .
@@ -59,10 +62,18 @@ mb:GeolocationDistance
 	rdfs:subClassOf mb:MobileControl;
 	rdfs:comment "" .
 
-mb:SliderControl
+mb:CompassHeading
 	a owl:Class;
 	rdfs:subClassOf mb:MobileControl;
 	rdfs:comment "" .
+
+mb:Slider
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+
+
+#Audio parameters
 
 mb:Amplitude
 	a owl:Class;
@@ -75,6 +86,11 @@ mb:Pan
 	rdfs:comment "" .
 
 mb:Distance
+	a owl:Class;
+	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:comment "" .
+
+mb:ListenerOrientation
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .

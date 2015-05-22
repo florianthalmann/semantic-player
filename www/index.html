@@ -28,6 +28,7 @@
 		<script src="js/track.js"></script>
 		<script src="js/accelerometerwatcher.js"></script>
 		<script src="js/geolocationwatcher.js"></script>
+		<script src="js/compasswatcher.js"></script>
 		<script src="js/ontologyloader.js"></script>
 	</head>
 	<body ng-app="semanticplayer" ng-controller="renderingController">
@@ -63,7 +64,10 @@
 						Latitude: {{ geolocationWatcher.latitudeControl.value }}<br>
 						Longitude: {{ geolocationWatcher.longitudeControl.value }}<br>
 						Distance: {{ geolocationWatcher.distanceControl.value }}<br>
-						Accuracy: {{ geolocationWatcher.accuracyControl.value }}
+						Accuracy: {{ geolocationWatcher.accuracyControl.value }}<br><br>
+						Heading: {{ compassWatcher.headingControl.value }}<br>
+						TrueHeading: {{ compassWatcher.trueHeadingControl.value }}<br>
+						Accuracy: {{ compassWatcher.accuracyControl.value }}
 				</ion-list>
 			</ion-content>
 		</ion-pane>
