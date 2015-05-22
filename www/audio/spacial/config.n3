@@ -1,0 +1,37 @@
+#@base <http://purl.org/ontology/studio/mobile-example#> .
+@prefix mb: <rdf/mobile.n3#> .
+@prefix mt: <http://purl.org/ontology/studio/multitrack#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <#> .
+
+ex:audio a mt:AudioTrack;
+	mb:hasPath "moon.m4a" .
+	
+ex:distanceMapping a mb:Mapping;
+	mb:fromControl mb:GeolocationDistance;
+	mb:toTrack ex:audio;
+	mb:toParameter mb:Distance;
+	mb:hasMultiplier .1 .
+
+ex:orientationMapping a mb:Mapping;
+	mb:fromControl mb:CompassHeading;
+	mb:toTrack ex:audio;
+	mb:toParameter mb:ListenerOrientation;
+	mb:hasMultiplier 1 .
+
+ex:distanceMapping2 a mb:Mapping;
+	mb:fromControl mb:Slider;
+	mb:toTrack ex:audio;
+	mb:toParameter mb:Distance;
+	mb:hasMultiplier 1 .
+
+ex:orientationMapping2 a mb:Mapping;
+	mb:fromControl mb:Slider;
+	mb:toTrack ex:audio;
+	mb:toParameter mb:ListenerOrientation;
+	mb:hasMultiplier 18 .
+
+ex:moon a mb:Rendering;
+	mt:track ex:audio;
+	mb:hasMapping ex:distanceMapping, ex:orientationMapping, ex:distanceMapping2, ex:orientationMapping2;
+	rdfs:label "Moon is Waiting" .
