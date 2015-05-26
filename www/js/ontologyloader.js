@@ -4,8 +4,6 @@ function OntologyLoader(dmoUri, $scope) {
 	var multitrackRdfUri = "http://purl.org/ontology/studio/multitrack";
 	var rdfsUri = "http://www.w3.org/2000/01/rdf-schema";
 	
-	var accelerometerWatcher, geolocationWatcher;
-	
 	this.loadDmo = function(rdfUri) {
 		$http.get(dmoUri+rdfUri).success(function(data) {
 			rdfstore.create(function(err, store) {
@@ -26,20 +24,34 @@ function OntologyLoader(dmoUri, $scope) {
 		});
 	}
 	
-	var loadRendering = function(store, renderingUri, label) {
-		store.execute("SELECT ?label ?path \
+	function loadRendering(store, renderingUri, label) {
+		store.execute("SELECT ?track ?path \
 		WHERE { <"+renderingUri+"> <"+multitrackRdfUri+"#track> ?track . \
-		?track <"+mobileRdfUri+"#hasPath> ?path }", function(err, results) {
+		?track <"+mobileRdfUri+"#hasAudioPath> ?path }", function(err, results) {
+			var trackUris = [];
 			var trackPaths = [];
 			for (var i = 0; i < results.length; i++) {
+				trackUris.push(results[i].track.value);
 				trackPaths.push(dmoUri+"/"+results[i].path.value);
 			}
 			$scope.rendering = new Rendering(label, trackPaths, $scope);
+			loadFeatures(store, trackUris);
 			loadMappings(store, renderingUri);
 		});
 	}
 	
-	var loadMappings = function(store, renderingUri) {
+	function loadFeatures(store, trackUris) {
+		for (var i = 0; i < trackUris.length; i++) {
+			store.execute("SELECT ?path \
+			WHERE { <"+trackUris[i]+"> <"+mobileRdfUri+"#hasFeaturesPath> ?path }", function(err, results) {
+				for (var i = 0; i < results.length; i++) {
+					loadEventTimes(i, "/"+results[i].path.value);
+				}
+			});
+		}
+	}
+	
+	function loadMappings(store, renderingUri) {
 		store.execute("SELECT ?mapping WHERE { <"+renderingUri+"> <"+mobileRdfUri+"#hasMapping> ?mapping }", function(err, results) {
 			for (var i = 0; i < results.length; i++) {
 				loadMapping(store, results[i].mapping.value);
@@ -47,11 +59,11 @@ function OntologyLoader(dmoUri, $scope) {
 		});
 	}
 	
-	var loadMapping = function(store, mappingUri) {
+	function loadMapping(store, mappingUri) {
 		store.execute("SELECT ?control ?trackPath ?parameter ?multiplier \
 		WHERE { <"+mappingUri+"> <"+mobileRdfUri+"#fromControl> ?control . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toTrack> ?track . \
-		?track <"+mobileRdfUri+"#hasPath> ?trackPath . \
+		?track <"+mobileRdfUri+"#hasAudioPath> ?trackPath . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#hasMultiplier> ?multiplier}", function(err, results) {
 			for (var i = 0; i < results.length; i++) {
@@ -64,7 +76,7 @@ function OntologyLoader(dmoUri, $scope) {
 		});
 	}
 	
-	var getControl = function(controlUri) {
+	function getControl(controlUri) {
 		if (controlUri == mobileRdfUri+"#AccelerometerX") {
 			return getAccelerometerControl(0);
 		} else if (controlUri == mobileRdfUri+"#AccelerometerY") {
@@ -87,7 +99,7 @@ function OntologyLoader(dmoUri, $scope) {
 		}
 	}
 	
-	var getAccelerometerControl = function(index) {
+	function getAccelerometerControl(index) {
 		if (!$scope.accelerometerWatcher) {
 			$scope.accelerometerWatcher = new AccelerometerWatcher();
 		}
@@ -100,7 +112,7 @@ function OntologyLoader(dmoUri, $scope) {
 		}
 	}
 	
-	var getGeolocationControl = function(index) {
+	function getGeolocationControl(index) {
 		if (!$scope.geolocationWatcher) {
 			$scope.geolocationWatcher = new GeolocationWatcher();
 		}
@@ -113,7 +125,7 @@ function OntologyLoader(dmoUri, $scope) {
 		}
 	}
 	
-	var getCompassControl = function(index) {
+	function getCompassControl(index) {
 		if (!$scope.compassWatcher) {
 			$scope.compassWatcher = new CompassWatcher();
 		}
@@ -124,16 +136,49 @@ function OntologyLoader(dmoUri, $scope) {
 		}
 	}
 	
-	var getParameter = function(track, parameterUri) {
+	function getParameter(track, parameterUri) {
 		if (parameterUri == mobileRdfUri+"#Amplitude") {
 			return track.amplitude;
 		} else if (parameterUri == mobileRdfUri+"#Pan") {
 			return track.pan;
 		}	else if (parameterUri == mobileRdfUri+"#Distance") {
 			return track.distance;
+		} else if (parameterUri == mobileRdfUri+"#Onset") {
+			return track.onset;
 		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation") {
 			return $scope.rendering.listenerOrientation;
 		}
+	}
+	
+	var eventOntology = "http://purl.org/NET/c4dm/event.owl";
+	var timelineOntology = "http://purl.org/NET/c4dm/timeline.owl";
+	
+	function loadEventTimes(trackIndex, rdfUri) {
+		$http.get(dmoUri+rdfUri).success(function(data) {
+			rdfstore.create(function(err, store) {
+				store.load('text/turtle', data, function(err, results) {
+					if (err) {
+						console.log(err);
+					}
+					store.execute("SELECT ?xsdTime \
+					WHERE { ?eventType <"+rdfsUri+"#subClassOf>* <"+eventOntology+"#Event> . \
+					?event a ?eventType . \
+					?event <"+eventOntology+"#time> ?time . \
+					?time <"+timelineOntology+"#at> ?xsdTime }", function(err, results) {
+						var times = [];
+						for (var i = 0; i < results.length; i++) {
+							times.push(toMilliseconds(results[i].xsdTime.value));
+						}
+						$scope.rendering.tracks[trackIndex].setOnsets(times.sort(function(a,b){return a - b}));
+					});
+				});
+			});
+		});
+	}
+	
+	function toMilliseconds(xsdDurationString) {
+		var seconds = xsdDurationString.substring(2, xsdDurationString.length-1);
+		return Math.round(Number(seconds)*1000);
 	}
 	
 }

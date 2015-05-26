@@ -5,33 +5,40 @@
 @prefix ex: <#> .
 
 ex:audio a mt:AudioTrack;
-	mb:hasPath "moon.m4a" .
+	mb:hasAudioPath "moon.m4a" ;
+	mb:hasFeaturesPath "moon.n3" .
 	
-ex:distanceMapping a mb:Mapping;
-	mb:fromControl mb:GeolocationDistance;
-	mb:toTrack ex:audio;
-	mb:toParameter mb:Distance;
+ex:distanceMapping a mb:Mapping ;
+	mb:fromControl mb:GeolocationDistance ;
+	mb:toTrack ex:audio ;
+	mb:toParameter mb:Distance ;
 	mb:hasMultiplier .1 .
 
-ex:orientationMapping a mb:Mapping;
-	mb:fromControl mb:CompassHeading;
-	mb:toTrack ex:audio;
-	mb:toParameter mb:ListenerOrientation;
+ex:orientationMapping a mb:Mapping ;
+	mb:fromControl mb:CompassHeading ;
+	mb:toTrack ex:audio ;
+	mb:toParameter mb:ListenerOrientation ;
 	mb:hasMultiplier 1 .
 
-ex:distanceMapping2 a mb:Mapping;
-	mb:fromControl mb:Slider;
-	mb:toTrack ex:audio;
-	mb:toParameter mb:Distance;
+ex:distanceMapping2 a mb:Mapping ;
+	mb:fromControl mb:Slider ;
+	mb:toTrack ex:audio ;
+	mb:toParameter mb:Distance ;
 	mb:hasMultiplier 1 .
 
-ex:orientationMapping2 a mb:Mapping;
-	mb:fromControl mb:Slider;
-	mb:toTrack ex:audio;
-	mb:toParameter mb:ListenerOrientation;
+ex:orientationMapping2 a mb:Mapping ;
+	mb:fromControl mb:Slider ;
+	mb:toTrack ex:audio ;
+	mb:toParameter mb:ListenerOrientation ;
 	mb:hasMultiplier 18 .
 
-ex:moon a mb:Rendering;
-	mt:track ex:audio;
-	mb:hasMapping ex:distanceMapping, ex:orientationMapping, ex:distanceMapping2, ex:orientationMapping2;
+ex:onsetMapping a mb:Mapping ;
+	mb:fromControl mb:Slider ;
+	mb:toTrack ex:audio ;
+	mb:toParameter mb:Onset ;
+	mb:hasMultiplier 400 .
+
+ex:moon a mb:Rendering ;
+	mt:track ex:audio ;
+	mb:hasMapping ex:distanceMapping, ex:orientationMapping, ex:distanceMapping2, ex:orientationMapping2, ex:onsetMapping ;
 	rdfs:label "Moon is Waiting" .

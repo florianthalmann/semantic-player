@@ -27,8 +27,8 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.dmoSelected = function() {
 		if ($scope.vars.selectedDmo) {
 			var dmoUri = "audio/"+$scope.vars.selectedDmo;
-			var rdfUri = "/config.n3";
-			new OntologyLoader(dmoUri, $scope).loadDmo(rdfUri);
+			var loader = new OntologyLoader(dmoUri, $scope)
+			loader.loadDmo("/config.n3");
 		}
 	}
 	

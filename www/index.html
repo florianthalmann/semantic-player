@@ -59,7 +59,7 @@
 						<select ng-model="vars.selectedDmo" ng-options="d as d.toString() for d in dmos" ng-change="dmoSelected()"></select>
 					</ion-item>
 					<ion-item class="range range-energized center" ng-repeat="s in sliderControls">
-						<input type="range" name="slider" min="-10" max="10" step=".1" ng-model="s.value" ng-change="s.updateMappings()">
+						<input type="range" name="slider" min="0" max="1" step=".001" ng-model="s.value" ng-change="s.updateMappings()">
 					</ion-item>
 					<ion-item>
 						<button class="button button-positive" ng-click="compasswatcher.reset(); geolocationwatcher.reset()">
