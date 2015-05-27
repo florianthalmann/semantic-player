@@ -1,8 +1,11 @@
-function Control(referenceAverageOf, $scope) {
+function Control(referenceAverageOf, label, $scope) {
 	
 	this.referenceValue;
 	this.value;
 	this.mappings = [];
+	if (label) {
+		this.label = label;
+	}
 	var currentNumAddends, currentSum;
 	
 	this.reset = function() {

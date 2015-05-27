@@ -60,14 +60,18 @@ function OntologyLoader(dmoUri, $scope) {
 	}
 	
 	function loadMapping(store, mappingUri) {
-		store.execute("SELECT ?control ?trackPath ?parameter ?multiplier \
+		store.execute("SELECT ?control ?trackPath ?parameter ?multiplier ?label \
 		WHERE { <"+mappingUri+"> <"+mobileRdfUri+"#fromControl> ?control . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toTrack> ?track . \
 		?track <"+mobileRdfUri+"#hasAudioPath> ?trackPath . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
-		<"+mappingUri+"> <"+mobileRdfUri+"#hasMultiplier> ?multiplier}", function(err, results) {
+		<"+mappingUri+"> <"+mobileRdfUri+"#hasMultiplier> ?multiplier . \
+		OPTIONAL { <"+mappingUri+"> <"+rdfsUri+"#label> ?label . }}", function(err, results) {
 			for (var i = 0; i < results.length; i++) {
-				var control = getControl(results[i].control.value);
+				if (results[i].label) {
+					var label = results[i].label.value;
+				}
+				var control = getControl(results[i].control.value, label);
 				var track = $scope.rendering.getTrackForPath(dmoUri+"/"+results[i].trackPath.value);
 				var parameter = getParameter(track, results[i].parameter.value);
 				var multiplier = results[i].multiplier.value;
@@ -76,7 +80,7 @@ function OntologyLoader(dmoUri, $scope) {
 		});
 	}
 	
-	function getControl(controlUri) {
+	function getControl(controlUri, label) {
 		if (controlUri == mobileRdfUri+"#AccelerometerX") {
 			return getAccelerometerControl(0);
 		} else if (controlUri == mobileRdfUri+"#AccelerometerY") {
@@ -92,7 +96,7 @@ function OntologyLoader(dmoUri, $scope) {
 		}	else if (controlUri == mobileRdfUri+"#CompassHeading") {
 			return getCompassControl(0);
 		}	else if (controlUri == mobileRdfUri+"#Slider") {
-			var sliderControl = new Control(0, $scope);
+			var sliderControl = new Control(0, label, $scope);
 			$scope.sliderControls.push(sliderControl);
 			$scope.$apply();
 			return sliderControl;

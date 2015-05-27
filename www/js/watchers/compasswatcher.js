@@ -16,8 +16,8 @@ function CompassWatcher() {
 	}
 	
 	function onSuccess(heading) {
-		headingControl.updateMappings(heading.magneticHeading);
-		trueHeadingControl.updateMappings(heading.trueHeading);
+		headingControl.updateMappings(heading.magneticHeading % 360);
+		trueHeadingControl.updateMappings(heading.trueHeading % 360);
 		accuracyControl.updateMappings(heading.headingAccuracy);
 	}
 	
