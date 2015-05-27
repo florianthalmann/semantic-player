@@ -167,18 +167,19 @@ function OntologyLoader(dmoUri, $scope) {
 					?time <"+timelineOntology+"#at> ?xsdTime }", function(err, results) {
 						var times = [];
 						for (var i = 0; i < results.length; i++) {
-							times.push(toMilliseconds(results[i].xsdTime.value));
+							times.push(toSecondsNumber(results[i].xsdTime.value));
 						}
 						$scope.rendering.tracks[trackIndex].setOnsets(times.sort(function(a,b){return a - b}));
+						$scope.ontologiesLoaded = true;
+						$scope.$apply();
 					});
 				});
 			});
 		});
 	}
 	
-	function toMilliseconds(xsdDurationString) {
-		var seconds = xsdDurationString.substring(2, xsdDurationString.length-1);
-		return Math.round(Number(seconds)*1000);
+	function toSecondsNumber(xsdDurationString) {
+		return Number(xsdDurationString.substring(2, xsdDurationString.length-1));
 	}
 	
 }

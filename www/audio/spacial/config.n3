@@ -24,13 +24,13 @@ ex:distanceMapping2 a mb:Mapping ;
 	mb:fromControl mb:Slider ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:Distance ;
-	mb:hasMultiplier 1 .
+	mb:hasMultiplier 10 .
 
 ex:orientationMapping2 a mb:Mapping ;
 	mb:fromControl mb:Slider ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:ListenerOrientation ;
-	mb:hasMultiplier 18 .
+	mb:hasMultiplier 360 .
 
 ex:onsetMapping a mb:Mapping ;
 	mb:fromControl mb:Slider ;

@@ -6,7 +6,6 @@ function Rendering(name, filePaths, $scope) {
 	//horizontal listener orientation in degrees
 	this.listenerOrientation = new Parameter(this, 0);
 	
-	var name = name;
 	this.tracks = [];
 	var pathToTrackIndex = {};
 	var readyCount = 0;

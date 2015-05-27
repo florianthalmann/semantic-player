@@ -40,17 +40,21 @@
 			<ion-content>
 				<ion-list>
 					<ion-item>
-						<button class="button button-balanced" ng-disabled="!rendering.tracksLoaded" ng-click="rendering.play()">
+						<button class="button button-balanced" ng-disabled="!rendering.tracksLoaded || !ontologiesLoaded" ng-click="rendering.play()">
 							<i class="icon ion-play"></i>
 						</button>
-						<button class="button button-energized" ng-disabled="!rendering.tracksLoaded" ng-click="rendering.pause()">
+						<button class="button button-energized" ng-disabled="!rendering.tracksLoaded || !ontologiesLoaded" ng-click="rendering.pause()">
 							<i class="icon ion-pause"></i>
 						</button>
-						<button class="button button-assertive" ng-disabled="!rendering.tracksLoaded" ng-click="rendering.stop()">
+						<button class="button button-assertive" ng-disabled="!rendering.tracksLoaded || !ontologiesLoaded" ng-click="rendering.stop()">
 							<i class="icon ion-stop"></i>
 						</button>
 						<span class="padding" ng-show="!rendering.tracksLoaded">
 							Loading audio...
+							<ion-spinner></ion-spinner>
+						</span>
+						<span class="padding" ng-show="rendering.tracksLoaded && !ontologiesLoaded">
+							Loading ontologies...
 							<ion-spinner></ion-spinner>
 						</span>
 					</ion-item>
@@ -63,17 +67,25 @@
 					</ion-item>
 					<ion-item>
 						<button class="button button-positive" ng-click="compasswatcher.reset(); geolocationwatcher.reset()">
-							Reset Sensors
+							Reset sensors
+						</button>
+						<button class="button button-royal" ng-click="toggleSensorData()">
+							Show sensor data
 						</button>
 					</ion-item>
-					<ion-item>
+					<ion-item ng-show="showSensorData">
 						Latitude: {{ geolocationWatcher.latitudeControl.value }}<br>
 						Longitude: {{ geolocationWatcher.longitudeControl.value }}<br>
 						Distance: {{ geolocationWatcher.distanceControl.value }}<br>
 						Accuracy: {{ geolocationWatcher.accuracyControl.value }}<br><br>
+						
 						Heading: {{ compassWatcher.headingControl.value }}<br>
 						TrueHeading: {{ compassWatcher.trueHeadingControl.value }}<br>
-						Accuracy: {{ compassWatcher.accuracyControl.value }}
+						Accuracy: {{ compassWatcher.accuracyControl.value }}<br><br>
+						
+						AccelerometerX: {{ accelerometerWatcher.xControl.value }}<br>
+						AccelerometerY: {{ accelerometerWatcher.yControl.value }}<br>
+						AccelerometerZ: {{ accelerometerWatcher.zControl.value }}
 				</ion-list>
 			</ion-content>
 		</ion-pane>
