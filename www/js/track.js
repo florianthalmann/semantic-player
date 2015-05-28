@@ -14,7 +14,7 @@ function Track(filePath, audioCtx, rendering) {
 	this.onset = onset;
 	
 	var startTime, currentPausePosition = 0;
-	var isPlaying;
+	var isPlaying, isPaused;
 	var onsets;
 	
 	this.setOnsets = function(newOnsets) {
@@ -59,7 +59,9 @@ function Track(filePath, audioCtx, rendering) {
 		if (isPlaying) {
 			stopAndRemoveAudioSources();
 			currentPausePosition += audioCtx.currentTime - startTime;
-		} else {
+			isPaused = true;
+		} else if (isPaused) {
+			isPaused = false;
 			this.play();
 		}
 	}

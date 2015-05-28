@@ -176,6 +176,7 @@ function OntologyLoader(dmoUri, $scope) {
 						$scope.rendering.tracks[trackIndex].setOnsets(times.sort(function(a,b){return a - b}));
 						$scope.ontologiesLoaded = true;
 						$scope.$apply();
+						new Mapping(new StatsControls().randomControl, $scope.rendering.tracks[0].onset, 400);
 					});
 				});
 			});
