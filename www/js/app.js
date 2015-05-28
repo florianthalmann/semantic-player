@@ -23,7 +23,7 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["spacial", "mixing"];
+	$scope.dmos = ["spatial", "mixing"];
 	
 	$scope.dmoSelected = function() {
 		if ($scope.vars.selectedDmo) {

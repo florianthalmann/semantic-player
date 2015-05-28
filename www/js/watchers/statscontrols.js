@@ -8,7 +8,6 @@ function StatsControls() {
 	function startUpdate() {
 		setInterval(function() {
 			randomControl.updateMappings(Math.random());
-			console.log("rando");
 		}, 300);
 	}
 	

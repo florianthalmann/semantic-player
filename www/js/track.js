@@ -35,7 +35,7 @@ function Track(filePath, audioCtx, rendering) {
 		rendering.tellReady();
 	};
 	audioLoader.onerror = function() {
-		console.log("Error loading Audio");
+		console.log("Error loading audio");
 	};
 	audioLoader.send();
 	
@@ -47,8 +47,9 @@ function Track(filePath, audioCtx, rendering) {
 	}
 	
 	function internalPlay() {
-		if (!audioSource) {
-			initAudioSource();
+		if (!audioSource || !nextAudioSource) {
+			audioSource = createNewAudioSource();
+			nextAudioSource = createNewAudioSource();
 		}
 		startTime = audioCtx.currentTime;
 		audioSource.start(0, currentPausePosition); //% audioSource.loopEnd-audioSource.loopStart);
@@ -81,42 +82,29 @@ function Track(filePath, audioCtx, rendering) {
 		nextAudioSource = null;
 	}
 	
-	function initAudioSource() {
-		audioSource = createNewAudioSource();
-	}
-	
 	function createNewAudioSource() {
 		var newSource = audioCtx.createBufferSource();
 		newSource.connect(panner);
 		newSource.buffer = getSubBuffer(toSamples(onsets[onset.value]), toSamples(onsets[onset.value+1]));
-		newSource.onended = startNextAudioSource;
+		newSource.onended = switchToNextAudioSource;
 		return newSource;
 	}
 	
-	function prepareNextAudioSource () {
+	function replaceNextAudioSource() {
 		nextAudioSource = createNewAudioSource();
 		if (SWITCH_BUFFER_IMMEDIATELY) {
 			switchToNextAudioSource();
 		}
 	}
 	
-	function startNextAudioSource() {
-		if (isPlaying && LOOP) {
-			if (nextAudioSource) {
-				switchToNextAudioSource();
-			} else {
-				audioSource = null;
-				internalPlay();
-			}
-		}
-	}
-	
 	function switchToNextAudioSource() {
-		oldAudioSource = audioSource;
-		audioSource = nextAudioSource;
-		internalPlay();
-		oldAudioSource.stop(0);
-		nextAudioSource = null;
+		if (isPlaying && LOOP) {
+			oldAudioSource = audioSource;
+			audioSource = nextAudioSource;
+			internalPlay();
+			oldAudioSource.stop(0);
+			nextAudioSource = createNewAudioSource();
+		}
 	}
 	
 	function toSamples(seconds) {
@@ -149,7 +137,7 @@ function Track(filePath, audioCtx, rendering) {
 		panner.setPosition(this.pan.value, -0.5, this.distance.value);
 		gain.gain.value = this.amplitude.value;
 		if (this.onset.hasChanged() && onsets) {
-			prepareNextAudioSource();
+			replaceNextAudioSource();
 		}
 	}
 	

@@ -100,6 +100,8 @@ function OntologyLoader(dmoUri, $scope) {
 			$scope.sliderControls.push(sliderControl);
 			$scope.$apply();
 			return sliderControl;
+		} else if (controlUri == mobileRdfUri+"#Random") {
+			return getStatsControl(0);
 		}
 	}
 	
@@ -140,6 +142,15 @@ function OntologyLoader(dmoUri, $scope) {
 		}
 	}
 	
+	function getStatsControl(index) {
+		if (!$scope.compassWatcher) {
+			$scope.statsControls = new StatsControls();
+		}
+		if (index == 0) {
+			return $scope.statsControls.randomControl;
+		}
+	}
+	
 	function getParameter(track, parameterUri) {
 		if (parameterUri == mobileRdfUri+"#Amplitude") {
 			return track.amplitude;
@@ -176,7 +187,6 @@ function OntologyLoader(dmoUri, $scope) {
 						$scope.rendering.tracks[trackIndex].setOnsets(times.sort(function(a,b){return a - b}));
 						$scope.ontologiesLoaded = true;
 						$scope.$apply();
-						new Mapping(new StatsControls().randomControl, $scope.rendering.tracks[0].onset, 400);
 					});
 				});
 			});

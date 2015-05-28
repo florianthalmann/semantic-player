@@ -41,6 +41,12 @@ ex:onsetMapping a mb:Mapping ;
 	mb:hasMultiplier 400 ;
 	rdfs:label "Onset" .
 
+ex:onsetMapping a mb:Mapping ;
+	mb:fromControl mb:Random ;
+	mb:toTrack ex:audio ;
+	mb:toParameter mb:Onset ;
+	mb:hasMultiplier 400 .
+
 ex:moon a mb:Rendering ;
 	mt:track ex:audio ;
 	mb:hasMapping ex:distanceMapping, ex:orientationMapping, ex:distanceMapping2, ex:orientationMapping2, ex:onsetMapping ;

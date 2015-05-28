@@ -72,6 +72,11 @@ mb:Slider
 	rdfs:subClassOf mb:MobileControl;
 	rdfs:comment "" .
 
+mb:Random
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+
 
 #Audio parameters
 
@@ -101,6 +106,7 @@ mb:ListenerOrientation
 	rdfs:comment "" .
 
 
+#predicates
 
 mb:hasMapping
 	a owl:ObjectProperty, owl:AntisymmetricProperty;
