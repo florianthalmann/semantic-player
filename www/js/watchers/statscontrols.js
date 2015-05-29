@@ -1,4 +1,4 @@
-function StatsControls() {
+function StatsControls($scope, $interval) {
 	
 	var randomControl = new Control();
 	this.randomControl = randomControl;
@@ -6,7 +6,7 @@ function StatsControls() {
 	startUpdate();
 	
 	function startUpdate() {
-		setInterval(function() {
+		$interval(function() {
 			randomControl.updateMappings(Math.random());
 		}, 300);
 	}

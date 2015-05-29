@@ -1,4 +1,4 @@
-function OntologyLoader(dmoUri, $scope) {
+function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	var mobileRdfUri = "rdf/mobile.n3";
 	var multitrackRdfUri = "http://purl.org/ontology/studio/multitrack";
@@ -143,8 +143,8 @@ function OntologyLoader(dmoUri, $scope) {
 	}
 	
 	function getStatsControl(index) {
-		if (!$scope.compassWatcher) {
-			$scope.statsControls = new StatsControls();
+		if (!$scope.statsControls) {
+			$scope.statsControls = new StatsControls($scope, $interval);
 		}
 		if (index == 0) {
 			return $scope.statsControls.randomControl;
@@ -186,7 +186,6 @@ function OntologyLoader(dmoUri, $scope) {
 						}
 						$scope.rendering.tracks[trackIndex].setOnsets(times.sort(function(a,b){return a - b}));
 						$scope.ontologiesLoaded = true;
-						$scope.$apply();
 					});
 				});
 			});

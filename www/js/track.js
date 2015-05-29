@@ -83,7 +83,6 @@ function Track(filePath, audioCtx, rendering) {
 	
 	function createNewAudioSource(hasChanged) {
 		if (!currentAudioSubBuffer || hasChanged) {
-			console.log("change!");
 			currentAudioSubBuffer = getAudioBufferCopy(toSamples(onsets[onset.value]), toSamples(onsets[onset.value+1]));
 		}
 		var newSource = audioCtx.createBufferSource();

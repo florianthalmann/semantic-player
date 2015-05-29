@@ -14,12 +14,13 @@ angular.module('semanticplayer', ['ionic'])
 	});
 })
 
-.controller('renderingController', function($scope) {
+.controller('renderingController', function($scope, $interval) {
 	$scope.rendering;
 	$scope.accelerometerWatcher;
 	$scope.geolocationWatcher;
 	$scope.compassWatcher;
 	$scope.sliderControls = [];
+	$scope.statsControls;
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
@@ -28,7 +29,7 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.dmoSelected = function() {
 		if ($scope.vars.selectedDmo) {
 			var dmoUri = "audio/"+$scope.vars.selectedDmo;
-			var loader = new OntologyLoader(dmoUri, $scope)
+			var loader = new OntologyLoader(dmoUri, $scope, $interval)
 			loader.loadDmo("/config.n3");
 		}
 	}
