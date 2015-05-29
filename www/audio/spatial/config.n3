@@ -13,19 +13,19 @@ ex:distanceMapping a mb:Mapping ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:Distance ;
 	mb:hasMultiplier .1 .
-
-ex:orientationMapping a mb:Mapping ;
-	mb:fromControl mb:CompassHeading ;
-	mb:toTrack ex:audio ;
-	mb:toParameter mb:ListenerOrientation ;
-	mb:hasMultiplier 1 .
-
+	
 ex:distanceMapping2 a mb:Mapping ;
 	mb:fromControl mb:Slider ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:Distance ;
 	mb:hasMultiplier 10 ;
 	rdfs:label "Distance" .
+
+ex:orientationMapping a mb:Mapping ;
+	mb:fromControl mb:CompassHeading ;
+	mb:toTrack ex:audio ;
+	mb:toParameter mb:ListenerOrientation ;
+	mb:hasMultiplier 1 .
 
 ex:orientationMapping2 a mb:Mapping ;
 	mb:fromControl mb:Slider ;
@@ -41,7 +41,7 @@ ex:onsetMapping a mb:Mapping ;
 	mb:hasMultiplier 400 ;
 	rdfs:label "Onset" .
 
-ex:onsetMapping a mb:Mapping ;
+ex:onsetMapping2 a mb:Mapping ;
 	mb:fromControl mb:Random ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:Onset ;
@@ -49,5 +49,5 @@ ex:onsetMapping a mb:Mapping ;
 
 ex:moon a mb:Rendering ;
 	mt:track ex:audio ;
-	mb:hasMapping ex:distanceMapping, ex:orientationMapping, ex:distanceMapping2, ex:orientationMapping2, ex:onsetMapping ;
+	mb:hasMapping ex:distanceMapping, ex:orientationMapping, ex:distanceMapping2, ex:orientationMapping2, ex:onsetMapping, ex:onsetMapping2 ;
 	rdfs:label "Moon is Waiting" .

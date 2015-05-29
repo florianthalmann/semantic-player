@@ -7,7 +7,6 @@ function Track(filePath, audioCtx, rendering) {
 	var distance = new Parameter(this, 1);
 	var amplitude = new Parameter(this, 0.5);
 	var onset = new Parameter(this, 0, true);
-	
 	this.pan = pan;
 	this.distance = distance;
 	this.amplitude = amplitude;
@@ -25,7 +24,7 @@ function Track(filePath, audioCtx, rendering) {
 	gain.connect(audioCtx.destination);
 	var panner = audioCtx.createPanner();
 	panner.connect(gain);
-	var audioBuffer, audioSource, nextAudioSource;
+	var audioBuffer, currentAudioSubBuffer, audioSource, nextAudioSource;
 	
 	var audioLoader = new AudioSampleLoader();
 	audioLoader.src = filePath;
@@ -82,19 +81,16 @@ function Track(filePath, audioCtx, rendering) {
 		nextAudioSource = null;
 	}
 	
-	function createNewAudioSource() {
+	function createNewAudioSource(hasChanged) {
+		if (!currentAudioSubBuffer || hasChanged) {
+			console.log("change!");
+			currentAudioSubBuffer = getAudioBufferCopy(toSamples(onsets[onset.value]), toSamples(onsets[onset.value+1]));
+		}
 		var newSource = audioCtx.createBufferSource();
 		newSource.connect(panner);
-		newSource.buffer = getSubBuffer(toSamples(onsets[onset.value]), toSamples(onsets[onset.value+1]));
+		newSource.buffer = currentAudioSubBuffer;
 		newSource.onended = switchToNextAudioSource;
 		return newSource;
-	}
-	
-	function replaceNextAudioSource() {
-		nextAudioSource = createNewAudioSource();
-		if (SWITCH_BUFFER_IMMEDIATELY) {
-			switchToNextAudioSource();
-		}
 	}
 	
 	function switchToNextAudioSource() {
@@ -110,14 +106,6 @@ function Track(filePath, audioCtx, rendering) {
 	function toSamples(seconds) {
 		if (seconds) {
 			return Math.round(seconds*audioBuffer.sampleRate);
-		}
-	}
-	
-	function getSubBuffer(startSample, endSample) {
-		if (startSample) {
-			return getAudioBufferCopy(startSample, endSample);
-		} else {
-			return audioBuffer;
 		}
 	}
 	
@@ -137,7 +125,10 @@ function Track(filePath, audioCtx, rendering) {
 		panner.setPosition(this.pan.value, -0.5, this.distance.value);
 		gain.gain.value = this.amplitude.value;
 		if (this.onset.hasChanged() && onsets) {
-			replaceNextAudioSource();
+			nextAudioSource = createNewAudioSource(true);
+			if (SWITCH_BUFFER_IMMEDIATELY) {
+				switchToNextAudioSource();
+			}
 		}
 	}
 	
