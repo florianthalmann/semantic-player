@@ -5,11 +5,11 @@
 @prefix ex: <#> .
 
 ex:voc a mt:AudioTrack;
-	mb:hasPath "voc.m4a" .
+	mb:hasAudioPath "voc.m4a" .
 ex:riddim a mt:AudioTrack;
-	mb:hasPath "riddim.m4a" .
+	mb:hasAudioPath "riddim.m4a" .
 ex:dnb a mt:AudioTrack;
-	mb:hasPath "dnb.m4a" .
+	mb:hasAudioPath "dnb.m4a" .
 	
 ex:vocMapping1 a mb:Mapping;
 	mb:fromControl mb:AccelerometerX;

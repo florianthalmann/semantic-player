@@ -47,6 +47,9 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 				for (var i = 0; i < results.length; i++) {
 					loadEventTimes(i, "/"+results[i].path.value);
 				}
+				if (results.length <= 0) {
+					$scope.ontologiesLoaded = true;
+				}
 			});
 		}
 	}

@@ -69,7 +69,9 @@ function Track(filePath, audioCtx, rendering) {
 		endTime = startTime+currentSourceDuration;
 		//console.log(delay + " " + endTime + " " + currentSourceDuration + " " + ((endTime-audioCtx.currentTime-SCHEDULE_AHEAD_TIME)*1000));
 		currentPausePosition = 0;
-		timeoutID = window.setTimeout(internalPlay, (endTime-audioCtx.currentTime-SCHEDULE_AHEAD_TIME)*1000);
+		if (endTime) {
+			timeoutID = window.setTimeout(internalPlay, (endTime-audioCtx.currentTime-SCHEDULE_AHEAD_TIME)*1000);
+		}
 	}
 	
 	this.pause = function() {
@@ -102,9 +104,13 @@ function Track(filePath, audioCtx, rendering) {
 	
 	function createNewAudioSource(hasChanged) {
 		if (!currentAudioSubBuffer || hasChanged) {
-			var currentOnset = onsets[onset.value];
-			currentSourceDuration = onsets[onset.value+1]-currentOnset;
-			currentAudioSubBuffer = getAudioBufferCopy(toSamples(currentOnset), toSamples(currentSourceDuration));
+			if (onsets) {
+				var currentOnset = onsets[onset.value];
+				currentSourceDuration = onsets[onset.value+1]-currentOnset;
+				currentAudioSubBuffer = getAudioBufferCopy(toSamples(currentOnset), toSamples(currentSourceDuration));
+			} else {
+				currentAudioSubBuffer = audioBuffer;
+			}
 		}
 		var newSource = audioCtx.createBufferSource();
 		newSource.connect(panner);

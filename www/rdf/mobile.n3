@@ -25,6 +25,10 @@ mb:LinearMapping
 	rdfs:subClassOf mb:Mapping;
 	rdfs:comment "" .
 
+mb:LocationMapping
+	a owl:Class;
+	rdfs:comment "" .
+
 
 #Controls
 
@@ -118,6 +122,12 @@ mb:fromControl
 	a owl:ObjectProperty, owl:AntisymmetricProperty;
 	rdfs:domain mb:Mapping;
 	rdfs:range mb:MobileControl;
+	rdfs:comment "" .
+
+mb:fromValue
+	a owl:ObjectProperty, owl:AntisymmetricProperty;
+	rdfs:domain mb:LocationMapping;
+	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
 mb:toTrack

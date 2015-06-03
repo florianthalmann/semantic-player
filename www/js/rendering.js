@@ -1,8 +1,5 @@
 function Rendering(name, filePaths, $scope) {
 	
-	window.AudioContext = window.AudioContext || window.webkitAudioContext;
-	var audioCtx = new AudioContext();
-	
 	//horizontal listener orientation in degrees
 	this.listenerOrientation = new Parameter(this, 0);
 	
@@ -13,7 +10,7 @@ function Rendering(name, filePaths, $scope) {
 	
 	for (var i = 0; i < filePaths.length; i++) {
 		pathToTrackIndex[filePaths[i]] = i;
-		this.tracks.push(new Track(filePaths[i], audioCtx, this));
+		this.tracks.push(new Track(filePaths[i], $scope.audioContext, this));
 	}
 	
 	this.tellReady = function() {
@@ -54,7 +51,7 @@ function Rendering(name, filePaths, $scope) {
 	
 	this.update = function() {
 		var angleInRadians = this.listenerOrientation.value * (Math.PI/180);
-		audioCtx.listener.setOrientation(Math.sin(angleInRadians), 0, -Math.cos(angleInRadians), 0, 1, 0);
+		$scope.audioContext.listener.setOrientation(Math.sin(angleInRadians), 0, -Math.cos(angleInRadians), 0, 1, 0);
 	}
 	
 }

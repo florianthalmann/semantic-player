@@ -15,19 +15,27 @@ angular.module('semanticplayer', ['ionic'])
 })
 
 .controller('renderingController', function($scope, $interval) {
-	$scope.rendering;
-	$scope.accelerometerWatcher;
-	$scope.geolocationWatcher;
-	$scope.compassWatcher;
-	$scope.sliderControls = [];
-	$scope.statsControls;
+	
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+	$scope.audioContext = new AudioContext();
+	
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["spatial", "mixing"];
+	$scope.dmos = ["location", "spatial", "mixing"];
+	
+	$scope.resetUI = function() {
+		$scope.rendering;
+		$scope.accelerometerWatcher;
+		$scope.geolocationWatcher;
+		$scope.compassWatcher;
+		$scope.statsControls;
+		$scope.sliderControls = [];
+	}
 	
 	$scope.dmoSelected = function() {
 		if ($scope.vars.selectedDmo) {
+			$scope.resetUI();
 			var dmoUri = "audio/"+$scope.vars.selectedDmo;
 			var loader = new OntologyLoader(dmoUri, $scope, $interval)
 			loader.loadDmo("/config.n3");
