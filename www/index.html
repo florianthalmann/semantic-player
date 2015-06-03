@@ -40,21 +40,17 @@
 			<ion-content>
 				<ion-list>
 					<ion-item>
-						<button class="button button-balanced" ng-disabled="!rendering.tracksLoaded || !ontologiesLoaded" ng-click="rendering.play()">
+						<button class="button button-balanced" ng-disabled="loadingString()" ng-click="rendering.play()">
 							<i class="icon ion-play"></i>
 						</button>
-						<button class="button button-energized" ng-disabled="!rendering.tracksLoaded || !ontologiesLoaded" ng-click="rendering.pause()">
+						<button class="button button-energized" ng-disabled="loadingString()" ng-click="rendering.pause()">
 							<i class="icon ion-pause"></i>
 						</button>
-						<button class="button button-assertive" ng-disabled="!rendering.tracksLoaded || !ontologiesLoaded" ng-click="rendering.stop()">
+						<button class="button button-assertive" ng-disabled="loadingString()" ng-click="rendering.stop()">
 							<i class="icon ion-stop"></i>
 						</button>
-						<span class="padding" ng-show="!rendering.tracksLoaded">
-							Loading audio...
-							<ion-spinner></ion-spinner>
-						</span>
-						<span class="padding" ng-show="rendering.tracksLoaded && !ontologiesLoaded">
-							Loading ontologies...
+						<span class="padding" ng-show="loadingString()">
+							{{ loadingString() }}
 							<ion-spinner></ion-spinner>
 						</span>
 					</ion-item>

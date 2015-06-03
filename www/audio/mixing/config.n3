@@ -27,7 +27,8 @@ ex:riddimMapping a mb:Mapping;
 	mb:fromControl mb:Slider;
 	mb:toTrack ex:riddim;
 	mb:toParameter mb:Pan;
-	mb:hasMultiplier 1 .
+	mb:hasMultiplier 1 ;
+	rdfs:label "Riddim pan" .
 
 ex:riddimMapping2 a mb:Mapping;
 	mb:fromControl mb:GeolocationDistance;
@@ -39,7 +40,8 @@ ex:dnbMapping a mb:Mapping;
 	mb:fromControl mb:Slider;
 	mb:toTrack ex:dnb;
 	mb:toParameter mb:Distance;
-	mb:hasMultiplier 1 .
+	mb:hasMultiplier 1 ;
+	rdfs:label "DnB distance" .
 
 ex:dnbMapping2 a mb:Mapping;
 	mb:fromControl mb:GeolocationDistance;

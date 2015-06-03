@@ -25,11 +25,13 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.dmos = ["location", "spatial", "mixing"];
 	
 	$scope.resetUI = function() {
-		$scope.rendering;
-		$scope.accelerometerWatcher;
-		$scope.geolocationWatcher;
-		$scope.compassWatcher;
-		$scope.statsControls;
+		$scope.mappingLoadingThreads = 0;
+		$scope.featureLoadingThreads = 0;
+		$scope.rendering = null;
+		$scope.accelerometerWatcher = null;
+		$scope.geolocationWatcher = null;
+		$scope.compassWatcher = null;
+		$scope.statsControls = null;
 		$scope.sliderControls = [];
 	}
 	
@@ -40,6 +42,21 @@ angular.module('semanticplayer', ['ionic'])
 			var loader = new OntologyLoader(dmoUri, $scope, $interval)
 			loader.loadDmo("/config.n3");
 		}
+	}
+	
+	$scope.loadingString = function() {
+		var loadedObjectString;
+		if (!$scope.rendering || !$scope.rendering.tracksLoaded) {
+			loadedObjectString = "audio";
+		} else if ($scope.mappingLoadingThreads && $scope.mappingLoadingThreads > 0) {
+			loadedObjectString = "ontologies (mappings)";
+		} else if ($scope.featureLoadingThreads && $scope.featureLoadingThreads > 0) {
+			loadedObjectString = "ontologies (features)";
+		}
+		if (loadedObjectString) {
+			return "Loading " + loadedObjectString + "..."
+		}
+		return null;
 	}
 	
 	//INIT SELECTION

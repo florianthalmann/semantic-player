@@ -63,6 +63,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	}
 	
 	function loadMapping(store, mappingUri) {
+		$scope.mappingLoadingThreads++;
 		store.execute("SELECT ?control ?trackPath ?parameter ?multiplier ?label \
 		WHERE { <"+mappingUri+"> <"+mobileRdfUri+"#fromControl> ?control . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toTrack> ?track . \
@@ -80,6 +81,8 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 				var multiplier = results[i].multiplier.value;
 				new Mapping(control, parameter, multiplier);
 			}
+			$scope.mappingLoadingThreads--;
+			$scope.$apply();
 		});
 	}
 	
@@ -172,6 +175,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	var timelineOntology = "http://purl.org/NET/c4dm/timeline.owl";
 	
 	function loadEventTimes(trackIndex, rdfUri) {
+		$scope.featureLoadingThreads++;
 		$http.get(dmoUri+rdfUri).success(function(data) {
 			rdfstore.create(function(err, store) {
 				store.load('text/turtle', data, function(err, results) {
@@ -188,7 +192,8 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 							times.push(toSecondsNumber(results[i].xsdTime.value));
 						}
 						$scope.rendering.tracks[trackIndex].setOnsets(times.sort(function(a,b){return a - b}));
-						$scope.ontologiesLoaded = true;
+						$scope.featureLoadingThreads--;
+						$scope.$apply();
 					});
 				});
 			});

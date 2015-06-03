@@ -12,7 +12,11 @@ function CompassWatcher() {
 
 	function startWatch() {
 		var options = { frequency: 100 };
-		watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+		if (navigator.compass) {
+			watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+		} else {
+			console.log("compass not available");
+		}
 	}
 	
 	function onSuccess(heading) {
