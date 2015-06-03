@@ -1,4 +1,4 @@
-function StatsControls($scope, $interval) {
+function StatsControls($interval) {
 	
 	var randomControl = new Control();
 	this.randomControl = randomControl;

@@ -144,7 +144,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	function getStatsControl(index) {
 		if (!$scope.statsControls) {
-			$scope.statsControls = new StatsControls($scope, $interval);
+			$scope.statsControls = new StatsControls($interval);
 		}
 		if (index == 0) {
 			return $scope.statsControls.randomControl;

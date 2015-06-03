@@ -1,5 +1,6 @@
 function Track(filePath, audioCtx, rendering) {
 	
+	var SCHEDULE_AHEAD_TIME = 0.1; //seconds
 	var SWITCH_BUFFER_IMMEDIATELY = false;
 	var LOOP = true;
 	
@@ -12,9 +13,10 @@ function Track(filePath, audioCtx, rendering) {
 	this.amplitude = amplitude;
 	this.onset = onset;
 	
-	var startTime, currentPausePosition = 0;
+	var startTime, endTime, currentPausePosition = 0;
 	var isPlaying, isPaused;
 	var onsets;
+	var timeoutID;
 	
 	this.setOnsets = function(newOnsets) {
 		onsets = newOnsets;
@@ -24,7 +26,9 @@ function Track(filePath, audioCtx, rendering) {
 	gain.connect(audioCtx.destination);
 	var panner = audioCtx.createPanner();
 	panner.connect(gain);
-	var audioBuffer, currentAudioSubBuffer, audioSource, nextAudioSource;
+	var audioBuffer, currentAudioSubBuffer;
+	var currentSourceDuration;
+	var audioSource, nextAudioSource;
 	
 	var audioLoader = new AudioSampleLoader();
 	audioLoader.src = filePath;
@@ -47,12 +51,25 @@ function Track(filePath, audioCtx, rendering) {
 	
 	function internalPlay() {
 		if (!audioSource || !nextAudioSource) {
+			//initially create sources
 			audioSource = createNewAudioSource();
 			nextAudioSource = createNewAudioSource();
+		} else {
+			//switch source
+			audioSource = nextAudioSource;
+			nextAudioSource = createNewAudioSource();
 		}
-		startTime = audioCtx.currentTime;
-		audioSource.start(0, currentPausePosition); //% audioSource.loopEnd-audioSource.loopStart);
+		if (!endTime) {
+			delay = SCHEDULE_AHEAD_TIME;
+		} else {
+			delay = endTime-audioCtx.currentTime;
+		}
+		startTime = audioCtx.currentTime+delay;
+		audioSource.start(startTime, currentPausePosition); //% audioSource.loopEnd-audioSource.loopStart);
+		endTime = startTime+currentSourceDuration;
+		//console.log(delay + " " + endTime + " " + currentSourceDuration + " " + ((endTime-audioCtx.currentTime-SCHEDULE_AHEAD_TIME)*1000));
 		currentPausePosition = 0;
+		timeoutID = window.setTimeout(internalPlay, (endTime-audioCtx.currentTime-SCHEDULE_AHEAD_TIME)*1000);
 	}
 	
 	this.pause = function() {
@@ -75,31 +92,24 @@ function Track(filePath, audioCtx, rendering) {
 	}
 	
 	function stopAndRemoveAudioSources() {
+		window.clearTimeout(timeoutID);
 		isPlaying = false;
 		audioSource.stop(0);
 		audioSource = null;
 		nextAudioSource = null;
+		endTime = null;
 	}
 	
 	function createNewAudioSource(hasChanged) {
 		if (!currentAudioSubBuffer || hasChanged) {
-			currentAudioSubBuffer = getAudioBufferCopy(toSamples(onsets[onset.value]), toSamples(onsets[onset.value+1]));
+			var currentOnset = onsets[onset.value];
+			currentSourceDuration = onsets[onset.value+1]-currentOnset;
+			currentAudioSubBuffer = getAudioBufferCopy(toSamples(currentOnset), toSamples(currentSourceDuration));
 		}
 		var newSource = audioCtx.createBufferSource();
 		newSource.connect(panner);
 		newSource.buffer = currentAudioSubBuffer;
-		newSource.onended = switchToNextAudioSource;
 		return newSource;
-	}
-	
-	function switchToNextAudioSource() {
-		if (isPlaying && LOOP) {
-			oldAudioSource = audioSource;
-			audioSource = nextAudioSource;
-			internalPlay();
-			oldAudioSource.stop(0);
-			nextAudioSource = createNewAudioSource();
-		}
 	}
 	
 	function toSamples(seconds) {
@@ -108,12 +118,13 @@ function Track(filePath, audioCtx, rendering) {
 		}
 	}
 	
-	function getAudioBufferCopy(fromSample, toSample) {
-		var subBuffer = audioCtx.createBuffer(audioBuffer.numberOfChannels, toSample-fromSample, audioBuffer.sampleRate);
+	function getAudioBufferCopy(fromSample, durationInSamples) {
+		//console.log(fromSample + " "+ durationInSamples);
+		var subBuffer = audioCtx.createBuffer(audioBuffer.numberOfChannels, durationInSamples, audioBuffer.sampleRate);
 		for (var i = 0; i < audioBuffer.numberOfChannels; i++) {
 			var currentCopyChannel = subBuffer.getChannelData(i);
 			var currentOriginalChannel = audioBuffer.getChannelData(i);
-			for (var j = 0; j < toSample-fromSample; j++) {
+			for (var j = 0; j < durationInSamples; j++) {
 				currentCopyChannel[j] = currentOriginalChannel[fromSample+j];
 			}
 		}
@@ -123,11 +134,8 @@ function Track(filePath, audioCtx, rendering) {
 	this.update = function() {
 		panner.setPosition(this.pan.value, -0.5, this.distance.value);
 		gain.gain.value = this.amplitude.value;
-		if (this.onset.hasChanged() && onsets) {
+		if (this.onset.hasChanged() && onsets && isPlaying) {
 			nextAudioSource = createNewAudioSource(true);
-			if (SWITCH_BUFFER_IMMEDIATELY) {
-				switchToNextAudioSource();
-			}
 		}
 	}
 	
