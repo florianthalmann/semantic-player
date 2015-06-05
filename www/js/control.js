@@ -26,7 +26,7 @@ function Control(referenceAverageOf, label, $scope) {
 	this.updateValue = function(value) {
 		this.value = value;
 		if ($scope) {
-			//$scope.$apply(); LEADS TO Error: [$rootScope:inprog] $digest already in progress
+			$scope.$apply(); //LEADS TO Error: [$rootScope:inprog] $digest already in progress
 		}
 	}
 	

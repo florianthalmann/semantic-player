@@ -14,13 +14,15 @@ ex:dnbLocation a mb:LocationMapping ;
 	mb:fromControl mb:Slider ;
 	mb:atValue 0.333 ;
 	mb:toTrack ex:dnb ;
-	mb:toParameter mb:Amplitude .
+	mb:toParameter mb:Amplitude ;
+	rdfs:label "Location1" .
 
 ex:moonLocation a mb:LocationMapping ;
 	mb:fromControl mb:Slider ;
 	mb:atValue 0.667 ;
 	mb:toTrack ex:moon ;
-	mb:toParameter mb:Amplitude .
+	mb:toParameter mb:Amplitude ;
+	rdfs:label "Location" .
 
 ex:location a mb:Rendering ;
 	mt:track ex:moon, ex:dnb ;

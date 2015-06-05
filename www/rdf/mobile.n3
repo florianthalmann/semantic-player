@@ -99,12 +99,24 @@ mb:Distance
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
 
+mb:Reverb
+	a owl:Class;
+	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:comment "" .
+
 mb:Onset
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
 
 mb:ListenerOrientation
+	a owl:Class;
+	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:comment "" .
+
+#Other parameters
+
+mb:StatsFrequency
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
@@ -145,7 +157,7 @@ mb:toParameter
 mb:hasMultiplier
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
 	rdfs:domain mb:Mapping;
-	rdfs:range xsd:integer;
+	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
 mb:hasAudioPath

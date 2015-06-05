@@ -52,4 +52,4 @@ ex:dnbMapping2 a mb:Mapping;
 ex:j4j a mb:Rendering;
 	mt:track ex:voc, ex:riddim, ex:dnb;
 	mb:hasMapping ex:vocMapping1, ex:vocMapping2, ex:riddimMapping, ex:riddimMapping2, ex:dnbMapping, ex:dnbMapping2;
-	rdfs:label "J4J Remix" .
+	rdfs:label "Mixing Demo" .

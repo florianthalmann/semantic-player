@@ -17,6 +17,7 @@
 		<script src="lib/ngCordova/dist/ng-cordova.js"></script>
 		<script src="cordova.js"></script>
 		<script src="lib/rdfstore/dist/rdfstore.js"></script>
+		<script src="lib/rdflib.js"></script>
 		<script src="lib/AudioSampleLoader.js"></script>
 
 		<!-- your app's js -->
@@ -31,14 +32,21 @@
 		<script src="js/watchers/compasswatcher.js"></script>
 		<script src="js/watchers/statscontrols.js"></script>
 		<script src="js/ontologyloader.js"></script>
+		<script src="js/ontologyloader-rdflib.js"></script>
 	</head>
 	<body ng-app="semanticplayer" ng-controller="renderingController">
 		<ion-pane>
-			<ion-header-bar class="bar-stable">
-				<h1 class="title">Semantic Player</h1>
+			<ion-header-bar class="bar-dark">
+				<h1 class="title">Semantic Player ({{ rendering.label }})</h1>
 			</ion-header-bar>
 			<ion-content>
 				<ion-list>
+					<ion-item class="item-input item-select item-dark">
+						<div class="input-label">
+							Select Dynamic Music Object
+						</div>
+						<select ng-model="vars.selectedDmo" ng-options="d as d.toString() for d in dmos" ng-change="dmoSelected()"></select>
+					</ion-item>
 					<ion-item>
 						<button class="button button-balanced" ng-disabled="loadingString()" ng-click="rendering.play()">
 							<i class="icon ion-play"></i>
@@ -53,10 +61,6 @@
 							{{ loadingString() }}
 							<ion-spinner></ion-spinner>
 						</span>
-					</ion-item>
-					<ion-item class="item-input item-select">
-						<div class="input-label">DMO</div>
-						<select ng-model="vars.selectedDmo" ng-options="d as d.toString() for d in dmos" ng-change="dmoSelected()"></select>
 					</ion-item>
 					<ion-item class="range range-energized center" ng-repeat="s in sliderControls">
 						<div class="input-label">

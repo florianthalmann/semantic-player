@@ -1,11 +1,32 @@
-function OntologyLoader(dmoUri, $scope, $interval) {
+function OntologyLoader2(dmoUri, $scope, $interval) {
 	
 	var mobileRdfUri = "rdf/mobile.n3";
 	var multitrackRdfUri = "http://purl.org/ontology/studio/multitrack";
 	var rdfsUri = "http://www.w3.org/2000/01/rdf-schema";
 	
+	/* WORKING RDFLIB SAMPLE FOR THE RECORD (DOESNT WORK WITH LOCAL FILES) */
+	var kb = $rdf.graph();
+	var fetch = $rdf.fetcher(kb);
+	
+	/*subj = "http://www.w3.org/2000/01/rdf-schema";
+	pred = "http://xmlns.com/foaf/0.1/knows";
+	query = function() {
+		preds = kb.each($rdf.sym(subj));
+		knowns = kb.each($rdf.sym(subj), $rdf.sym(pred));
+	}
+	doc = (function(uri){return uri.slice(0, uri.indexOf('#'));})(subj);*/
+	fetch.nowOrWhenFetched("http://localhost/rdf/rdf-schema.n3", undefined, function(success, error) {
+		//query();
+		console.log(kb.statements.length + " " + success + " " + error);
+		$scope.statements = kb.statements.length;
+		/*for (var i = 0; i < preds.length; i++) {
+			console.log(preds[i].value);
+		}*/
+	});
+	
 	this.loadDmo = function(rdfUri) {
 		$http.get(dmoUri+rdfUri).success(function(data) {
+			
 			rdfstore.create(function(err, store) {
 				store.load('text/turtle', data, function(err, results) {
 					if (err) {
@@ -170,17 +191,10 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 			return track.pan;
 		}	else if (parameterUri == mobileRdfUri+"#Distance") {
 			return track.distance;
-		} else if (parameterUri == mobileRdfUri+"#Reverb") {
-			return track.reverb;
 		} else if (parameterUri == mobileRdfUri+"#Onset") {
 			return track.onset;
 		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation") {
 			return $scope.rendering.listenerOrientation;
-		} else if (parameterUri == mobileRdfUri+"#StatsFrequency") {
-			if (!$scope.statsControls) {
-				$scope.statsControls = new StatsControls($interval);
-			}
-			return $scope.statsControls.frequency;
 		}
 	}
 	
@@ -188,14 +202,10 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	var timelineOntology = "http://purl.org/NET/c4dm/timeline.owl";
 	
 	function loadEventTimes(trackIndex, rdfUri) {
-		//console.log("start");
 		$scope.featureLoadingThreads++;
 		$http.get(dmoUri+rdfUri).success(function(data) {
-			//console.log("get");
 			rdfstore.create(function(err, store) {
-				//console.log("create");
 				store.load('text/turtle', data, function(err, results) {
-					//console.log("load");
 					if (err) {
 						console.log(err);
 					}
@@ -204,7 +214,6 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 					?event a ?eventType . \
 					?event <"+eventOntology+"#time> ?time . \
 					?time <"+timelineOntology+"#at> ?xsdTime }", function(err, results) {
-						//console.log("execute");
 						var times = [];
 						for (var i = 0; i < results.length; i++) {
 							times.push(toSecondsNumber(results[i].xsdTime.value));

@@ -22,11 +22,14 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["location", "spatial", "mixing"];
+	$scope.dmos = ["spatial", "mixing", "features"];
 	
 	$scope.resetUI = function() {
 		$scope.mappingLoadingThreads = 0;
 		$scope.featureLoadingThreads = 0;
+		if ($scope.rendering) {
+			$scope.rendering.stop();
+		}
 		$scope.rendering = null;
 		$scope.accelerometerWatcher = null;
 		$scope.geolocationWatcher = null;
@@ -39,8 +42,9 @@ angular.module('semanticplayer', ['ionic'])
 		if ($scope.vars.selectedDmo) {
 			$scope.resetUI();
 			var dmoUri = "audio/"+$scope.vars.selectedDmo;
-			var loader = new OntologyLoader(dmoUri, $scope, $interval)
+			var loader = new OntologyLoader(dmoUri, $scope, $interval);
 			loader.loadDmo("/config.n3");
+			//new OntologyLoader2(dmoUri, $scope, $interval, $rdf);
 		}
 	}
 	

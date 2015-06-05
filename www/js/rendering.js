@@ -1,4 +1,6 @@
-function Rendering(name, filePaths, $scope) {
+function Rendering(label, filePaths, $scope) {
+	
+	this.label = label;
 	
 	//horizontal listener orientation in degrees
 	this.listenerOrientation = new Parameter(this, 0);
@@ -15,7 +17,7 @@ function Rendering(name, filePaths, $scope) {
 	
 	this.tellReady = function() {
 		readyCount++;
-		if (readyCount == this.tracks.length) {
+		if (readyCount == 2*this.tracks.length) {
 			this.tracksLoaded = true;
 			$scope.$apply();
 		}

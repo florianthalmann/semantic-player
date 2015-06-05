@@ -16,7 +16,9 @@ function Parameter(owner, initialValue, isInteger) {
 			}
 			this.value = value;
 			changed = true;
-			this.owner.update();
+			if (this.owner.update) {
+				this.owner.update();
+			}
 			//update values of all other controllers connected to this parameter
 			for (var i = 0; i < this.mappings.length; i++) {
 				if (this.mappings[i] != mapping) {

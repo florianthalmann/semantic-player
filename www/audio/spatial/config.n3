@@ -5,8 +5,7 @@
 @prefix ex: <#> .
 
 ex:audio a mt:AudioTrack;
-	mb:hasAudioPath "moon.m4a" ;
-	mb:hasFeaturesPath "moon.n3" .
+	mb:hasAudioPath "moon.m4a" .
 	
 ex:distanceMapping a mb:Mapping ;
 	mb:fromControl mb:GeolocationDistance ;
@@ -20,6 +19,13 @@ ex:distanceMapping2 a mb:Mapping ;
 	mb:toParameter mb:Distance ;
 	mb:hasMultiplier 10 ;
 	rdfs:label "Distance" .
+	
+ex:reverbMapping2 a mb:Mapping ;
+	mb:fromControl mb:Slider ;
+	mb:toTrack ex:audio ;
+	mb:toParameter mb:Reverb ;
+	mb:hasMultiplier 1 ;
+	rdfs:label "Reverb" .
 
 ex:orientationMapping a mb:Mapping ;
 	mb:fromControl mb:CompassHeading ;
@@ -34,20 +40,7 @@ ex:orientationMapping2 a mb:Mapping ;
 	mb:hasMultiplier 360 ;
 	rdfs:label "Orientation" .
 
-ex:onsetMapping a mb:Mapping ;
-	mb:fromControl mb:Slider ;
-	mb:toTrack ex:audio ;
-	mb:toParameter mb:Onset ;
-	mb:hasMultiplier 400 ;
-	rdfs:label "Onset" .
-
-ex:onsetMapping2 a mb:Mapping ;
-	mb:fromControl mb:Random ;
-	mb:toTrack ex:audio ;
-	mb:toParameter mb:Onset ;
-	mb:hasMultiplier 400 .
-
 ex:moon a mb:Rendering ;
 	mt:track ex:audio ;
-	mb:hasMapping ex:distanceMapping, ex:orientationMapping, ex:distanceMapping2, ex:orientationMapping2, ex:onsetMapping, ex:onsetMapping2 ;
-	rdfs:label "Moon is Waiting" .
+	mb:hasMapping ex:distanceMapping, ex:orientationMapping, ex:reverbMapping, ex:reverbMapping2, ex:distanceMapping2, ex:orientationMapping2 ;
+	rdfs:label "Spatial Demo" .
