@@ -7,6 +7,11 @@ function CompassWatcher() {
 	this.trueHeadingControl = trueHeadingControl;
 	this.accuracyControl = accuracyControl;
 	
+	this.reset = function() {
+		headingControl.reset();
+		trueHeadingControl.reset();
+	}
+	
 	var watchID = null;
 	startWatch();
 

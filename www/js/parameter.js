@@ -10,7 +10,7 @@ function Parameter(owner, initialValue, isInteger) {
 	}
 	
 	this.update = function(mapping, value) {
-		if (value) {
+		if (value || value == 0) {
 			if (isInteger) {
 				value = Math.round(value);
 			}

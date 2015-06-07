@@ -64,12 +64,14 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	function loadMapping(store, mappingUri) {
 		$scope.mappingLoadingThreads++;
-		store.execute("SELECT ?control ?trackPath ?parameter ?multiplier ?label \
+		store.execute("SELECT ?control ?trackPath ?parameter ?multiplier ?addend ?modulus ?label \
 		WHERE { <"+mappingUri+"> <"+mobileRdfUri+"#fromControl> ?control . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toTrack> ?track . \
 		?track <"+mobileRdfUri+"#hasAudioPath> ?trackPath . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
 		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#hasMultiplier> ?multiplier . } \
+		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#hasAddend> ?addend . } \
+		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#hasModulus> ?modulus . } \
 		OPTIONAL { <"+mappingUri+"> <"+rdfsUri+"#label> ?label . }}", function(err, results) {
 			//console.log(results);
 			for (var i = 0; i < results.length; i++) {
@@ -79,13 +81,20 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 				var control = getControl(results[i].control.value, label);
 				var track = $scope.rendering.getTrackForPath(dmoUri+"/"+results[i].trackPath.value);
 				var parameter = getParameter(track, results[i].parameter.value);
+				var multiplier = 1;
 				if (results[i].multiplier) {
-					multiplier = results[i].multiplier.value;
-				} else {
-					multiplier = 1;
+					multiplier = Number(results[i].multiplier.value);
+				}
+				var addend = 0;
+				if (results[i].addend) {
+					addend = Number(results[i].addend.value);
+				}
+				var modulus;
+				if (results[i].modulus) {
+					modulus = Number(results[i].modulus.value);
 				}
 				//console.log(control + " " + track + " " + parameter + " " + label);
-				new Mapping(control, parameter, multiplier);
+				new Mapping(control, parameter, multiplier, addend, modulus);
 			}
 			$scope.mappingLoadingThreads--;
 			$scope.$apply();

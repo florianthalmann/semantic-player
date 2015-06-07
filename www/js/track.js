@@ -5,8 +5,8 @@ function Track(filePath, audioContext, rendering) {
 	var LOOP = true;
 	
 	var pan = new Parameter(this, 0);
-	var distance = new Parameter(this, 1);
-	var amplitude = new Parameter(this, 0.5);
+	var distance = new Parameter(this, 0);
+	var amplitude = new Parameter(this, 1);
 	var reverb = new Parameter(this, 0);
 	var onset = new Parameter(this, 0, true);
 	this.pan = pan;
@@ -147,7 +147,8 @@ function Track(filePath, audioContext, rendering) {
 	}
 	
 	this.update = function() {
-		panner.setPosition(this.pan.value, -0.5, this.distance.value);
+		//console.log(this.pan.value, 0, this.distance.value);
+		panner.setPosition(this.pan.value, 0, this.distance.value);
 		dryGain.gain.value = this.amplitude.value;
 		reverbGain.gain.value = this.reverb.value;
 		if (this.onset.hasChanged() && onsets && isPlaying) {

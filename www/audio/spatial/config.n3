@@ -31,13 +31,15 @@ ex:orientationMapping a mb:Mapping ;
 	mb:fromControl mb:CompassHeading ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:ListenerOrientation ;
-	mb:hasMultiplier 1 .
+	mb:hasMultiplier -1 ;
+	mb:hasModulus 360 .
 
 ex:orientationMapping2 a mb:Mapping ;
 	mb:fromControl mb:Slider ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:ListenerOrientation ;
-	mb:hasMultiplier 360 ;
+	mb:hasMultiplier -360 ;
+	mb:hasModulus 360 ;
 	rdfs:label "Orientation" .
 
 ex:moon a mb:Rendering ;

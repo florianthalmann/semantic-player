@@ -1,7 +1,7 @@
 function GeolocationWatcher() {
 	
-	var latitudeControl = new Control(3);
-	var longitudeControl = new Control(3);
+	var latitudeControl = new Control(5);
+	var longitudeControl = new Control(5);
 	var accuracyControl = new Control();
 	var distanceControl = new Control();
 	this.latitudeControl = latitudeControl;
@@ -12,6 +12,7 @@ function GeolocationWatcher() {
 	this.reset = function() {
 		latitudeControl.reset();
 		longitudeControl.reset();
+		distanceControl.reset();
 	}
 	
 	var watchID = null;

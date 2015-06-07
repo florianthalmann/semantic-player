@@ -9,7 +9,8 @@ function Control(referenceAverageOf, label, $scope) {
 	var currentNumAddends, currentSum;
 	
 	this.reset = function() {
-		this.value = 0;
+		this.value = null;
+		this.referenceValue = null;
 		currentNumAddends = 0;
 		currentSum = 0;
 	}
@@ -40,6 +41,7 @@ function Control(referenceAverageOf, label, $scope) {
 				currentSum /= referenceAverageOf;
 				this.referenceValue = currentSum;
 			}
+			//console.log(currentNumAddends + " " + currentSum + " " + value + " " + this.referenceValue);
 		//done measuring. adjust value if initialvalue taken
 		} else {
 			if (value) {

@@ -1,4 +1,4 @@
-function Mapping(control, parameter, multiplier) {
+function Mapping(control, parameter, multiplier, addend, modulus) {
 	
 	//TODO HERE WE'LL REALIZE VARIOUS KINDS OF MAPPINGS (LINEAR, EXP, ETC)
 	
@@ -6,10 +6,22 @@ function Mapping(control, parameter, multiplier) {
 		if (multiplier) {
 			value *= multiplier;
 		}
+		if (modulus) {
+			value = moduloAsItShouldBe(value, modulus);
+		}
+		if (addend) {
+			value += addend;
+		}
 		parameter.update(this, value);
 	}
 	
 	this.updateControl = function(value) {
+		if (addend) {
+			value -= addend;
+		}
+		if (modulus) {
+			value = moduloAsItShouldBe(value, modulus);
+		}
 		if (multiplier) {
 			value /= multiplier;
 		}
@@ -18,5 +30,10 @@ function Mapping(control, parameter, multiplier) {
 	
 	control.addMapping(this);
 	parameter.addMapping(this);
+	
+	//javascript modulo sucks
+	function moduloAsItShouldBe(m, n) {
+		return ((m % n) + n) % n;
+	}
 	
 }

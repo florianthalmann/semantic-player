@@ -58,4 +58,5 @@
     <splash src="resources/ios/splash/Default~iphone.png" height="480" width="320"/>
   </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
+  <allow-navigation href="http://*/*"/>
 </widget>

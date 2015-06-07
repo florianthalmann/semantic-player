@@ -160,6 +160,18 @@ mb:hasMultiplier
 	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
+mb:hasAddend
+	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
+	rdfs:domain mb:Mapping;
+	rdfs:range xsd:decimal;
+	rdfs:comment "" .
+
+mb:hasModulus
+	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
+	rdfs:domain mb:Mapping;
+	rdfs:range xsd:decimal;
+	rdfs:comment "" .
+
 mb:hasAudioPath
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:InverseFunctionalProperty;
 	rdfs:domain mt:AudioTrack;
