@@ -22,7 +22,7 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["spatial", "mixing", "features"];
+	$scope.dmos = ["location", "spatial", "mixing", "features"];
 	
 	$scope.resetUI = function() {
 		$scope.mappingLoadingThreads = 0;
@@ -35,7 +35,7 @@ angular.module('semanticplayer', ['ionic'])
 		$scope.geolocationWatcher = null;
 		$scope.compassWatcher = null;
 		$scope.statsControls = null;
-		$scope.sliderControls = [];
+		$scope.sliderControls = {};
 	}
 	
 	$scope.dmoSelected = function() {

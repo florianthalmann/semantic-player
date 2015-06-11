@@ -10,19 +10,22 @@ ex:moon a mt:AudioTrack;
 ex:dnb a mt:AudioTrack;
 	mb:hasAudioPath "dnb.m4a" .
 
+ex:locationSlider a mb:Slider ;
+	rdfs:label "Location" .
+
 ex:dnbLocation a mb:LocationMapping ;
-	mb:fromControl mb:Slider ;
+	mb:fromControl ex:locationSlider ;
 	mb:atValue 0.333 ;
+	mb:hasRange 0.333 ;
 	mb:toTrack ex:dnb ;
-	mb:toParameter mb:Amplitude ;
-	rdfs:label "Location1" .
+	mb:toParameter mb:Amplitude .
 
 ex:moonLocation a mb:LocationMapping ;
-	mb:fromControl mb:Slider ;
+	mb:fromControl ex:locationSlider ;
 	mb:atValue 0.667 ;
+	mb:hasRange 0.333 ;
 	mb:toTrack ex:moon ;
-	mb:toParameter mb:Amplitude ;
-	rdfs:label "Location" .
+	mb:toParameter mb:Amplitude .
 
 ex:location a mb:Rendering ;
 	mt:track ex:moon, ex:dnb ;

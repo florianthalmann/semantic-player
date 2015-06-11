@@ -64,21 +64,25 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	function loadMapping(store, mappingUri) {
 		$scope.mappingLoadingThreads++;
-		store.execute("SELECT ?control ?trackPath ?parameter ?multiplier ?addend ?modulus ?label \
-		WHERE { <"+mappingUri+"> <"+mobileRdfUri+"#fromControl> ?control . \
+		store.execute("SELECT ?mappingType ?control ?controlType ?trackPath ?parameter ?multiplier ?addend ?modulus ?locationValue ?locationRange ?label \
+		WHERE { <"+mappingUri+"> a ?mappingType . \
+		<"+mappingUri+"> <"+mobileRdfUri+"#fromControl> ?control . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toTrack> ?track . \
 		?track <"+mobileRdfUri+"#hasAudioPath> ?trackPath . \
 		<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
+		?control a ?controlType . \
 		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#hasMultiplier> ?multiplier . } \
 		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#hasAddend> ?addend . } \
 		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#hasModulus> ?modulus . } \
-		OPTIONAL { <"+mappingUri+"> <"+rdfsUri+"#label> ?label . }}", function(err, results) {
+		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#atValue> ?locationValue . } \
+		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#hasRange> ?locationRange . } \
+		OPTIONAL { ?control <"+rdfsUri+"#label> ?label . }}", function(err, results) {
 			//console.log(results);
 			for (var i = 0; i < results.length; i++) {
 				if (results[i].label) {
 					var label = results[i].label.value;
 				}
-				var control = getControl(results[i].control.value, label);
+				var control = getControl(results[i].control.value, results[i].controlType.value, label);
 				var track = $scope.rendering.getTrackForPath(dmoUri+"/"+results[i].trackPath.value);
 				var parameter = getParameter(track, results[i].parameter.value);
 				var multiplier = 1;
@@ -93,15 +97,20 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 				if (results[i].modulus) {
 					modulus = Number(results[i].modulus.value);
 				}
+				var mappingType = results[i].mappingType.value;
+				if (mappingType == mobileRdfUri+"#LocationMapping") {
+					new LocationMapping(control, results[i].locationValue.value, results[i].locationRange.value, parameter, multiplier, addend, modulus);
+				} else {
+					new Mapping(control, parameter, multiplier, addend, modulus);
+				}
 				//console.log(control + " " + track + " " + parameter + " " + label);
-				new Mapping(control, parameter, multiplier, addend, modulus);
 			}
 			$scope.mappingLoadingThreads--;
 			$scope.$apply();
 		});
 	}
 	
-	function getControl(controlUri, label) {
+	function getControl(controlUri, controlTypeUri, label) {
 		if (controlUri == mobileRdfUri+"#AccelerometerX") {
 			return getAccelerometerControl(0);
 		} else if (controlUri == mobileRdfUri+"#AccelerometerY") {
@@ -116,11 +125,13 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 			return getGeolocationControl(2);
 		}	else if (controlUri == mobileRdfUri+"#CompassHeading") {
 			return getCompassControl(0);
-		}	else if (controlUri == mobileRdfUri+"#Slider") {
-			var sliderControl = new Control(0, label, $scope);
-			$scope.sliderControls.push(sliderControl);
-			$scope.$apply();
-			return sliderControl;
+		}	else if (controlTypeUri == mobileRdfUri+"#Slider") {
+			if ($scope.sliderControls[controlUri]) {
+				return $scope.sliderControls[controlUri];
+			}
+			$scope.sliderControls[controlUri] = new Control(0, label, $scope);
+			//$scope.$apply();
+			return $scope.sliderControls[controlUri];
 		} else if (controlUri == mobileRdfUri+"#Random") {
 			return getStatsControl(0);
 		}

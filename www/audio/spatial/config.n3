@@ -11,13 +11,13 @@ ex:distanceMapping a mb:Mapping ;
 	mb:fromControl mb:GeolocationDistance ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:Distance ;
-	mb:hasMultiplier .1 .
+	mb:hasMultiplier 0.5 .
 	
 ex:distanceMapping2 a mb:Mapping ;
 	mb:fromControl mb:Slider ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:Distance ;
-	mb:hasMultiplier 10 ;
+	mb:hasMultiplier 100 ;
 	rdfs:label "Distance" .
 	
 ex:reverbMapping2 a mb:Mapping ;
