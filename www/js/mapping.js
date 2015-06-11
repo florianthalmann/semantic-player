@@ -38,7 +38,8 @@ function Mapping(control, parameter, multiplier, addend, modulus) {
 	
 }
 
-function LocationMapping(control, location, range, parameter, maximum, minimum) {
+
+function LocationMapping(controls, locations, ranges, parameter, minimum, maximum, $scope) {
 	
 	if (!maximum) {
 		maximum = 1;
@@ -47,14 +48,27 @@ function LocationMapping(control, location, range, parameter, maximum, minimum) 
 		minimum = 0;
 	}
 	
-	this.updateParameter = function(value) {
-		var distance = Math.abs(location - value);
-		var parameterValue;
-		if (distance < range) {
-			parameterValue = maximum-(distance/range);
+	var currentDistances = [];
+	
+	this.updateParameter = function(value, control) {
+		var i = controls.indexOf(control);
+		var distance = Math.abs(locations[i] - value);
+		
+		if (distance < ranges[i]) {
+			currentDistances[i] = 1-(distance/ranges[i]);
 		} else {
-			parameterValue = minimum;
+			currentDistances[i] = 0;
 		}
+		internalUpdate();
+	}
+	
+	function internalUpdate() {
+		var parameterValue = 1;
+		$scope.parameter = currentDistances + " " ;
+		for (var i = 0; i < currentDistances.length; i++) {
+			parameterValue *= currentDistances[i];
+		}
+		parameterValue = minimum+(parameterValue*(maximum-minimum));
 		parameter.update(this, parameterValue);
 	}
 	
@@ -63,7 +77,9 @@ function LocationMapping(control, location, range, parameter, maximum, minimum) 
 		//control.updateValue(value);
 	}
 	
-	control.addMapping(this);
+	for (var i = 0; i < controls.length; i++) {
+		controls[i].addMapping(this);
+	}
 	parameter.addMapping(this);
 	
 }

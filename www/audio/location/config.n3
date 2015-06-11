@@ -13,21 +13,62 @@ ex:dnb a mt:AudioTrack;
 ex:locationSlider a mb:Slider ;
 	rdfs:label "Location" .
 
+ex:ampSlider a mb:Slider ;
+	rdfs:label "Moon amplitude" .
+
+ex:xSlider a mb:Slider ;
+	rdfs:label "X" .
+
+ex:ySlider a mb:Slider ;
+	rdfs:label "Y" .
+
+ex:ampMapping a mb:Mapping ;
+	mb:fromControl ex:ampSlider ;
+	mb:toTrack ex:moon ;
+	mb:toParameter mb:Amplitude ;
+	mb:hasMultiplier 1 .
+
 ex:dnbLocation a mb:LocationMapping ;
-	mb:fromControl ex:locationSlider ;
-	mb:atValue 0.333 ;
-	mb:hasRange 0.333 ;
+	mb:hasLocation [ a mb:ParameterLocation ;
+		mb:fromControl ex:locationSlider ;
+		mb:atValue 0.333 ;
+		mb:hasRange 0.333 ] ;
 	mb:toTrack ex:dnb ;
 	mb:toParameter mb:Amplitude .
 
 ex:moonLocation a mb:LocationMapping ;
-	mb:fromControl ex:locationSlider ;
-	mb:atValue 0.667 ;
-	mb:hasRange 0.333 ;
+	mb:hasLocation [ a mb:ParameterLocation ;
+		mb:fromControl ex:locationSlider ;
+		mb:atValue 0.667 ;
+		mb:hasRange 0.333 ] ;
+	mb:toTrack ex:moon ;
+	mb:toParameter mb:Amplitude .
+	
+ex:dnbLocation1 a mb:LocationMapping ;
+	mb:hasLocation [ a mb:ParameterLocation ;
+		mb:fromControl mb:AccelerometerX ;
+		mb:atValue -8 ;
+		mb:hasRange 4 ] ;
+	mb:hasLocation [ a mb:ParameterLocation ;
+		mb:fromControl mb:AccelerometerY ;
+		mb:atValue -8 ;
+		mb:hasRange 4 ] ;
+	mb:toTrack ex:dnb ;
+	mb:toParameter mb:Amplitude .
+
+ex:moonLocation1 a mb:LocationMapping ;
+	mb:hasLocation [ a mb:ParameterLocation ;
+		mb:fromControl mb:AccelerometerX ;
+		mb:atValue 8 ;
+		mb:hasRange 4 ] ;
+	mb:hasLocation [ a mb:ParameterLocation ;
+		mb:fromControl mb:AccelerometerY ;
+		mb:atValue 8 ;
+		mb:hasRange 4 ] ;
 	mb:toTrack ex:moon ;
 	mb:toParameter mb:Amplitude .
 
 ex:location a mb:Rendering ;
 	mt:track ex:moon, ex:dnb ;
-	mb:hasMapping ex:dnbLocation, ex:moonLocation ;
+	mb:hasMapping ex:ampMapping, ex:dnbLocation, ex:moonLocation, ex:dnbLocation1, ex:moonLocation1 ;
 	rdfs:label "Location Demo" .

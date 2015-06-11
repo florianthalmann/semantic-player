@@ -21,13 +21,13 @@ function Control(referenceAverageOf, label, $scope) {
 	
 	this.addMapping = function(mapping) {
 		this.mappings.push(mapping);
-		mapping.updateParameter(this.value);
+		mapping.updateParameter(this.value, this);
 	}
 	
 	this.updateValue = function(value) {
 		this.value = value;
 		if ($scope) {
-			$scope.$apply(); //LEADS TO Error: [$rootScope:inprog] $digest already in progress
+			//$scope.$apply(); //LEADS TO Error: [$rootScope:inprog] $digest already in progress
 		}
 	}
 	
@@ -41,7 +41,6 @@ function Control(referenceAverageOf, label, $scope) {
 				currentSum /= referenceAverageOf;
 				this.referenceValue = currentSum;
 			}
-			//console.log(currentNumAddends + " " + currentSum + " " + value + " " + this.referenceValue);
 		//done measuring. adjust value if initialvalue taken
 		} else {
 			if (value) {
@@ -51,7 +50,7 @@ function Control(referenceAverageOf, label, $scope) {
 				this.value -= this.referenceValue;
 			}
 			for (var i = 0; i < this.mappings.length; i++) {
-				this.mappings[i].updateParameter(this.value);
+				this.mappings[i].updateParameter(this.value, this);
 			}
 		}
 	}

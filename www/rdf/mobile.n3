@@ -20,12 +20,17 @@ mb:Mapping
 	a owl:Class;
 	rdfs:comment "" .
 
-mb:LinearMapping
+mb:DirectMapping
 	a owl:Class;
 	rdfs:subClassOf mb:Mapping;
 	rdfs:comment "" .
 
 mb:LocationMapping
+	a owl:Class;
+	rdfs:subClassOf mb:Mapping;
+	rdfs:comment "" .
+
+mb:ParameterLocation
 	a owl:Class;
 	rdfs:comment "" .
 
@@ -122,23 +127,35 @@ mb:StatsFrequency
 	rdfs:comment "" .
 
 
-#predicates
+#Properties
 
 mb:hasMapping
 	a owl:ObjectProperty, owl:AntisymmetricProperty;
-	rdfs:domain mb:Rendering;
+	rdfs:domain mb:Rendering; 
 	rdfs:range mb:Mapping;
 	rdfs:comment "" .
 
 mb:fromControl
 	a owl:ObjectProperty, owl:AntisymmetricProperty;
-	rdfs:domain mb:Mapping;
+	rdfs:domain mb:DirectMapping;
 	rdfs:range mb:MobileControl;
 	rdfs:comment "" .
 
-mb:fromValue
+mb:fromControl
 	a owl:ObjectProperty, owl:AntisymmetricProperty;
-	rdfs:domain mb:LocationMapping;
+	rdfs:domain mb:ParameterLocation;
+	rdfs:range mb:MobileControl;
+	rdfs:comment "" .
+
+mb:atValue
+	a owl:ObjectProperty, owl:AntisymmetricProperty;
+	rdfs:domain mb:ParameterLocation;
+	rdfs:range xsd:decimal;
+	rdfs:comment "" .
+
+mb:hasRange
+	a owl:ObjectProperty, owl:AntisymmetricProperty;
+	rdfs:domain mb:ParameterLocation;
 	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
@@ -156,19 +173,19 @@ mb:toParameter
 
 mb:hasMultiplier
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
-	rdfs:domain mb:Mapping;
+	rdfs:domain mb:DirectMapping;
 	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
 mb:hasAddend
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
-	rdfs:domain mb:Mapping;
+	rdfs:domain mb:DirectMapping;
 	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
 mb:hasModulus
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
-	rdfs:domain mb:Mapping;
+	rdfs:domain mb:DirectMapping;
 	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
