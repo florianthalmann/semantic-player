@@ -1,4 +1,4 @@
-function Track(filePath, audioContext, rendering) {
+function Track(filePath, audioContext, rendering, reverbAllowed) {
 	
 	var SCHEDULE_AHEAD_TIME = 0.1; //seconds
 	var SWITCH_BUFFER_IMMEDIATELY = false;
@@ -19,6 +19,7 @@ function Track(filePath, audioContext, rendering) {
 	var isPlaying, isPaused;
 	var onsets;
 	var timeoutID;
+	this.isPlaying = isPlaying;
 	
 	this.setOnsets = function(newOnsets) {
 		onsets = newOnsets;
@@ -27,8 +28,9 @@ function Track(filePath, audioContext, rendering) {
 	var dryGain = audioContext.createGain();
 	dryGain.connect(audioContext.destination);
 	var reverbGain = audioContext.createGain();
-	reverbGain.connect(audioContext.destination);
-	reverbGain.gain.value = 0;
+	if (reverbAllowed) {
+		reverbGain.connect(audioContext.destination);
+	}
 	var convolver = audioContext.createConvolver();
 	convolver.connect(reverbGain);
 	var panner = audioContext.createPanner();
@@ -73,6 +75,7 @@ function Track(filePath, audioContext, rendering) {
 			delay = endTime-audioContext.currentTime;
 		}
 		startTime = audioContext.currentTime+delay;
+		this.startTime = startTime;
 		audioSource.start(startTime, currentPausePosition); //% audioSource.loopEnd-audioSource.loopStart);
 		endTime = startTime+currentSourceDuration;
 		//console.log(delay + " " + endTime + " " + currentSourceDuration + " " + ((endTime-audioContext.currentTime-SCHEDULE_AHEAD_TIME)*1000));
@@ -86,7 +89,6 @@ function Track(filePath, audioContext, rendering) {
 		if (isPlaying) {
 			stopAndRemoveAudioSources();
 			currentPausePosition += audioContext.currentTime - startTime;
-			console.log(currentPausePosition);
 			isPaused = true;
 		} else if (isPaused) {
 			isPaused = false;

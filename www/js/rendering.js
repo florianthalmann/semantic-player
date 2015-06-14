@@ -12,7 +12,9 @@ function Rendering(label, filePaths, $scope) {
 	
 	for (var i = 0; i < filePaths.length; i++) {
 		pathToTrackIndex[filePaths[i]] = i;
-		this.tracks.push(new Track(filePaths[i], $scope.audioContext, this));
+		var currentTrack = new Track(filePaths[i], $scope.audioContext, this, i == 0); //currently reverb works only for one channel on android!?!
+		this.tracks.push(currentTrack);
+		
 	}
 	
 	this.tellReady = function() {

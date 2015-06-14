@@ -1,4 +1,4 @@
-function AccelerometerWatcher() {
+function AccelerometerWatcher($scope) {
 	
 	var xControl = new Control();
 	var yControl = new Control();
@@ -36,6 +36,12 @@ function AccelerometerWatcher() {
 		xControl.updateMappings(acceleration.x);
 		yControl.updateMappings(acceleration.y);
 		zControl.updateMappings(acceleration.z);
+		if ($scope) {
+			//scope apply here whenever something changes
+			setTimeout(function() {
+				$scope.$apply();
+			}, 10);
+		}
 	}
 
 	// Stop watching the acceleration

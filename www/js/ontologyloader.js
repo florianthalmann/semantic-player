@@ -90,7 +90,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 					loadLocations(store, mappingUri, parameter, minimum, maximum);
 				} else {
 					if (control) { //control might not be available, e.g. accelerometer on laptops
-						new Mapping(control, parameter, multiplier, addend, modulus);
+						$scope.mappings[mappingUri] = new Mapping(control, parameter, multiplier, addend, modulus);
 					}
 					$scope.mappingLoadingThreads--;
 					$scope.$apply();
@@ -116,7 +116,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 				values[i] = getNumberValue(results[i].value);
 				ranges[i] = getNumberValue(results[i].range);
 			}
-			new LocationMapping(controls, values, ranges, parameter, minimum, maximum, $scope);
+			$scope.mappings[locationMappingUri] = new LocationMapping(controls, values, ranges, parameter, minimum, maximum);
 			$scope.mappingLoadingThreads--;
 			$scope.$apply();
 		});
@@ -172,7 +172,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	function getAccelerometerControl(index) {
 		if (!$scope.accelerometerWatcher) {
-			$scope.accelerometerWatcher = new AccelerometerWatcher();
+			$scope.accelerometerWatcher = new AccelerometerWatcher($scope);
 		}
 		if (index == 0) {
 			return $scope.accelerometerWatcher.xControl;
@@ -185,7 +185,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	function getGeolocationControl(index) {
 		if (!$scope.geolocationWatcher) {
-			$scope.geolocationWatcher = new GeolocationWatcher();
+			$scope.geolocationWatcher = new GeolocationWatcher($scope);
 		}
 		if (index == 0) {
 			return $scope.geolocationWatcher.latitudeControl;
@@ -198,7 +198,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	function getCompassControl(index) {
 		if (!$scope.compassWatcher) {
-			$scope.compassWatcher = new CompassWatcher();
+			$scope.compassWatcher = new CompassWatcher($scope);
 		}
 		if (index == 0) {
 			return $scope.compassWatcher.headingControl;

@@ -36,6 +36,7 @@ angular.module('semanticplayer', ['ionic'])
 		$scope.compassWatcher = null;
 		$scope.statsControls = null;
 		$scope.sliderControls = {};
+		$scope.mappings = {};
 	}
 	
 	$scope.dmoSelected = function() {

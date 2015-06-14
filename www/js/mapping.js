@@ -39,7 +39,7 @@ function Mapping(control, parameter, multiplier, addend, modulus) {
 }
 
 
-function LocationMapping(controls, locations, ranges, parameter, minimum, maximum, $scope) {
+function LocationMapping(controls, locations, ranges, parameter, minimum, maximum) {
 	
 	if (!maximum) {
 		maximum = 1;
@@ -49,6 +49,7 @@ function LocationMapping(controls, locations, ranges, parameter, minimum, maximu
 	}
 	
 	var currentDistances = [];
+	this.currentDistances = currentDistances;
 	
 	this.updateParameter = function(value, control) {
 		var i = controls.indexOf(control);
@@ -64,7 +65,6 @@ function LocationMapping(controls, locations, ranges, parameter, minimum, maximu
 	
 	function internalUpdate() {
 		var parameterValue = 1;
-		$scope.parameter = currentDistances + " " ;
 		for (var i = 0; i < currentDistances.length; i++) {
 			parameterValue *= currentDistances[i];
 		}

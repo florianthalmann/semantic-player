@@ -1,4 +1,4 @@
-function GeolocationWatcher() {
+function GeolocationWatcher($scope) {
 	
 	var latitudeControl = new Control(5);
 	var longitudeControl = new Control(5);
@@ -35,6 +35,12 @@ function GeolocationWatcher() {
 		if (latitudeControl.referenceValue && longitudeControl.referenceValue) {
 			currentDistance = latLonToMeters(latitudeControl.referenceValue, longitudeControl.referenceValue, position.coords.latitude, position.coords.longitude);
 			distanceControl.updateMappings(currentDistance);
+		}
+		if ($scope) {
+			//scope apply here whenever something changes
+			setTimeout(function() {
+				$scope.$apply();
+			}, 10);
 		}
 	}
 	

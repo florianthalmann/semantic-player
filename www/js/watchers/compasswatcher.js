@@ -1,4 +1,4 @@
-function CompassWatcher() {
+function CompassWatcher($scope) {
 	
 	var headingControl = new Control(3);
 	var trueHeadingControl = new Control(3);
@@ -28,6 +28,13 @@ function CompassWatcher() {
 		headingControl.updateMappings(heading.magneticHeading);
 		trueHeadingControl.updateMappings(heading.trueHeading);
 		accuracyControl.updateMappings(heading.headingAccuracy);
+		if ($scope) {
+			//scope apply here whenever something changes
+			setTimeout(function() {
+				$scope.$apply();
+			}, 10);
+			//$scope.$apply(); //LEADS TO Error: [$rootScope:inprog] $digest already in progress
+		}
 	}
 	
 	function stopWatch() {
