@@ -18,3 +18,16 @@ function TriangleFunction(position, range) {
 	}
 	
 }
+
+function RectangleFunction(position, range) {
+	
+	this.getValue = function(argument) {
+		var distance = Math.abs(position - argument);
+		if (distance < range) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+}

@@ -113,6 +113,8 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	function getFunction(functionType, position, range) {
 		if (functionType == mobileRdfUri+"#TriangleFunction") {
 			return new TriangleFunction(position, range);
+		} else if (functionType == mobileRdfUri+"#RectangleFunction") {
+			return new RectangleFunction(position, range);
 		}
 		return new LinearFunction();
 	}
