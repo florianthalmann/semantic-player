@@ -13,47 +13,53 @@ ex:sark2 a mt:AudioTrack;
 ex:locationSlider a mb:Slider ;
 	rdfs:label "Location" .
 
-ex:sarkLocation a mb:LocationMapping ;
-	mb:hasLocation [ a mb:ParameterLocation ;
+ex:sarkLocation a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl ex:locationSlider ;
-		mb:atValue 0.333 ;
-		mb:hasRange 0.333 ] ;
+		mb:withFunction [ a mb:TriangleFunction ;
+			mb:atPosition 0.333 ;
+			mb:hasRange 0.333 ] ] ;
 	mb:toTrack ex:sark ;
 	mb:toParameter mb:Amplitude .
 
-ex:sark2Location a mb:LocationMapping ;
-	mb:hasLocation [ a mb:ParameterLocation ;
+ex:sark2Location a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl ex:locationSlider ;
-		mb:atValue 0.667 ;
-		mb:hasRange 0.333 ] ;
+		mb:withFunction [ a mb:TriangleFunction ;
+			mb:atPosition 0.667 ;
+			mb:hasRange 0.333 ] ] ;
 	mb:toTrack ex:sark2 ;
 	mb:toParameter mb:Amplitude .
 
-ex:sarkLocation1 a mb:LocationMapping ;
-	mb:hasLocation [ a mb:ParameterLocation ;
+ex:sarkLocation1 a mb:ProductMapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerX ;
-		mb:atValue -6 ;
-		mb:hasRange 8 ] ;
-	mb:hasLocation [ a mb:ParameterLocation ;
+		mb:withFunction [ a mb:TriangleFunction ;
+			mb:atPosition 0 ;
+			mb:hasRange 0.6 ] ] ;
+	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerY ;
-		mb:atValue -6 ;
-		mb:hasRange 8 ] ;
+		mb:withFunction [ a mb:TriangleFunction ;
+			mb:atPosition 0 ;
+			mb:hasRange 0.6 ] ] ;
 	mb:toTrack ex:sark ;
 	mb:toParameter mb:Amplitude .
 
 ex:sark2Location1 a mb:LocationMapping ;
-	mb:hasLocation [ a mb:ParameterLocation ;
+	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerX ;
-		mb:atValue 6 ;
-		mb:hasRange 8 ] ;
-	mb:hasLocation [ a mb:ParameterLocation ;
+		mb:withFunction [ a mb:TriangleFunction ;
+			mb:atPosition 0 ;
+			mb:hasRange 0.6 ] ] ;
+	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerY ;
-		mb:atValue 6 ;
-		mb:hasRange 8 ] ;
+		mb:withFunction [ a mb:TriangleFunction ;
+			mb:atPosition 0 ;
+			mb:hasRange 0.6 ] ] ;
 	mb:toTrack ex:sark2 ;
 	mb:toParameter mb:Amplitude .
 
 ex:j4j a mb:Rendering;
 	mt:track ex:sark, ex:sark2;
 	mb:hasMapping ex:sarkLocation, ex:sark2Location, ex:sarkLocation1, ex:sark2Location1;
-	rdfs:label "Test Demo" .
+	rdfs:label "Location Demo" .

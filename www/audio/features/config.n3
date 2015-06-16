@@ -9,11 +9,11 @@ ex:audio a mt:AudioTrack;
 	mb:hasFeaturesPath "moon.n3" .
 
 ex:onsetMapping a mb:Mapping ;
-	mb:fromControl mb:Slider ;
+	mb:fromControl [ a mb:Slider ;
+		rdfs:label "Onset" ] ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:Onset ;
-	mb:hasMultiplier 400 ;
-	rdfs:label "Onset" .
+	mb:hasMultiplier 400 .
 
 ex:onsetMapping2 a mb:Mapping ;
 	mb:fromControl mb:Random ;
@@ -22,11 +22,11 @@ ex:onsetMapping2 a mb:Mapping ;
 	mb:hasMultiplier 400 .
 
 ex:statsMapping a mb:Mapping ;
-	mb:fromControl mb:Slider ;
+	mb:fromControl [ a mb:Slider ;
+		rdfs:label "Stats rate" ] ;
 	mb:toTrack ex:audio ;
 	mb:toParameter mb:StatsFrequency ;
-	mb:hasMultiplier 2500 ;
-	rdfs:label "Stats rate" .
+	mb:hasMultiplier 2500 .
 
 ex:moon a mb:Rendering ;
 	mt:track ex:audio ;

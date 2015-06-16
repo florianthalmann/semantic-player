@@ -18,21 +18,32 @@ mb:Rendering
 
 mb:Mapping
 	a owl:Class;
-	rdfs:comment "" .
+	rdfs:comment "" . #make restriction to one dimension
 
-mb:DirectMapping
+mb:ProductMapping
 	a owl:Class;
 	rdfs:subClassOf mb:Mapping;
-	rdfs:comment "" .
+	rdfs:comment "Mapping that multiplies its dimensions" .
 
-mb:LocationMapping
+mb:SumMapping
 	a owl:Class;
 	rdfs:subClassOf mb:Mapping;
-	rdfs:comment "" .
+	rdfs:comment "Mapping that adds its dimensions" .
 
-mb:ParameterLocation
+mb:MappingDimension
 	a owl:Class;
 	rdfs:comment "" .
+
+mb:Function
+	a owl:Class .
+
+mb:LinearFunction
+	a owl:Class;
+	rdfs:subClassOf mb:Function .
+
+mb:TriangleFunction
+	a owl:Class;
+	rdfs:subClassOf mb:Function .
 
 
 #Controls
@@ -110,6 +121,11 @@ mb:Reverb
 	rdfs:comment "" .
 
 mb:Onset
+	a owl:Class;
+	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:comment "" .
+
+mb:Beat
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
