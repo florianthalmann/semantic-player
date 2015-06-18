@@ -1,7 +1,6 @@
 function GraphControls(graph) {
 	
-	var nextNodeControl = new Control(undefined, undefined, undefined, requestValue, reset);
-	this.nextNodeControl = nextNodeControl;
+	this.nextNodeControl = new Control(undefined, undefined, undefined, requestValue, reset, update);
 	
 	//graph = [[],[],[],[],[],[],[],[],[],[5,6,7,8]];
 	
@@ -26,6 +25,10 @@ function GraphControls(graph) {
 	
 	function reset() {
 		currentNode = null;
+	}
+	
+	function update(node) {
+		currentNode = node;
 	}
 	
 }

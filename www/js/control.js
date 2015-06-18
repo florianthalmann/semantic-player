@@ -1,4 +1,4 @@
-function Control(referenceAverageOf, label, $scope, requestValueFunction, resetFunction) {
+function Control(referenceAverageOf, label, $scope, requestValueFunction, resetFunction, updateFunction) {
 	
 	this.referenceValue;
 	this.value;
@@ -28,6 +28,9 @@ function Control(referenceAverageOf, label, $scope, requestValueFunction, resetF
 	
 	this.updateValue = function(value) {
 		this.value = value;
+		if (updateFunction) {
+			updateFunction(value);
+		}
 		if ($scope) {
 			//scope apply here whenever something changes
 			setTimeout(function() {

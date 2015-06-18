@@ -41,5 +41,5 @@ ex:graphThresholdMapping a mb:Mapping ;
 
 ex:fandandoBeats a mb:Rendering;
 	mt:track ex:fandango ;
-	mb:hasMapping ex:beatSliderMapping, ex:beatGraphMapping, ex:graphThresholdMapping ;
+	mb:hasMapping ex:beatSliderMapping; #ex:beatGraphMapping, ex:graphThresholdMapping ;
 	rdfs:label "Graph Demo" .

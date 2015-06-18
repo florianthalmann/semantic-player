@@ -45,9 +45,9 @@ function Parameter(owner, initialValue, isInteger) {
 			var value = this.mappings[i].requestValue();
 			if (value || value == 0) {
 				this.setValueAndUpdateOtherMappings(this.mappings[i], value);
-				return value;
 			}
 		}
+		return this.value;
 	}
 	
 	//resets all the mappings

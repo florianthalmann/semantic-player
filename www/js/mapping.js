@@ -50,9 +50,11 @@ function Mapping(controls, functions, multipliers, addends, moduli, parameter) {
 	
 	this.requestValue = function() {
 		for (var i = 0; i < controls.length; i++) {
-			var value = controls[i].requestValue();
-			if (value || value == 0) {
-				currentFunctionValues[i] = getFunctionValue(value, i);
+			if (controls[i].requestValue) {
+				var value = controls[i].requestValue();
+				if (value || value == 0) {
+					currentFunctionValues[i] = getFunctionValue(value, i);
+				}
 			}
 		}
 		return calculateParameter();

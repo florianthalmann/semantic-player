@@ -63,7 +63,6 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 	});
 	
 	this.play = function() {
-		console.log(segmentations, segmentationParams, segmentations.length);
 		if (!isPlaying) {
 			internalPlay();
 		}
@@ -134,10 +133,13 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 			if (currentPausePosition == 0) { //only update segment if wasn't paused
 				currentSegmentIndex = segmentationParams[segmentationUri].requestValue();
 			}
-			console.log(currentSegmentIndex);
-			var currentSegment = segmentations[segmentationUri][currentSegmentIndex];
-			currentSourceDuration = segmentations[segmentationUri][currentSegmentIndex+1]-currentSegment;
-			currentAudioSubBuffer = getAudioBufferCopy(toSamples(currentSegment), toSamples(currentSourceDuration));
+			var currentSegmentStart = segmentations[segmentationUri][currentSegmentIndex];
+			var currentSegmentEnd = segmentations[segmentationUri][currentSegmentIndex+1];
+			if (!currentSegmentEnd) {
+				currentSegmentEnd = audioBuffer.duration;
+			}
+			currentSourceDuration = currentSegmentEnd-currentSegmentStart;
+			currentAudioSubBuffer = getAudioBufferCopy(toSamples(currentSegmentStart), toSamples(currentSourceDuration));
 		} else {
 			currentAudioSubBuffer = audioBuffer;
 		}
@@ -170,9 +172,9 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 		panner.setPosition(this.pan.value, 0, this.distance.value);
 		dryGain.gain.value = this.amplitude.value;
 		reverbGain.gain.value = this.reverb.value;
-		if (this.segmentationParams[0].hasChanged() && segmentations[0] && isPlaying) {
+		/*if (this.segmentationParams[0].hasChanged() && segmentations[0] && isPlaying) {
 			nextAudioSource = createNewAudioSource(true);
-		}
+		}*/
 	}
 	this.update = update;
 	
