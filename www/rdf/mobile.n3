@@ -125,12 +125,7 @@ mb:Reverb
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
 
-mb:Onset
-	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
-	rdfs:comment "" .
-
-mb:Beat
+mb:Segmentation
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .

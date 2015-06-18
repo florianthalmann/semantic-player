@@ -4,9 +4,14 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <#> .
 
+ex:beat a mb:Segmentation ;
+	mb:hasPath "moon.n3" ;
+	mb:hasGraphPath "moon_graph.json" ;
+	rdfs:label "Onset" .
+
 ex:fandango a mt:AudioTrack ;
 	mb:hasAudioPath "moon.m4a" ;
-	mb:hasFeaturesPath "moon.n3" .
+	mb:hasParameter ex:beat .
 
 ex:beatSliderMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
@@ -15,7 +20,7 @@ ex:beatSliderMapping a mb:Mapping ;
 		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 400 ] ;
 	mb:toTrack ex:fandango ;
-	mb:toParameter mb:Beat .
+	mb:toParameter ex:beat .
 
 ex:beatGraphMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
@@ -24,7 +29,7 @@ ex:beatGraphMapping a mb:Mapping ;
 			mb:ofParameter mb:Beat ] ;
 		mb:withFunction [ a mb:LinearFunction ] ] ;
 	mb:toTrack ex:fandango ;
-	mb:toParameter mb:Beat .
+	mb:toParameter ex:beat .
 		
 ex:graphThresholdMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
@@ -32,7 +37,7 @@ ex:graphThresholdMapping a mb:Mapping ;
 			rdfs:label "Beat threshold" ] ;
 		mb:withFunction [ a mb:LinearFunction ] ] ;
 	mb:toTrack ex:fandango ;
-	mb:toParameter mb:Beat .
+	mb:toParameter ex:beat .
 
 ex:fandandoBeats a mb:Rendering;
 	mt:track ex:fandango ;

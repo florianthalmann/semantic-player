@@ -42,10 +42,17 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	function loadFeatures(store, trackUris) {
 		for (var i = 0; i < trackUris.length; i++) {
-			store.execute("SELECT ?path \
-			WHERE { <"+trackUris[i]+"> <"+mobileRdfUri+"#hasFeaturesPath> ?path }", function(err, results) {
+			store.execute("SELECT ?parameter ?path ?graphPath ?label \
+			WHERE { <"+trackUris[i]+"> <"+mobileRdfUri+"#hasParameter> ?parameter . \
+			?parameter <"+mobileRdfUri+"#hasPath> ?path . \
+			OPTIONAL { ?parameter <"+mobileRdfUri+"#hasGraphPath> ?graphPath . } \
+			OPTIONAL { ?parameter <"+rdfsUri+"#label> ?label . } }", function(err, results) {
 				for (var i = 0; i < results.length; i++) {
-					loadEventTimes(i, "/"+results[i].path.value);
+					var path = dmoUri+"/"+results[i].path.value;
+					if (results[i].label) {
+						var label = results[i].label.value;
+					}
+					loadSegmentation(i, results[i].parameter.value, path, label);
 				}
 				if (results.length <= 0) {
 					$scope.ontologiesLoaded = true;
@@ -64,15 +71,16 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	function loadMapping(store, mappingUri) {
 		$scope.mappingLoadingThreads++;
-		store.execute("SELECT ?mappingType ?control ?controlType ?trackPath ?parameter \
+		store.execute("SELECT ?mappingType ?control ?controlType ?trackPath ?parameter ?parameterType \
 		WHERE { <"+mappingUri+"> a ?mappingType . \
 			<"+mappingUri+"> <"+mobileRdfUri+"#toTrack> ?track . \
 			?track <"+mobileRdfUri+"#hasAudioPath> ?trackPath . \
-			<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . }", function(err, results) {
+			<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
+			?parameter a ?parameterType . }", function(err, results) {
 			for (var i = 0; i < results.length; i++) {
 				var control = getControlFromResults(results[i].control, results[i].controlType, results[i].label);
 				var track = $scope.rendering.getTrackForPath(dmoUri+"/"+results[i].trackPath.value);
-				var parameter = getParameter(track, results[i].parameter.value);
+				var parameter = getParameter(track, results[i].parameter.value, results[i].parameterType.value);
 				
 				loadMappingDimensions(store, mappingUri, results[i].mappingType.value, parameter);
 			}
@@ -225,7 +233,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 		}
 	}
 	
-	function getParameter(track, parameterUri) {
+	function getParameter(track, parameterUri, parameterTypeUri) {
 		if (parameterUri == mobileRdfUri+"#Amplitude") {
 			return track.amplitude;
 		} else if (parameterUri == mobileRdfUri+"#Pan") {
@@ -234,8 +242,8 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 			return track.distance;
 		} else if (parameterUri == mobileRdfUri+"#Reverb") {
 			return track.reverb;
-		} else if (parameterUri == mobileRdfUri+"#Onset" || parameterUri == mobileRdfUri+"#Beat") {
-			return track.onset;
+		} else if (parameterTypeUri == mobileRdfUri+"#Segmentation") {
+			return track.getSegmentationParam(parameterUri);
 		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation") {
 			return $scope.rendering.listenerOrientation;
 		} else if (parameterUri == mobileRdfUri+"#StatsFrequency") {
@@ -249,10 +257,10 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	var eventOntology = "http://purl.org/NET/c4dm/event.owl";
 	var timelineOntology = "http://purl.org/NET/c4dm/timeline.owl";
 	
-	function loadEventTimes(trackIndex, rdfUri) {
+	function loadSegmentation(trackIndex, parameterUri, rdfUri) {
 		//console.log("start");
 		$scope.featureLoadingThreads++;
-		$http.get(dmoUri+rdfUri).success(function(data) {
+		$http.get(rdfUri).success(function(data) {
 			//console.log("get");
 			rdfstore.create(function(err, store) {
 				//console.log("create");
@@ -271,7 +279,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 						for (var i = 0; i < results.length; i++) {
 							times.push(toSecondsNumber(results[i].xsdTime.value));
 						}
-						$scope.rendering.tracks[trackIndex].setOnsets(times.sort(function(a,b){return a - b}));
+						$scope.rendering.tracks[trackIndex].setSegmentation(parameterUri, times.sort(function(a,b){return a - b}));
 						$scope.featureLoadingThreads--;
 						$scope.$apply();
 					});

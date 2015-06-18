@@ -8,22 +8,31 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 	var distance = new Parameter(this, 0);
 	var amplitude = new Parameter(this, 1);
 	var reverb = new Parameter(this, 0);
-	var onset = new Parameter(this, 0, true);
+	var segmentationUris = [];
+	var segmentationParams = {};
+	var segmentations = {};
 	this.pan = pan;
 	this.distance = distance;
 	this.amplitude = amplitude;
-	this.onset = onset;
+	this.segmentationParams = segmentationParams;
 	this.reverb = reverb;
 	
-	var startTime, endTime, currentPausePosition = 0, currentOnsetIndex = 0;
+	var startTime, endTime, currentPausePosition = 0, currentSegmentIndex = 0;
 	var isPlaying, isPaused;
-	var onsets;
 	var timeoutID;
 	this.isPlaying = isPlaying;
 	
-	this.setOnsets = function(newOnsets) {
-		onsets = newOnsets;
+	this.setSegmentation = function(uri, times) {
+		segmentations[uri] = times;
 	};
+	
+	this.getSegmentationParam = function(uri) {
+		if (!this.segmentationParams[uri]) {
+			segmentationUris.push(uri);
+			this.segmentationParams[uri] = new Parameter(this, 0, true);
+		}
+		return this.segmentationParams[uri];
+	}
 	
 	var dryGain = audioContext.createGain();
 	dryGain.connect(audioContext.destination);
@@ -54,6 +63,7 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 	});
 	
 	this.play = function() {
+		console.log(segmentations, segmentationParams, segmentations.length);
 		if (!isPlaying) {
 			internalPlay();
 		}
@@ -76,9 +86,10 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 		startTime = audioContext.currentTime+delay;
 		audioSource.start(startTime, currentPausePosition); //% audioSource.loopEnd-audioSource.loopStart);
 		endTime = startTime+currentSourceDuration;
-		currentPausePosition = 0;
 		//console.log(delay + " " + endTime + " " + currentSourceDuration + " " + ((endTime-audioContext.currentTime-SCHEDULE_AHEAD_TIME)*1000));
-		//currentPausePosition = 0;
+		if (segmentations.length > 0) { //TODO FIND OTHER WAY TO MAKE PAUSE WORK WITH SEGMENTED TRACKS
+			currentPausePosition = 0;
+		}
 		nextAudioSource = createNewAudioSource();
 		if (endTime) {
 			timeoutID = window.setTimeout(internalPlay, (endTime-audioContext.currentTime-SCHEDULE_AHEAD_TIME)*1000);
@@ -102,7 +113,9 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 		}
 		//even in case it is paused
 		currentPausePosition = 0;
-		onset.reset();
+		for (var i = 0; i < this.segmentationParams.length; i++) {
+			this.segmentationParams[i].reset();
+		}
 	}
 	
 	function stopAndRemoveAudioSources() {
@@ -115,18 +128,19 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 	}
 	
 	function createNewAudioSource(hasChanged) {
-		//if (!currentAudioSubBuffer || hasChanged) {
-			if (onsets) {
-				if (currentPausePosition == 0) { //only update onset if wasn't paused
-					currentOnsetIndex = onset.requestValue();
-				}
-				var currentOnset = onsets[currentOnsetIndex];
-				currentSourceDuration = onsets[currentOnsetIndex+1]-currentOnset;
-				currentAudioSubBuffer = getAudioBufferCopy(toSamples(currentOnset), toSamples(currentSourceDuration));
-			} else {
-				currentAudioSubBuffer = audioBuffer;
+		if (segmentationUris.length > 0) {
+			//TODO CONSIDER MORE THAN THE FIRST SEGMENTATION!!!!!
+			var segmentationUri = segmentationUris[0];
+			if (currentPausePosition == 0) { //only update segment if wasn't paused
+				currentSegmentIndex = segmentationParams[segmentationUri].requestValue();
 			}
-		//}
+			console.log(currentSegmentIndex);
+			var currentSegment = segmentations[segmentationUri][currentSegmentIndex];
+			currentSourceDuration = segmentations[segmentationUri][currentSegmentIndex+1]-currentSegment;
+			currentAudioSubBuffer = getAudioBufferCopy(toSamples(currentSegment), toSamples(currentSourceDuration));
+		} else {
+			currentAudioSubBuffer = audioBuffer;
+		}
 		var newSource = audioContext.createBufferSource();
 		newSource.connect(panner);
 		newSource.buffer = currentAudioSubBuffer;
@@ -155,9 +169,8 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 		//console.log(this.pan.value, 0, this.distance.value);
 		panner.setPosition(this.pan.value, 0, this.distance.value);
 		dryGain.gain.value = this.amplitude.value;
-		console.log(this.reverb.value);
 		reverbGain.gain.value = this.reverb.value;
-		if (this.onset.hasChanged() && onsets && isPlaying) {
+		if (this.segmentationParams[0].hasChanged() && segmentations[0] && isPlaying) {
 			nextAudioSource = createNewAudioSource(true);
 		}
 	}
