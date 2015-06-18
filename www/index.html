@@ -32,6 +32,7 @@
 		<script src="js/watchers/geolocationwatcher.js"></script>
 		<script src="js/watchers/compasswatcher.js"></script>
 		<script src="js/watchers/statscontrols.js"></script>
+		<script src="js/watchers/graphcontrols.js"></script>
 		<script src="js/ontologyloader.js"></script>
 		<script src="js/ontologyloader-rdflib.js"></script>
 	</head>
@@ -92,7 +93,8 @@
 						AccelerometerY: {{ accelerometerWatcher.yControl.value }}<br>
 						AccelerometerZ: {{ accelerometerWatcher.zControl.value }}<br><br>
 						
-						Stats Random: {{ statsControls.randomControl.value }}
+						Stats Random: {{ statsControls.randomControl.value }}<br>
+						Graph: {{ graphControls.nextNodeControl.value }}
 					</ion-item>
 				</ion-list>
 			</ion-content>

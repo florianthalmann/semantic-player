@@ -1,0 +1,40 @@
+#@base <http://purl.org/ontology/studio/mobile-example#> .
+@prefix mb: <rdf/mobile.n3#> .
+@prefix mt: <http://purl.org/ontology/studio/multitrack#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <#> .
+
+ex:fandango a mt:AudioTrack ;
+	mb:hasAudioPath "moon.m4a" ;
+	mb:hasFeaturesPath "moon.n3" .
+
+ex:beatSliderMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Beat" ] ;
+		mb:withFunction [ a mb:LinearFunction ] ;
+		mb:hasMultiplier 400 ] ;
+	mb:toTrack ex:fandango ;
+	mb:toParameter mb:Beat .
+
+ex:beatGraphMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:GraphControl ;
+			mb:ofTrack ex:fandango ;
+			mb:ofParameter mb:Beat ] ;
+		mb:withFunction [ a mb:LinearFunction ] ] ;
+	mb:toTrack ex:fandango ;
+	mb:toParameter mb:Beat .
+		
+ex:graphThresholdMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Beat threshold" ] ;
+		mb:withFunction [ a mb:LinearFunction ] ] ;
+	mb:toTrack ex:fandango ;
+	mb:toParameter mb:Beat .
+
+ex:fandandoBeats a mb:Rendering;
+	mt:track ex:fandango ;
+	mb:hasMapping ex:beatSliderMapping, ex:beatGraphMapping, ex:graphThresholdMapping ;
+	rdfs:label "Graph Demo" .

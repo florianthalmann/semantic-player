@@ -10,9 +10,9 @@ function GeolocationWatcher($scope) {
 	this.distanceControl = distanceControl;
 	
 	this.reset = function() {
-		latitudeControl.reset();
-		longitudeControl.reset();
-		distanceControl.reset();
+		latitudeControl.resetReferenceValue();
+		longitudeControl.resetReferenceValue();
+		distanceControl.resetReferenceValue();
 	}
 	
 	var watchID = null;

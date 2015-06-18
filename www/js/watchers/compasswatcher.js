@@ -8,8 +8,8 @@ function CompassWatcher($scope) {
 	this.accuracyControl = accuracyControl;
 	
 	this.reset = function() {
-		headingControl.reset();
-		trueHeadingControl.reset();
+		headingControl.resetReferenceValue();
+		trueHeadingControl.resetReferenceValue();
 	}
 	
 	var watchID = null;

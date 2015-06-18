@@ -15,7 +15,7 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 	this.onset = onset;
 	this.reverb = reverb;
 	
-	var startTime, endTime, currentPausePosition = 0;
+	var startTime, endTime, currentPausePosition = 0, currentOnsetIndex = 0;
 	var isPlaying, isPaused;
 	var onsets;
 	var timeoutID;
@@ -30,6 +30,7 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 	var reverbGain = audioContext.createGain();
 	if (reverbAllowed) {
 		reverbGain.connect(audioContext.destination);
+		reverbGain.gain = reverb.value;
 	}
 	var convolver = audioContext.createConvolver();
 	convolver.connect(reverbGain);
@@ -60,14 +61,12 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 	}
 	
 	function internalPlay() {
-		if (!audioSource || !nextAudioSource) {
+		if (!audioSource) {
 			//initially create sources
 			audioSource = createNewAudioSource();
-			nextAudioSource = createNewAudioSource();
 		} else {
 			//switch source
 			audioSource = nextAudioSource;
-			nextAudioSource = createNewAudioSource();
 		}
 		if (!endTime) {
 			delay = SCHEDULE_AHEAD_TIME;
@@ -75,11 +74,12 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 			delay = endTime-audioContext.currentTime;
 		}
 		startTime = audioContext.currentTime+delay;
-		this.startTime = startTime;
 		audioSource.start(startTime, currentPausePosition); //% audioSource.loopEnd-audioSource.loopStart);
 		endTime = startTime+currentSourceDuration;
+		currentPausePosition = 0;
 		//console.log(delay + " " + endTime + " " + currentSourceDuration + " " + ((endTime-audioContext.currentTime-SCHEDULE_AHEAD_TIME)*1000));
 		//currentPausePosition = 0;
+		nextAudioSource = createNewAudioSource();
 		if (endTime) {
 			timeoutID = window.setTimeout(internalPlay, (endTime-audioContext.currentTime-SCHEDULE_AHEAD_TIME)*1000);
 		}
@@ -102,6 +102,7 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 		}
 		//even in case it is paused
 		currentPausePosition = 0;
+		onset.reset();
 	}
 	
 	function stopAndRemoveAudioSources() {
@@ -114,15 +115,18 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 	}
 	
 	function createNewAudioSource(hasChanged) {
-		if (!currentAudioSubBuffer || hasChanged) {
+		//if (!currentAudioSubBuffer || hasChanged) {
 			if (onsets) {
-				var currentOnset = onsets[onset.value];
-				currentSourceDuration = onsets[onset.value+1]-currentOnset;
+				if (currentPausePosition == 0) { //only update onset if wasn't paused
+					currentOnsetIndex = onset.requestValue();
+				}
+				var currentOnset = onsets[currentOnsetIndex];
+				currentSourceDuration = onsets[currentOnsetIndex+1]-currentOnset;
 				currentAudioSubBuffer = getAudioBufferCopy(toSamples(currentOnset), toSamples(currentSourceDuration));
 			} else {
 				currentAudioSubBuffer = audioBuffer;
 			}
-		}
+		//}
 		var newSource = audioContext.createBufferSource();
 		newSource.connect(panner);
 		newSource.buffer = currentAudioSubBuffer;
@@ -136,7 +140,6 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 	}
 	
 	function getAudioBufferCopy(fromSample, durationInSamples) {
-		//console.log(fromSample + " "+ durationInSamples);
 		var subBuffer = audioContext.createBuffer(audioBuffer.numberOfChannels, durationInSamples, audioBuffer.sampleRate);
 		for (var i = 0; i < audioBuffer.numberOfChannels; i++) {
 			var currentCopyChannel = subBuffer.getChannelData(i);
@@ -148,15 +151,17 @@ function Track(filePath, audioContext, rendering, reverbAllowed) {
 		return subBuffer;
 	}
 	
-	this.update = function() {
+	function update() {
 		//console.log(this.pan.value, 0, this.distance.value);
 		panner.setPosition(this.pan.value, 0, this.distance.value);
 		dryGain.gain.value = this.amplitude.value;
+		console.log(this.reverb.value);
 		reverbGain.gain.value = this.reverb.value;
 		if (this.onset.hasChanged() && onsets && isPlaying) {
 			nextAudioSource = createNewAudioSource(true);
 		}
 	}
+	this.update = update;
 	
 	function loadAudio(path, audioLoader, onload) {
 		audioLoader.src = path;

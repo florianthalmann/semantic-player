@@ -97,6 +97,11 @@ mb:Random
 	rdfs:subClassOf mb:MobileControl;
 	rdfs:comment "" .
 
+mb:GraphControl
+	a owl:Class;
+	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+
 
 #Audio parameters
 

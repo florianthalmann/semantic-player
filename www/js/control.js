@@ -1,4 +1,4 @@
-function Control(referenceAverageOf, label, $scope) {
+function Control(referenceAverageOf, label, $scope, requestValueFunction, resetFunction) {
 	
 	this.referenceValue;
 	this.value;
@@ -6,17 +6,19 @@ function Control(referenceAverageOf, label, $scope) {
 	if (label) {
 		this.label = label;
 	}
+	if (requestValueFunction) {
+		this.requestValue = requestValueFunction;
+	}
+	if (resetFunction) {
+		this.reset = resetFunction;
+	}
 	var currentNumAddends, currentSum;
 	
-	this.reset = function() {
+	this.resetReferenceValue = function() {
 		this.value = null;
 		this.referenceValue = null;
 		currentNumAddends = 0;
 		currentSum = 0;
-	}
-	
-	if (referenceAverageOf) {
-		this.reset();
 	}
 	
 	this.addMapping = function(mapping) {
@@ -57,6 +59,11 @@ function Control(referenceAverageOf, label, $scope) {
 				this.mappings[i].updateParameter(this.value, this);
 			}
 		}
+	}
+	
+	//initialize
+	if (referenceAverageOf) {
+		this.resetReferenceValue();
 	}
 	
 }

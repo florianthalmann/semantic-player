@@ -99,7 +99,9 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 			var moduli = [];
 			for (var i = 0; i < results.length; i++) {
 				controls[i] = getControlFromResults(results[i].control, results[i].controlType, results[i].label);
-				functions[i] = getFunction(results[i].functionType.value, results[i].position.value, results[i].range.value);
+				var position = getNumberValue(results[i].position);
+				var range = getNumberValue(results[i].range);
+				functions[i] = getFunction(results[i].functionType.value, position, range);
 				multipliers[i] = getNumberValue(results[i].multiplier, 1);
 				addends[i] = getNumberValue(results[i].addend, 0);
 				moduli[i] = getNumberValue(results[i].modulus);
@@ -163,6 +165,8 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 			return $scope.sliderControls[controlUri];
 		} else if (controlUri == mobileRdfUri+"#Random") {
 			return getStatsControl(0);
+		} else if (controlTypeUri == mobileRdfUri+"#GraphControl") {
+			return getGraphControl(0);
 		}
 	}
 	
@@ -212,6 +216,15 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 		}
 	}
 	
+	function getGraphControl(index) {
+		if (!$scope.graphControls) {
+			$scope.graphControls = new GraphControls();
+		}
+		if (index == 0) {
+			return $scope.graphControls.nextNodeControl;
+		}
+	}
+	
 	function getParameter(track, parameterUri) {
 		if (parameterUri == mobileRdfUri+"#Amplitude") {
 			return track.amplitude;
@@ -221,7 +234,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 			return track.distance;
 		} else if (parameterUri == mobileRdfUri+"#Reverb") {
 			return track.reverb;
-		} else if (parameterUri == mobileRdfUri+"#Onset") {
+		} else if (parameterUri == mobileRdfUri+"#Onset" || parameterUri == mobileRdfUri+"#Beat") {
 			return track.onset;
 		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation") {
 			return $scope.rendering.listenerOrientation;

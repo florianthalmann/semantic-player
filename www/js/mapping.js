@@ -5,11 +5,15 @@ function Mapping(controls, functions, multipliers, addends, moduli, parameter) {
 	this.updateParameter = function(value, control) {
 		var controlIndex = controls.indexOf(control);
 		currentFunctionValues[controlIndex] = getFunctionValue(value, controlIndex);
+		parameter.update(this, calculateParameter());
+	}
+	
+	function calculateParameter() {
 		var product = 1;
 		for (var i = 0; i < controls.length; i++) {
 			product *= currentFunctionValues[i];
 		}
-		parameter.update(this, product);
+		return product;
 	}
 	
 	function getFunctionValue(value, i) {
@@ -30,16 +34,34 @@ function Mapping(controls, functions, multipliers, addends, moduli, parameter) {
 		//TODO MAPPING NOT POSSIBLE IF SEVERAL DIMENSIONS
 		if (controls.length <= 1) {
 			for (var i = 0; i < controls.length; i++) {
-				if (addends) {
+				if (addends[i]) {
 					value -= addends[i];
 				}
-				if (moduli) {
+				if (moduli[i]) {
 					value = moduloAsItShouldBe(value, moduli[i]);
 				}
-				if (multipliers) {
+				if (multipliers[i]) {
 					value /= multipliers[i];
 				}
 				controls[i].updateValue(value);
+			}
+		}
+	}
+	
+	this.requestValue = function() {
+		for (var i = 0; i < controls.length; i++) {
+			var value = controls[i].requestValue();
+			if (value || value == 0) {
+				currentFunctionValues[i] = getFunctionValue(value, i);
+			}
+		}
+		return calculateParameter();
+	}
+	
+	this.reset = function() {
+		for (var i = 0; i < controls.length; i++) {
+			if (controls[i].reset) {
+				controls[i].reset();
 			}
 		}
 	}
