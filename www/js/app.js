@@ -22,7 +22,7 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["beatgraph", "location", "mixing", "spatial", "features"];
+	$scope.dmos = ["features", "mixing", "beatgraph", "location", "spatial"];
 	
 	$scope.resetUI = function() {
 		$scope.mappingLoadingThreads = 0;
@@ -51,7 +51,7 @@ angular.module('semanticplayer', ['ionic'])
 	
 	$scope.loadingString = function() {
 		var loadedObjectString;
-		if (!$scope.rendering || !$scope.rendering.tracksLoaded) {
+		if (!$scope.sourcesReady) {
 			loadedObjectString = "audio";
 		} else if ($scope.mappingLoadingThreads && $scope.mappingLoadingThreads > 0) {
 			loadedObjectString = "ontologies (mappings)";

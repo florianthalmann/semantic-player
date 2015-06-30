@@ -11,168 +11,203 @@
 	a owl:Ontology;
 	rdfs:comment "An ontology for describing playback rendering features on mobile devices" .
 
+mb:DMO
+	a owl:Class ;
+	rdfs:comment "A Dynamic Music Object is a hierarchical structure of musical objects with modifiable parameters" .
+
 mb:Rendering
-	a owl:Class;
-	rdfs:subClassOf mt:MultitrackProject;
+	a owl:Class ;
+	rdfs:subClassOf mt:MultitrackProject ;
 	rdfs:comment "" .
 
 mb:Mapping
-	a owl:Class;
+	a owl:Class ;
 	rdfs:comment "" . #make restriction to one dimension
 
 mb:ProductMapping
-	a owl:Class;
-	rdfs:subClassOf mb:Mapping;
+	a owl:Class ;
+	rdfs:subClassOf mb:Mapping ;
 	rdfs:comment "Mapping that multiplies its dimensions" .
 
 mb:SumMapping
-	a owl:Class;
-	rdfs:subClassOf mb:Mapping;
+	a owl:Class ;
+	rdfs:subClassOf mb:Mapping ;
 	rdfs:comment "Mapping that adds its dimensions" .
 
 mb:MappingDimension
-	a owl:Class;
+	a owl:Class ;
 	rdfs:comment "" .
 
 mb:Function
 	a owl:Class .
 
 mb:LinearFunction
-	a owl:Class;
+	a owl:Class ;
+	rdfs:subClassOf mb:Function .
+
+mb:SymmetricalFunction
+	a owl:Class ;
 	rdfs:subClassOf mb:Function .
 
 mb:TriangleFunction
-	a owl:Class;
-	rdfs:subClassOf mb:Function .
+	a owl:Class ;
+	rdfs:subClassOf mb:SymmetricalFunction .
+
+mb:RectangleFunction
+	a owl:Class ;
+	rdfs:subClassOf mb:SymmetricalFunction .
 
 
 #Controls
 
 mb:MobileControl 
-	a owl:Class;
+	a owl:Class ;
 	rdfs:comment "" .
 
 mb:AccelerometerX
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 	
 mb:AccelerometerY
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 
 mb:AccelerometerZ
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 
 mb:GeolocationLatitude
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 
 mb:GeolocationLongitude
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 
 mb:GeolocationDistance
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 
 mb:CompassHeading
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 
 mb:Slider
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 
 mb:Random
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 
 mb:GraphControl
-	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	a owl:Class ;
+	rdfs:subClassOf mb:MobileControl ;
 	rdfs:comment "" .
 
+#DMO
+
+mb:DMO
+	a owl:Class ;
+	rdfs:comment "" .
 
 #Audio parameters
 
 mb:Amplitude
-	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	a owl:Class ;
+	rdfs:subClassOf mt:AutomationParameter ;
 	rdfs:comment "" .
 
 mb:Pan
-	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	a owl:Class ;
+	rdfs:subClassOf mt:AutomationParameter ;
 	rdfs:comment "" .
 
 mb:Distance
-	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	a owl:Class ;
+	rdfs:subClassOf mt:AutomationParameter ;
 	rdfs:comment "" .
 
 mb:Reverb
-	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	a owl:Class ;
+	rdfs:subClassOf mt:AutomationParameter ;
 	rdfs:comment "" .
 
 mb:Segmentation
-	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	a owl:Class ;
+	rdfs:subClassOf mt:AutomationParameter ;
 	rdfs:comment "" .
 
 mb:ListenerOrientation
-	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	a owl:Class ;
+	rdfs:subClassOf mt:AutomationParameter ;
 	rdfs:comment "" .
 
 #Other parameters
 
 mb:StatsFrequency
-	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	a owl:Class ;
+	rdfs:subClassOf mt:AutomationParameter ;
 	rdfs:comment "" .
 
 
-#Properties
+#PROPERTIES
+
+#DMO properties
+
+mb:hasChild
+	a owl:ObjectProperty owl:AntisymmetricProperty ;
+	rdfs:domain mb:DMO ; 
+	rdfs:range mb:DMO ;
+	rdfs:comment "" .
+
+mb:hasParameter
+	a owl:ObjectProperty owl:AntisymmetricProperty ;
+	rdfs:domain mb:DMO ; 
+	rdfs:range mt:AutomationParameter ;
+	rdfs:comment "" .
+
+mb:hasSourceFile
+	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:InverseFunctionalProperty ;
+	rdfs:domain mb:DMO ;
+	rdfs:range xsd:string ;
+	rdfs:comment "" .
+
+mb:hasFeaturesFile
+	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:InverseFunctionalProperty ;
+	rdfs:domain mb:DMO ;
+	rdfs:range xsd:string ;
+	rdfs:comment "" .
+
+#Rendering properties
+
+mb:hasDMO
+	a owl:ObjectProperty, owl:FunctionalProperty ;
+	rdfs:domain mb:Rendering ; 
+	rdfs:range mb:DMO ;
+	rdfs:comment "" .
 
 mb:hasMapping
-	a owl:ObjectProperty, owl:AntisymmetricProperty;
-	rdfs:domain mb:Rendering; 
-	rdfs:range mb:Mapping;
+	a owl:ObjectProperty, owl:AntisymmetricProperty ;
+	rdfs:domain mb:Rendering ; 
+	rdfs:range mb:Mapping ;
 	rdfs:comment "" .
+
+#Mapping properties
 
 mb:fromControl
-	a owl:ObjectProperty, owl:AntisymmetricProperty;
-	rdfs:domain mb:DirectMapping;
-	rdfs:range mb:MobileControl;
-	rdfs:comment "" .
-
-mb:fromControl
-	a owl:ObjectProperty, owl:AntisymmetricProperty;
-	rdfs:domain mb:ParameterLocation;
-	rdfs:range mb:MobileControl;
-	rdfs:comment "" .
-
-mb:atValue
-	a owl:ObjectProperty, owl:AntisymmetricProperty;
-	rdfs:domain mb:ParameterLocation;
-	rdfs:range xsd:decimal;
-	rdfs:comment "" .
-
-mb:hasRange
-	a owl:ObjectProperty, owl:AntisymmetricProperty;
-	rdfs:domain mb:ParameterLocation;
-	rdfs:range xsd:decimal;
+	a owl:ObjectProperty, owl:AntisymmetricProperty ;
+	rdfs:domain mb:Mapping ;
+	rdfs:range mb:MobileControl ;
 	rdfs:comment "" .
 
 mb:toTrack
@@ -189,30 +224,32 @@ mb:toParameter
 
 mb:hasMultiplier
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
-	rdfs:domain mb:DirectMapping;
+	rdfs:domain mb:Mapping;
 	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
 mb:hasAddend
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
-	rdfs:domain mb:DirectMapping;
+	rdfs:domain mb:Mapping;
 	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
 mb:hasModulus
 	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:FunctionalProperty;
-	rdfs:domain mb:DirectMapping;
+	rdfs:domain mb:Mapping;
 	rdfs:range xsd:decimal;
 	rdfs:comment "" .
 
-mb:hasAudioPath
-	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:InverseFunctionalProperty;
-	rdfs:domain mt:AudioTrack;
-	rdfs:range xsd:string;
+#Function properties
+
+mb:hasPosition
+	a owl:ObjectProperty, owl:AntisymmetricProperty ;
+	rdfs:domain mb:SymmetricalFunction ;
+	rdfs:range xsd:decimal ;
 	rdfs:comment "" .
 
-mb:hasFeaturesPath
-	a owl:DatatypeProperty, owl:AntisymmetricProperty, owl:InverseFunctionalProperty;
-	rdfs:domain mt:AudioTrack;
-	rdfs:range xsd:string;
+mb:hasRange
+	a owl:ObjectProperty, owl:AntisymmetricProperty ;
+	rdfs:domain mb:SymmetricalFunction ;
+	rdfs:range xsd:decimal ;
 	rdfs:comment "" .

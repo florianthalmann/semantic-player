@@ -4,11 +4,16 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <#> .
 
-ex:sark a mt:AudioTrack;
-	mb:hasAudioPath "sark.m4a" .
+ex:sark a mb:DMO ;
+	mb:hasChild ex:sark1 , ex:sark2 .
 
-ex:sark2 a mt:AudioTrack;
-	mb:hasAudioPath "sark2.m4a" .
+ex:sark1 a mb:DMO ;
+	mb:hasSourceFile "sark1.m4a" ;
+	mb:hasParameter mb:Amplitude .
+
+ex:sark2 a mb:DMO ;
+	mb:hasAudioPath "sark2.m4a" ;
+	mb:hasParameter mb:Amplitude .
 	
 ex:locationSlider a mb:Slider ;
 	rdfs:label "Location" .
@@ -19,7 +24,7 @@ ex:sarkLocation a mb:Mapping ;
 		mb:withFunction [ a mb:RectangleFunction ;
 			mb:atPosition 0.333 ;
 			mb:hasRange 0.333 ] ] ;
-	mb:toTrack ex:sark ;
+	mb:toDMO ex:sark1 ;
 	mb:toParameter mb:Amplitude .
 
 ex:sark2Location a mb:Mapping ;
@@ -28,7 +33,7 @@ ex:sark2Location a mb:Mapping ;
 		mb:withFunction [ a mb:RectangleFunction ;
 			mb:atPosition 0.667 ;
 			mb:hasRange 0.333 ] ] ;
-	mb:toTrack ex:sark2 ;
+	mb:toDMO ex:sark2 ;
 	mb:toParameter mb:Amplitude .
 
 ex:sarkLocation1 a mb:ProductMapping ;
@@ -42,7 +47,7 @@ ex:sarkLocation1 a mb:ProductMapping ;
 		mb:withFunction [ a mb:TriangleFunction ;
 			mb:atPosition 0 ;
 			mb:hasRange 0.6 ] ] ;
-	mb:toTrack ex:sark ;
+	mb:toDMO ex:sark1 ;
 	mb:toParameter mb:Amplitude .
 
 ex:sark2Location1 a mb:LocationMapping ;
@@ -56,10 +61,10 @@ ex:sark2Location1 a mb:LocationMapping ;
 		mb:withFunction [ a mb:TriangleFunction ;
 			mb:atPosition 0 ;
 			mb:hasRange 0.6 ] ] ;
-	mb:toTrack ex:sark2 ;
+	mb:toDMO ex:sark2 ;
 	mb:toParameter mb:Amplitude .
 
-ex:j4j a mb:Rendering;
-	mt:track ex:sark, ex:sark2;
+ex:locationDemo a mb:Rendering;
+	mb:hasDMO ex:sark, ex:sark2;
 	mb:hasMapping ex:sarkLocation, ex:sark2Location, ex:sarkLocation1, ex:sark2Location1;
 	rdfs:label "Location Demo" .

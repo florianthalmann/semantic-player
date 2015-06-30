@@ -4,31 +4,42 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <#> .
 
-ex:audio a mt:AudioTrack;
+ex:onset a mb:Segmentation ;
+	mb:hasFeaturesPath "beats.n3" .
+
+ex:onsetDMO a mb:DMO ;
+	mb:hasParameter ex:onset .
+	
+ex:moonDMO a mb:DMO ;
 	mb:hasAudioPath "moon.m4a" ;
-	mb:hasFeaturesPath "moon.n3" .
+	mb:hasChild ex:onsetDMO .
 
 ex:onsetMapping a mb:Mapping ;
-	mb:fromControl [ a mb:Slider ;
-		rdfs:label "Onset" ] ;
-	mb:toTrack ex:audio ;
-	mb:toParameter mb:Onset ;
-	mb:hasMultiplier 400 .
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:GraphControl ] ;
+		mb:withFunction [ a mb:LinearFunction ] ] ;
+	mb:toDMO ex:onsetDMO ;
+	mb:toParameter ex:onset .
 
 ex:onsetMapping2 a mb:Mapping ;
-	mb:fromControl mb:Random ;
-	mb:toTrack ex:audio ;
-	mb:toParameter mb:Onset ;
-	mb:hasMultiplier 400 .
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Onset" ] ;
+		mb:withFunction [ a mb:LinearFunction ] ;
+		mb:hasMultiplier 400 ] ;
+	mb:toDMO ex:onsetDMO ;
+	mb:toParameter ex:onset .
 
 ex:statsMapping a mb:Mapping ;
-	mb:fromControl [ a mb:Slider ;
-		rdfs:label "Stats rate" ] ;
-	mb:toTrack ex:audio ;
-	mb:toParameter mb:StatsFrequency ;
-	mb:hasMultiplier 2500 .
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Segment duration" ] ;
+		mb:withFunction [ a mb:LinearFunction ] ;
+		mb:hasMultiplier 2 ] ;
+	mb:toDMO ex:onsetDMO ;
+	mb:toParameter mb:SegmentDurationRatio .
 
 ex:moon a mb:Rendering ;
-	mt:track ex:audio ;
+	mb:hasDMO ex:moonDMO ;
 	mb:hasMapping ex:onsetMapping, ex:onsetMapping2, ex:statsMapping ;
 	rdfs:label "Features Demo" .

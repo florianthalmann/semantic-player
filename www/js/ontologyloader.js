@@ -1,11 +1,13 @@
-function OntologyLoader(dmoUri, $scope, $interval) {
+function OntologyLoader(dmoPath, $scope, $interval) {
 	
 	var mobileRdfUri = "rdf/mobile.n3";
 	var multitrackRdfUri = "http://purl.org/ontology/studio/multitrack";
 	var rdfsUri = "http://www.w3.org/2000/01/rdf-schema";
 	
+	var dmos = {}; //dmos at all hierarchy levels for quick access during mapping assignment
+	
 	this.loadDmo = function(rdfUri) {
-		$http.get(dmoUri+rdfUri).success(function(data) {
+		$http.get(dmoPath+rdfUri).success(function(data) {
 			rdfstore.create(function(err, store) {
 				store.load('text/turtle', data, function(err, results) {
 					if (err) {
@@ -25,40 +27,67 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	}
 	
 	function loadRendering(store, renderingUri, label) {
-		store.execute("SELECT ?track ?path \
-		WHERE { <"+renderingUri+"> <"+multitrackRdfUri+"#track> ?track . \
-		?track <"+mobileRdfUri+"#hasAudioPath> ?path }", function(err, results) {
-			var trackUris = [];
-			var trackPaths = [];
+		store.execute("SELECT ?dmo \
+		WHERE { <"+renderingUri+"> <"+mobileRdfUri+"#hasDMO> ?dmo }", function(err, results) {
+			$scope.rendering = new Rendering(label, $scope);
+			$scope.scheduler = new Scheduler($scope);
 			for (var i = 0; i < results.length; i++) {
-				trackUris.push(results[i].track.value);
-				trackPaths.push(dmoUri+"/"+results[i].path.value);
+				loadDMO(store, results[i].dmo.value);
 			}
-			$scope.rendering = new Rendering(label, trackPaths, $scope);
-			loadFeatures(store, trackUris);
 			loadMappings(store, renderingUri);
 		});
 	}
 	
-	function loadFeatures(store, trackUris) {
-		for (var i = 0; i < trackUris.length; i++) {
-			store.execute("SELECT ?parameter ?path ?graphPath ?label \
-			WHERE { <"+trackUris[i]+"> <"+mobileRdfUri+"#hasParameter> ?parameter . \
-			?parameter <"+mobileRdfUri+"#hasPath> ?path . \
-			OPTIONAL { ?parameter <"+mobileRdfUri+"#hasGraphPath> ?graphPath . } \
-			OPTIONAL { ?parameter <"+rdfsUri+"#label> ?label . } }", function(err, results) {
-				for (var i = 0; i < results.length; i++) {
-					var path = dmoUri+"/"+results[i].path.value;
-					if (results[i].label) {
-						var label = results[i].label.value;
-					}
-					loadSegmentation(i, results[i].parameter.value, path, label);
-				}
-				if (results.length <= 0) {
-					$scope.ontologiesLoaded = true;
-				}
-			});
+	function loadDMO(store, dmoUri, parentDMO) {
+		var dmo = new DynamicMusicObject(dmoUri, $scope.scheduler);
+		dmos[dmoUri] = dmo;
+		if (parentDMO) {
+			parentDMO.addChild(dmo);
+		} else {
+			$scope.rendering.dmo = dmo; //pass top-level dmo to rendering
 		}
+		loadAudioPath(store, dmoUri, dmo);
+		loadParameters(store, dmoUri, dmo);
+		loadChildren(store, dmoUri, dmo);
+	}
+	
+	function loadAudioPath(store, dmoUri, dmo) {
+		store.execute("SELECT ?audioPath \
+		WHERE { <"+dmoUri+"> <"+mobileRdfUri+"#hasAudioPath> ?audioPath }", function(err, results) {
+			for (var i = 0; i < results.length; i++) {
+				var audioPath = dmoPath+"/"+results[i].audioPath.value;
+				dmo.setSourcePath(audioPath);
+				$scope.scheduler.addSourceFile(audioPath);
+			}
+		});
+	}
+	
+	function loadParameters(store, dmoUri, dmo) {
+		store.execute("SELECT ?parameter ?path ?graphPath ?label \
+		WHERE { <"+dmoUri+"> <"+mobileRdfUri+"#hasParameter> ?parameter . \
+		?parameter <"+mobileRdfUri+"#hasFeaturesPath> ?path . \
+		OPTIONAL { ?parameter <"+mobileRdfUri+"#hasGraphPath> ?graphPath . } \
+		OPTIONAL { ?parameter <"+rdfsUri+"#label> ?label . } }", function(err, results) {
+			for (var i = 0; i < results.length; i++) {
+				var path = dmoPath+"/"+results[i].path.value;
+				if (results[i].label) {
+					var label = results[i].label.value;
+				}
+				loadSegmentation(dmo, results[i].parameter.value, path, label);
+			}
+			if (results.length <= 0) {
+				$scope.ontologiesLoaded = true;
+			}
+		});
+	}
+	
+	function loadChildren(store, dmoUri, dmo) {
+		store.execute("SELECT ?child \
+		WHERE { <"+dmoUri+"> <"+mobileRdfUri+"#hasChild> ?child }", function(err, results) {
+			for (var i = 0; i < results.length; i++) {
+				loadDMO(store, results[i].child.value, dmo);
+			}
+		});
 	}
 	
 	function loadMappings(store, renderingUri) {
@@ -71,17 +100,19 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	
 	function loadMapping(store, mappingUri) {
 		$scope.mappingLoadingThreads++;
-		store.execute("SELECT ?mappingType ?control ?controlType ?trackPath ?parameter ?parameterType \
+		store.execute("SELECT ?mappingType ?dmo ?parameter ?parameterType \
 		WHERE { <"+mappingUri+"> a ?mappingType . \
-			<"+mappingUri+"> <"+mobileRdfUri+"#toTrack> ?track . \
-			?track <"+mobileRdfUri+"#hasAudioPath> ?trackPath . \
 			<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
-			?parameter a ?parameterType . }", function(err, results) {
+		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#toDMO> ?dmo . } \
+		OPTIONAL { ?parameter a ?parameterType . } }", function(err, results) {
 			for (var i = 0; i < results.length; i++) {
-				var control = getControlFromResults(results[i].control, results[i].controlType, results[i].label);
-				var track = $scope.rendering.getTrackForPath(dmoUri+"/"+results[i].trackPath.value);
-				var parameter = getParameter(track, results[i].parameter.value, results[i].parameterType.value);
-				
+				if (results[i].dmo) {
+					var dmo = dmos[results[i].dmo.value];
+				}
+				if (results[i].parameterType) {
+					var parameterType = results[i].parameterType.value;
+				}
+				var parameter = getParameter(dmo, results[i].parameter.value, parameterType);
 				loadMappingDimensions(store, mappingUri, results[i].mappingType.value, parameter);
 			}
 		});
@@ -91,8 +122,8 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 		store.execute("SELECT ?control ?controlType ?label ?function ?functionType ?position ?range ?multiplier ?addend ?modulus \
 		WHERE { <"+mappingUri+"> <"+mobileRdfUri+"#hasDimension> ?dimension . \
 			?dimension <"+mobileRdfUri+"#fromControl> ?control . \
-			?dimension <"+mobileRdfUri+"#withFunction> ?function . \
-			?function a ?functionType . \
+		OPTIONAL {	?dimension <"+mobileRdfUri+"#withFunction> ?function . \
+			?function a ?functionType . } \
 		OPTIONAL { ?control a ?controlType . } \
 		OPTIONAL { ?control <"+rdfsUri+"#label> ?label . } \
 		OPTIONAL { ?dimension <"+mobileRdfUri+"#hasMultiplier> ?multiplier . } \
@@ -109,7 +140,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 				controls[i] = getControlFromResults(results[i].control, results[i].controlType, results[i].label);
 				var position = getNumberValue(results[i].position);
 				var range = getNumberValue(results[i].range);
-				functions[i] = getFunction(results[i].functionType.value, position, range);
+				functions[i] = getFunction(results[i].functionType, position, range);
 				multipliers[i] = getNumberValue(results[i].multiplier, 1);
 				addends[i] = getNumberValue(results[i].addend, 0);
 				moduli[i] = getNumberValue(results[i].modulus);
@@ -120,11 +151,14 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 		});
 	}
 	
-	function getFunction(functionType, position, range) {
-		if (functionType == mobileRdfUri+"#TriangleFunction") {
-			return new TriangleFunction(position, range);
-		} else if (functionType == mobileRdfUri+"#RectangleFunction") {
-			return new RectangleFunction(position, range);
+	function getFunction(functionTypeResult, position, range) {
+		if (functionTypeResult) {
+			functionType = functionTypeResult.value;
+			if (functionType == mobileRdfUri+"#TriangleFunction") {
+				return new TriangleFunction(position, range);
+			} else if (functionType == mobileRdfUri+"#RectangleFunction") {
+				return new RectangleFunction(position, range);
+			}
 		}
 		return new LinearFunction();
 	}
@@ -171,7 +205,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 			$scope.sliderControls[controlUri] = new Control(0, label, $scope);
 			$scope.$apply();
 			return $scope.sliderControls[controlUri];
-		} else if (controlUri == mobileRdfUri+"#Random") {
+		} else if (controlUri == mobileRdfUri+"#Random" || controlTypeUri == mobileRdfUri+"#Random") {
 			return getStatsControl(0);
 		} else if (controlTypeUri == mobileRdfUri+"#GraphControl") {
 			return getGraphControl(0);
@@ -233,17 +267,19 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 		}
 	}
 	
-	function getParameter(track, parameterUri, parameterTypeUri) {
+	function getParameter(dmo, parameterUri, parameterTypeUri) {
 		if (parameterUri == mobileRdfUri+"#Amplitude") {
-			return track.amplitude;
+			return dmo.amplitude;
 		} else if (parameterUri == mobileRdfUri+"#Pan") {
-			return track.pan;
+			return dmo.pan;
 		}	else if (parameterUri == mobileRdfUri+"#Distance") {
-			return track.distance;
+			return dmo.distance;
 		} else if (parameterUri == mobileRdfUri+"#Reverb") {
-			return track.reverb;
+			return dmo.reverb;
 		} else if (parameterTypeUri == mobileRdfUri+"#Segmentation") {
-			return track.getSegmentationParam(parameterUri);
+			return dmo.segmentIndex;
+		} else if (parameterUri == mobileRdfUri+"#SegmentDurationRatio") {
+			return dmo.segmentDurationRatio;
 		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation") {
 			return $scope.rendering.listenerOrientation;
 		} else if (parameterUri == mobileRdfUri+"#StatsFrequency") {
@@ -257,7 +293,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 	var eventOntology = "http://purl.org/NET/c4dm/event.owl";
 	var timelineOntology = "http://purl.org/NET/c4dm/timeline.owl";
 	
-	function loadSegmentation(trackIndex, parameterUri, rdfUri) {
+	function loadSegmentation(dmo, parameterUri, rdfUri) {
 		//console.log("start");
 		$scope.featureLoadingThreads++;
 		$http.get(rdfUri).success(function(data) {
@@ -269,9 +305,10 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 					if (err) {
 						console.log(err);
 					}
+					//for now looks at anything containing event times
+					//?eventType <"+rdfsUri+"#subClassOf>* <"+eventOntology+"#Event> . \
 					store.execute("SELECT ?xsdTime \
-					WHERE { ?eventType <"+rdfsUri+"#subClassOf>* <"+eventOntology+"#Event> . \
-					?event a ?eventType . \
+					WHERE { ?event a ?eventType . \
 					?event <"+eventOntology+"#time> ?time . \
 					?time <"+timelineOntology+"#at> ?xsdTime }", function(err, results) {
 						//console.log("execute");
@@ -279,7 +316,7 @@ function OntologyLoader(dmoUri, $scope, $interval) {
 						for (var i = 0; i < results.length; i++) {
 							times.push(toSecondsNumber(results[i].xsdTime.value));
 						}
-						$scope.rendering.tracks[trackIndex].setSegmentation(parameterUri, times.sort(function(a,b){return a - b}));
+						dmo.setSegmentation(times.sort(function(a,b){return a - b}));
 						$scope.featureLoadingThreads--;
 						$scope.$apply();
 					});

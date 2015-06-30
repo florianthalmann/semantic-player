@@ -4,57 +4,74 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <#> .
 
-ex:voc a mt:AudioTrack;
+ex:voc a mb:DMO ;
 	mb:hasAudioPath "voc.m4a" .
 	
-ex:riddim a mt:AudioTrack;
+ex:riddim a mb:DMO ;
 	mb:hasAudioPath "riddim.m4a" .
 	
-ex:dnb a mt:AudioTrack;
+ex:dnb a mb:DMO ;
 	mb:hasAudioPath "dnb.m4a" .
 
-ex:vocMapping1 a mb:Mapping;
-	mb:fromControl mb:AccelerometerX;
-	mb:toTrack ex:voc;
-	mb:toParameter mb:Pan;
-	mb:hasMultiplier -1 .
+ex:mix a mb:DMO ;
+	mb:hasChild ex:voc, ex:riddim, ex:dnb .
 
-ex:vocMapping3 a mb:Mapping;
-	mb:fromControl [ a mb:Slider;
-		rdfs:label "Voc amp" ];
-	mb:toTrack ex:voc;
-	mb:toParameter mb:Amplitude;
-	mb:hasMultiplier 1 .
+ex:mainAmpMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Mix amp" ] ;
+		mb:hasMultiplier 1 ] ;
+	mb:toDMO ex:mix ;
+	mb:toParameter mb:Amplitude .
 
-ex:vocMapping2 a mb:Mapping;
-	mb:fromControl mb:AccelerometerY;
-	mb:toTrack ex:voc;
-	mb:toParameter mb:Distance;
-	mb:hasMultiplier -1 .
+ex:vocMapping1 a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl mb:AccelerometerX ;
+		mb:hasMultiplier -1 ] ;
+	mb:toDMO ex:voc ;
+	mb:toParameter mb:Pan .
 
-ex:riddimMapping2 a mb:Mapping;
-	mb:fromControl [ a mb:Slider;
-		rdfs:label "Riddim amp" ];
-	mb:toTrack ex:riddim;
-	mb:toParameter mb:Amplitude;
-	mb:hasMultiplier 1 .
+ex:vocMapping3 a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Voc amp" ] ;
+		mb:hasMultiplier 1 ] ;
+	mb:toDMO ex:voc ;
+	mb:toParameter mb:Amplitude .
+
+ex:vocMapping2 a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl mb:AccelerometerY ;
+		mb:hasMultiplier -1 ] ;
+	mb:toDMO ex:voc ;
+	mb:toParameter mb:Distance .
+
+ex:riddimMapping2 a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Riddim amp" ] ;
+		mb:hasMultiplier 1 ] ;
+	mb:toDMO ex:riddim ;
+	mb:toParameter mb:Amplitude .
 	
 ex:riddimMapping a mb:Mapping;
-	mb:fromControl [ a mb:Slider;
-		rdfs:label "Riddim pan" ];
-	mb:toTrack ex:riddim;
-	mb:toParameter mb:Pan;
-	mb:hasMultiplier 2 ;
-	mb:hasAddend -1 .
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Riddim pan" ] ;
+		mb:hasMultiplier 2 ;
+		mb:hasAddend -1 ] ;
+	mb:toDMO ex:riddim ;
+	mb:toParameter mb:Pan .
 
 ex:dnbMapping a mb:Mapping;
-	mb:fromControl [ a mb:Slider;
-		rdfs:label "DnB distance" ];
-	mb:toTrack ex:dnb;
-	mb:toParameter mb:Distance;
-	mb:hasMultiplier -3 .
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "DnB distance" ] ;
+		mb:hasMultiplier -3 ] ;
+	mb:toDMO ex:dnb ;
+	mb:toParameter mb:Distance .
 
-ex:j4j a mb:Rendering;
-	mt:track ex:voc, ex:riddim, ex:dnb;
-	mb:hasMapping ex:vocMapping1, ex:vocMapping2, ex:vocMapping3, ex:riddimMapping, ex:riddimMapping2, ex:dnbMapping;
+ex:j4j a mb:Rendering ;
+	mb:hasDMO ex:mix ;
+	mb:hasMapping ex:mainAmpMapping, ex:vocMapping1, ex:vocMapping2, ex:vocMapping3, ex:riddimMapping, ex:riddimMapping2, ex:dnbMapping ;
 	rdfs:label "Mixing Demo" .

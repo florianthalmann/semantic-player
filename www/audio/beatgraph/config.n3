@@ -4,42 +4,42 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <#> .
 
-ex:beat a mb:Segmentation ;
+ex:onset a mb:Segmentation ;
 	mb:hasPath "moon.n3" ;
 	mb:hasGraphPath "moon_graph.json" ;
 	rdfs:label "Onset" .
 
-ex:fandango a mt:AudioTrack ;
+ex:moon a mt:AudioTrack ;
 	mb:hasAudioPath "moon.m4a" ;
-	mb:hasParameter ex:beat .
-
-ex:beatSliderMapping a mb:Mapping ;
-	mb:hasDimension [ a mb:MappingDimension ;
-		mb:fromControl [ a mb:Slider ;
-			rdfs:label "Beat" ] ;
-		mb:withFunction [ a mb:LinearFunction ] ;
-		mb:hasMultiplier 400 ] ;
-	mb:toTrack ex:fandango ;
-	mb:toParameter ex:beat .
-
-ex:beatGraphMapping a mb:Mapping ;
+	mb:hasParameter ex:onset .
+	
+ex:onsetGraphMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:GraphControl ;
 			mb:ofTrack ex:fandango ;
 			mb:ofParameter mb:Beat ] ;
 		mb:withFunction [ a mb:LinearFunction ] ] ;
-	mb:toTrack ex:fandango ;
-	mb:toParameter ex:beat .
+	mb:toTrack ex:moon ;
+	mb:toParameter ex:onset .
+
+ex:onsetSliderMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Onset" ] ;
+		mb:withFunction [ a mb:LinearFunction ] ;
+		mb:hasMultiplier 400 ] ;
+	mb:toTrack ex:moon ;
+	mb:toParameter ex:onset .
 		
 ex:graphThresholdMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
-			rdfs:label "Beat threshold" ] ;
+			rdfs:label "Onset threshold" ] ;
 		mb:withFunction [ a mb:LinearFunction ] ] ;
-	mb:toTrack ex:fandango ;
-	mb:toParameter ex:beat .
+	mb:toTrack ex:moon ;
+	mb:toParameter ex:onset .
 
-ex:fandandoBeats a mb:Rendering;
-	mt:track ex:fandango ;
-	mb:hasMapping ex:beatSliderMapping; #ex:beatGraphMapping, ex:graphThresholdMapping ;
+ex:moonOnsets a mb:Rendering;
+	mt:track ex:moon ;
+	mb:hasMapping ex:onsetGraphMapping, ex:onsetSliderMapping, ex:graphThresholdMapping ;
 	rdfs:label "Graph Demo" .

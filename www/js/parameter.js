@@ -1,9 +1,8 @@
-function Parameter(owner, initialValue, isInteger) {
+function Parameter(owner, updateFunction, initialValue, isInteger, isUpdateAbsolute) {
 	
-	this.owner = owner;
 	this.value = initialValue;
+	this.change = 0; //records amout of last change
 	this.mappings = [];
-	var changed = false;
 	
 	this.addMapping = function(mapping) {
 		this.mappings.push(mapping);
@@ -11,9 +10,14 @@ function Parameter(owner, initialValue, isInteger) {
 	
 	this.update = function(mapping, value) {
 		if (value || value == 0) {
-			this.setValueAndUpdateOtherMappings(mapping, value)
-			if (this.owner.update) {
-				this.owner.update();
+			this.setValueAndUpdateOtherMappings(mapping, value);
+			//only update if value changed
+			if (this.change && updateFunction) {
+				if (isUpdateAbsolute) { //send absolute value rather than change
+					updateFunction.call(owner, this.value);
+				} else {
+					updateFunction.call(owner, this.change);
+				}
 			}
 		}
 	}
@@ -22,21 +26,14 @@ function Parameter(owner, initialValue, isInteger) {
 		if (isInteger) {
 			value = Math.round(value);
 		}
+		this.change = value - this.value;
 		this.value = value;
-		changed = true;
 		//update values of all other controllers connected to this parameter
 		for (var i = 0; i < this.mappings.length; i++) {
 			if (this.mappings[i] != mapping) {
 				this.mappings[i].updateControl(value);
 			}
 		}
-	}
-	
-	//returns true if the value has changed since the last time this method was called
-	this.hasChanged = function() {
-		var previousChanged = changed;
-		changed = false;
-		return previousChanged;
 	}
 	
 	//returns the first value that it manages to request from one of the mappings
@@ -46,6 +43,7 @@ function Parameter(owner, initialValue, isInteger) {
 			if (value || value == 0) {
 				this.setValueAndUpdateOtherMappings(this.mappings[i], value);
 			}
+			return this.value;
 		}
 		return this.value;
 	}

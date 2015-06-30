@@ -1,0 +1,4116 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> . 
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix vamp: <http://purl.org/ontology/vamp/> .
+@prefix : <#> .
+
+<file:///Users/flo/Projects/Code/Cordova/SemanticPlayer/www/audio/features/moon.m4a> a mo:AudioFile ;
+    mo:encodes :signal_0.
+
+:signal_0 a mo:Signal ;
+    mo:time [
+        a tl:Interval ;
+        tl:onTimeLine :signal_timeline_0
+    ] .
+
+:signal_timeline_0 a tl:Timeline .
+
+
+:transform_1_beats a vamp:Transform ;
+    vamp:plugin <http://vamp-plugins.org/rdf/plugins/qm-vamp-plugins#qm-barbeattracker> ;
+    vamp:step_size "512"^^xsd:int ; 
+    vamp:block_size "1024"^^xsd:int ; 
+    vamp:sample_rate "44100"^^xsd:float ; 
+    vamp:plugin_version """2""" ; 
+    vamp:parameter_binding [
+        vamp:parameter [ vamp:identifier "bpb" ] ;
+        vamp:value "4"^^xsd:float ;
+    ] ;
+    vamp:output <http://vamp-plugins.org/rdf/plugins/qm-vamp-plugins#qm-barbeattracker_output_beats> .
+
+:event_2 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT0.185759637S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_3 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT0.499229024S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_4 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT0.870748299S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_5 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT1.253877551S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_6 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT1.637006802S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_7 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT2.020136054S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_8 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT2.403265306S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_9 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT2.763174603S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_10 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT3.157913832S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_11 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT3.541043083S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_12 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT3.947392290S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_13 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT4.318911564S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_14 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT4.713650793S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_15 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT5.096780045S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_16 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT5.468299319S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_17 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT5.851428571S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_18 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT6.234557823S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_19 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT6.617687074S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_20 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT7.000816326S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_21 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT7.383945578S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_22 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT7.767074829S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_23 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT8.150204081S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_24 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT8.533333333S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_25 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT8.916462585S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_26 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT9.299591836S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_27 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT9.671111111S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_28 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT10.054240362S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_29 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT10.437369614S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_30 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT10.832108843S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_31 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT11.215238095S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_32 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT11.586757369S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_33 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT11.969886621S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_34 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT12.353015873S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_35 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT12.736145124S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_36 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT13.119274376S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_37 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT13.490793650S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_38 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT13.873922902S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_39 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT14.257052154S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_40 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT14.640181405S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_41 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT15.011700680S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_42 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT15.406439909S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_43 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT15.801179138S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_44 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT16.184308390S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_45 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT16.555827664S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_46 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT16.938956916S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_47 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT17.322086167S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_48 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT17.705215419S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_49 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT18.088344671S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_50 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT18.483083900S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_51 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT18.866213151S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_52 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT19.237732426S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_53 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT19.620861678S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_54 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT20.003990929S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_55 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT20.387120181S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_56 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT20.770249433S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_57 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT21.141768707S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_58 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT21.524897959S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_59 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT21.896417233S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_60 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT22.279546485S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_61 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT22.651065759S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_62 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT23.034195011S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_63 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT23.417324263S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_64 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT23.788843537S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_65 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT24.183582766S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_66 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT24.555102040S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_67 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT24.926621315S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_68 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT25.309750566S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_69 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT25.692879818S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_70 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT26.087619047S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_71 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT26.470748299S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_72 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT26.853877551S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_73 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT27.237006802S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_74 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT27.620136054S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_75 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT28.014875283S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_76 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT28.398004535S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_77 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT28.769523809S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_78 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT29.152653061S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_79 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT29.535782312S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_80 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT29.918911564S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_81 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT30.290430839S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_82 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT30.673560090S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_83 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT31.068299319S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_84 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT31.439818594S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_85 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT31.822947845S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_86 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT32.217687074S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_87 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT32.600816326S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_88 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT32.983945578S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_89 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT33.367074829S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_90 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT33.750204081S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_91 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT34.133333333S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_92 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT34.504852607S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_93 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT34.887981859S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_94 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT35.271111111S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_95 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT35.642630385S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_96 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT36.014149659S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_97 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT36.385668934S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_98 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT36.768798185S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_99 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT37.140317460S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_100 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT37.523446712S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_101 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT37.894965986S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_102 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT38.278095238S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_103 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT38.672834467S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_104 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT39.055963718S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_105 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT39.427482993S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_106 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT39.822222222S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_107 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT40.205351473S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_108 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT40.588480725S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_109 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT40.971609977S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_110 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT41.343129251S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_111 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT41.726258503S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_112 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT42.097777777S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_113 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT42.469297052S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_114 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT42.864036281S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_115 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT43.247165532S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_116 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT43.618684807S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_117 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT43.990204081S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_118 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT44.384943310S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_119 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT44.779682539S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_120 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT45.151201814S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_121 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT45.534331065S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_122 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT45.917460317S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_123 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT46.288979591S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_124 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT46.660498866S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_125 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT47.032018140S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_126 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT47.415147392S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_127 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT47.786666666S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_128 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT48.169795918S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_129 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT48.564535147S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_130 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT48.947664399S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_131 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT49.319183673S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_132 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT49.690702947S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_133 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT50.073832199S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_134 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT50.445351473S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_135 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT50.840090702S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_136 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT51.211609977S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_137 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT51.583129251S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_138 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT51.966258503S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_139 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT52.349387755S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_140 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT52.732517006S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_141 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT53.104036281S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_142 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT53.487165532S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_143 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT53.881904761S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_144 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT54.265034013S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_145 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT54.648163265S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_146 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT55.031292517S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_147 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT55.414421768S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_148 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT55.785941043S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_149 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT56.169070294S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_150 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT56.552199546S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_151 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT56.935328798S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_152 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT57.318458049S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_153 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT57.689977324S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_154 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT58.073106575S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_155 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT58.456235827S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_156 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT58.839365079S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_157 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT59.222494331S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_158 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT59.605623582S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_159 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT59.988752834S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_160 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT60.371882086S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_161 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT60.743401360S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_162 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT61.126530612S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_163 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT61.509659863S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_164 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT61.892789115S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_165 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT62.264308390S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_166 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT62.659047619S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_167 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT63.053786848S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_168 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT63.436916099S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_169 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT63.820045351S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_170 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT64.214784580S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_171 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT64.597913832S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_172 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT64.981043083S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_173 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT65.352562358S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_174 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT65.735691609S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_175 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT66.118820861S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_176 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT66.490340136S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_177 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT66.861859410S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_178 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT67.244988662S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_179 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT67.628117913S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_180 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT67.999637188S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_181 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT68.371156462S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_182 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT68.765895691S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_183 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT69.149024943S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_184 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT69.520544217S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_185 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT69.903673469S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_186 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT70.286802721S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_187 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT70.669931972S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_188 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT71.041451247S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_189 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT71.412970521S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_190 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT71.796099773S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_191 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT72.167619047S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_192 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT72.539138321S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_193 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT72.910657596S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_194 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT73.293786848S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_195 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT73.665306122S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_196 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT74.048435374S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_197 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT74.431564625S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_198 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT74.803083900S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_199 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT75.197823129S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_200 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT75.592562358S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_201 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT75.975691609S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_202 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT76.358820861S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_203 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT76.741950113S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_204 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT77.125079365S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_205 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT77.496598639S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_206 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT77.891337868S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_207 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT78.274467120S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_208 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT78.657596371S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_209 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT79.029115646S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_210 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT79.412244897S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_211 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT79.795374149S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_212 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT80.178503401S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_213 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT80.561632653S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_214 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT80.956371882S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_215 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT81.339501133S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_216 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT81.722630385S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_217 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT82.094149659S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_218 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT82.477278911S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_219 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT82.860408163S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_220 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT83.243537414S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_221 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT83.626666666S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_222 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT84.021405895S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_223 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT84.404535147S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_224 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT84.787664399S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_225 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT85.159183673S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_226 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT85.542312925S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_227 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT85.925442176S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_228 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT86.320181405S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_229 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT86.691700680S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_230 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT87.086439909S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_231 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT87.469569160S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_232 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT87.864308390S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_233 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT88.247437641S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_234 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT88.630566893S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_235 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT89.013696145S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_236 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT89.396825396S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_237 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT89.768344671S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_238 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT90.151473922S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_239 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT90.534603174S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_240 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT90.917732426S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_241 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT91.300861678S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_242 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT91.683990929S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_243 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT92.067120181S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_244 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT92.450249433S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_245 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT92.833378684S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_246 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT93.216507936S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_247 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT93.599637188S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_248 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT93.982766439S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_249 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT94.354285714S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_250 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT94.749024943S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_251 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT95.132154195S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_252 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT95.515283446S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_253 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT95.886802721S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_254 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT96.269931972S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_255 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT96.641451247S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_256 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT97.036190476S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_257 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT97.430929705S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_258 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT97.802448979S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_259 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT98.173968253S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_260 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT98.557097505S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_261 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT98.940226757S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_262 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT99.334965986S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_263 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT99.718095238S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_264 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT100.101224489S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_265 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT100.484353741S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_266 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT100.867482993S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_267 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT101.250612244S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_268 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT101.633741496S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_269 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT101.993650793S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_270 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT102.388390022S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_271 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT102.771519274S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_272 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT103.154648526S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_273 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT103.537777777S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_274 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT103.920907029S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_275 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT104.304036281S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_276 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT104.687165532S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_277 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT105.058684807S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_278 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT105.453424036S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_279 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT105.836553287S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_280 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT106.231292517S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_281 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT106.602811791S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_282 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT106.985941043S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_283 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT107.369070294S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_284 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT107.740589569S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_285 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT108.123718820S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_286 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT108.506848072S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_287 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT108.878367346S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_288 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT109.261496598S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_289 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT109.633015873S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_290 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT110.016145124S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_291 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT110.399274376S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_292 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT110.782403628S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_293 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT111.165532879S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_294 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT111.548662131S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_295 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT111.920181405S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_296 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT112.314920634S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_297 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT112.686439909S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_298 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT113.069569160S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_299 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT113.464308390S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_300 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT113.847437641S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_301 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT114.218956916S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_302 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT114.602086167S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_303 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT114.985215419S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_304 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT115.368344671S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_305 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT115.751473922S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_306 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT116.134603174S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_307 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT116.506122448S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_308 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT116.889251700S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_309 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT117.260770975S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_310 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT117.643900226S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_311 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT118.027029478S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_312 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT118.421768707S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_313 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT118.804897959S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_314 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT119.188027210S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_315 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT119.559546485S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_316 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT119.931065759S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_317 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT120.302585034S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_318 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT120.674104308S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_319 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT121.057233560S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_320 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT121.440362811S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_321 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT121.811882086S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_322 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT122.195011337S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_323 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT122.578140589S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_324 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT122.949659863S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_325 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT123.321179138S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_326 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT123.715918367S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_327 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT124.110657596S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_328 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT124.493786848S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_329 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT124.865306122S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_330 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT125.260045351S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_331 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT125.643174603S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_332 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT126.026303854S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_333 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT126.397823129S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_334 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT126.792562358S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_335 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT127.175691609S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_336 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT127.558820861S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_337 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT127.941950113S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_338 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT128.325079365S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_339 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT128.708208616S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_340 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT129.102947845S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_341 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT129.474467120S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_342 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT129.869206349S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_343 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT130.252335600S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_344 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT130.635464852S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_345 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT131.018594104S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_346 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT131.401723356S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_347 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT131.784852607S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_348 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT132.167981859S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_349 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT132.539501133S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_350 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT132.934240362S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_351 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT133.305759637S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_352 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT133.688888888S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_353 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT134.060408163S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_354 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT134.443537414S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_355 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT134.815056689S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_356 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT135.198185941S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_357 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT135.581315192S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_358 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT135.976054421S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_359 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT136.370793650S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_360 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT136.742312925S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_361 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT137.125442176S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_362 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT137.520181405S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_363 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT137.914920634S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_364 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT138.286439909S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_365 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT138.669569160S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_366 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT139.052698412S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_367 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT139.447437641S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_368 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT139.830566893S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_369 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT140.202086167S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_370 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT140.596825396S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_371 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT140.979954648S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_372 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT141.351473922S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_373 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT141.734603174S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_374 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT142.117732426S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_375 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT142.512471655S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_376 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT142.883990929S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_377 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT143.267120181S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_378 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT143.650249433S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_379 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT144.044988662S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_380 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT144.416507936S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_381 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT144.776417233S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_382 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT145.159546485S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_383 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT145.542675736S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_384 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT145.925804988S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_385 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT146.308934240S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_386 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT146.692063492S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_387 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT147.075192743S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_388 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT147.469931972S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_389 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT147.841451247S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_390 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT148.212970521S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_391 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT148.607709750S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_392 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT149.002448979S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_393 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT149.385578231S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_394 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT149.780317460S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_395 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT150.175056689S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_396 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT150.558185941S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_397 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT150.941315192S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_398 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT151.336054421S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_399 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT151.719183673S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_400 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT152.102312925S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_401 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT152.485442176S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_402 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT152.880181405S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_403 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT153.263310657S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_404 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT153.646439909S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_405 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT154.029569160S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_406 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT154.424308390S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_407 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT154.807437641S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_408 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT155.190566893S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_409 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT155.562086167S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_410 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT155.956825396S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_411 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT156.339954648S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_412 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT156.723083900S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_413 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT157.106213151S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_414 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT157.489342403S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_415 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT157.884081632S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_416 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT158.255600907S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_417 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT158.615510204S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_418 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT159.010249433S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_419 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT159.393378684S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_420 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT159.776507936S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_421 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT160.159637188S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_422 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT160.542766439S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_423 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT160.914285714S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_424 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT161.297414965S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_425 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT161.668934240S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_426 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT162.063673469S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_427 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT162.446802721S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_428 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT162.829931972S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_429 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT163.201451247S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_430 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT163.584580498S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_431 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT163.967709750S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_432 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT164.350839002S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_433 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT164.722358276S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_434 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT165.117097505S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_435 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT165.488616780S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_436 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT165.871746031S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_437 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT166.243265306S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_438 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT166.638004535S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_439 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT167.021133786S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_440 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT167.392653061S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_441 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT167.775782312S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_442 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT168.170521541S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_443 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT168.553650793S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_444 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT168.925170068S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_445 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT169.296689342S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_446 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT169.679818594S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_447 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT170.051337868S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_448 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT170.434467120S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_449 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT170.817596371S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_450 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT171.200725623S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_451 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT171.572244897S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_452 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT171.955374149S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_453 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT172.338503401S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_454 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT172.710022675S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_455 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT173.104761904S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_456 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT173.487891156S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_457 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT173.871020408S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_458 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT174.254149659S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_459 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT174.625668934S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_460 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT175.008798185S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_461 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT175.391927437S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_462 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT175.775056689S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_463 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT176.158185941S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_464 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT176.541315192S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_465 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT176.924444444S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_466 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT177.319183673S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_467 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT177.702312925S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_468 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT178.097052154S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_469 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT178.480181405S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_470 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT178.851700680S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_471 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT179.234829931S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_472 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT179.617959183S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_473 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT180.001088435S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_474 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT180.384217687S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_475 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT180.767346938S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_476 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT181.150476190S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_477 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT181.533605442S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_478 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT181.916734693S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_479 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT182.299863945S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_480 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT182.682993197S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_481 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT183.066122448S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_482 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT183.460861678S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_483 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT183.843990929S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_484 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT184.227120181S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_485 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT184.598639455S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_486 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT184.981768707S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_487 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT185.353287981S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_488 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT185.736417233S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_489 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT186.107936507S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_490 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT186.479455782S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_491 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT186.839365079S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_492 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT187.210884353S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_493 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT187.582403628S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_494 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT187.953922902S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_495 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT188.325442176S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_496 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT188.696961451S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_497 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT189.080090702S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_498 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT189.463219954S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_499 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT189.823129251S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_500 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT190.194648526S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_501 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT190.554557823S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_502 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT190.926077097S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_503 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT191.285986394S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_504 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT191.645895691S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_505 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT192.017414965S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_506 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT192.388934240S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_507 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT192.760453514S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .
+:event_508 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT193.166802721S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """2""" .
+:event_509 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT193.561541950S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """3""" .
+:event_510 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT193.933061224S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """4""" .
+:event_511 a <http://purl.org/ontology/af/Beat> ;
+    event:time [ 
+        a tl:Instant ;
+        tl:onTimeLine :signal_timeline_0 ;
+        tl:at "PT194.304580498S"^^xsd:duration ;
+    ] ;
+    vamp:computed_by :transform_1_beats ;
+    rdfs:label """1""" .

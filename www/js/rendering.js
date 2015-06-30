@@ -1,56 +1,18 @@
-function Rendering(label, filePaths, $scope) {
+function Rendering(label, $scope) {
 	
 	this.label = label;
 	
 	//horizontal listener orientation in degrees
 	this.listenerOrientation = new Parameter(this, 0);
 	
-	this.tracks = [];
-	var pathToTrackIndex = {};
-	var readyCount = 0;
-	this.tracksLoaded = false;
-	
-	for (var i = 0; i < filePaths.length; i++) {
-		pathToTrackIndex[filePaths[i]] = i;
-		var currentTrack = new Track(filePaths[i], $scope.audioContext, this, i == 0); //currently reverb works only for one channel on android!?!
-		this.tracks.push(currentTrack);
-		
-	}
-	
-	this.tellReady = function() {
-		readyCount++;
-		if (readyCount == 2*this.tracks.length) {
-			this.tracksLoaded = true;
-			$scope.$apply();
-		}
-	}
+	this.dmo = null;
 	
 	this.play = function() {
-		if (this.tracksLoaded) {
-			for (var i = 0; i < this.tracks.length; i++) {
-				this.tracks[i].play();
-			}
-		}
-	}
-	
-	this.pause = function() {
-		if (this.tracksLoaded) {
-			for (var i = 0; i < this.tracks.length; i++) {
-				this.tracks[i].pause();
-			}
-		}
+		this.dmo.play.update(undefined, 1);
 	}
 	
 	this.stop = function() {
-		if (this.tracksLoaded) {
-			for (var i = 0; i < this.tracks.length; i++) {
-				this.tracks[i].stop();
-			}
-		}
-	}
-	
-	this.getTrackForPath = function(filePath) {
-		return this.tracks[pathToTrackIndex[filePath]];
+		this.dmo.play.update(undefined, 0);
 	}
 	
 	this.update = function() {
