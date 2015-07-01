@@ -21,7 +21,7 @@ ex:dnb a mb:DMO ;
 
 ex:mix a mb:DMO ;
 	mb:hasParameter [ a mb:Reverb ;
-		mb:hasValue 0.8 ] ;
+		mb:hasValue 0 ] ;
 	mb:hasChild ex:voc, ex:riddim, ex:dnb .
 
 ex:panTilt a mb:Mapping ;
@@ -55,6 +55,20 @@ ex:distanceTilt a mb:Mapping ;
 				mb:hasAddend -5 ] ;
 			mb:toDMO ex:riddim ;
 			mb:toParameter mb:Pan .
+		
+ex:riddimReverbSlider a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Riddim reverb" ] ] ;
+	mb:toDMO ex:riddim ;
+	mb:toParameter mb:Reverb .
+
+ex:dnbReverbSlider a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "DnB reverb" ] ] ;
+	mb:toDMO ex:dnb ;
+	mb:toParameter mb:Reverb .
 
 ex:panSlider a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
@@ -76,5 +90,5 @@ ex:distanceSlider a mb:Mapping;
 
 ex:j4j a mb:Rendering ;
 	mb:hasDMO ex:mix ;
-	mb:hasMapping ex:panTilt, ex:distanceTilt, ex:vocPanSlider, ex:riddimPanSlider, ex:panSlider, ex:distanceSlider ;
+	mb:hasMapping ex:panTilt, ex:distanceTilt, ex:vocPanSlider, ex:riddimPanSlider, ex:panSlider, ex:distanceSlider, ex:riddimReverbSlider, ex:dnbReverbSlider ;
 	rdfs:label "Spatial Band Demo" .

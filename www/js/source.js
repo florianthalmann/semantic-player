@@ -1,4 +1,4 @@
-function Source(audioContext, dmo, reverbAllowed) {
+function Source(audioContext, dmo, reverbSend) {
 	
 	var SCHEDULE_AHEAD_TIME = 0.1; //seconds
 	var SWITCH_BUFFER_IMMEDIATELY = false;
@@ -10,17 +10,14 @@ function Source(audioContext, dmo, reverbAllowed) {
 	var dryGain = audioContext.createGain();
 	dryGain.connect(audioContext.destination);
 	var reverbGain = audioContext.createGain();
-	if (reverbAllowed) {
-		reverbGain.connect(audioContext.destination);
-		reverbGain.gain = reverb.value;
-	}
-	var convolver = audioContext.createConvolver();
-	convolver.connect(reverbGain);
+	reverbGain.connect(reverbSend);
+	reverbGain.gain.value = 0;
 	var panner = audioContext.createPanner();
 	panner.connect(dryGain);
-	panner.connect(convolver);
+	panner.connect(reverbGain);
 	var currentAmplitude = 1;
 	var currentPannerPosition = [0,0,0];
+	var currentReverb = 0;
 	var currentAudioSubBuffer;
 	var currentSourceDuration;
 	var audioSource, nextAudioSource;
@@ -121,7 +118,12 @@ function Source(audioContext, dmo, reverbAllowed) {
 	}
 	
 	this.changeReverb = function(deltaReverb) {
-		reverbGain.gain.value += deltaReverb;
+		currentReverb += deltaReverb;
+		if (currentReverb > 0) {
+			reverbGain.gain.value += deltaReverb;
+		} else {
+			reverbGain.gain.value = 0;
+		}
 	}
 	
 	function createNewAudioSource() {

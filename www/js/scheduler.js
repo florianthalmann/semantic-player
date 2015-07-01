@@ -2,7 +2,9 @@ function Scheduler($scope) {
 	
 	var buffers = {};
 	var sources = {};
-	var convolutionBuffer;
+	
+	var convolverSend = $scope.audioContext.createConvolver();
+	convolverSend.connect($scope.audioContext.destination);
 	
 	var numCurrentlyLoading = 0;
 	
@@ -10,7 +12,7 @@ function Scheduler($scope) {
 	numCurrentlyLoading++;
 	var audioLoader2 = new AudioSampleLoader();
 	loadAudio("audio/impulse_rev.wav", audioLoader2, function() {
-		convolutionBuffer = audioLoader2.response;
+		convolverSend.buffer = audioLoader2.response;
 		sourceReady();
 	});
 	
@@ -88,7 +90,7 @@ function Scheduler($scope) {
 			//currently reverb works only for one channel on android!?!
 			//TODO make a send channel for reverb for everything
 			reverbAllowed = sources.length < 1;
-			sources[dmo.getUri()] = new Source($scope.audioContext, dmo, reverbAllowed);
+			sources[dmo.getUri()] = new Source($scope.audioContext, dmo, convolverSend);
 		}
 		return sources[dmo.getUri()];
 	}
