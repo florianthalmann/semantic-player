@@ -32,53 +32,65 @@ function Scheduler($scope) {
 	}
 	
 	this.play = function(dmo) {
-		sourcePath = dmo.getSourcePath();
-		if (sourcePath) {
-			if (!sources[dmo.getUri()]) {
-				//currently reverb works only for one channel on android!?!
-				//TODO make a send channel for reverb for everything
-				reverbAllowed = sources.length < 1;
-				dmoBuffer = buffers[sourcePath];
-				sources[dmo.getUri()] = new Source($scope.audioContext, dmo, dmoBuffer, reverbAllowed);
+		source = getSource(dmo);
+		if (source) {
+			if (!source.hasAudioBuffer()) {
+				source.setAudioBuffer(buffers[dmo.getSourcePath()]);
 			}
-			sources[dmo.getUri()].play();
+			source.play();
 		}
 	}
 	
 	this.pause = function(dmo) {
-		if (sources[dmo.getUri()]) {
-			sources[dmo.getUri()].pause();
+		source = getSource(dmo);
+		if (source) {
+			source.pause();
 		}
 	}
 	
 	this.stop = function(dmo) {
-		if (sources[dmo.getUri()]) {
-			sources[dmo.getUri()].stop();
+		source = getSource(dmo);
+		if (source) {
+			source.stop();
 		}
 	}
 	
 	this.updateAmplitude = function(dmo, change) {
-		if (sources[dmo.getUri()]) {
-			sources[dmo.getUri()].changeAmplitude(change);
+		source = getSource(dmo);
+		if (source) {
+			source.changeAmplitude(change);
 		}
 	}
 	
 	this.updatePan = function(dmo, change) {
-		if (sources[dmo.getUri()]) {
-			sources[dmo.getUri()].changePosition(change, 0, 0);
+		source = getSource(dmo);
+		if (source) {
+			source.changePosition(change, 0, 0);
 		}
 	}
 	
 	this.updateDistance = function(dmo, change) {
-		if (sources[dmo.getUri()]) {
-			sources[dmo.getUri()].changePosition(0, 0, change);
+		source = getSource(dmo);
+		if (source) {
+			source.changePosition(0, 0, change);
 		}
 	}
 	
 	this.updateReverb = function(dmo, change) {
-		if (sources[dmo.getUri()]) {
-			sources[dmo.getUri()].changeReverb(change);
+		source = getSource(dmo);
+		if (source) {
+			source.changeReverb(change);
 		}
+	}
+	
+	function getSource(dmo) {
+		if (!sources[dmo.getUri()] && dmo.getSourcePath()) {
+			//currently reverb works only for one channel on android!?!
+			//TODO make a send channel for reverb for everything
+			reverbAllowed = sources.length < 1;
+			sources[dmo.getUri()] = new Source($scope.audioContext, dmo, reverbAllowed);
+		}
+		return sources[dmo.getUri()];
 	}
 	
 	function loadAudio(path, audioLoader, onload) {

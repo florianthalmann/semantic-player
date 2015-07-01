@@ -1,0 +1,80 @@
+#@base <http://purl.org/ontology/studio/mobile-example#> .
+@prefix mb: <rdf/mobile.n3#> .
+@prefix mt: <http://purl.org/ontology/studio/multitrack#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <#> .
+
+ex:voc a mb:DMO ;
+	mb:hasAudioPath "voc.m4a" ;
+	mb:hasParameter [ a mb:Distance ;
+		mb:hasValue -5 ] .
+	
+ex:riddim a mb:DMO ;
+	mb:hasAudioPath "riddim.m4a" ;
+	mb:hasParameter [ a mb:Pan ;
+		mb:hasValue -5 ] .
+	
+ex:dnb a mb:DMO ;
+	mb:hasAudioPath "dnb.m4a" ;
+	mb:hasParameter [ a mb:Pan ;
+		mb:hasValue 5 ] .
+
+ex:mix a mb:DMO ;
+	mb:hasParameter [ a mb:Reverb ;
+		mb:hasValue 0.8 ] ;
+	mb:hasChild ex:voc, ex:riddim, ex:dnb .
+
+ex:panTilt a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl mb:TiltX ;
+		mb:hasMultiplier 1 ] ;
+	mb:toDMO ex:mix ;
+	mb:toParameter mb:Pan .
+
+ex:distanceTilt a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl mb:TiltY ;
+		mb:hasMultiplier -1 ] ;
+	mb:toDMO ex:mix ;
+	mb:toParameter mb:Distance .
+	
+	ex:vocPanSlider a mb:Mapping ;
+		mb:hasDimension [ a mb:MappingDimension ;
+			mb:fromControl [ a mb:Slider ;
+				rdfs:label "Voc pan" ] ;
+			mb:hasMultiplier 10 ;
+			mb:hasAddend -5 ] ;
+		mb:toDMO ex:voc ;
+		mb:toParameter mb:Pan .
+		
+		ex:riddimPanSlider a mb:Mapping ;
+			mb:hasDimension [ a mb:MappingDimension ;
+				mb:fromControl [ a mb:Slider ;
+					rdfs:label "Riddim pan" ] ;
+				mb:hasMultiplier 10 ;
+				mb:hasAddend -5 ] ;
+			mb:toDMO ex:riddim ;
+			mb:toParameter mb:Pan .
+
+ex:panSlider a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "X Position" ] ;
+		mb:hasMultiplier -10 ;
+		mb:hasAddend 5 ] ;
+	mb:toDMO ex:mix ;
+	mb:toParameter mb:Pan .
+	
+ex:distanceSlider a mb:Mapping;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Z Position" ] ;
+		mb:hasMultiplier 10 ;
+		mb:hasAddend -5 ] ;
+	mb:toDMO ex:mix ;
+	mb:toParameter mb:Distance .
+
+ex:j4j a mb:Rendering ;
+	mb:hasDMO ex:mix ;
+	mb:hasMapping ex:panTilt, ex:distanceTilt, ex:vocPanSlider, ex:riddimPanSlider, ex:panSlider, ex:distanceSlider ;
+	rdfs:label "Spatial Band Demo" .

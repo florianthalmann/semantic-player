@@ -1,4 +1,4 @@
-function Source(audioContext, dmo, audioBuffer, reverbAllowed) {
+function Source(audioContext, dmo, reverbAllowed) {
 	
 	var SCHEDULE_AHEAD_TIME = 0.1; //seconds
 	var SWITCH_BUFFER_IMMEDIATELY = false;
@@ -24,6 +24,16 @@ function Source(audioContext, dmo, audioBuffer, reverbAllowed) {
 	var currentAudioSubBuffer;
 	var currentSourceDuration;
 	var audioSource, nextAudioSource;
+	
+	var audioBuffer = null;
+	
+	this.hasAudioBuffer = function() {
+		return audioBuffer;
+	};
+	
+	this.setAudioBuffer = function(buffer) {
+		audioBuffer = buffer;
+	};
 	
 	this.play = function() {
 		if (!isPlaying) {
@@ -116,9 +126,6 @@ function Source(audioContext, dmo, audioBuffer, reverbAllowed) {
 	
 	function createNewAudioSource() {
 		var segment = dmo.getNextSegment();
-		if (!segment[0]) {
-			segment[0] = 0;
-		}
 		if (!segment[1]) {
 			segment[1] = audioBuffer.duration-segment[0];
 		}

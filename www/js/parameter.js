@@ -22,6 +22,10 @@ function Parameter(owner, updateFunction, initialValue, isInteger, isUpdateAbsol
 		}
 	}
 	
+	this.relativeUpdate = function(change) {
+		this.update(undefined, this.value+change);
+	}
+	
 	this.setValueAndUpdateOtherMappings = function(mapping, value) {
 		if (isInteger) {
 			value = Math.round(value);

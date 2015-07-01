@@ -55,7 +55,7 @@ function DynamicMusicObject(uri, scheduler) {
 		scheduler.updateAmplitude(this, change);
 		if (!sourcePath) {
 			for (var i = 0; i < children.length; i++) {
-				children[i].updateAmplitude(change);
+				children[i].amplitude.relativeUpdate(change);
 			}
 		}
 	}
@@ -64,7 +64,7 @@ function DynamicMusicObject(uri, scheduler) {
 	this.updatePan = function(change) {
 		scheduler.updatePan(this, change);
 		for (var i = 0; i < children.length; i++) {
-			children[i].updatePan(change);
+			children[i].pan.relativeUpdate(change);
 		}
 	}
 	
@@ -72,7 +72,7 @@ function DynamicMusicObject(uri, scheduler) {
 	this.updateDistance = function(change) {
 		scheduler.updateDistance(this, change);
 		for (var i = 0; i < children.length; i++) {
-			children[i].updateDistance(change);
+			children[i].distance.relativeUpdate(change);
 		}
 	}
 	
@@ -80,7 +80,7 @@ function DynamicMusicObject(uri, scheduler) {
 	this.updateReverb = function(change) {
 		scheduler.updateReverb(this, change);
 		for (var i = 0; i < children.length; i++) {
-			children[i].updateReverb(change);
+			children[i].reverb.relativeUpdate(change);
 		}
 	}
 	
@@ -106,12 +106,14 @@ function DynamicMusicObject(uri, scheduler) {
 			duration *= this.segmentDurationRatio.value;
 		}
 		skip = !skip;
-		console.log(i, [start, duration]);
-		if (duration > 0) {
-			return [start, duration];
-		} else {
-			return this.getNextSegment();
+		if (start >= 0) {
+			if (duration > 0) {
+				return [start, duration];
+			} else {
+				return this.getNextSegment();
+			}
 		}
+		return [0, undefined];
 	}
 	
 	this.play = new Parameter(this, this.updatePlay, 0);
