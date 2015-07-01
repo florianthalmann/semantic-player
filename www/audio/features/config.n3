@@ -5,15 +5,22 @@
 @prefix ex: <#> .
 
 ex:beat a mb:Segmentation ;
+	mb:hasFeaturesPath "beats.n3" .
+
+ex:bar a mb:Segmentation ;
 	mb:hasFeaturesPath "beats.n3" ;
 	mb:isSubset "1".
 
 ex:beatDMO a mb:DMO ;
 	mb:hasParameter ex:beat .
-	
+
+ex:barDMO a mb:DMO ;
+	mb:hasParameter ex:bar ;
+	mb:hasChild ex:beatDMO .
+
 ex:moonDMO a mb:DMO ;
 	mb:hasAudioPath "moon.m4a" ;
-	mb:hasChild ex:beatDMO .
+	mb:hasChild ex:barDMO .
 
 ex:onsetMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
@@ -25,7 +32,7 @@ ex:onsetMapping a mb:Mapping ;
 ex:onsetMapping2 a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
-			rdfs:label "Onset" ] ;
+			rdfs:label "Beat" ] ;
 		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 400 ] ;
 	mb:toDMO ex:beatDMO ;
@@ -40,10 +47,19 @@ ex:rateMapping a mb:Mapping ;
 	mb:toDMO ex:beatDMO ;
 	mb:toParameter mb:Rate .
 
-ex:statsMapping a mb:Mapping ;
+ex:countMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
-			rdfs:label "Segment duration" ] ;
+			rdfs:label "Beats per bar" ] ;
+		mb:withFunction [ a mb:LinearFunction ] ;
+		mb:hasMultiplier 4 ] ;
+	mb:toDMO ex:beatDMO ;
+	mb:toParameter mb:SegmentCount .
+
+ex:durationRatioMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Beat duration" ] ;
 		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 2 ] ;
 	mb:toDMO ex:beatDMO ;
@@ -51,5 +67,5 @@ ex:statsMapping a mb:Mapping ;
 
 ex:moon a mb:Rendering ;
 	mb:hasDMO ex:moonDMO ;
-	mb:hasMapping ex:onsetMapping, ex:onsetMapping2, ex:rateMapping, ex:statsMapping ;
+	mb:hasMapping ex:onsetMapping, ex:onsetMapping2, ex:rateMapping, ex:countMapping, ex:durationRatioMapping ;
 	rdfs:label "Features Demo" .

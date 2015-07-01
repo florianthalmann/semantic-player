@@ -155,6 +155,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				addends[i] = getNumberValue(results[i].addend, 0);
 				moduli[i] = getNumberValue(results[i].modulus);
 			}
+			console.log(controls, parameter);
 			$scope.mappings[mappingUri] = new Mapping(controls, functions, multipliers, addends, moduli, parameter);
 			$scope.mappingLoadingThreads--;
 			$scope.$apply();
@@ -304,6 +305,8 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 			return dmo.reverb;
 		} else if (parameterTypeUri == mobileRdfUri+"#Segmentation") {
 			return dmo.segmentIndex;
+		} else if (parameterUri == mobileRdfUri+"#SegmentCount" || parameterTypeUri == mobileRdfUri+"#SegmentCount") {
+			return dmo.segmentCount;
 		} else if (parameterUri == mobileRdfUri+"#SegmentDurationRatio" || parameterTypeUri == mobileRdfUri+"#SegmentDurationRatio") {
 			return dmo.segmentDurationRatio;
 		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation" || parameterTypeUri == mobileRdfUri+"#ListenerOrientation") {
@@ -365,7 +368,6 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 			subset = features[rdfUri].filter(function(x) { return x.label == subsetCondition; });
 		}
 		subset = subset.map(function(x) { return x.time; });
-		console.log(subset);
 		dmo.setSegmentation(subset);
 	}
 	

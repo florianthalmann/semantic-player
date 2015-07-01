@@ -4,6 +4,7 @@ function DynamicMusicObject(uri, scheduler) {
 	var children = [];
 	var sourcePath;
 	var segmentation = [];
+	var segmentsPlayed = 0;
 	var skip = false;
 	
 	this.getUri = function() {
@@ -25,6 +26,10 @@ function DynamicMusicObject(uri, scheduler) {
 	
 	this.setSegmentation = function(segments) {
 		segmentation = segments;
+	}
+	
+	this.getSegmentation = function() {
+		return segmentation;
 	}
 	
 	this.getSourcePath = function() {
@@ -112,18 +117,31 @@ function DynamicMusicObject(uri, scheduler) {
 		i = this.segmentIndex.requestValue();
 		start = segmentation[i];
 		duration = segmentation[i+1]-start;
-		//if (!skip) {
-			duration *= this.segmentDurationRatio.value;
-			//}
-		skip = !skip;
-		if (start >= 0) {
-			if (duration > 0) {
-				return [start, duration];
-			} else {
-				return this.getNextSegment();
-			}
+		
+		//check parent segmentation
+		if (parentDMO.getSegmentation().indexOf(start) >= 0) {
+			segmentsPlayed = 0;
 		}
-		return [0, undefined];
+		
+		if (segmentsPlayed < this.segmentCount.value) {
+			//if (!skip) {
+				duration *= this.segmentDurationRatio.value;
+				//}
+			skip = !skip;
+			if (start >= 0) {
+				segmentsPlayed++;
+				if (duration > 0) {
+					console.log(segmentsPlayed, this.segmentCount.value, [start, duration]);
+					return [start, duration];
+				} else {
+					return this.getNextSegment();
+				}
+			} else {
+				return [0, undefined];
+			}
+		} else {
+			return this.getNextSegment();
+		}
 	}
 	
 	this.play = new Parameter(this, this.updatePlay, 0);
@@ -134,5 +152,6 @@ function DynamicMusicObject(uri, scheduler) {
 	this.reverb = new Parameter(this, this.updateReverb, 0);
 	this.segmentIndex = new Parameter(this, this.updateSegmentIndex, 0, true, true);
 	this.segmentDurationRatio = new Parameter(this, undefined, 1, false, true);
+	this.segmentCount = new Parameter(this, undefined, 4, true, true);
 	
 }
