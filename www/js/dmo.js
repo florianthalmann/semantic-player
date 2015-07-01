@@ -60,6 +60,16 @@ function DynamicMusicObject(uri, scheduler) {
 		}
 	}
 	
+	//change in amplitude does not affect children
+	this.updateRate = function(change) {
+		scheduler.updateRate(this, change);
+		if (!sourcePath) {
+			for (var i = 0; i < children.length; i++) {
+				children[i].rate.relativeUpdate(change);
+			}
+		}
+	}
+	
 	//change in pan affects pan of children
 	this.updatePan = function(change) {
 		scheduler.updatePan(this, change);
@@ -102,9 +112,9 @@ function DynamicMusicObject(uri, scheduler) {
 		i = this.segmentIndex.requestValue();
 		start = segmentation[i];
 		duration = segmentation[i+1]-start;
-		if (!skip) {
+		//if (!skip) {
 			duration *= this.segmentDurationRatio.value;
-		}
+			//}
 		skip = !skip;
 		if (start >= 0) {
 			if (duration > 0) {
@@ -118,6 +128,7 @@ function DynamicMusicObject(uri, scheduler) {
 	
 	this.play = new Parameter(this, this.updatePlay, 0);
 	this.amplitude = new Parameter(this, this.updateAmplitude, 1);
+	this.rate = new Parameter(this, this.updateRate, 1);
 	this.pan = new Parameter(this, this.updatePan, 0);
 	this.distance = new Parameter(this, this.updateDistance, 0);
 	this.reverb = new Parameter(this, this.updateReverb, 0);

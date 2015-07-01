@@ -4,22 +4,23 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex: <#> .
 
-ex:onset a mb:Segmentation ;
-	mb:hasFeaturesPath "beats.n3" .
+ex:beat a mb:Segmentation ;
+	mb:hasFeaturesPath "beats.n3" ;
+	mb:isSubset "1".
 
-ex:onsetDMO a mb:DMO ;
-	mb:hasParameter ex:onset .
+ex:beatDMO a mb:DMO ;
+	mb:hasParameter ex:beat .
 	
 ex:moonDMO a mb:DMO ;
 	mb:hasAudioPath "moon.m4a" ;
-	mb:hasChild ex:onsetDMO .
+	mb:hasChild ex:beatDMO .
 
 ex:onsetMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:GraphControl ] ;
 		mb:withFunction [ a mb:LinearFunction ] ] ;
-	mb:toDMO ex:onsetDMO ;
-	mb:toParameter ex:onset .
+	mb:toDMO ex:beatDMO ;
+	mb:toParameter ex:beat .
 
 ex:onsetMapping2 a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
@@ -27,8 +28,17 @@ ex:onsetMapping2 a mb:Mapping ;
 			rdfs:label "Onset" ] ;
 		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 400 ] ;
-	mb:toDMO ex:onsetDMO ;
-	mb:toParameter ex:onset .
+	mb:toDMO ex:beatDMO ;
+	mb:toParameter ex:beat .
+
+ex:rateMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Rate" ] ;
+		mb:withFunction [ a mb:LinearFunction ] ;
+		mb:hasMultiplier 2 ] ;
+	mb:toDMO ex:beatDMO ;
+	mb:toParameter mb:Rate .
 
 ex:statsMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
@@ -36,10 +46,10 @@ ex:statsMapping a mb:Mapping ;
 			rdfs:label "Segment duration" ] ;
 		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 2 ] ;
-	mb:toDMO ex:onsetDMO ;
+	mb:toDMO ex:beatDMO ;
 	mb:toParameter mb:SegmentDurationRatio .
 
 ex:moon a mb:Rendering ;
 	mb:hasDMO ex:moonDMO ;
-	mb:hasMapping ex:onsetMapping, ex:onsetMapping2, ex:statsMapping ;
+	mb:hasMapping ex:onsetMapping, ex:onsetMapping2, ex:rateMapping, ex:statsMapping ;
 	rdfs:label "Features Demo" .

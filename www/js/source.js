@@ -16,6 +16,7 @@ function Source(audioContext, dmo, reverbSend) {
 	panner.connect(dryGain);
 	panner.connect(reverbGain);
 	var currentAmplitude = 1;
+	var currentPlaybackRate = 1;
 	var currentPannerPosition = [0,0,0];
 	var currentReverb = 0;
 	var currentAudioSubBuffer;
@@ -117,6 +118,16 @@ function Source(audioContext, dmo, reverbSend) {
 		}
 	}
 	
+	this.changeRate = function(deltaRate) {
+		currentPlaybackRate += deltaRate;
+		if (audioSource) {
+			audioSource.playbackRate.value = currentPlaybackRate;
+		}
+		if (nextAudioSource) {
+			nextAudioSource.playbackRate.value = currentPlaybackRate;
+		}
+	}
+	
 	this.changeReverb = function(deltaReverb) {
 		currentReverb += deltaReverb;
 		if (currentReverb > 0) {
@@ -140,6 +151,7 @@ function Source(audioContext, dmo, reverbSend) {
 		var newSource = audioContext.createBufferSource();
 		newSource.connect(panner);
 		newSource.buffer = currentAudioSubBuffer;
+		newSource.playbackRate.value = currentPlaybackRate;
 		return newSource;
 	}
 	

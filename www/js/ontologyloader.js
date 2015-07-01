@@ -5,6 +5,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	var rdfsUri = "http://www.w3.org/2000/01/rdf-schema";
 	
 	var dmos = {}; //dmos at all hierarchy levels for quick access during mapping assignment
+	var features = {};
 	
 	this.loadDmo = function(rdfUri) {
 		$http.get(dmoPath+rdfUri).success(function(data) {
@@ -63,11 +64,12 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	}
 	
 	function loadParameters(store, dmoUri, dmo) {
-		store.execute("SELECT ?parameter ?parameterType ?value ?featuresPath ?graphPath ?label \
+		store.execute("SELECT ?parameter ?parameterType ?value ?featuresPath ?subsetCondition ?graphPath ?label \
 		WHERE { <"+dmoUri+"> <"+mobileRdfUri+"#hasParameter> ?parameter . \
 		OPTIONAL { ?parameter a ?parameterType . \
 			?parameter <"+mobileRdfUri+"#hasValue> ?value . } \
 		OPTIONAL { ?parameter <"+mobileRdfUri+"#hasFeaturesPath> ?featuresPath . } \
+		OPTIONAL { ?parameter <"+mobileRdfUri+"#isSubset> ?subsetCondition . } \
 		OPTIONAL { ?parameter <"+mobileRdfUri+"#hasGraphPath> ?graphPath . } \
 		OPTIONAL { ?parameter <"+rdfsUri+"#label> ?label . } }", function(err, results) {
 			for (var i = 0; i < results.length; i++) {
@@ -79,7 +81,8 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				}
 				if (results[i].featuresPath) {
 					var featuresPath = dmoPath+"/"+results[i].featuresPath.value;
-					loadSegmentation(dmo, results[i].parameter.value, featuresPath, label);
+					var subsetCondition = getValue(results[i].subsetCondition);
+					loadSegmentation(dmo, results[i].parameter.value, featuresPath, subsetCondition, label);
 				}
 			}
 			if (results.length <= 0) {
@@ -291,6 +294,8 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	function getParameter(dmo, parameterUri, parameterTypeUri) {
 		if (parameterUri == mobileRdfUri+"#Amplitude" || parameterTypeUri == mobileRdfUri+"#Amplitude") {
 			return dmo.amplitude;
+		} if (parameterUri == mobileRdfUri+"#Rate" || parameterTypeUri == mobileRdfUri+"#Rate") {
+			return dmo.rate;
 		} else if (parameterUri == mobileRdfUri+"#Pan" || parameterTypeUri == mobileRdfUri+"#Pan") {
 			return dmo.pan;
 		}	else if (parameterUri == mobileRdfUri+"#Distance" || parameterTypeUri == mobileRdfUri+"#Distance") {
@@ -314,36 +319,54 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	var eventOntology = "http://purl.org/NET/c4dm/event.owl";
 	var timelineOntology = "http://purl.org/NET/c4dm/timeline.owl";
 	
-	function loadSegmentation(dmo, parameterUri, rdfUri) {
-		//console.log("start");
-		$scope.featureLoadingThreads++;
-		$http.get(rdfUri).success(function(data) {
-			//console.log("get");
-			rdfstore.create(function(err, store) {
-				//console.log("create");
-				store.load('text/turtle', data, function(err, results) {
-					//console.log("load");
-					if (err) {
-						console.log(err);
-					}
-					//for now looks at anything containing event times
-					//?eventType <"+rdfsUri+"#subClassOf>* <"+eventOntology+"#Event> . \
-					store.execute("SELECT ?xsdTime \
-					WHERE { ?event a ?eventType . \
-					?event <"+eventOntology+"#time> ?time . \
-					?time <"+timelineOntology+"#at> ?xsdTime }", function(err, results) {
-						//console.log("execute");
-						var times = [];
-						for (var i = 0; i < results.length; i++) {
-							times.push(toSecondsNumber(results[i].xsdTime.value));
+	function loadSegmentation(dmo, parameterUri, rdfUri, subsetCondition) {
+		if (features[rdfUri]) {
+			setSegmentation(dmo, rdfUri, subsetCondition)
+		} else {
+			//console.log("start");
+			$scope.featureLoadingThreads++;
+			$http.get(rdfUri).success(function(data) {
+				//console.log("get");
+				rdfstore.create(function(err, store) {
+					//console.log("create");
+					store.load('text/turtle', data, function(err, results) {
+						//console.log("load");
+						if (err) {
+							console.log(err);
 						}
-						dmo.setSegmentation(times.sort(function(a,b){return a - b}));
-						$scope.featureLoadingThreads--;
-						$scope.$apply();
+						//for now looks at anything containing event times
+						//?eventType <"+rdfsUri+"#subClassOf>* <"+eventOntology+"#Event> . \
+						store.execute("SELECT ?xsdTime ?label \
+						WHERE { ?event a ?eventType . \
+						?event <"+eventOntology+"#time> ?time . \
+						?time <"+timelineOntology+"#at> ?xsdTime . \
+						OPTIONAL { ?event <"+rdfsUri+"#label> ?label . } }", function(err, results) {
+							//console.log("execute");
+							var times = [];
+							for (var i = 0; i < results.length; i++) {
+								//insert value/label pairs
+								times.push({ time: toSecondsNumber(results[i].xsdTime.value), label: getValue(results[i].label) });
+							}
+							//save so that file does not have to be read twice
+							features[rdfUri] = times.sort(function(a,b){return a.time - b.time});
+							setSegmentation(dmo, rdfUri, subsetCondition);
+							$scope.featureLoadingThreads--;
+							$scope.$apply();
+						});
 					});
 				});
 			});
-		});
+		}
+	}
+	
+	function setSegmentation(dmo, rdfUri, subsetCondition) {
+		subset = features[rdfUri];
+		if (subsetCondition) {
+			subset = features[rdfUri].filter(function(x) { return x.label == subsetCondition; });
+		}
+		subset = subset.map(function(x) { return x.time; });
+		console.log(subset);
+		dmo.setSegmentation(subset);
 	}
 	
 	function toSecondsNumber(xsdDurationString) {

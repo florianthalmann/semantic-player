@@ -64,6 +64,13 @@ function Scheduler($scope) {
 		}
 	}
 	
+	this.updateRate = function(dmo, change) {
+		source = getSource(dmo);
+		if (source) {
+			source.changeRate(change);
+		}
+	}
+	
 	this.updatePan = function(dmo, change) {
 		source = getSource(dmo);
 		if (source) {

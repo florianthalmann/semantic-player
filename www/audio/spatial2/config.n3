@@ -21,7 +21,7 @@ ex:dnb a mb:DMO ;
 
 ex:mix a mb:DMO ;
 	mb:hasParameter [ a mb:Reverb ;
-		mb:hasValue 0 ] ;
+		mb:hasValue 0.5 ] ;
 	mb:hasChild ex:voc, ex:riddim, ex:dnb .
 
 ex:panTilt a mb:Mapping ;
@@ -38,37 +38,23 @@ ex:distanceTilt a mb:Mapping ;
 	mb:toDMO ex:mix ;
 	mb:toParameter mb:Distance .
 	
-	ex:vocPanSlider a mb:Mapping ;
-		mb:hasDimension [ a mb:MappingDimension ;
-			mb:fromControl [ a mb:Slider ;
-				rdfs:label "Voc pan" ] ;
-			mb:hasMultiplier 10 ;
-			mb:hasAddend -5 ] ;
-		mb:toDMO ex:voc ;
-		mb:toParameter mb:Pan .
-		
-		ex:riddimPanSlider a mb:Mapping ;
-			mb:hasDimension [ a mb:MappingDimension ;
-				mb:fromControl [ a mb:Slider ;
-					rdfs:label "Riddim pan" ] ;
-				mb:hasMultiplier 10 ;
-				mb:hasAddend -5 ] ;
-			mb:toDMO ex:riddim ;
-			mb:toParameter mb:Pan .
-		
-ex:riddimReverbSlider a mb:Mapping ;
+ex:vocPanSlider a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
-			rdfs:label "Riddim reverb" ] ] ;
+			rdfs:label "Voc pan" ] ;
+		mb:hasMultiplier 10 ;
+		mb:hasAddend -5 ] ;
+	mb:toDMO ex:voc ;
+	mb:toParameter mb:Pan .
+		
+ex:riddimPanSlider a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Riddim pan" ] ;
+		mb:hasMultiplier 10 ;
+		mb:hasAddend -5 ] ;
 	mb:toDMO ex:riddim ;
-	mb:toParameter mb:Reverb .
-
-ex:dnbReverbSlider a mb:Mapping ;
-	mb:hasDimension [ a mb:MappingDimension ;
-		mb:fromControl [ a mb:Slider ;
-			rdfs:label "DnB reverb" ] ] ;
-	mb:toDMO ex:dnb ;
-	mb:toParameter mb:Reverb .
+	mb:toParameter mb:Pan .
 
 ex:panSlider a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
@@ -90,5 +76,5 @@ ex:distanceSlider a mb:Mapping;
 
 ex:j4j a mb:Rendering ;
 	mb:hasDMO ex:mix ;
-	mb:hasMapping ex:panTilt, ex:distanceTilt, ex:vocPanSlider, ex:riddimPanSlider, ex:panSlider, ex:distanceSlider, ex:riddimReverbSlider, ex:dnbReverbSlider ;
+	mb:hasMapping ex:panTilt, ex:distanceTilt, ex:vocPanSlider, ex:riddimPanSlider, ex:panSlider, ex:distanceSlider ;
 	rdfs:label "Spatial Band Demo" .
