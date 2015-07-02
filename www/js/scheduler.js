@@ -64,10 +64,10 @@ function Scheduler($scope) {
 		}
 	}
 	
-	this.updateRate = function(dmo, change) {
+	this.updatePlaybackRate = function(dmo, change) {
 		source = getSource(dmo);
 		if (source) {
-			source.changeRate(change);
+			source.changePlaybackRate(change);
 		}
 	}
 	

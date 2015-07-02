@@ -5,7 +5,7 @@ function DynamicMusicObject(uri, scheduler) {
 	var sourcePath;
 	var segmentation = [];
 	var segmentsPlayed = 0;
-	var skip = false;
+	var skipProportionAdjustment = false;
 	
 	this.getUri = function() {
 		return uri;
@@ -66,11 +66,11 @@ function DynamicMusicObject(uri, scheduler) {
 	}
 	
 	//change in amplitude does not affect children
-	this.updateRate = function(change) {
-		scheduler.updateRate(this, change);
+	this.updatePlaybackRate = function(change) {
+		scheduler.updatePlaybackRate(this, change);
 		if (!sourcePath) {
 			for (var i = 0; i < children.length; i++) {
-				children[i].rate.relativeUpdate(change);
+				children[i].playbackRate.relativeUpdate(change);
 			}
 		}
 	}
@@ -124,10 +124,11 @@ function DynamicMusicObject(uri, scheduler) {
 		}
 		
 		if (segmentsPlayed < this.segmentCount.value) {
-			//if (!skip) {
-				duration *= this.segmentDurationRatio.value;
-				//}
-			skip = !skip;
+			duration *= this.segmentDurationRatio.value;
+			if (!skipProportionAdjustment) {
+				duration *= this.segmentProportion.value;
+			}
+			skipProportionAdjustment = !skipProportionAdjustment;
 			if (start >= 0) {
 				segmentsPlayed++;
 				if (duration > 0) {
@@ -146,12 +147,13 @@ function DynamicMusicObject(uri, scheduler) {
 	
 	this.play = new Parameter(this, this.updatePlay, 0);
 	this.amplitude = new Parameter(this, this.updateAmplitude, 1);
-	this.rate = new Parameter(this, this.updateRate, 1);
+	this.playbackRate = new Parameter(this, this.updatePlaybackRate, 1);
 	this.pan = new Parameter(this, this.updatePan, 0);
 	this.distance = new Parameter(this, this.updateDistance, 0);
 	this.reverb = new Parameter(this, this.updateReverb, 0);
 	this.segmentIndex = new Parameter(this, this.updateSegmentIndex, 0, true, true);
 	this.segmentDurationRatio = new Parameter(this, undefined, 1, false, true);
-	this.segmentCount = new Parameter(this, undefined, 4, true, true);
+	this.segmentProportion = new Parameter(this, undefined, 1, false, true);
+	this.segmentCount = new Parameter(this, undefined, 8, true, true);
 	
 }

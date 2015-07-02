@@ -118,7 +118,7 @@ function Source(audioContext, dmo, reverbSend) {
 		}
 	}
 	
-	this.changeRate = function(deltaRate) {
+	this.changePlaybackRate = function(deltaRate) {
 		currentPlaybackRate += deltaRate;
 		if (audioSource) {
 			audioSource.playbackRate.value = currentPlaybackRate;
@@ -177,7 +177,6 @@ function Source(audioContext, dmo, reverbSend) {
 	}*/
 	
 	function getAudioBufferCopy(fromSample, durationInSamples) {
-		console.log(fromSample, durationInSamples);
 		var subBuffer = audioContext.createBuffer(audioBuffer.numberOfChannels, durationInSamples, audioBuffer.sampleRate);
 		for (var i = 0; i < audioBuffer.numberOfChannels; i++) {
 			var currentCopyChannel = subBuffer.getChannelData(i);

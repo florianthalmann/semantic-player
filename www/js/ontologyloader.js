@@ -155,7 +155,6 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				addends[i] = getNumberValue(results[i].addend, 0);
 				moduli[i] = getNumberValue(results[i].modulus);
 			}
-			console.log(controls, parameter);
 			$scope.mappings[mappingUri] = new Mapping(controls, functions, multipliers, addends, moduli, parameter);
 			$scope.mappingLoadingThreads--;
 			$scope.$apply();
@@ -295,8 +294,8 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	function getParameter(dmo, parameterUri, parameterTypeUri) {
 		if (parameterUri == mobileRdfUri+"#Amplitude" || parameterTypeUri == mobileRdfUri+"#Amplitude") {
 			return dmo.amplitude;
-		} if (parameterUri == mobileRdfUri+"#Rate" || parameterTypeUri == mobileRdfUri+"#Rate") {
-			return dmo.rate;
+		} if (parameterUri == mobileRdfUri+"#PlaybackRate" || parameterTypeUri == mobileRdfUri+"#PlaybackRate") {
+			return dmo.playbackRate;
 		} else if (parameterUri == mobileRdfUri+"#Pan" || parameterTypeUri == mobileRdfUri+"#Pan") {
 			return dmo.pan;
 		}	else if (parameterUri == mobileRdfUri+"#Distance" || parameterTypeUri == mobileRdfUri+"#Distance") {
@@ -309,6 +308,8 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 			return dmo.segmentCount;
 		} else if (parameterUri == mobileRdfUri+"#SegmentDurationRatio" || parameterTypeUri == mobileRdfUri+"#SegmentDurationRatio") {
 			return dmo.segmentDurationRatio;
+		} else if (parameterUri == mobileRdfUri+"#SegmentProportion" || parameterTypeUri == mobileRdfUri+"#SegmentProportion") {
+			return dmo.segmentProportion;
 		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation" || parameterTypeUri == mobileRdfUri+"#ListenerOrientation") {
 			return $scope.rendering.listenerOrientation;
 		} else if (parameterUri == mobileRdfUri+"#StatsFrequency" || parameterTypeUri == mobileRdfUri+"#StatsFrequency") {

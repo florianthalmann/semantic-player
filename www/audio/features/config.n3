@@ -45,14 +45,14 @@ ex:rateMapping a mb:Mapping ;
 		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 2 ] ;
 	mb:toDMO ex:beatDMO ;
-	mb:toParameter mb:Rate .
+	mb:toParameter mb:PlaybackRate .
 
 ex:countMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Beats per bar" ] ;
 		mb:withFunction [ a mb:LinearFunction ] ;
-		mb:hasMultiplier 4 ] ;
+		mb:hasMultiplier 8 ] ;
 	mb:toDMO ex:beatDMO ;
 	mb:toParameter mb:SegmentCount .
 
@@ -65,7 +65,15 @@ ex:durationRatioMapping a mb:Mapping ;
 	mb:toDMO ex:beatDMO ;
 	mb:toParameter mb:SegmentDurationRatio .
 
+ex:proportionMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Beat proportion" ] ;
+		mb:withFunction [ a mb:LinearFunction ] ] ;
+	mb:toDMO ex:beatDMO ;
+	mb:toParameter mb:SegmentProportion .
+
 ex:moon a mb:Rendering ;
 	mb:hasDMO ex:moonDMO ;
-	mb:hasMapping ex:onsetMapping, ex:onsetMapping2, ex:rateMapping, ex:countMapping, ex:durationRatioMapping ;
+	mb:hasMapping ex:onsetMapping, ex:onsetMapping2, ex:rateMapping, ex:countMapping, ex:durationRatioMapping, ex:proportionMapping ;
 	rdfs:label "Features Demo" .
