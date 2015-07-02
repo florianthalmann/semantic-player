@@ -5,10 +5,10 @@
 @prefix ex: <#> .
 
 ex:beat a mb:Segmentation ;
-	mb:hasFeaturesPath "beats.n3" .
+	mb:hasFeaturesPath "beats.json" .
 
 ex:bar a mb:Segmentation ;
-	mb:hasFeaturesPath "beats.n3" ;
+	mb:hasFeaturesPath "beats.json" ;
 	mb:isSubset "1".
 
 ex:beatDMO a mb:DMO ;
@@ -52,7 +52,7 @@ ex:countMapping a mb:Mapping ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Beats per bar" ] ;
 		mb:withFunction [ a mb:LinearFunction ] ;
-		mb:hasMultiplier 8 ] ;
+		mb:hasMultiplier 4 ] ;
 	mb:toDMO ex:beatDMO ;
 	mb:toParameter mb:SegmentCount .
 

@@ -82,7 +82,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				if (results[i].featuresPath) {
 					var featuresPath = dmoPath+"/"+results[i].featuresPath.value;
 					var subsetCondition = getValue(results[i].subsetCondition);
-					loadSegmentation(dmo, results[i].parameter.value, featuresPath, subsetCondition, label);
+					loadFeatures(dmo, results[i].parameter.value, featuresPath, subsetCondition, label);
 				}
 			}
 			if (results.length <= 0) {
@@ -323,9 +323,18 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	var eventOntology = "http://purl.org/NET/c4dm/event.owl";
 	var timelineOntology = "http://purl.org/NET/c4dm/timeline.owl";
 	
-	function loadSegmentation(dmo, parameterUri, rdfUri, subsetCondition) {
+	function loadFeatures(dmo, parameterUri, uri, subsetCondition) {
+		var fileExtension = uri.slice(uri.indexOf('.')+1);
+		if (fileExtension == 'n3') {
+			loadFeaturesFromRdf(dmo, parameterUri, uri, subsetCondition);
+		} else if (fileExtension == 'json') {
+			loadFeaturesFromJson(dmo, parameterUri, uri, subsetCondition);
+		}
+	}
+		
+	function loadFeaturesFromRdf(dmo, parameterUri, rdfUri, subsetCondition) {
 		if (features[rdfUri]) {
-			setSegmentation(dmo, rdfUri, subsetCondition)
+			setSegmentationFromRdf(dmo, rdfUri, subsetCondition)
 		} else {
 			//console.log("start");
 			$scope.featureLoadingThreads++;
@@ -353,7 +362,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 							}
 							//save so that file does not have to be read twice
 							features[rdfUri] = times.sort(function(a,b){return a.time - b.time});
-							setSegmentation(dmo, rdfUri, subsetCondition);
+							setSegmentationFromRdf(dmo, rdfUri, subsetCondition);
 							$scope.featureLoadingThreads--;
 							$scope.$apply();
 						});
@@ -363,13 +372,35 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		}
 	}
 	
-	function setSegmentation(dmo, rdfUri, subsetCondition) {
+	function setSegmentationFromRdf(dmo, rdfUri, subsetCondition) {
 		subset = features[rdfUri];
 		if (subsetCondition) {
 			subset = features[rdfUri].filter(function(x) { return x.label == subsetCondition; });
 		}
 		subset = subset.map(function(x) { return x.time; });
 		dmo.setSegmentation(subset);
+	}
+	
+	function loadFeaturesFromJson(dmo, parameterUri, jsonUri, subsetCondition) {
+		if (features[jsonUri]) {
+			setSegmentationFromRdf(dmo, jsonUri, subsetCondition)
+		} else {
+			//console.log("start");
+			$scope.featureLoadingThreads++;
+			$http.get(jsonUri).success(function(json) {
+				//console.log("get");
+				json = json.beat[0].data;
+				
+				if (subsetCondition) {
+					json = json.filter(function(x) { return x.label.value == subsetCondition; });
+				}
+				json = json.map(function(x) { return x.time.value; });
+				dmo.setSegmentation(json);
+				
+				$scope.featureLoadingThreads--;
+				$scope.$apply();
+			});
+		}
 	}
 	
 	function toSecondsNumber(xsdDurationString) {
