@@ -6,6 +6,7 @@ function Parameter(owner, updateFunction, initialValue, isInteger, isUpdateAbsol
 	
 	this.addMapping = function(mapping) {
 		this.mappings.push(mapping);
+		mapping.updateControl(this.value);
 	}
 	
 	this.update = function(mapping, value) {
