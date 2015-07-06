@@ -2,6 +2,7 @@ function Source(audioContext, dmo, reverbSend) {
 	
 	var SCHEDULE_AHEAD_TIME = 0.1; //seconds
 	var SWITCH_BUFFER_IMMEDIATELY = false;
+	var FADE_LENGTH = 0.05; //seconds
 	
 	var startTime, endTime, currentPausePosition = 0;
 	var isPlaying, isPaused;
@@ -146,7 +147,8 @@ function Source(audioContext, dmo, reverbSend) {
 		if (segment[0] == 0 && segment[1] == audioBuffer.duration) {
 			currentAudioSubBuffer = audioBuffer;
 		} else {
-			currentAudioSubBuffer = getAudioBufferCopy(toSamples(segment[0]), toSamples(currentSourceDuration));
+			//add time for fade after source officially done
+			currentAudioSubBuffer = getAudioBufferCopy(toSamples(segment[0]), toSamples(currentSourceDuration+FADE_LENGTH));
 		}
 		var newSource = audioContext.createBufferSource();
 		newSource.connect(panner);
@@ -183,6 +185,11 @@ function Source(audioContext, dmo, reverbSend) {
 			var currentOriginalChannel = audioBuffer.getChannelData(i);
 			for (var j = 0; j < durationInSamples; j++) {
 				currentCopyChannel[j] = currentOriginalChannel[fromSample+j];
+			}
+			var fadeSamples = audioBuffer.sampleRate*FADE_LENGTH;
+			for (var j = 0.0; j < fadeSamples; j++) {
+				currentCopyChannel[j] *= j/fadeSamples;
+				currentCopyChannel[durationInSamples-j-1] *= j/fadeSamples;
 			}
 		}
 		return subBuffer;
