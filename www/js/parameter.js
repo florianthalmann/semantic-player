@@ -41,14 +41,15 @@ function Parameter(owner, updateFunction, initialValue, isInteger, isUpdateAbsol
 		}
 	}
 	
-	//returns the first value that it manages to request from one of the mappings
+	//returns the first value that it manages to request that is different from this.value
+	//returns this.value if none are different
 	this.requestValue = function() {
 		for (var i = 0; i < this.mappings.length; i++) {
 			var value = this.mappings[i].requestValue();
-			if (value || value == 0) {
+			if (value && value != this.value) {
 				this.setValueAndUpdateOtherMappings(this.mappings[i], value);
+				return this.value;
 			}
-			return this.value;
 		}
 		return this.value;
 	}

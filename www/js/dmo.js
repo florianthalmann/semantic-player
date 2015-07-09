@@ -4,6 +4,7 @@ function DynamicMusicObject(uri, scheduler) {
 	var children = [];
 	var sourcePath;
 	var segmentation = [];
+	var graph = null;
 	var segmentsPlayed = 0;
 	var skipProportionAdjustment = false;
 	
@@ -30,6 +31,14 @@ function DynamicMusicObject(uri, scheduler) {
 	
 	this.getSegmentation = function() {
 		return segmentation;
+	}
+	
+	this.setGraph = function(g) {
+		graph = g;
+	}
+	
+	this.getGraph = function() {
+		return graph;
 	}
 	
 	this.getSourcePath = function() {
@@ -119,10 +128,10 @@ function DynamicMusicObject(uri, scheduler) {
 		duration = segmentation[i+1]-start;
 		
 		//check parent segmentation
-		if (parentDMO.getSegmentation().indexOf(start) >= 0) {
+		if (parentDMO.getSegmentation().length == 0 || parentDMO.getSegmentation().indexOf(start) >= 0) {
 			segmentsPlayed = 0;
 		}
-		
+		console.log(i);
 		if (segmentsPlayed < this.segmentCount.value) {
 			duration *= this.segmentDurationRatio.value;
 			if (!skipProportionAdjustment) {
@@ -132,7 +141,7 @@ function DynamicMusicObject(uri, scheduler) {
 			if (start >= 0) {
 				segmentsPlayed++;
 				if (duration > 0) {
-					console.log(segmentsPlayed, this.segmentCount.value, [start, duration]);
+					//console.log(segmentsPlayed, this.segmentCount.value, [start, duration]);
 					return [start, duration];
 				} else {
 					return this.getNextSegment();

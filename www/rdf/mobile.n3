@@ -57,6 +57,10 @@ mb:RectangleFunction
 	a owl:Class ;
 	rdfs:subClassOf mb:SymmetricalFunction .
 
+mb:InterpolationFunction
+	a owl:Class ;
+	rdfs:subClassOf mb:Function .
+
 
 #Controls
 
@@ -266,5 +270,11 @@ mb:hasPosition
 mb:hasRange
 	a owl:DatatypeProperty ;
 	rdfs:domain mb:SymmetricalFunction;
+	rdfs:range xsd:decimal;
+	rdfs:comment "" .
+
+mb:hasPoint
+	a owl:DatatypeProperty ;
+	rdfs:domain mb:InterpolationFunction;
 	rdfs:range xsd:decimal;
 	rdfs:comment "" .

@@ -1,6 +1,6 @@
 function StatsControls($interval) {
 	
-	var frequency = new Parameter(this, 300);
+	var frequency = new Parameter(this, undefined, 300);
 	this.frequency = frequency;
 	
 	var randomControl = new Control();

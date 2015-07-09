@@ -1,0 +1,42 @@
+#@base <http://purl.org/ontology/studio/mobile-example#> .
+@prefix mb: <rdf/mobile.n3#> .
+@prefix mt: <http://purl.org/ontology/studio/multitrack#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <#> .
+
+ex:beat a mb:Segmentation ;
+	mb:hasFeaturesPath "03-FreakFandango-GypsySong_beats_sec.json" ;
+	mb:hasGraphPath "03-FreakFandango-GypsySong_closest.json" .
+
+ex:beatDMO a mb:DMO ;
+	mb:hasParameter ex:beat .
+
+ex:fandangoDMO a mb:DMO ;
+	mb:hasAudioPath "03-FreakFandango-GypsySong.mp3" ;
+	mb:hasChild ex:beatDMO .
+
+ex:beatGraphMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:GraphControl ;
+			mb:fromDMO ex:beatDMO ] ] ;
+	mb:toDMO ex:beatDMO ;
+	mb:toParameter ex:beat .
+
+ex:beatSliderMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Beat" ] ;
+		mb:hasMultiplier 400 ] ;
+	mb:toDMO ex:beatDMO ;
+	mb:toParameter ex:beat .
+
+ex:leapSliderMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Leap probability" ] ] ;
+	mb:toParameter mb:LeapProbability .
+
+ex:fandango a mb:Rendering;
+	mb:hasDMO ex:fandangoDMO ;
+	mb:hasMapping ex:beatGraphMapping, ex:beatSliderMapping, ex:leapSliderMapping ;
+	rdfs:label "Alfonso Demo" .

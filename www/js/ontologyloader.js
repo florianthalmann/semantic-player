@@ -84,6 +84,10 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 					var subsetCondition = getValue(results[i].subsetCondition);
 					loadFeatures(dmo, results[i].parameter.value, featuresPath, subsetCondition, label);
 				}
+				if (results[i].graphPath) {
+					var graphPath = dmoPath+"/"+results[i].graphPath.value;
+					loadGraph(dmo, results[i].parameter.value, graphPath, label);
+				}
 			}
 			if (results.length <= 0) {
 				$scope.ontologiesLoaded = true;
@@ -129,13 +133,14 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	}
 	
 	function loadMappingDimensions(store, mappingUri, mappingType, parameter) {
-		store.execute("SELECT ?control ?controlType ?label ?function ?functionType ?position ?range ?multiplier ?addend ?modulus \
+		store.execute("SELECT ?control ?controlType ?label ?controlDMO ?function ?functionType ?position ?range ?multiplier ?addend ?modulus \
 		WHERE { <"+mappingUri+"> <"+mobileRdfUri+"#hasDimension> ?dimension . \
 			?dimension <"+mobileRdfUri+"#fromControl> ?control . \
-		OPTIONAL {	?dimension <"+mobileRdfUri+"#withFunction> ?function . \
+		OPTIONAL { ?dimension <"+mobileRdfUri+"#withFunction> ?function . \
 			?function a ?functionType . } \
 		OPTIONAL { ?control a ?controlType . } \
 		OPTIONAL { ?control <"+rdfsUri+"#label> ?label . } \
+		OPTIONAL { ?control <"+mobileRdfUri+"#fromDMO> ?controlDMO . } \
 		OPTIONAL { ?dimension <"+mobileRdfUri+"#hasMultiplier> ?multiplier . } \
 		OPTIONAL { ?dimension <"+mobileRdfUri+"#hasAddend> ?addend . } \
 		OPTIONAL { ?dimension <"+mobileRdfUri+"#hasModulus> ?modulus . } \
@@ -147,7 +152,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 			var addends = [];
 			var moduli = [];
 			for (var i = 0; i < results.length; i++) {
-				controls[i] = getControlFromResults(results[i].control, results[i].controlType, results[i].label);
+				controls[i] = getControlFromResults(results[i].control, results[i].controlType, results[i].label, results[i].controlDMO);
 				var position = getNumberValue(results[i].position);
 				var range = getNumberValue(results[i].range);
 				functions[i] = getFunction(results[i].functionType, position, range);
@@ -173,7 +178,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		return new LinearFunction();
 	}
 	
-	function getControlFromResults(controlResult, controlTypeResult, labelResult) {
+	function getControlFromResults(controlResult, controlTypeResult, labelResult, dmoResult) {
 		if (labelResult) {
 			var label = labelResult.value;
 		}
@@ -183,7 +188,10 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		if (controlTypeResult) {
 			var controlType = controlTypeResult.value;
 		}
-		return getControl(control, controlType, label);
+		if (dmoResult) {
+			var dmo = dmos[dmoResult.value];
+		}
+		return getControl(control, controlType, label, dmo);
 	}
 	
 	function getValue(result) {
@@ -199,7 +207,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		return defaultValue;
 	}
 	
-	function getControl(controlUri, controlTypeUri, label) {
+	function getControl(controlUri, controlTypeUri, label, dmo) {
 		if (controlUri == mobileRdfUri+"#AccelerometerX") {
 			return getAccelerometerControl(0);
 		} else if (controlUri == mobileRdfUri+"#AccelerometerY") {
@@ -228,7 +236,10 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		} else if (controlUri == mobileRdfUri+"#Random" || controlTypeUri == mobileRdfUri+"#Random") {
 			return getStatsControl(0);
 		} else if (controlTypeUri == mobileRdfUri+"#GraphControl") {
-			return getGraphControl(0);
+			if (dmo) {
+				graph = dmo.getGraph();
+			}
+			return getGraphControl(0, graph);
 		}
 	}
 	
@@ -282,9 +293,11 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		}
 	}
 	
-	function getGraphControl(index) {
+	function getGraphControl(index, graph) {
 		if (!$scope.graphControls) {
-			$scope.graphControls = new GraphControls();
+			$scope.graphControls = new GraphControls(graph);
+		} else {
+			$scope.graphControls.setGraph(graph);
 		}
 		if (index == 0) {
 			return $scope.graphControls.nextNodeControl;
@@ -317,6 +330,11 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				$scope.statsControls = new StatsControls($interval);
 			}
 			return $scope.statsControls.frequency;
+		} else if (parameterUri == mobileRdfUri+"#LeapProbability" || parameterTypeUri == mobileRdfUri+"#LeapProbability") {
+			if (!$scope.graphControls) {
+				$scope.graphControls = new GraphControls();
+			}
+			return $scope.graphControls.leapProb;
 		}
 	}
 	
@@ -385,22 +403,30 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		if (features[jsonUri]) {
 			setSegmentationFromRdf(dmo, jsonUri, subsetCondition)
 		} else {
-			//console.log("start");
 			$scope.featureLoadingThreads++;
 			$http.get(jsonUri).success(function(json) {
-				//console.log("get");
-				json = json.beat[0].data;
-				
-				if (subsetCondition) {
-					json = json.filter(function(x) { return x.label.value == subsetCondition; });
+				if (json.beat) {
+					json = json.beat[0].data;
+					if (subsetCondition) {
+						json = json.filter(function(x) { return x.label.value == subsetCondition; });
+					}
+					json = json.map(function(x) { return x.time.value; });
 				}
-				json = json.map(function(x) { return x.time.value; });
 				dmo.setSegmentation(json);
 				
 				$scope.featureLoadingThreads--;
 				$scope.$apply();
 			});
 		}
+	}
+	
+	function loadGraph(dmo, parameterUri, jsonUri) {
+		$scope.featureLoadingThreads++;
+		$http.get(jsonUri).success(function(json) {
+			dmo.setGraph(json);
+			$scope.featureLoadingThreads--;
+			$scope.$apply();
+		});
 	}
 	
 	function toSecondsNumber(xsdDurationString) {
