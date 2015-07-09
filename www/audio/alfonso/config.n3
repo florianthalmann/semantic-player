@@ -15,11 +15,14 @@ ex:fandangoDMO a mb:DMO ;
 	mb:hasAudioPath "03-FreakFandango-GypsySong.mp3" ;
 	mb:hasChild ex:beatDMO .
 
+ex:beatGraphControl a mb:GraphControl ;
+	mb:fromDMO ex:beatDMO ;
+	mb:leapsAndContinues "true" .
+
 ex:beatGraphMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
-		mb:fromControl [ a mb:GraphControl ;
-			mb:fromDMO ex:beatDMO ] ] ;
-	mb:toDMO ex:beatDMO ;
+		mb:fromControl ex:beatGraphControl ] ;
+	mb:toOwner ex:beatDMO ;
 	mb:toParameter ex:beat .
 
 ex:beatSliderMapping a mb:Mapping ;
@@ -27,13 +30,14 @@ ex:beatSliderMapping a mb:Mapping ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Beat" ] ;
 		mb:hasMultiplier 400 ] ;
-	mb:toDMO ex:beatDMO ;
+	mb:toOwner ex:beatDMO ;
 	mb:toParameter ex:beat .
 
 ex:leapSliderMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Leap probability" ] ] ;
+	mb:toOwner ex:beatGraphControl ;
 	mb:toParameter mb:LeapProbability .
 
 ex:fandango a mb:Rendering;

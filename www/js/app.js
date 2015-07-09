@@ -34,7 +34,8 @@ angular.module('semanticplayer', ['ionic'])
 		$scope.accelerometerWatcher = null;
 		$scope.geolocationWatcher = null;
 		$scope.compassWatcher = null;
-		$scope.statsControls = null;
+		$scope.statsControls = {};
+		$scope.graphControls = {};
 		$scope.sliderControls = {};
 		$scope.mappings = {};
 	}

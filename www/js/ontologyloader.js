@@ -114,19 +114,25 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	
 	function loadMapping(store, mappingUri) {
 		$scope.mappingLoadingThreads++;
-		store.execute("SELECT ?mappingType ?dmo ?parameter ?parameterType \
+		store.execute("SELECT ?mappingType ?owner ?parameter ?parameterType \
 		WHERE { <"+mappingUri+"> a ?mappingType . \
 			<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
-		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#toDMO> ?dmo . } \
+		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#toOwner> ?owner . } \
 		OPTIONAL { ?parameter a ?parameterType . } }", function(err, results) {
 			for (var i = 0; i < results.length; i++) {
-				if (results[i].dmo) {
-					var dmo = dmos[results[i].dmo.value];
+				if (results[i].owner) {
+					var owner = dmos[results[i].owner.value];
+					if (!owner) {
+						owner = getGraphControl(undefined, results[i].owner.value);
+						if (!owner) {
+							owner = getStatsControl(undefined, results[i].owner.value);
+						}
+					}
 				}
 				if (results[i].parameterType) {
 					var parameterType = results[i].parameterType.value;
 				}
-				var parameter = getParameter(dmo, results[i].parameter.value, parameterType);
+				var parameter = getParameter(owner, results[i].parameter.value, parameterType);
 				loadMappingDimensions(store, mappingUri, results[i].mappingType.value, parameter);
 			}
 		});
@@ -227,19 +233,14 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		}	else if (controlUri == mobileRdfUri+"#CompassHeading") {
 			return getCompassControl(0);
 		}	else if (controlTypeUri == mobileRdfUri+"#Slider") {
-			if ($scope.sliderControls[controlUri]) {
-				return $scope.sliderControls[controlUri];
-			}
-			$scope.sliderControls[controlUri] = new Control(0, label, $scope);
-			$scope.$apply();
-			return $scope.sliderControls[controlUri];
+			return getSliderControl(controlUri, label);
 		} else if (controlUri == mobileRdfUri+"#Random" || controlTypeUri == mobileRdfUri+"#Random") {
-			return getStatsControl(0);
+			return getStatsControl(0, controlUri);
 		} else if (controlTypeUri == mobileRdfUri+"#GraphControl") {
 			if (dmo) {
 				graph = dmo.getGraph();
 			}
-			return getGraphControl(0, graph);
+			return getGraphControl(0, controlUri, graph);
 		}
 	}
 	
@@ -284,57 +285,63 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		}
 	}
 	
-	function getStatsControl(index) {
-		if (!$scope.statsControls) {
-			$scope.statsControls = new StatsControls($interval);
+	function getStatsControl(index, uri) {
+		if (!$scope.statsControls[uri]) {
+			$scope.statsControls[uri] = new StatsControls($interval);
 		}
 		if (index == 0) {
-			return $scope.statsControls.randomControl;
-		}
-	}
-	
-	function getGraphControl(index, graph) {
-		if (!$scope.graphControls) {
-			$scope.graphControls = new GraphControls(graph);
+			return $scope.statsControls[uri].randomControl;
 		} else {
-			$scope.graphControls.setGraph(graph);
-		}
-		if (index == 0) {
-			return $scope.graphControls.nextNodeControl;
+			return $scope.statsControls[uri];
 		}
 	}
 	
-	function getParameter(dmo, parameterUri, parameterTypeUri) {
+	function getGraphControl(index, uri, graph) {
+		if (!$scope.graphControls[uri]) {
+			$scope.graphControls[uri] = new GraphControls(graph);
+		} else {
+			$scope.graphControls[uri].setGraph(graph);
+		}
+		if (index == 0) {
+			return $scope.graphControls[uri].nextNodeControl;
+		} else {
+			return $scope.graphControls[uri];
+		}
+	}
+	
+	function getSliderControl(uri, label) {
+		if (!$scope.sliderControls[uri]) {
+			$scope.sliderControls[uri] = new Control(0, label, $scope);
+			$scope.$apply();
+		}
+		return $scope.sliderControls[uri];
+	}
+	
+	function getParameter(owner, parameterUri, parameterTypeUri ) {
 		if (parameterUri == mobileRdfUri+"#Amplitude" || parameterTypeUri == mobileRdfUri+"#Amplitude") {
-			return dmo.amplitude;
+			return owner.amplitude;
 		} if (parameterUri == mobileRdfUri+"#PlaybackRate" || parameterTypeUri == mobileRdfUri+"#PlaybackRate") {
-			return dmo.playbackRate;
+			return owner.playbackRate;
 		} else if (parameterUri == mobileRdfUri+"#Pan" || parameterTypeUri == mobileRdfUri+"#Pan") {
-			return dmo.pan;
+			return owner.pan;
 		}	else if (parameterUri == mobileRdfUri+"#Distance" || parameterTypeUri == mobileRdfUri+"#Distance") {
-			return dmo.distance;
+			return owner.distance;
 		} else if (parameterUri == mobileRdfUri+"#Reverb" || parameterTypeUri == mobileRdfUri+"#Reverb") {
-			return dmo.reverb;
+			return owner.reverb;
 		} else if (parameterTypeUri == mobileRdfUri+"#Segmentation") {
-			return dmo.segmentIndex;
+			return owner.segmentIndex;
 		} else if (parameterUri == mobileRdfUri+"#SegmentCount" || parameterTypeUri == mobileRdfUri+"#SegmentCount") {
-			return dmo.segmentCount;
+			return owner.segmentCount;
 		} else if (parameterUri == mobileRdfUri+"#SegmentDurationRatio" || parameterTypeUri == mobileRdfUri+"#SegmentDurationRatio") {
-			return dmo.segmentDurationRatio;
+			return owner.segmentDurationRatio;
 		} else if (parameterUri == mobileRdfUri+"#SegmentProportion" || parameterTypeUri == mobileRdfUri+"#SegmentProportion") {
-			return dmo.segmentProportion;
+			return owner.segmentProportion;
 		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation" || parameterTypeUri == mobileRdfUri+"#ListenerOrientation") {
 			return $scope.rendering.listenerOrientation;
 		} else if (parameterUri == mobileRdfUri+"#StatsFrequency" || parameterTypeUri == mobileRdfUri+"#StatsFrequency") {
-			if (!$scope.statsControls) {
-				$scope.statsControls = new StatsControls($interval);
-			}
-			return $scope.statsControls.frequency;
+			return owner.frequency;
 		} else if (parameterUri == mobileRdfUri+"#LeapProbability" || parameterTypeUri == mobileRdfUri+"#LeapProbability") {
-			if (!$scope.graphControls) {
-				$scope.graphControls = new GraphControls();
-			}
-			return $scope.graphControls.leapProb;
+			return owner.leapProb;
 		}
 	}
 	
