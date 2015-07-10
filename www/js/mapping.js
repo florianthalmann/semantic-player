@@ -1,4 +1,4 @@
-function Mapping(controls, functions, multipliers, addends, moduli, parameter) {
+function Mapping(type, controls, functions, multipliers, addends, moduli, parameter) {
 	
 	var currentFunctionValues = [];
 	
@@ -9,11 +9,19 @@ function Mapping(controls, functions, multipliers, addends, moduli, parameter) {
 	}
 	
 	function calculateParameter() {
-		var product = 1;
-		for (var i = 0; i < controls.length; i++) {
-			product *= currentFunctionValues[i];
+		if (type = Constants.PRODUCT_MAPPING) {
+			var product = 1;
+			for (var i = 0; i < controls.length; i++) {
+				product *= currentFunctionValues[i];
+			}
+			return product;
+		} else {
+			var sum = 0;
+			for (var i = 0; i < controls.length; i++) {
+				sum += currentFunctionValues[i];
+			}
+			return sum;
 		}
-		return product;
 	}
 	
 	function getFunctionValue(value, i) {

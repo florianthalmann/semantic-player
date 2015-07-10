@@ -1,3 +1,8 @@
+var Constants = {
+	PRODUCT_MAPPING: 0,
+	SUM_MAPPING: 1
+};
+
 var $http = angular.injector(['ng']).get('$http');
 
 angular.module('semanticplayer', ['ionic'])

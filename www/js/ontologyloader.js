@@ -132,8 +132,12 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				if (results[i].parameterType) {
 					var parameterType = results[i].parameterType.value;
 				}
+				var mappingType = Constants.PRODUCT_MAPPING;
+				if (results[i].mappingType.value == mobileRdfUri+"#SumMapping") {
+					mappingType = Constants.SUM_MAPPING;
+				}
 				var parameter = getParameter(owner, results[i].parameter.value, parameterType);
-				loadMappingDimensions(store, mappingUri, results[i].mappingType.value, parameter);
+				loadMappingDimensions(store, mappingUri, mappingType, parameter);
 			}
 		});
 	}
@@ -166,7 +170,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				addends[i] = getNumberValue(results[i].addend, 0);
 				moduli[i] = getNumberValue(results[i].modulus);
 			}
-			$scope.mappings[mappingUri] = new Mapping(controls, functions, multipliers, addends, moduli, parameter);
+			$scope.mappings[mappingUri] = new Mapping(mappingType, controls, functions, multipliers, addends, moduli, parameter);
 			$scope.mappingLoadingThreads--;
 			$scope.$apply();
 		});
