@@ -1,4 +1,4 @@
-function Control(referenceAverageOf, label, $scope, requestValueFunction, resetFunction, updateFunction) {
+function Control(referenceAverageOf, label, type, $scope, requestValueFunction, resetFunction, updateFunction) {
 	
 	this.referenceValue;
 	this.value;
@@ -6,6 +6,7 @@ function Control(referenceAverageOf, label, $scope, requestValueFunction, resetF
 	if (label) {
 		this.label = label;
 	}
+	this.type = type;
 	if (requestValueFunction) {
 		this.requestValue = requestValueFunction;
 	}

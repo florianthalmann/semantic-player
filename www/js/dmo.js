@@ -154,7 +154,7 @@ function DynamicMusicObject(uri, scheduler) {
 		}
 	}
 	
-	this.play = new Parameter(this, this.updatePlay, 0);
+	this.play = new Parameter(this, this.updatePlay, 0, true);
 	this.amplitude = new Parameter(this, this.updateAmplitude, 1);
 	this.playbackRate = new Parameter(this, this.updatePlaybackRate, 1);
 	this.pan = new Parameter(this, this.updatePan, 0);

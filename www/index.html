@@ -67,12 +67,15 @@
 							<ion-spinner></ion-spinner>
 						</span>
 					</ion-item>
-					<ion-item class="range range-energized center" ng-repeat="s in sliderControls">
+					<ion-item ng-if="u.type == 0" class="item range range-energized" ng-repeat="u in uiControls">
 						<div class="input-label">
-							{{ s.label }}
+							{{ u.label }}
 						</div>
-						<input type="range" name="slider" min="0" max="1" step=".001" ng-model="s.value" ng-change="s.updateMappings()">
+						<input type="range" name="slider" min="0" max="1" step=".001" ng-model="u.value" ng-change="u.updateMappings()">
 					</ion-item>
+					<ion-toggle ng-if="u.type == 1" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.updateMappings()">
+						{{ u.label }}
+					</ion-toggle>
 					<ion-item>
 						<button class="button button-positive" ng-click="compassWatcher.reset(); geolocationWatcher.reset()">
 							Reset sensors

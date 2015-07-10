@@ -233,7 +233,9 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		}	else if (controlUri == mobileRdfUri+"#CompassHeading") {
 			return getCompassControl(0);
 		}	else if (controlTypeUri == mobileRdfUri+"#Slider") {
-			return getSliderControl(controlUri, label);
+			return getUIControl(0, controlUri, label);
+		} else if (controlTypeUri == mobileRdfUri+"#Toggle") {
+			return getUIControl(1, controlUri, label);
 		} else if (controlUri == mobileRdfUri+"#Random" || controlTypeUri == mobileRdfUri+"#Random") {
 			return getStatsControl(0, controlUri);
 		} else if (controlTypeUri == mobileRdfUri+"#GraphControl") {
@@ -309,12 +311,12 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		}
 	}
 	
-	function getSliderControl(uri, label) {
-		if (!$scope.sliderControls[uri]) {
-			$scope.sliderControls[uri] = new Control(0, label, $scope);
+	function getUIControl(type, uri, label) {
+		if (!$scope.uiControls[uri]) {
+			$scope.uiControls[uri] = new Control(0, label, type, $scope);
 			$scope.$apply();
 		}
-		return $scope.sliderControls[uri];
+		return $scope.uiControls[uri];
 	}
 	
 	function getParameter(owner, parameterUri, parameterTypeUri ) {
@@ -340,8 +342,10 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 			return $scope.rendering.listenerOrientation;
 		} else if (parameterUri == mobileRdfUri+"#StatsFrequency" || parameterTypeUri == mobileRdfUri+"#StatsFrequency") {
 			return owner.frequency;
-		} else if (parameterUri == mobileRdfUri+"#LeapProbability" || parameterTypeUri == mobileRdfUri+"#LeapProbability") {
-			return owner.leapProb;
+		} else if (parameterUri == mobileRdfUri+"#LeapingProbability" || parameterTypeUri == mobileRdfUri+"#LeapingProbability") {
+			return owner.leapingProbability;
+		} else if (parameterUri == mobileRdfUri+"#ContinueAfterLeaping" || parameterTypeUri == mobileRdfUri+"#ContinueAfterLeaping") {
+			return owner.continueAfterLeaping;
 		}
 	}
 	

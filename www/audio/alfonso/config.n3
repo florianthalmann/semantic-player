@@ -38,9 +38,16 @@ ex:leapSliderMapping a mb:Mapping ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Leap probability" ] ] ;
 	mb:toOwner ex:beatGraphControl ;
-	mb:toParameter mb:LeapProbability .
+	mb:toParameter mb:LeapingProbability .
+
+ex:continueToggleMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Toggle ;
+			rdfs:label "Continue after leaping" ] ] ;
+	mb:toOwner ex:beatGraphControl ;
+	mb:toParameter mb:ContinueAfterLeaping .
 
 ex:fandango a mb:Rendering;
 	mb:hasDMO ex:fandangoDMO ;
-	mb:hasMapping ex:beatGraphMapping, ex:beatSliderMapping, ex:leapSliderMapping ;
+	mb:hasMapping ex:beatGraphMapping, ex:beatSliderMapping, ex:leapSliderMapping, ex:continueToggleMapping ;
 	rdfs:label "Alfonso Demo" .
