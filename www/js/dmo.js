@@ -7,6 +7,7 @@ function DynamicMusicObject(uri, scheduler) {
 	var graph = null;
 	var segmentsPlayed = 0;
 	var skipProportionAdjustment = false;
+	var previousIndex;
 	
 	this.getUri = function() {
 		return uri;
@@ -110,8 +111,8 @@ function DynamicMusicObject(uri, scheduler) {
 	
 	//change in segment affects only segment of children if any
 	this.updateSegmentIndex = function(value) {
-		start = segmentation[value];
-		end = segmentation[value+1];
+		var start = segmentation[value];
+		var end = segmentation[value+1];
 		//scheduler.updateSegment(this, segmentStart, segmentEnd);
 		for (var i = 0; i < children.length; i++) {
 			children[i].jumpToSegment(start);
@@ -122,7 +123,7 @@ function DynamicMusicObject(uri, scheduler) {
 		if (segmentation.length == 0) {
 			return true;
 		} else {
-			index = segmentation.indexOf(time);
+			var index = segmentation.indexOf(time);
 			if (index >= 0) {
 				this.segmentIndex.update(undefined, index);
 				//ADJUST CHILDREN!!!!!
@@ -133,15 +134,22 @@ function DynamicMusicObject(uri, scheduler) {
 	}
 	
 	this.getNextSegment = function() {
-		i = this.segmentIndex.requestValue();
-		start = segmentation[i];
-		duration = segmentation[i+1]-start;
+		
+		//TODO ONLY REQUEST IF NOT CHANGED RECENTLY (SOLVES PROBLEM )
+		var index = this.segmentIndex.value;
+		if (index == previousIndex) {
+			index = this.segmentIndex.requestValue();
+		}
+		previousIndex = index;
+		
+		var start = segmentation[index];
+		var duration = segmentation[index+1]-start;
 		
 		//try to adjust parent segmentation
 		if (parentDMO.jumpToSegment(start)) {
 			segmentsPlayed = 0;
 		}
-		console.log(i);
+		console.log(index, segmentation.length);
 		if (segmentsPlayed < this.segmentCount.value) {
 			duration *= this.segmentDurationRatio.value;
 			if (!skipProportionAdjustment) {
