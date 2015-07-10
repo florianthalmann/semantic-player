@@ -114,18 +114,18 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	
 	function loadMapping(store, mappingUri) {
 		$scope.mappingLoadingThreads++;
-		store.execute("SELECT ?mappingType ?owner ?parameter ?parameterType \
+		store.execute("SELECT ?mappingType ?object ?parameter ?parameterType \
 		WHERE { <"+mappingUri+"> a ?mappingType . \
 			<"+mappingUri+"> <"+mobileRdfUri+"#toParameter> ?parameter . \
-		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#toOwner> ?owner . } \
+		OPTIONAL { <"+mappingUri+"> <"+mobileRdfUri+"#toObject> ?object . } \
 		OPTIONAL { ?parameter a ?parameterType . } }", function(err, results) {
 			for (var i = 0; i < results.length; i++) {
-				if (results[i].owner) {
-					var owner = dmos[results[i].owner.value];
-					if (!owner) {
-						owner = getGraphControl(undefined, results[i].owner.value);
-						if (!owner) {
-							owner = getStatsControl(undefined, results[i].owner.value);
+				if (results[i].object) {
+					var object = dmos[results[i].object.value];
+					if (!object) {
+						owner = getGraphControl(undefined, results[i].object.value);
+						if (!object) {
+							owner = getStatsControl(undefined, results[i].object.value);
 						}
 					}
 				}
@@ -136,7 +136,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				if (results[i].mappingType.value == mobileRdfUri+"#SumMapping") {
 					mappingType = Constants.SUM_MAPPING;
 				}
-				var parameter = getParameter(owner, results[i].parameter.value, parameterType);
+				var parameter = getParameter(object, results[i].parameter.value, parameterType);
 				loadMappingDimensions(store, mappingUri, mappingType, parameter);
 			}
 		});
@@ -244,7 +244,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 			return getStatsControl(0, controlUri);
 		} else if (controlTypeUri == mobileRdfUri+"#GraphControl") {
 			if (dmo) {
-				graph = dmo.getGraph();
+				var graph = dmo.getGraph();
 			}
 			return getGraphControl(0, controlUri, graph);
 		}

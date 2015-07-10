@@ -28,14 +28,14 @@ ex:panTilt a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:TiltX ;
 		mb:hasMultiplier 1 ] ;
-	mb:toDMO ex:mix ;
+	mb:toObject ex:mix ;
 	mb:toParameter mb:Pan .
 
 ex:distanceTilt a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:TiltY ;
 		mb:hasMultiplier -1 ] ;
-	mb:toDMO ex:mix ;
+	mb:toObject ex:mix ;
 	mb:toParameter mb:Distance .
 	
 ex:vocPanSlider a mb:Mapping ;
@@ -44,7 +44,7 @@ ex:vocPanSlider a mb:Mapping ;
 			rdfs:label "Voc pan" ] ;
 		mb:hasMultiplier 10 ;
 		mb:hasAddend -5 ] ;
-	mb:toDMO ex:voc ;
+	mb:toObject ex:voc ;
 	mb:toParameter mb:Pan .
 		
 ex:riddimPanSlider a mb:Mapping ;
@@ -53,7 +53,7 @@ ex:riddimPanSlider a mb:Mapping ;
 			rdfs:label "Riddim pan" ] ;
 		mb:hasMultiplier 10 ;
 		mb:hasAddend -5 ] ;
-	mb:toDMO ex:riddim ;
+	mb:toObject ex:riddim ;
 	mb:toParameter mb:Pan .
 
 ex:panSlider a mb:Mapping ;
@@ -62,7 +62,7 @@ ex:panSlider a mb:Mapping ;
 			rdfs:label "X Position" ] ;
 		mb:hasMultiplier -10 ;
 		mb:hasAddend 5 ] ;
-	mb:toDMO ex:mix ;
+	mb:toObject ex:mix ;
 	mb:toParameter mb:Pan .
 	
 ex:distanceSlider a mb:Mapping;
@@ -71,7 +71,7 @@ ex:distanceSlider a mb:Mapping;
 			rdfs:label "Z Position" ] ;
 		mb:hasMultiplier 10 ;
 		mb:hasAddend -5 ] ;
-	mb:toDMO ex:mix ;
+	mb:toObject ex:mix ;
 	mb:toParameter mb:Distance .
 
 ex:j4j a mb:Rendering ;

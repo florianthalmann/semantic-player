@@ -109,17 +109,27 @@ function DynamicMusicObject(uri, scheduler) {
 	}
 	
 	//change in segment affects only segment of children if any
-	function updateSegmentIndex(value) {
-		segmentStart = segmentation[value];
-		segmentEnd = segmentation[value+1];
+	this.updateSegmentIndex = function(value) {
+		start = segmentation[value];
+		end = segmentation[value+1];
 		//scheduler.updateSegment(this, segmentStart, segmentEnd);
 		for (var i = 0; i < children.length; i++) {
-			children[i].updateSegmentIndex(value);
+			children[i].jumpToSegment(start);
 		}
 	}
 	
-	function jumpToClosestSegment(time) {
-		
+	this.jumpToSegment = function(time) {
+		if (segmentation.length == 0) {
+			return true;
+		} else {
+			index = segmentation.indexOf(time);
+			if (index >= 0) {
+				this.segmentIndex.update(undefined, index);
+				//ADJUST CHILDREN!!!!!
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	this.getNextSegment = function() {
@@ -127,8 +137,8 @@ function DynamicMusicObject(uri, scheduler) {
 		start = segmentation[i];
 		duration = segmentation[i+1]-start;
 		
-		//check parent segmentation
-		if (parentDMO.getSegmentation().length == 0 || parentDMO.getSegmentation().indexOf(start) >= 0) {
+		//try to adjust parent segmentation
+		if (parentDMO.jumpToSegment(start)) {
 			segmentsPlayed = 0;
 		}
 		console.log(i);

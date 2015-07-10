@@ -24,7 +24,7 @@ ex:sarkLocation a mb:Mapping ;
 		mb:withFunction [ a mb:RectangleFunction ;
 			mb:atPosition 0.333 ;
 			mb:hasRange 0.333 ] ] ;
-	mb:toDMO ex:sark1 ;
+	mb:toObject ex:sark1 ;
 	mb:toParameter mb:Amplitude .
 
 ex:sark2Location a mb:Mapping ;
@@ -33,7 +33,7 @@ ex:sark2Location a mb:Mapping ;
 		mb:withFunction [ a mb:RectangleFunction ;
 			mb:atPosition 0.667 ;
 			mb:hasRange 0.333 ] ] ;
-	mb:toDMO ex:sark2 ;
+	mb:toObject ex:sark2 ;
 	mb:toParameter mb:Amplitude .
 
 ex:sarkLocation1 a mb:ProductMapping ;
@@ -47,7 +47,7 @@ ex:sarkLocation1 a mb:ProductMapping ;
 		mb:withFunction [ a mb:TriangleFunction ;
 			mb:atPosition 0 ;
 			mb:hasRange 0.6 ] ] ;
-	mb:toDMO ex:sark1 ;
+	mb:toObject ex:sark1 ;
 	mb:toParameter mb:Amplitude .
 
 ex:sark2Location1 a mb:LocationMapping ;
@@ -61,7 +61,7 @@ ex:sark2Location1 a mb:LocationMapping ;
 		mb:withFunction [ a mb:TriangleFunction ;
 			mb:atPosition 0 ;
 			mb:hasRange 0.6 ] ] ;
-	mb:toDMO ex:sark2 ;
+	mb:toObject ex:sark2 ;
 	mb:toParameter mb:Amplitude .
 
 ex:locationDemo a mb:Rendering;

@@ -22,7 +22,7 @@ ex:beatGraphControl a mb:GraphControl ;
 ex:beatGraphMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl ex:beatGraphControl ] ;
-	mb:toOwner ex:beatDMO ;
+	mb:toObject ex:beatDMO ;
 	mb:toParameter ex:beat .
 
 ex:beatSliderMapping a mb:Mapping ;
@@ -30,21 +30,21 @@ ex:beatSliderMapping a mb:Mapping ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Beat" ] ;
 		mb:hasMultiplier 400 ] ;
-	mb:toOwner ex:beatDMO ;
+	mb:toObject ex:beatDMO ;
 	mb:toParameter ex:beat .
 
 ex:leapSliderMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Leap probability" ] ] ;
-	mb:toOwner ex:beatGraphControl ;
+	mb:toObject ex:beatGraphControl ;
 	mb:toParameter mb:LeapingProbability .
 
 ex:continueToggleMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Toggle ;
 			rdfs:label "Continue after leaping" ] ] ;
-	mb:toOwner ex:beatGraphControl ;
+	mb:toObject ex:beatGraphControl ;
 	mb:toParameter mb:ContinueAfterLeaping .
 
 ex:fandango a mb:Rendering;

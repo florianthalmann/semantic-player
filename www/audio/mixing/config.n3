@@ -21,14 +21,14 @@ ex:mainAmpMapping a mb:Mapping ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Mix amp" ] ;
 		mb:hasMultiplier 1 ] ;
-	mb:toDMO ex:mix ;
+	mb:toObject ex:mix ;
 	mb:toParameter mb:Amplitude .
 
 ex:vocMapping1 a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerX ;
 		mb:hasMultiplier -1 ] ;
-	mb:toDMO ex:voc ;
+	mb:toObject ex:voc ;
 	mb:toParameter mb:Pan .
 
 ex:vocMapping3 a mb:Mapping ;
@@ -36,14 +36,14 @@ ex:vocMapping3 a mb:Mapping ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Voc amp" ] ;
 		mb:hasMultiplier 1 ] ;
-	mb:toDMO ex:voc ;
+	mb:toObject ex:voc ;
 	mb:toParameter mb:Amplitude .
 
 ex:vocMapping2 a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerY ;
 		mb:hasMultiplier -1 ] ;
-	mb:toDMO ex:voc ;
+	mb:toObject ex:voc ;
 	mb:toParameter mb:Distance .
 
 ex:riddimMapping2 a mb:Mapping ;
@@ -51,7 +51,7 @@ ex:riddimMapping2 a mb:Mapping ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Riddim amp" ] ;
 		mb:hasMultiplier 1 ] ;
-	mb:toDMO ex:riddim ;
+	mb:toObject ex:riddim ;
 	mb:toParameter mb:Amplitude .
 	
 ex:riddimMapping a mb:Mapping;
@@ -60,7 +60,7 @@ ex:riddimMapping a mb:Mapping;
 			rdfs:label "Riddim pan" ] ;
 		mb:hasMultiplier 2 ;
 		mb:hasAddend -1 ] ;
-	mb:toDMO ex:riddim ;
+	mb:toObject ex:riddim ;
 	mb:toParameter mb:Pan .
 
 ex:dnbMapping a mb:Mapping;
@@ -68,7 +68,7 @@ ex:dnbMapping a mb:Mapping;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "DnB distance" ] ;
 		mb:hasMultiplier -3 ] ;
-	mb:toDMO ex:dnb ;
+	mb:toObject ex:dnb ;
 	mb:toParameter mb:Distance .
 
 ex:j4j a mb:Rendering ;

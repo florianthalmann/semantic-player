@@ -5,10 +5,10 @@
 @prefix ex: <#> .
 
 ex:beat a mb:Segmentation ;
-	mb:hasFeaturesPath "andante.json" .
+	mb:hasFeaturesPath "low.json" .
 
 ex:bar a mb:Segmentation ;
-	mb:hasFeaturesPath "andante.json" ;
+	mb:hasFeaturesPath "low.json" ;
 	mb:isSubset "1".
 
 ex:beatDMO a mb:DMO ;
@@ -18,62 +18,64 @@ ex:barDMO a mb:DMO ;
 	mb:hasParameter ex:bar ;
 	mb:hasChild ex:beatDMO .
 
-ex:moonDMO a mb:DMO ;
-	mb:hasAudioPath "andante.m4a" ;
+ex:segmentedDMO a mb:DMO ;
+	mb:hasAudioPath "low.mp3" ;
 	mb:hasChild ex:barDMO .
 
-ex:onsetMapping a mb:Mapping ;
+ex:beatMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
-		mb:fromControl [ a mb:GraphControl ] ;
-		mb:withFunction [ a mb:LinearFunction ] ] ;
-	mb:toDMO ex:beatDMO ;
+		mb:fromControl [ a mb:GraphControl ] ] ;
+	mb:toObject ex:beatDMO ;
 	mb:toParameter ex:beat .
 
-ex:onsetMapping2 a mb:Mapping ;
+ex:barMapping a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl [ a mb:Slider ;
+			rdfs:label "Bar" ] ;
+		mb:hasMultiplier 100 ] ;
+	mb:toObject ex:barDMO ;
+	mb:toParameter ex:bar .
+
+ex:beatMapping2 a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Beat" ] ;
-		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 400 ] ;
-	mb:toDMO ex:beatDMO ;
+	mb:toObject ex:beatDMO ;
 	mb:toParameter ex:beat .
 
 ex:rateMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Rate" ] ;
-		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 2 ] ;
-	mb:toDMO ex:beatDMO ;
+	mb:toObject ex:beatDMO ;
 	mb:toParameter mb:PlaybackRate .
 
 ex:countMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Beats per bar" ] ;
-		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 4 ] ;
-	mb:toDMO ex:beatDMO ;
+	mb:toObject ex:beatDMO ;
 	mb:toParameter mb:SegmentCount .
 
 ex:durationRatioMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
 			rdfs:label "Beat duration" ] ;
-		mb:withFunction [ a mb:LinearFunction ] ;
 		mb:hasMultiplier 2 ] ;
-	mb:toDMO ex:beatDMO ;
+	mb:toObject ex:beatDMO ;
 	mb:toParameter mb:SegmentDurationRatio .
 
 ex:proportionMapping a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl [ a mb:Slider ;
-			rdfs:label "Beat proportion" ] ;
-		mb:withFunction [ a mb:LinearFunction ] ] ;
-	mb:toDMO ex:beatDMO ;
+			rdfs:label "Beat proportion" ] ] ;
+	mb:toObject ex:beatDMO ;
 	mb:toParameter mb:SegmentProportion .
 
 ex:moon a mb:Rendering ;
-	mb:hasDMO ex:moonDMO ;
-	mb:hasMapping ex:onsetMapping, ex:onsetMapping2, ex:rateMapping, ex:countMapping, ex:durationRatioMapping, ex:proportionMapping ;
+	mb:hasDMO ex:segmentedDMO ;
+	mb:hasMapping ex:beatMapping, ex:barMapping, ex:beatMapping2, ex:rateMapping, ex:countMapping, ex:durationRatioMapping, ex:proportionMapping ;
 	rdfs:label "Features Demo" .
