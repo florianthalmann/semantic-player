@@ -154,7 +154,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		OPTIONAL { ?dimension <"+mobileRdfUri+"#hasMultiplier> ?multiplier . } \
 		OPTIONAL { ?dimension <"+mobileRdfUri+"#hasAddend> ?addend . } \
 		OPTIONAL { ?dimension <"+mobileRdfUri+"#hasModulus> ?modulus . } \
-		OPTIONAL { ?function <"+mobileRdfUri+"#atPosition> ?position . } \
+		OPTIONAL { ?function <"+mobileRdfUri+"#hasPosition> ?position . } \
 		OPTIONAL { ?function <"+mobileRdfUri+"#hasRange> ?range . } }", function(err, results) {
 			var controls = [];
 			var functions = [];
@@ -334,7 +334,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 			return owner.distance;
 		} else if (parameterUri == mobileRdfUri+"#Reverb" || parameterTypeUri == mobileRdfUri+"#Reverb") {
 			return owner.reverb;
-		} else if (parameterTypeUri == mobileRdfUri+"#Segmentation") {
+		} else if (parameterUri == mobileRdfUri+"#Segmentation" || parameterTypeUri == mobileRdfUri+"#Segmentation") {
 			return owner.segmentIndex;
 		} else if (parameterUri == mobileRdfUri+"#SegmentCount" || parameterTypeUri == mobileRdfUri+"#SegmentCount") {
 			return owner.segmentCount;

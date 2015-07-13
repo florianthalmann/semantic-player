@@ -62,100 +62,191 @@ mb:InterpolationFunction
 	rdfs:subClassOf mb:Function .
 
 
-#Controls
+#Sensor Controls
 
 mb:MobileControl 
 	a owl:Class;
 	rdfs:comment "" .
 
-mb:AccelerometerX
+mb:SensorControl 
 	a owl:Class;
 	rdfs:subClassOf mb:MobileControl;
+	rdfs:comment "" .
+
+mb:AccelerometerX
+	a owl:Class;
+	rdfs:subClassOf mb:SensorControl;
 	rdfs:comment "" .
 	
 mb:AccelerometerY
 	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	rdfs:subClassOf mb:SensorControl;
 	rdfs:comment "" .
 
 mb:AccelerometerZ
 	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	rdfs:subClassOf mb:SensorControl;
+	rdfs:comment "" .
+
+mb:TiltX
+	a owl:Class;
+	rdfs:subClassOf mb:SensorControl;
+	rdfs:comment "" .
+	
+mb:TiltY
+	a owl:Class;
+	rdfs:subClassOf mb:SensorControl;
 	rdfs:comment "" .
 
 mb:GeolocationLatitude
 	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	rdfs:subClassOf mb:SensorControl;
 	rdfs:comment "" .
 
 mb:GeolocationLongitude
 	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	rdfs:subClassOf mb:SensorControl;
 	rdfs:comment "" .
 
 mb:GeolocationDistance
 	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	rdfs:subClassOf mb:SensorControl;
 	rdfs:comment "" .
 
 mb:CompassHeading
+	a owl:Class;
+	rdfs:subClassOf mb:SensorControl;
+	rdfs:comment "" .
+
+#UI Controls
+
+mb:UIControl
 	a owl:Class;
 	rdfs:subClassOf mb:MobileControl;
 	rdfs:comment "" .
 
 mb:Slider
 	a owl:Class;
+	rdfs:subClassOf mb:UIControl;
+	rdfs:comment "" .
+
+mb:Toggle
+	a owl:Class;
+	rdfs:subClassOf mb:UIControl;
+	rdfs:comment "" .
+
+mb:Button
+	a owl:Class;
+	rdfs:subClassOf mb:UIControl;
+	rdfs:comment "" .
+
+#Autonomous Controls
+
+mb:AutoControl
+	a owl:Class;
 	rdfs:subClassOf mb:MobileControl;
 	rdfs:comment "" .
 
 mb:Random
 	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	rdfs:subClassOf mb:AutoControl;
 	rdfs:comment "" .
 
 mb:GraphControl
 	a owl:Class;
-	rdfs:subClassOf mb:MobileControl;
+	rdfs:subClassOf mb:AutoControl;
 	rdfs:comment "" .
 
 
 #Audio parameters
 
-mb:Amplitude
+mb:AudioParameter
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:comment "" .
+
+mb:Amplitude
+	a owl:Class;
+	rdfs:subClassOf mb:AudioParameter;
+	rdfs:comment "" .
+
+mb:PlaybackRate
+	a owl:Class;
+	rdfs:subClassOf mb:AudioParameter;
 	rdfs:comment "" .
 
 mb:Pan
 	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:subClassOf mb:AudioParameter;
 	rdfs:comment "" .
 
 mb:Distance
 	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:subClassOf mb:AudioParameter;
 	rdfs:comment "" .
 
 mb:Reverb
+	a owl:Class;
+	rdfs:subClassOf mb:AudioParameter;
+	rdfs:comment "" .
+
+#Segmentation parameters
+
+mb:SegmentationParameter
 	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
 
 mb:Segmentation
 	a owl:Class;
+	rdfs:subClassOf mb:SegmentationParameter;
+	rdfs:comment "" .
+
+mb:SegmentCount
+	a owl:Class;
+	rdfs:subClassOf mb:SegmentationParameter;
+	rdfs:comment "" .
+
+mb:SegmentDuration
+	a owl:Class;
+	rdfs:subClassOf mb:SegmentationParameter;
+	rdfs:comment "" .
+
+mb:SegmentProportion
+	a owl:Class;
+	rdfs:subClassOf mb:SegmentationParameter;
+	rdfs:comment "" .
+
+#Global and control parameters
+
+mb:GlobalParameter
+	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
 
 mb:ListenerOrientation
 	a owl:Class;
+	rdfs:subClassOf mb:GlobalParameter;
+	rdfs:comment "" .
+
+mb:ControlParameter
+	a owl:Class;
 	rdfs:subClassOf mt:AutomationParameter;
 	rdfs:comment "" .
 
-#Other parameters
-
 mb:StatsFrequency
 	a owl:Class;
-	rdfs:subClassOf mt:AutomationParameter;
+	rdfs:subClassOf mb:ControlParameter;
+	rdfs:comment "" .
+
+mb:LeapingProbability
+	a owl:Class;
+	rdfs:subClassOf mb:ControlParameter;
+	rdfs:comment "" .
+
+mb:ContinueAfterLeaping
+	a owl:Class;
+	rdfs:subClassOf mb:ControlParameter;
 	rdfs:comment "" .
 
 
