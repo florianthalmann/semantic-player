@@ -8,7 +8,7 @@ ex:sark a mb:DMO ;
 	mb:hasChild ex:sark1 , ex:sark2 .
 
 ex:sark1 a mb:DMO ;
-	mb:hasSourceFile "sark1.m4a" ;
+	mb:hasAudioPath "sark1.m4a" ;
 	mb:hasParameter mb:Amplitude .
 
 ex:sark2 a mb:DMO ;
@@ -21,8 +21,8 @@ ex:locationSlider a mb:Slider ;
 ex:sarkLocation a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl ex:locationSlider ;
-		mb:withFunction [ a mb:RectangleFunction ;
-			mb:atPosition 0.333 ;
+		mb:withFunction [ a mb:TriangleFunction ;
+			mb:hasPosition 0.333 ;
 			mb:hasRange 0.333 ] ] ;
 	mb:toObject ex:sark1 ;
 	mb:toParameter mb:Amplitude .
@@ -30,41 +30,59 @@ ex:sarkLocation a mb:Mapping ;
 ex:sark2Location a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl ex:locationSlider ;
-		mb:withFunction [ a mb:RectangleFunction ;
-			mb:atPosition 0.667 ;
+		mb:withFunction [ a mb:TriangleFunction ;
+			mb:hasPosition 0.667 ;
 			mb:hasRange 0.333 ] ] ;
 	mb:toObject ex:sark2 ;
 	mb:toParameter mb:Amplitude .
+
+ex:sark1Play a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl ex:locationSlider ;
+		mb:withFunction [ a mb:RectangleFunction ;
+			mb:hasPosition 0.333 ;
+			mb:hasRange 0.333 ] ] ;
+	mb:toObject ex:sark1 ;
+	mb:toParameter mb:Play .
+
+ex:sark2Play a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl ex:locationSlider ;
+		mb:withFunction [ a mb:RectangleFunction ;
+			mb:hasPosition 0.667 ;
+			mb:hasRange 0.333 ] ] ;
+	mb:toObject ex:sark2 ;
+	mb:toParameter mb:Play .
 
 ex:sarkLocation1 a mb:ProductMapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerX ;
 		mb:withFunction [ a mb:TriangleFunction ;
-			mb:atPosition 0 ;
+			mb:hasPosition 0 ;
 			mb:hasRange 0.6 ] ] ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerY ;
 		mb:withFunction [ a mb:TriangleFunction ;
-			mb:atPosition 0 ;
+			mb:hasPosition 0 ;
 			mb:hasRange 0.6 ] ] ;
 	mb:toObject ex:sark1 ;
 	mb:toParameter mb:Amplitude .
 
-ex:sark2Location1 a mb:LocationMapping ;
+ex:sark2Location1 a mb:ProductMapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerX ;
 		mb:withFunction [ a mb:TriangleFunction ;
-			mb:atPosition 0 ;
+			mb:hasPosition 0 ;
 			mb:hasRange 0.6 ] ] ;
 	mb:hasDimension [ a mb:MappingDimension ;
 		mb:fromControl mb:AccelerometerY ;
 		mb:withFunction [ a mb:TriangleFunction ;
-			mb:atPosition 0 ;
+			mb:hasPosition 0 ;
 			mb:hasRange 0.6 ] ] ;
 	mb:toObject ex:sark2 ;
 	mb:toParameter mb:Amplitude .
 
 ex:locationDemo a mb:Rendering;
-	mb:hasDMO ex:sark, ex:sark2;
-	mb:hasMapping ex:sarkLocation, ex:sark2Location, ex:sarkLocation1, ex:sark2Location1;
+	mb:hasDMO ex:sark ;
+	mb:hasMapping ex:sarkLocation, ex:sark2Location, ex:sark1Play, ex:sark2Play, ex:sarkLocation1, ex:sark2Location1;
 	rdfs:label "Location Demo" .

@@ -324,7 +324,9 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 	}
 	
 	function getParameter(owner, parameterUri, parameterTypeUri ) {
-		if (parameterUri == mobileRdfUri+"#Amplitude" || parameterTypeUri == mobileRdfUri+"#Amplitude") {
+		if (parameterUri == mobileRdfUri+"#Play" || parameterTypeUri == mobileRdfUri+"#Play") {
+			return owner.play;
+		} if (parameterUri == mobileRdfUri+"#Amplitude" || parameterTypeUri == mobileRdfUri+"#Amplitude") {
 			return owner.amplitude;
 		} if (parameterUri == mobileRdfUri+"#PlaybackRate" || parameterTypeUri == mobileRdfUri+"#PlaybackRate") {
 			return owner.playbackRate;

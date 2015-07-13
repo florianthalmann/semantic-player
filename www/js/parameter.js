@@ -10,6 +10,7 @@ function Parameter(owner, updateFunction, initialValue, isInteger, isUpdateAbsol
 	}
 	
 	this.update = function(mapping, value) {
+		console.log(mapping, value);
 		if (value || value == 0) {
 			this.setValueAndUpdateOtherMappings(mapping, value);
 			//only update if value changed

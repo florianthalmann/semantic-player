@@ -9,7 +9,7 @@ function Mapping(type, controls, functions, multipliers, addends, moduli, parame
 	}
 	
 	function calculateParameter() {
-		if (type = Constants.PRODUCT_MAPPING) {
+		if (type == Constants.PRODUCT_MAPPING) {
 			var product = 1;
 			for (var i = 0; i < controls.length; i++) {
 				product *= currentFunctionValues[i];
