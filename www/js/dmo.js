@@ -149,7 +149,7 @@ function DynamicMusicObject(uri, scheduler) {
 		if (parentDMO.jumpToSegment(start)) {
 			segmentsPlayed = 0;
 		}
-		console.log(sourcePath, index, segmentation.length);
+		//console.log(sourcePath, index, segmentation.length);
 		if (segmentsPlayed < this.segmentCount.value) {
 			duration *= this.segmentDurationRatio.value;
 			if (!skipProportionAdjustment) {

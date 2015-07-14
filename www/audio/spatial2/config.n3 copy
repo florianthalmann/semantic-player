@@ -24,19 +24,19 @@ ex:mix a mb:DMO ;
 		mb:hasValue 0.5 ] ;
 	mb:hasChild ex:voc, ex:riddim, ex:dnb .
 
-#ex:panTilt a mb:Mapping ;
-# 	mb:hasDimension [ a mb:MappingDimension ;
-# 		mb:fromControl mb:TiltX ;
-# 		mb:hasMultiplier 1 ] ;
-# 	mb:toObject ex:mix ;
-# 	mb:toParameter mb:Pan .
-# 
-# ex:distanceTilt a mb:Mapping ;
-# 	mb:hasDimension [ a mb:MappingDimension ;
-# 		mb:fromControl mb:TiltY ;
-# 		mb:hasMultiplier -1 ] ;
-# 	mb:toObject ex:mix ;
-# 	mb:toParameter mb:Distance .
+ex:panTilt a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl mb:TiltX ;
+		mb:hasMultiplier 1 ] ;
+	mb:toObject ex:mix ;
+	mb:toParameter mb:Pan .
+
+ex:distanceTilt a mb:Mapping ;
+	mb:hasDimension [ a mb:MappingDimension ;
+		mb:fromControl mb:TiltY ;
+		mb:hasMultiplier -1 ] ;
+	mb:toObject ex:mix ;
+	mb:toParameter mb:Distance .
 	
 ex:vocPanSlider a mb:Mapping ;
 	mb:hasDimension [ a mb:MappingDimension ;
@@ -74,14 +74,7 @@ ex:distanceSlider a mb:Mapping;
 	mb:toObject ex:mix ;
 	mb:toParameter mb:Distance .
 
-ex:orientationMapping a mb:Mapping ;
-	mb:hasDimension [ a mb:MappingDimension ;
-		mb:fromControl mb:CompassHeading ;
-		mb:hasMultiplier -1 ;
-		mb:hasModulus 360 ] ;
-	mb:toParameter mb:ListenerOrientation .
-
 ex:j4j a mb:Rendering ;
 	mb:hasDMO ex:mix ;
-	mb:hasMapping ex:vocPanSlider, ex:riddimPanSlider, ex:panSlider, ex:distanceSlider, ex:orientationMapping ;
+	mb:hasMapping ex:panTilt, ex:distanceTilt, ex:vocPanSlider, ex:riddimPanSlider, ex:panSlider, ex:distanceSlider ;
 	rdfs:label "Spatial Band Demo" .

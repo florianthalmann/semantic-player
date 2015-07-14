@@ -25,7 +25,6 @@ function GraphControls(graph) {
 				if (Math.random() < leapingProbability.value) {
 					options = graph[currentNode];
 					selectedOption = Math.floor(Math.random()*options.length);
-					console.log(continueAfterLeaping.value);
 					if (!continueAfterLeaping.value) {
 						return options[selectedOption];
 					} else {

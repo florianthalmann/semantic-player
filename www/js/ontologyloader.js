@@ -123,9 +123,9 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				if (results[i].object) {
 					var object = dmos[results[i].object.value];
 					if (!object) {
-						owner = getGraphControl(undefined, results[i].object.value);
+						object = getGraphControl(undefined, results[i].object.value);
 						if (!object) {
-							owner = getStatsControl(undefined, results[i].object.value);
+							object = getStatsControl(undefined, results[i].object.value);
 						}
 					}
 				}
