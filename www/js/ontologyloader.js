@@ -31,7 +31,9 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		store.execute("SELECT ?dmo \
 		WHERE { <"+renderingUri+"> <"+mobileRdfUri+"#hasDMO> ?dmo }", function(err, results) {
 			$scope.rendering = new Rendering(label, $scope);
-			$scope.scheduler = new Scheduler($scope);
+			$scope.scheduler = new Scheduler($scope.audioContext, function() {
+				$scope.sourcesReady = true;
+			});
 			for (var i = 0; i < results.length; i++) {
 				loadDMO(store, results[i].dmo.value);
 			}
@@ -43,7 +45,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		var dmo = new DynamicMusicObject(dmoUri, $scope.scheduler);
 		dmos[dmoUri] = dmo;
 		if (parentDMO) {
-			parentDMO.addChild(dmo);
+			parentDMO.addPart(dmo);
 		} else {
 			$scope.rendering.dmo = dmo; //pass top-level dmo to rendering
 		}
@@ -132,10 +134,11 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				if (results[i].parameterType) {
 					var parameterType = results[i].parameterType.value;
 				}
-				var mappingType = Constants.PRODUCT_MAPPING;
+				var mappingType = MappingTypes.PRODUCT_MAPPING;
 				if (results[i].mappingType.value == mobileRdfUri+"#SumMapping") {
-					mappingType = Constants.SUM_MAPPING;
+					mappingType = MappingTypes.SUM_MAPPING;
 				}
+				console.log(results[i].object, object, results[i].parameter, parameterType);
 				var parameter = getParameter(object, results[i].parameter.value, parameterType);
 				loadMappingDimensions(store, mappingUri, mappingType, parameter);
 			}
@@ -170,6 +173,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 				addends[i] = getNumberValue(results[i].addend, 0);
 				moduli[i] = getNumberValue(results[i].modulus);
 			}
+			console.log(mappingType, controls, functions, multipliers, addends, moduli, parameter);
 			$scope.mappings[mappingUri] = new Mapping(mappingType, controls, functions, multipliers, addends, moduli, parameter);
 			$scope.mappingLoadingThreads--;
 			$scope.$apply();
@@ -345,7 +349,7 @@ function OntologyLoader(dmoPath, $scope, $interval) {
 		} else if (parameterUri == mobileRdfUri+"#SegmentProportion" || parameterTypeUri == mobileRdfUri+"#SegmentProportion") {
 			return owner.segmentProportion;
 		} else if (parameterUri == mobileRdfUri+"#ListenerOrientation" || parameterTypeUri == mobileRdfUri+"#ListenerOrientation") {
-			return $scope.rendering.listenerOrientation;
+			return $scope.scheduler.listenerOrientation;
 		} else if (parameterUri == mobileRdfUri+"#StatsFrequency" || parameterTypeUri == mobileRdfUri+"#StatsFrequency") {
 			return owner.frequency;
 		} else if (parameterUri == mobileRdfUri+"#LeapingProbability" || parameterTypeUri == mobileRdfUri+"#LeapingProbability") {

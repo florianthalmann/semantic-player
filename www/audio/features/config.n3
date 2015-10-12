@@ -5,11 +5,11 @@
 @prefix ex: <#> .
 
 ex:beat a mb:Segmentation ;
-	mb:hasFeaturesPath "low.json" .
+	mb:hasFeaturesPath "sheago_barbeat.json" .
 
 ex:bar a mb:Segmentation ;
-	mb:hasFeaturesPath "low.json" ;
-	mb:isSubset "1".
+	mb:hasFeaturesPath "sheago_barbeat.json" ;
+	mb:isSubset "1" .
 
 ex:beatDMO a mb:DMO ;
 	mb:hasParameter ex:beat .
@@ -19,7 +19,7 @@ ex:barDMO a mb:DMO ;
 	mb:hasChild ex:beatDMO .
 
 ex:segmentedDMO a mb:DMO ;
-	mb:hasAudioPath "low.mp3" ;
+	mb:hasAudioPath "sheago.mp3" ;
 	mb:hasChild ex:barDMO .
 
 ex:beatMapping a mb:Mapping ;

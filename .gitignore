@@ -6,4 +6,7 @@ platforms/
 plugins/
 resources/android/
 resources/ios/
+www/lib/
 **/.DS_Store
+**/*.mp3
+**/*.m4a

@@ -1,7 +1,12 @@
-var Constants = {
+var MappingTypes = {
 	PRODUCT_MAPPING: 0,
 	SUM_MAPPING: 1
 };
+
+var DmoTypes = {
+	SEQUENCE: 0,
+	SIMULTANEITY: 1
+}
 
 var $http = angular.injector(['ng']).get('$http');
 
@@ -49,6 +54,8 @@ angular.module('semanticplayer', ['ionic'])
 		if ($scope.vars.selectedDmo) {
 			$scope.resetUI();
 			var dmoUri = "audio/"+$scope.vars.selectedDmo;
+			//var creator = new DmoCreator(dmoUri, $scope, $interval);
+			//creator.writeDmo("/test.n3");
 			var loader = new OntologyLoader(dmoUri, $scope, $interval);
 			loader.loadDmo("/config.n3");
 			//new OntologyLoader2(dmoUri, $scope, $interval, $rdf);

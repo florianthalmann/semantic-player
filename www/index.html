@@ -10,100 +10,101 @@
 
 	<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
 		<link href="css/ionic.app.css" rel="stylesheet">
-		-->
+	-->
 
-		<!-- ionic/angularjs/cordova and other libs js -->
-		<script src="lib/ionic/js/ionic.bundle.js"></script>
-		<script src="lib/ngCordova/dist/ng-cordova.js"></script>
-		<script src="cordova.js"></script>
-		<script src="lib/rdfstore/dist/rdfstore.js"></script>
-		<script src="lib/rdflib.js"></script>
-		<script src="lib/AudioSampleLoader.js"></script>
+	<!-- ionic/angularjs/cordova and other libs js -->
+	<script src="lib/ionic/js/ionic.bundle.js"></script>
+	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
+	<script src="cordova.js"></script>
+	<script src="lib/meyda/dist/web/meyda.js"></script>
+	<script src="lib/rdfstore/dist/rdfstore.js"></script>
+	<script src="lib/n3/n3-browser.js"></script>
+	<script src="lib/rdflib.js"></script>
+	<script src="lib/AudioSampleLoader.js"></script>
+	<script src="lib/dymo-core/logic/dymo.js"></script>
+	<script src="lib/dymo-core/logic/rendering.js"></script>
+	<script src="lib/dymo-core/logic/mapping.js"></script>
+	<script src="lib/dymo-core/logic/control.js"></script>
+	<script src="lib/dymo-core/logic/parameter.js"></script>
+	<script src="lib/dymo-core/logic/function.js"></script>
+	<script src="lib/dymo-core/audio/scheduler.js"></script>
+	<script src="lib/dymo-core/audio/source.js"></script>
 
-		<!-- your app's js -->
-		<script src="js/app.js"></script>
-		<script src="js/mapping.js"></script>
-		<script src="js/function.js"></script>
-		<script src="js/control.js"></script>
-		<script src="js/parameter.js"></script>
-		<script src="js/rendering.js"></script>
-		<script src="js/scheduler.js"></script>
-		<script src="js/source.js"></script>
-		<script src="js/dmo.js"></script>
-		<script src="js/track.js"></script>
-		<script src="js/watchers/accelerometerwatcher.js"></script>
-		<script src="js/watchers/geolocationwatcher.js"></script>
-		<script src="js/watchers/compasswatcher.js"></script>
-		<script src="js/watchers/statscontrols.js"></script>
-		<script src="js/watchers/graphcontrols.js"></script>
-		<script src="js/ontologyloader.js"></script>
-		<script src="js/ontologyloader-rdflib.js"></script>
-	</head>
-	<body ng-app="semanticplayer" ng-controller="renderingController">
-		<ion-pane>
-			<ion-header-bar class="bar-dark">
-				<h1 class="title">Semantic Player ({{ rendering.label }})</h1>
-			</ion-header-bar>
-			<ion-content>
-				<ion-list>
-					<ion-item class="item-input item-select item-dark">
-						<div class="input-label">
-							Select Dynamic Music Object
-						</div>
-						<select ng-model="vars.selectedDmo" ng-options="d as d.toString() for d in dmos" ng-change="dmoSelected()"></select>
-					</ion-item>
-					<ion-item>
-						<button class="button button-balanced" ng-disabled="loadingString()" ng-click="rendering.play()">
-							<i class="icon ion-play"></i>
-						</button>
-						<button class="button button-energized" ng-disabled="loadingString()" ng-click="rendering.pause()">
-							<i class="icon ion-pause"></i>
-						</button>
-						<button class="button button-assertive" ng-disabled="loadingString()" ng-click="rendering.stop()">
-							<i class="icon ion-stop"></i>
-						</button>
-						<span class="padding" ng-show="loadingString()">
-							{{ loadingString() }}
-							<ion-spinner></ion-spinner>
-						</span>
-					</ion-item>
-					<ion-item ng-if="u.type == 0" class="item range range-energized" ng-repeat="u in uiControls">
-						<div class="input-label">
-							{{ u.label }}
-						</div>
-						<input type="range" name="slider" min="0" max="1" step=".001" ng-model="u.value" ng-change="u.updateMappings()">
-					</ion-item>
-					<ion-toggle ng-if="u.type == 1" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.updateMappings()">
+	<!-- your app's js -->
+	<script src="js/app.js"></script>
+	<script src="js/ontologyloader.js"></script>
+	<script src="js/watchers/accelerometerwatcher.js"></script>
+	<script src="js/watchers/geolocationwatcher.js"></script>
+	<script src="js/watchers/compasswatcher.js"></script>
+	<script src="js/watchers/statscontrols.js"></script>
+	<script src="js/watchers/graphcontrols.js"></script>
+	<!--script src="js/ontologyloader-rdflib.js"></script-->
+</head>
+<body ng-app="semanticplayer" ng-controller="renderingController">
+	<ion-pane>
+		<ion-header-bar class="bar-dark">
+			<h1 class="title">Semantic Player ({{ rendering.label }})</h1>
+		</ion-header-bar>
+		<ion-content>
+			<ion-list>
+				<ion-item class="item-input item-select item-dark">
+					<div class="input-label">
+						Select Dynamic Music Object
+					</div>
+					<select ng-model="vars.selectedDmo" ng-options="d as d.toString() for d in dmos" ng-change="dmoSelected()"></select>
+				</ion-item>
+				<ion-item>
+					<button class="button button-balanced" ng-disabled="loadingString()" ng-click="rendering.play()">
+						<i class="icon ion-play"></i>
+					</button>
+					<button class="button button-energized" ng-disabled="loadingString()" ng-click="rendering.pause()">
+						<i class="icon ion-pause"></i>
+					</button>
+					<button class="button button-assertive" ng-disabled="loadingString()" ng-click="rendering.stop()">
+						<i class="icon ion-stop"></i>
+					</button>
+					<span class="padding" ng-show="loadingString()">
+						{{ loadingString() }}
+						<ion-spinner></ion-spinner>
+					</span>
+				</ion-item>
+				<ion-item ng-if="u.type == 0" class="item range range-energized" ng-repeat="u in uiControls">
+					<div class="input-label">
 						{{ u.label }}
-					</ion-toggle>
-					<ion-item>
-						<button class="button button-positive" ng-click="compassWatcher.reset(); geolocationWatcher.reset()">
-							Reset sensors
-						</button>
-						<button class="button button-royal" ng-click="toggleSensorData()">
-							Show sensor data
-						</button>
-					</ion-item>
-					<ion-item ng-show="showSensorData">
-						Latitude: {{ geolocationWatcher.latitudeControl.value }}<br>
-						Longitude: {{ geolocationWatcher.longitudeControl.value }}<br>
-						Distance: {{ geolocationWatcher.distanceControl.value }}<br>
-						Accuracy: {{ geolocationWatcher.accuracyControl.value }}<br><br>
-						
-						HeadingRef: {{ compassWatcher.headingControl.referenceValue }}<br>
-						Heading: {{ compassWatcher.headingControl.value }}<br>
-						TrueHeading: {{ compassWatcher.trueHeadingControl.value }}<br>
-						Accuracy: {{ compassWatcher.accuracyControl.value }}<br><br>
-						
-						AccelerometerX: {{ accelerometerWatcher.xControl.value }}<br>
-						AccelerometerY: {{ accelerometerWatcher.yControl.value }}<br>
-						AccelerometerZ: {{ accelerometerWatcher.zControl.value }}<br><br>
-						
-						Stats Random: {{ statsControls.randomControl.value }}<br>
-						Graph: {{ graphControls.nextNodeControl.value }}
-					</ion-item>
-				</ion-list>
-			</ion-content>
-		</ion-pane>
+					</div>
+					<input type="range" name="slider" min="0" max="1" step=".001" ng-model="u.value" ng-change="u.updateMappings()">
+				</ion-item>
+				<ion-toggle ng-if="u.type == 1" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.updateMappings()">
+					{{ u.label }}
+				</ion-toggle>
+				<ion-item>
+					<button class="button button-positive" ng-click="compassWatcher.reset(); geolocationWatcher.reset()">
+						Reset sensors
+					</button>
+					<button class="button button-royal" ng-click="toggleSensorData()">
+						Show sensor data
+					</button>
+				</ion-item>
+				<ion-item ng-show="showSensorData">
+					Latitude: {{ geolocationWatcher.latitudeControl.value }}<br>
+					Longitude: {{ geolocationWatcher.longitudeControl.value }}<br>
+					Distance: {{ geolocationWatcher.distanceControl.value }}<br>
+					Accuracy: {{ geolocationWatcher.accuracyControl.value }}<br><br>
+					
+					HeadingRef: {{ compassWatcher.headingControl.referenceValue }}<br>
+					Heading: {{ compassWatcher.headingControl.value }}<br>
+					TrueHeading: {{ compassWatcher.trueHeadingControl.value }}<br>
+					Accuracy: {{ compassWatcher.accuracyControl.value }}<br><br>
+					
+					AccelerometerX: {{ accelerometerWatcher.xControl.value }}<br>
+					AccelerometerY: {{ accelerometerWatcher.yControl.value }}<br>
+					AccelerometerZ: {{ accelerometerWatcher.zControl.value }}<br><br>
+					
+					Stats Random: {{ statsControls.randomControl.value }}<br>
+					Graph: {{ graphControls.nextNodeControl.value }}
+				</ion-item>
+			</ion-list>
+		</ion-content>
+	</ion-pane>
 </body>
 </html>
