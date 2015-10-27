@@ -60,11 +60,14 @@ angular.module('semanticplayer', ['ionic'])
 				$scope.sourcesReady = true;
 				$scope.$apply();
 			});
+			$scope.scheduler.setReverbFile("audio/impulse_rev.wav");
 			var loader = new DymoLoader($scope.scheduler, $scope, $interval);
 			loader.loadDymoFromJson(dmoUri + '/dymo.json', function(loadedDymo) {
 				loader.loadRenderingFromJson(dmoUri + '/rendering.json', loadedDymo[1], function(loadedRendering) {
 					$scope.rendering = loadedRendering[0];
 					$scope.rendering.dmo = loadedDymo[0];
+					$scope.uiControls = Object.keys(loadedRendering[1]).map(function (key) { return loadedRendering[1][key]; });
+					$scope.$apply();
 				}, $http);
 			}, $http);
 			//loader.loadDmo(dmoUri, "/config.n3");

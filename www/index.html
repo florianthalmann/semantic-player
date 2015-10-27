@@ -67,13 +67,13 @@
 						<ion-spinner></ion-spinner>
 					</span>
 				</ion-item>
-				<ion-item ng-if="u.type == 0" class="item range range-energized" ng-repeat="u in uiControls">
+				<ion-item ng-if="u.type == 'Slider'" class="item range range-energized" ng-repeat="u in uiControls">
 					<div class="input-label">
-						{{ u.label }}
+						{{ u.name }}
 					</div>
 					<input type="range" name="slider" min="0" max="1" step=".001" ng-model="u.value" ng-change="u.updateMappings()">
 				</ion-item>
-				<ion-toggle ng-if="u.type == 1" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.updateMappings()">
+				<ion-toggle ng-if="u.type == 'Toggle'" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.updateMappings()">
 					{{ u.label }}
 				</ion-toggle>
 				<ion-item>
