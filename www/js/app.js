@@ -32,7 +32,7 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["location", "spatial2", "features", "alfonso", "mixing", "beatgraph", "spatial"];
+	$scope.dmos = ["decomposition1", "decomposition", "location", "spatial2", "features", "alfonso", "mixing", "beatgraph", "spatial"];
 	
 	$scope.resetUI = function() {
 		$scope.mappingLoadingThreads = 0;
@@ -56,8 +56,19 @@ angular.module('semanticplayer', ['ionic'])
 			var dmoUri = "audio/"+$scope.vars.selectedDmo;
 			//var creator = new DmoCreator(dmoUri, $scope, $interval);
 			//creator.writeDmo("/test.n3");
-			var loader = new OntologyLoader(dmoUri, $scope, $interval);
-			loader.loadDmo("/config.n3");
+			$scope.scheduler = new Scheduler($scope.audioContext, function() {
+				$scope.sourcesReady = true;
+				$scope.$apply();
+			});
+			var loader = new DymoLoader($scope.scheduler, $scope, $interval);
+			loader.loadDymoFromJson(dmoUri + '/dymo.json', function(loadedDymo) {
+				loader.loadRenderingFromJson(dmoUri + '/rendering.json', loadedDymo[1], function(loadedRendering) {
+					$scope.rendering = loadedRendering[0];
+					$scope.rendering.dmo = loadedDymo[0];
+				}, $http);
+			}, $http);
+			//loader.loadDmo(dmoUri, "/config.n3");
+			
 			//new OntologyLoader2(dmoUri, $scope, $interval, $rdf);
 		}
 	}

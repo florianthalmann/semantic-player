@@ -53,13 +53,13 @@
 					<select ng-model="vars.selectedDmo" ng-options="d as d.toString() for d in dmos" ng-change="dmoSelected()"></select>
 				</ion-item>
 				<ion-item>
-					<button class="button button-balanced" ng-disabled="loadingString()" ng-click="rendering.play()">
+					<button class="button button-balanced" ng-disabled="loadingString()" ng-click="scheduler.play(rendering.dmo)">
 						<i class="icon ion-play"></i>
 					</button>
 					<button class="button button-energized" ng-disabled="loadingString()" ng-click="rendering.pause()">
 						<i class="icon ion-pause"></i>
 					</button>
-					<button class="button button-assertive" ng-disabled="loadingString()" ng-click="rendering.stop()">
+					<button class="button button-assertive" ng-disabled="loadingString()" ng-click="scheduler.stop(rendering.dmo)">
 						<i class="icon ion-stop"></i>
 					</button>
 					<span class="padding" ng-show="loadingString()">
