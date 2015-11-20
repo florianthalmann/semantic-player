@@ -32,7 +32,7 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["decomposition1", "decomposition", "location", "spatial2", "features", "alfonso", "mixing", "beatgraph", "spatial"];
+	$scope.dmos = ["beatmatch","decomposition", "decomposition1", "location", "spatial2", "features", "alfonso", "mixing", "beatgraph", "spatial"];
 	
 	$scope.resetUI = function() {
 		$scope.mappingLoadingThreads = 0;
