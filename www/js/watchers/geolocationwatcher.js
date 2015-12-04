@@ -1,7 +1,9 @@
 function GeolocationWatcher($scope) {
 	
-	var latitudeControl = new Control(5);
-	var longitudeControl = new Control(5);
+	var latitudeControl = new Control();
+	latitudeControl.setReferenceAverageCount(5);
+	var longitudeControl = new Control();
+	longitudeControl.setReferenceAverageCount(5);
 	var accuracyControl = new Control();
 	var distanceControl = new Control();
 	this.latitudeControl = latitudeControl;

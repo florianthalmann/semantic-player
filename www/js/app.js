@@ -66,7 +66,7 @@ angular.module('semanticplayer', ['ionic'])
 				loader.loadRenderingFromJson(dmoUri + '/rendering.json', loadedDymo[1], function(loadedRendering) {
 					$scope.rendering = loadedRendering[0];
 					$scope.rendering.dmo = loadedDymo[0];
-					$scope.uiControls = Object.keys(loadedRendering[1]).map(function (key) { return loadedRendering[1][key]; });
+					$scope.uiControls = Object.keys(loadedRendering[1]).map(function (key) { return new UIControl(loadedRendering[1][key], $scope); });
 					$scope.$apply();
 				}, $http);
 			}, $http);

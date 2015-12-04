@@ -15,6 +15,7 @@
 	<!-- ionic/angularjs/cordova and other libs js -->
 	<script src="lib/ionic/js/ionic.bundle.js"></script>
 	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
+	<script src="lib/mathjs/dist/math.js"></script>
 	<script src="cordova.js"></script>
 	<!--script src="lib/meyda/dist/web/meyda.js"></script-->
 	<script src="lib/rdfstore/dist/rdfstore.js"></script>
@@ -27,17 +28,20 @@
 	<script src="lib/dymo-core/logic/control.js"></script>
 	<script src="lib/dymo-core/logic/parameter.js"></script>
 	<script src="lib/dymo-core/logic/function.js"></script>
+	<script src="lib/dymo-core/math/functioninverter.js"></script>
 	<script src="lib/dymo-core/audio/scheduler.js"></script>
 	<script src="lib/dymo-core/audio/source.js"></script>
 	<script src="lib/dymo-core/io/dymoloader.js"></script>
+	<script src="lib/dymo-core/controls/statscontrols.js"></script>
+	<script src="lib/dymo-core/controls/browniancontrols.js"></script>
+	<script src="lib/dymo-core/controls/graphcontrols.js"></script>
 
 	<!-- your app's js -->
 	<script src="js/app.js"></script>
+	<script src="js/uicontrol.js"></script>
 	<script src="js/watchers/accelerometerwatcher.js"></script>
 	<script src="js/watchers/geolocationwatcher.js"></script>
 	<script src="js/watchers/compasswatcher.js"></script>
-	<script src="js/watchers/statscontrols.js"></script>
-	<script src="js/watchers/graphcontrols.js"></script>
 	<!--script src="js/ontologyloader-rdflib.js"></script-->
 </head>
 <body ng-app="semanticplayer" ng-controller="renderingController">
@@ -68,14 +72,14 @@
 						<ion-spinner></ion-spinner>
 					</span>
 				</ion-item>
-				<ion-item ng-if="u.type == 'Slider'" class="item range range-energized" ng-repeat="u in uiControls">
+				<ion-item ng-if="u.getType() == 'Slider'" class="item range range-energized" ng-repeat="u in uiControls">
 					<div class="input-label">
-						{{ u.name }}
+						{{ u.getName() }}
 					</div>
-					<input type="range" name="slider" min="0" max="1" step=".001" ng-model="u.value" ng-change="u.updateMappings()">
+					<input type="range" name="slider" min="0" max="1" step=".001" ng-model="u.value" ng-change="u.update()">
 				</ion-item>
-				<ion-toggle ng-if="u.type == 'Toggle'" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.updateMappings()">
-					{{ u.label }}
+				<ion-toggle ng-if="u.getType() == 'Toggle'" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.update()">
+					{{ u.getName() }}
 				</ion-toggle>
 				<ion-item>
 					<button class="button button-positive" ng-click="compassWatcher.reset(); geolocationWatcher.reset()">
