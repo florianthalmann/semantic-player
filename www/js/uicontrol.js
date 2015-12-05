@@ -3,9 +3,10 @@
  */
 function UIControl(control, $scope) {
 	
+	var self = this;
+	
 	this.value = control.getValue();
 	control.setUpdateFunction(updateFunction);
-	var count = 0;
 	
 	this.getName = function() {
 		return control.getName();
@@ -16,15 +17,14 @@ function UIControl(control, $scope) {
 	}
 	
 	this.update = function() {
-		if (count % 10 == 0) {
-			control.update(this.value);
-		}
-		count++;
+		control.update(this.value);
 	}
 	
 	function updateFunction(newValue) {
-		this.value = newValue;
-		//$scope.$apply();
+		self.value = newValue;
+		setTimeout(function() {
+			$scope.$apply();
+		}, 10);
 	}
 	
 }
