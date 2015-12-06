@@ -1,13 +1,3 @@
-var MappingTypes = {
-	PRODUCT_MAPPING: 0,
-	SUM_MAPPING: 1
-};
-
-var DmoTypes = {
-	SEQUENCE: 0,
-	SIMULTANEITY: 1
-}
-
 var $http = angular.injector(['ng']).get('$http');
 
 angular.module('semanticplayer', ['ionic'])
@@ -24,7 +14,7 @@ angular.module('semanticplayer', ['ionic'])
 	});
 })
 
-.controller('renderingController', function($scope, $interval) {
+.controller('renderingController', function($scope) {
 	
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	$scope.audioContext = new AudioContext();
@@ -44,9 +34,6 @@ angular.module('semanticplayer', ['ionic'])
 		$scope.accelerometerWatcher = null;
 		$scope.geolocationWatcher = null;
 		$scope.compassWatcher = null;
-		$scope.statsControls = {};
-		$scope.brownianControls = {};
-		$scope.graphControls = {};
 		$scope.uiControls = {};
 		$scope.mappings = {};
 	}
@@ -62,14 +49,15 @@ angular.module('semanticplayer', ['ionic'])
 				$scope.$apply();
 			});
 			$scope.scheduler.setReverbFile("audio/impulse_rev.wav");
-			var loader = new DymoLoader($scope.scheduler, $scope, $interval);
+			var loader = new DymoLoader($scope.scheduler, $scope);
 			loader.loadDymoFromJson(dmoUri + '/dymo.json', function(loadedDymo) {
 				loader.loadRenderingFromJson(dmoUri + '/rendering.json', loadedDymo[1], function(loadedRendering) {
 					$scope.rendering = loadedRendering[0];
 					$scope.rendering.dmo = loadedDymo[0];
 					for (var key in loadedRendering[1]) {
-						if (UI_CONTROLS.indexOf(loadedRendering[1][key].getType()) >= 0) {
-							$scope.uiControls[key] = new UIControl(loadedRendering[1][key], $scope);
+						var currentControl = loadedRendering[1][key];
+						if (UI_CONTROLS.indexOf(currentControl.getType()) >= 0) {
+							$scope.uiControls[key] = new UIControl(currentControl, $scope);
 						}
 					}
 					$scope.$apply();

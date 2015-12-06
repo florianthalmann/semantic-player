@@ -1,1 +1,1 @@
-{"@id":"dymo368","@type":"Dymo","ct":"parallel","parts":[],"similars":[],"level":{"value":0,"adt":"Level"},"@context":"http://purl.org/ontology/dymo/context.json"}
+{"@id":"dymo368","@type":"Dymo","ct":"parallel","mappings":[{"domainDims":[{"name":"f","type":"Brownian"}],"function":"new Function(\"a\", \"return a;\");","dymos":["dymo368"],"parameter":"Amplitude"}],"parts":[],"similars":[],"level":{"value":0,"adt":"Level"},"@context":"http://purl.org/ontology/dymo/context.json"}
