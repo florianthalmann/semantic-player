@@ -22,7 +22,7 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["beatmatch","decomposition", "decomposition1", "location", "spatial2", "features", "alfonso", "mixing", "beatgraph", "spatial"];
+	$scope.dmos = ["mixing"];
 	
 	$scope.resetUI = function() {
 		$scope.mappingLoadingThreads = 0;
@@ -41,16 +41,16 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.dmoSelected = function() {
 		if ($scope.vars.selectedDmo) {
 			$scope.resetUI();
-			var dmoUri = "audio/"+$scope.vars.selectedDmo;
+			var dmoUri = "dymos/"+$scope.vars.selectedDmo;
 			//var creator = new DmoCreator(dmoUri, $scope, $interval);
 			//creator.writeDmo("/test.n3");
 			$scope.scheduler = new Scheduler($scope.audioContext, function() {
 				$scope.sourcesReady = true;
 				$scope.$apply();
 			});
-			$scope.scheduler.setReverbFile("audio/impulse_rev.wav");
+			$scope.scheduler.setReverbFile("lib/dymo-core/audio/impulse_rev.wav");
 			var loader = new DymoLoader($scope.scheduler, $scope);
-			loader.loadDymoFromJson(dmoUri + '/dymo.json', function(loadedDymo) {
+			loader.loadDymoFromJson(dmoUri+'/', 'dymo.json', function(loadedDymo) {
 				loader.loadRenderingFromJson(dmoUri + '/rendering.json', loadedDymo[1], function(loadedRendering) {
 					$scope.rendering = loadedRendering[0];
 					$scope.rendering.dmo = loadedDymo[0];

@@ -1,1 +1,0 @@
-{"mappings":[{"domainDims":[{"name":"fade","type":"Slider"}],"function":"new Function(\"a\", \"return a;\");","dymos":["dymo368"],"parameter":"Amplitude"},{"domainDims":[{"name":"fade2","type":"Slider"}],"function":"new Function(\"a\", \"return (1-a)*2-1;\");","dymos":["dymo368"],"parameter":"Amplitude"}]}
