@@ -1,14 +1,64 @@
 {
-	"@id":"mix",
+	"@id":"demoBeat",
 	"@type":"Dymo",
 	"ct":"parallel",
+	"mappings":[
+		{
+			"domainDims":[{"name":"Rhythmicality","type":"Parameter"}],
+			"function":"new Function(\"a\", \"return a/4;\");",
+			"dymos":["bass", "drums", "flav"],
+			"parameter":"Amplitude"
+		},
+		{
+			"domainDims":[{"name":"Rhythmicality","type":"Parameter"}],
+			"function":"new Function(\"a\", \"return 0.2-a;\");",
+			"dymos":["blib", "pad"],
+			"parameter":"Amplitude"
+		},
+		{
+			"domainDims":[{"name":"Space","type":"Parameter"}],
+			"function":"new Function(\"a\", \"return 2*a-1;\");",
+			"dymos":["piano"],
+			"parameter":"Pan"
+		},
+		{
+			"domainDims":[{"name":"Space","type":"Parameter"}],
+			"function":"new Function(\"a\", \"return -2*a+1;\");",
+			"dymos":["pad"],
+			"parameter":"Pan"
+		},
+		{
+			"domainDims":[{"name":"Space","type":"Parameter"}],
+			"function":"new Function(\"a\", \"return 0.5*a;\");",
+			"dymos":["piano", "pad", "drums", "bass"],
+			"parameter":"Reverb"
+		},
+		{
+			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
+			"function":"new Function(\"a\", \"b\", \"return 1+a*(b*2-1);\");",
+			"dymos":["blib"],
+			"parameter":"PlaybackRate"
+		},
+		{
+			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
+			"function":"new Function(\"a\", \"b\", \"return a*(b-0.5);\");",
+			"dymos":["piano", "flav"],
+			"parameter":"Pan"
+		},
+		{
+			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
+			"function":"new Function(\"a\", \"b\", \"return a*(-b+0.5);\");",
+			"dymos":["pad", "drums"],
+			"parameter":"Pan"
+		}
+	],
 	"parts":[
 		{
 			"@id":"pad",
 			"@type":"Dymo",
 			"parts":[],
 			"source":"pad.m4a",
-			"Loop":{"value":0,"type":"Parameter"},
+			"Loop":{"value":1,"type":"Parameter"},
 			"Amplitude":{"value":0.2,"type":"Parameter"},
 			"PlaybackRate":{"value":1,"type":"Parameter"}
 		},
@@ -17,7 +67,7 @@
 			"@type":"Dymo",
 			"parts":[],
 			"source":"piano.m4a",
-			"Loop":{"value":0,"type":"Parameter"},
+			"Loop":{"value":1,"type":"Parameter"},
 			"Amplitude":{"value":0.2,"type":"Parameter"},
 			"Reverb":{"value":0.2,"type":"Parameter"},
 			"PlaybackRate":{"value":1,"type":"Parameter"}
@@ -29,6 +79,7 @@
 			"source":"bass.m4a",
 			"Loop":{"value":1,"type":"Parameter"},
 			"Amplitude":{"value":0,"type":"Parameter"},
+			"Reverb":{"value":0.2,"type":"Parameter"},
 			"PlaybackRate":{"value":1,"type":"Parameter"}
 		},
 		{
