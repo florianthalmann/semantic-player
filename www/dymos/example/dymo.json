@@ -12,7 +12,7 @@
 		{
 			"domainDims":[{"name":"Rhythmicality","type":"Parameter"}],
 			"function":"new Function(\"a\", \"return 0.2-a;\");",
-			"dymos":["blib", "pad"],
+			"dymos":["pad"],
 			"parameter":"Amplitude"
 		},
 		{
@@ -29,14 +29,20 @@
 		},
 		{
 			"domainDims":[{"name":"Space","type":"Parameter"}],
-			"function":"new Function(\"a\", \"return 0.5*a;\");",
-			"dymos":["piano", "pad", "drums", "bass"],
+			"function":"new Function(\"a\", \"return 5*a;\");",
+			"dymos":["piano", "pad"],
+			"parameter":"Reverb"
+		},
+		{
+			"domainDims":[{"name":"Space","type":"Parameter"}],
+			"function":"new Function(\"a\", \"return a;\");",
+			"dymos":["drums", "bass"],
 			"parameter":"Reverb"
 		},
 		{
 			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
 			"function":"new Function(\"a\", \"b\", \"return 1+a*(b*2-1);\");",
-			"dymos":["blib"],
+			"dymos":["blib","piano", "pad", "drums", "bass","flav"],
 			"parameter":"PlaybackRate"
 		},
 		{
