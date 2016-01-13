@@ -1,0 +1,68 @@
+{
+	"topDymo":"mix",
+	"mappings":[
+		{
+			"domainDims":[{
+				"name":"Amp",
+				"type":"Slider"
+			}],
+			"function":"new Function(\"a\", \"return a/4;\");",
+			"dymos":["bass", "drums"],
+			"parameter":"Amplitude"
+		},
+		{
+			"domainDims":[{
+				"name":"Amp",
+				"type":"Slider"
+			}],
+			"function":"new Function(\"a\", \"return a/12;\");",
+			"dymos":["bass"],
+			"parameter":"Reverb"
+		},
+		{
+			"domainDims":[{
+				"name":"Rate",
+				"type":"Slider"
+			}],
+			"function":"new Function(\"a\", \"return a*2;\");",
+			"dymos":["blib"],
+			"parameter":"PlaybackRate"
+		},
+		{
+			"domainDims":[{
+				"name":"Panverb",
+				"type":"Slider"
+			}],
+			"function":"new Function(\"a\", \"return a*2-1;\");",
+			"dymos":["pad"],
+			"parameter":"Pan"
+		},
+		{
+			"domainDims":[{
+				"name":"Panverb",
+				"type":"Slider"
+			}],
+			"function":"new Function(\"a\", \"return Math.abs(0.5-a);\");",
+			"dymos":["piano", "pad"],
+			"parameter":"Reverb"
+		},
+		{
+			"domainDims":[{
+				"name":"Flav",
+				"type":"Slider"
+			}],
+			"function":"new Function(\"a\", \"return a/4;\");",
+			"dymos":["flav"],
+			"parameter":"Amplitude"
+		},
+		{
+			"domainDims":[{
+				"name":"Flav",
+				"type":"Slider"
+			}],
+			"function":"new Function(\"a\", \"return a/12;\");",
+			"dymos":["flav"],
+			"parameter":"Reverb"
+		}
+	]
+}

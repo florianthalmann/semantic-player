@@ -25,12 +25,13 @@ and finally:
 ```bash
 $ ionic serve
 ```
-to start the local server.
 
-Navigate to your browser to test the example dymo.
+Now you can navigate to http://localhost:8100 in your browser to view the example dymo.
 
 Check out the [Ionic docs](http://ionicframework.com/docs/cli/run.html) to find out how to build the app and run it on a mobile phone.
 
 ## Creating your own dymos
 
-Add any of the [example dymos](https://github.com/florianthalmann/example-dymos.git) to the folder `www/dymos/` in the semantic-player project or build your own dymo.
+Add any of the [example dymos](https://github.com/florianthalmann/example-dymos.git) to the folder `www/dymos/` in the semantic-player project or build your own dymo, either by using the [Dymo Designer](https://github.com/florianthalmann/dymo-designer.git) or by defining files manually as described in the [dymo-core readme](https://github.com/florianthalmann/dymo-core.git).
+
+Declare the added dymos in the `www/dymos/dymos.json` file by adding their folder name to the `"uris"` list.

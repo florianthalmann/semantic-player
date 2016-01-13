@@ -22,7 +22,6 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.showSensorData = false;
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
-	$scope.dmos = ["mixing"];
 	
 	$scope.resetUI = function() {
 		$scope.mappingLoadingThreads = 0;
@@ -38,22 +37,20 @@ angular.module('semanticplayer', ['ionic'])
 		$scope.mappings = {};
 	}
 	
-	$scope.dmoSelected = function() {
-		if ($scope.vars.selectedDmo) {
+	$scope.dymoSelected = function() {
+		if ($scope.vars.selectedDymo) {
 			$scope.resetUI();
-			var dmoUri = "dymos/"+$scope.vars.selectedDmo;
-			//var creator = new DmoCreator(dmoUri, $scope, $interval);
-			//creator.writeDmo("/test.n3");
+			var dymoUri = "dymos/"+$scope.vars.selectedDymo;
 			$scope.scheduler = new Scheduler($scope.audioContext, function() {
 				$scope.sourcesReady = true;
 				$scope.$apply();
 			});
 			$scope.scheduler.setReverbFile("lib/dymo-core/audio/impulse_rev.wav");
 			var loader = new DymoLoader($scope.scheduler, $scope);
-			loader.loadDymoFromJson(dmoUri+'/', 'dymo.json', function(loadedDymo) {
-				loader.loadRenderingFromJson(dmoUri + '/rendering.json', loadedDymo[1], function(loadedRendering) {
+			loader.loadDymoFromJson(dymoUri+'/', 'dymo.json', function(loadedDymo) {
+				loader.loadRenderingFromJson(dymoUri + '/rendering.json', loadedDymo[1], function(loadedRendering) {
 					$scope.rendering = loadedRendering[0];
-					$scope.rendering.dmo = loadedDymo[0];
+					$scope.rendering.dymo = loadedDymo[0];
 					for (var key in loadedRendering[1]) {
 						var currentControl = loadedRendering[1][key];
 						if (UI_CONTROLS.indexOf(currentControl.getType()) >= 0) {
@@ -63,9 +60,6 @@ angular.module('semanticplayer', ['ionic'])
 					$scope.$apply();
 				}, $http);
 			}, $http);
-			//loader.loadDmo(dmoUri, "/config.n3");
-			
-			//new OntologyLoader2(dmoUri, $scope, $interval, $rdf);
 		}
 	}
 	
@@ -84,12 +78,15 @@ angular.module('semanticplayer', ['ionic'])
 		return null;
 	}
 	
-	//INIT SELECTION
-	$scope.vars.selectedDmo = $scope.dmos[0];
-	$scope.dmoSelected();
-	
 	$scope.toggleSensorData = function() {
 		$scope.showSensorData = !$scope.showSensorData;
 	}
+	
+	//INIT SELECTION based on saved dymo list
+	$http.get('dymos/dymos.json').success(function(data) {
+		$scope.dymos = data.uris;
+		$scope.vars.selectedDymo = $scope.dymos[0];
+		$scope.dymoSelected();
+	});
 	
 });
