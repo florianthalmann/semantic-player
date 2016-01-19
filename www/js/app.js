@@ -14,7 +14,7 @@ angular.module('semanticplayer', ['ionic'])
 	});
 })
 
-.controller('renderingController', function($scope) {
+.controller('renderingController', function($scope, $ionicLoading) {
 	
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	$scope.audioContext = new AudioContext();
@@ -23,9 +23,10 @@ angular.module('semanticplayer', ['ionic'])
 	//container for model primitives (angular needs an object to contain them!?)
 	$scope.vars = {};
 	
+	var loadingAudio = false;
+	var loadingDymoAndRendering = false;
+	
 	$scope.resetUI = function() {
-		$scope.mappingLoadingThreads = 0;
-		$scope.featureLoadingThreads = 0;
 		if ($scope.rendering) {
 			$scope.rendering.stop();
 		}
@@ -35,20 +36,27 @@ angular.module('semanticplayer', ['ionic'])
 		$scope.compassWatcher = null;
 		$scope.uiControls = {};
 		$scope.mappings = {};
+		loadingString = null;
 	}
 	
 	$scope.dymoSelected = function() {
 		if ($scope.vars.selectedDymo) {
 			$scope.resetUI();
+			loadingAudio = true;
+			$scope.updateLoading();
 			var dymoUri = "dymos/"+$scope.vars.selectedDymo;
 			$scope.scheduler = new Scheduler($scope.audioContext, function() {
 				$scope.sourcesReady = true;
+				loadingAudio = false;
+				$scope.updateLoading();
 				$scope.$apply();
 			});
 			$scope.scheduler.setReverbFile("lib/dymo-core/audio/impulse_rev.wav");
-			var loader = new DymoLoader($scope.scheduler, $scope);
+			loadingDymoAndRendering = true;
+			$scope.updateLoading();
+			var loader = new DymoLoader($scope.scheduler, $scope, $http);
 			loader.loadDymoFromJson(dymoUri+'/', 'dymo.json', function(loadedDymo) {
-				loader.loadRenderingFromJson(dymoUri + '/rendering.json', loadedDymo[1], function(loadedRendering) {
+				loader.loadRenderingFromJson('rendering.json', loadedDymo[1], function(loadedRendering) {
 					$scope.rendering = loadedRendering[0];
 					$scope.rendering.dymo = loadedDymo[0];
 					for (var key in loadedRendering[1]) {
@@ -57,25 +65,26 @@ angular.module('semanticplayer', ['ionic'])
 							$scope.uiControls[key] = new UIControl(currentControl, $scope);
 						}
 					}
+					loadingDymoAndRendering = false;
+					$scope.updateLoading();
 					$scope.$apply();
 				}, $http);
 			}, $http);
 		}
 	}
 	
-	$scope.loadingString = function() {
-		var loadedObjectString;
-		if (!$scope.sourcesReady) {
-			loadedObjectString = "audio";
-		} else if ($scope.mappingLoadingThreads && $scope.mappingLoadingThreads > 0) {
-			loadedObjectString = "ontologies (mappings)";
-		} else if ($scope.featureLoadingThreads && $scope.featureLoadingThreads > 0) {
-			loadedObjectString = "ontologies (features)";
+	$scope.updateLoading = function() {
+		if (loadingAudio) {
+			$ionicLoading.show({
+				template: 'Loading audio...'
+			});
+		} else if (loadingDymoAndRendering) {
+			$ionicLoading.show({
+				template: 'Loading mappings...'
+			});
+		} else {
+			$ionicLoading.hide();
 		}
-		if (loadedObjectString) {
-			return "Loading " + loadedObjectString + "..."
-		}
-		return null;
 	}
 	
 	$scope.toggleSensorData = function() {

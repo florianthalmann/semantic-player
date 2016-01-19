@@ -17,7 +17,16 @@ function UIControl(control, $scope) {
 	}
 	
 	this.update = function() {
-		control.update(this.value);
+		if (control.getType() == BUTTON) {
+			this.value = 1-this.value;
+		}
+		if (this.value == true) {
+			control.update(1);
+		} else if (this.value == false) {
+			control.update(0);
+		} else {
+			control.update(this.value);
+		}
 	}
 	
 	function updateFunction(newValue) {

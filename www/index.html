@@ -34,7 +34,7 @@
 	<script src="lib/dymo-core/io/dymoloader.js"></script>
 	<script src="lib/dymo-core/controls/statscontrols.js"></script>
 	<script src="lib/dymo-core/controls/browniancontrols.js"></script>
-	<script src="lib/dymo-core/controls/graphcontrols.js"></script>
+	<script src="lib/dymo-core/controls/rampcontrols.js"></script>
 	<script src="lib/dymo-core/navigators/sequential.js"></script>
 	<script src="lib/dymo-core/navigators/similarity.js"></script>
 
@@ -60,19 +60,15 @@
 					<select ng-model="vars.selectedDymo" ng-options="d as d.toString() for d in dymos" ng-change="dymoSelected()"></select>
 				</ion-item>
 				<ion-item>
-					<button class="button button-balanced" ng-disabled="loadingString()" ng-click="scheduler.play(rendering.dymo)">
+					<button class="button button-balanced" ng-click="scheduler.play(rendering.dymo)">
 						<i class="icon ion-play"></i>
 					</button>
-					<button class="button button-energized" ng-disabled="loadingString()" ng-click="rendering.pause()">
+					<button class="button button-energized" ng-click="rendering.pause()">
 						<i class="icon ion-pause"></i>
 					</button>
-					<button class="button button-assertive" ng-disabled="loadingString()" ng-click="scheduler.stop(rendering.dymo)">
+					<button class="button button-assertive" ng-click="scheduler.stop(rendering.dymo)">
 						<i class="icon ion-stop"></i>
 					</button>
-					<span class="padding" ng-show="loadingString()">
-						{{ loadingString() }}
-						<ion-spinner></ion-spinner>
-					</span>
 				</ion-item>
 				<ion-item ng-if="u.getType() == &apos;Slider&apos;" class="item range range-energized" ng-repeat="u in uiControls">
 					<div class="input-label">
@@ -83,6 +79,11 @@
 				<ion-toggle ng-if="u.getType() == &apos;Toggle&apos;" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.update()">
 					{{ u.getName() }}
 				</ion-toggle>
+				<ion-item ng-if="u.getType() == &apos;Button&apos;" ng-repeat="u in uiControls">
+					<button class="button button-calm" ng-model="u.value" ng-click="u.update()">
+						{{ u.getName() }}
+					</button>
+				</ion-item>
 				<ion-item>
 					<button class="button button-positive" ng-click="compassWatcher.reset(); geolocationWatcher.reset()">
 						Reset sensors
