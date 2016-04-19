@@ -1,10 +1,12 @@
 {
   "name": "SemanticPlayer",
   "private": "true",
+  "dependencies": {
+    "dymo-core": "*"
+  },
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#v1.0.0",
     "browser": "~0.7.2",
-    "ngCordova": "~0.1.23-alpha",
-    "dymo-core": "*"
+    "ngCordova": "~0.1.23-alpha"
   }
 }

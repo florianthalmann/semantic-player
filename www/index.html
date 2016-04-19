@@ -12,44 +12,22 @@
 		<link href="css/ionic.app.css" rel="stylesheet">
 	-->
 
-	<!-- ionic/angularjs/cordova and other libs js -->
+	<!-- ionic/angularjs/cordova, dymo-core, and other libs js -->
 	<script src="lib/ionic/js/ionic.bundle.js"></script>
 	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
 	<script src="lib/mathjs/dist/math.js"></script>
-	<script src="lib/rdfstore/dist/rdfstore.js"></script>
-	<script src="lib/dymo-core/lib/soundtouch-js/soundtouch-min.js"></script>
-	<script src="lib/dymo-core/io/globals.js"></script>
-	<script src="lib/dymo-core/lib/AudioSampleLoader.js"></script>
-	<script src="lib/dymo-core/logic/dymo.js"></script>
-	<script src="lib/dymo-core/logic/rendering.js"></script>
-	<script src="lib/dymo-core/logic/mapping.js"></script>
-	<script src="lib/dymo-core/logic/control.js"></script>
-	<script src="lib/dymo-core/logic/parameter.js"></script>
-	<script src="lib/dymo-core/logic/function.js"></script>
-	<script src="lib/dymo-core/math/functioninverter.js"></script>
-	<script src="lib/dymo-core/math/polygontools.js"></script>
-	<script src="lib/dymo-core/audio/scheduler.js"></script>
-	<script src="lib/dymo-core/audio/source.js"></script>
-	<script src="lib/dymo-core/audio/processor.js"></script>
-	<script src="lib/dymo-core/io/dymoloader.js"></script>
-	<script src="lib/dymo-core/controls/statscontrols.js"></script>
-	<script src="lib/dymo-core/controls/browniancontrols.js"></script>
-	<script src="lib/dymo-core/controls/rampcontrols.js"></script>
-	<script src="lib/dymo-core/navigators/sequential.js"></script>
-	<script src="lib/dymo-core/navigators/similarity.js"></script>
+	<script src="lib/dymo-core/dist/dymo-core.min.js"></script>
 
 	<!-- semantic player's js -->
 	<script src="js/app.js"></script>
-	<script src="js/uicontrol.js"></script>
 	<script src="js/watchers/accelerometerwatcher.js"></script>
 	<script src="js/watchers/geolocationwatcher.js"></script>
 	<script src="js/watchers/compasswatcher.js"></script>
-	<!--script src="js/ontologyloader-rdflib.js"></script-->
 </head>
 <body ng-app="semanticplayer" ng-controller="renderingController">
 	<ion-pane>
 		<ion-header-bar class="bar-dark">
-			<h1 class="title">Semantic Player ({{ rendering.label }})</h1>
+			<h1 class="title">Semantic Music Player</h1>
 		</ion-header-bar>
 		<ion-content>
 			<ion-list>
@@ -60,13 +38,13 @@
 					<select ng-model="vars.selectedDymo" ng-options="d as d.toString() for d in dymos" ng-change="dymoSelected()"></select>
 				</ion-item>
 				<ion-item>
-					<button class="button button-balanced" ng-click="scheduler.play(rendering.dymo)">
+					<button class="button button-balanced" ng-click="manager.startPlaying()">
 						<i class="icon ion-play"></i>
 					</button>
-					<button class="button button-energized" ng-click="rendering.pause()">
+					<button class="button button-energized" ng-click="manager.pausePlaying()">
 						<i class="icon ion-pause"></i>
 					</button>
-					<button class="button button-assertive" ng-click="scheduler.stop(rendering.dymo)">
+					<button class="button button-assertive" ng-click="manager.stopPlaying()">
 						<i class="icon ion-stop"></i>
 					</button>
 				</ion-item>

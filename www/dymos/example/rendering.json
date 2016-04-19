@@ -1,10 +1,14 @@
 {
-	"topDymo":"demoBeat",
+	"@context":"http://tiny.cc/dymo-context",
+	"@id":"demoBeatRendering",
+	"@type":"Rendering",
+	"dymo":"demoBeat",
 	"mappings":[
 		{
 			"domainDims":[{
 				"name":"Rhythmicality",
-				"type":"Slider"
+				"type":"Slider",
+				"value":0
 			}],
 			"dymos":["demoBeat"],
 			"parameter":"Rhythmicality"

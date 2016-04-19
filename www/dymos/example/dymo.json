@@ -1,59 +1,60 @@
 {
+	"@context":"http://tiny.cc/dymo-context",
 	"@id":"demoBeat",
 	"@type":"Dymo",
 	"ct":"parallel",
 	"mappings":[
 		{
 			"domainDims":[{"name":"Rhythmicality","type":"Parameter"}],
-			"function":"new Function(\"a\", \"return a/4;\");",
+			"function":{"args":["a"],"body":"return a/4;"},
 			"dymos":["bass", "drums", "flav"],
 			"parameter":"Amplitude"
 		},
 		{
 			"domainDims":[{"name":"Rhythmicality","type":"Parameter"}],
-			"function":"new Function(\"a\", \"return 0.2-a;\");",
+			"function":{"args":["a"],"body":"return 0.2-a;"},
 			"dymos":["pad"],
 			"parameter":"Amplitude"
 		},
 		{
 			"domainDims":[{"name":"Space","type":"Parameter"}],
-			"function":"new Function(\"a\", \"return 2*a-1;\");",
+			"function":{"args":["a"],"body":"return 2*a-1;"},
 			"dymos":["piano"],
 			"parameter":"Pan"
 		},
 		{
 			"domainDims":[{"name":"Space","type":"Parameter"}],
-			"function":"new Function(\"a\", \"return -2*a+1;\");",
+			"function":{"args":["a"],"body":"return -2*a+1;"},
 			"dymos":["pad"],
 			"parameter":"Pan"
 		},
 		{
 			"domainDims":[{"name":"Space","type":"Parameter"}],
-			"function":"new Function(\"a\", \"return 5*a;\");",
+			"function":{"args":["a"],"body":"return 5*a;"},
 			"dymos":["piano", "pad"],
 			"parameter":"Reverb"
 		},
 		{
 			"domainDims":[{"name":"Space","type":"Parameter"}],
-			"function":"new Function(\"a\", \"return a;\");",
+			"function":{"args":["a"],"body":"return a;"},
 			"dymos":["drums", "bass"],
 			"parameter":"Reverb"
 		},
 		{
 			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
-			"function":"new Function(\"a\", \"b\", \"return 1+a*(b*2-1);\");",
+			"function":{"args":["a","b"],"body":"return 1+a*(b*2-1);"},
 			"dymos":["blib","piano", "pad", "drums", "bass","flav"],
 			"parameter":"PlaybackRate"
 		},
 		{
 			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
-			"function":"new Function(\"a\", \"b\", \"return a*(b-0.5);\");",
+			"function":{"args":["a","b"],"body":"return a*(b-0.5);"},
 			"dymos":["piano", "flav"],
 			"parameter":"Pan"
 		},
 		{
 			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
-			"function":"new Function(\"a\", \"b\", \"return a*(-b+0.5);\");",
+			"function":{"args":["a","b"],"body":"return a*(-b+0.5);"},
 			"dymos":["pad", "drums"],
 			"parameter":"Pan"
 		}
