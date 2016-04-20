@@ -1,1 +1,6 @@
-/* Empty. Add your own CSS if you like */
+.pane {
+    background-image: url("../img/background.png"); 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}

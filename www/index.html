@@ -8,10 +8,6 @@
 	<link href="lib/ionic/css/ionic.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 
-	<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-		<link href="css/ionic.app.css" rel="stylesheet">
-	-->
-
 	<!-- ionic/angularjs/cordova, dymo-core, and other libs js -->
 	<script src="lib/ionic/js/ionic.bundle.js"></script>
 	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
@@ -26,18 +22,18 @@
 </head>
 <body ng-app="semanticplayer" ng-controller="renderingController">
 	<ion-pane>
-		<ion-header-bar class="bar-dark">
-			<h1 class="title">Semantic Music Player</h1>
+		<ion-header-bar class="bar-dark" ng-show="config.showTitle">
+			<h1 class="title">{{config.title}}</h1>
 		</ion-header-bar>
 		<ion-content>
 			<ion-list>
-				<ion-item class="item-input item-select item-dark">
+				<ion-item class="item-input item-select item-dark" ng-show="config.showDymoSelector">
 					<div class="input-label">
 						Select Dynamic Music Object
 					</div>
-					<select ng-model="vars.selectedDymo" ng-options="d as d.toString() for d in dymos" ng-change="dymoSelected()"></select>
+					<select ng-model="selectedDymo" ng-options="d as d.name for d in config.dymos" ng-change="dymoSelected()"></select>
 				</ion-item>
-				<ion-item>
+				<ion-item ng-show="config.showPlaybackButtons">
 					<button class="button button-balanced" ng-click="manager.startPlaying()">
 						<i class="icon ion-play"></i>
 					</button>
@@ -48,21 +44,21 @@
 						<i class="icon ion-stop"></i>
 					</button>
 				</ion-item>
-				<ion-item ng-if="u.getType() == &apos;Slider&apos;" class="item range range-energized" ng-repeat="u in uiControls">
+				<ion-item ng-show="config.showDymoControls" ng-if="u.getType() == &apos;Slider&apos;" class="item range range-energized" ng-repeat="u in uiControls">
 					<div class="input-label">
 						{{ u.getName() }}
 					</div>
 					<input type="range" name="slider" min="0" max="1" step=".001" ng-model="u.value" ng-change="u.update()">
 				</ion-item>
-				<ion-toggle ng-if="u.getType() == &apos;Toggle&apos;" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.update()">
+				<ion-toggle ng-show="config.showDymoControls" ng-if="u.getType() == &apos;Toggle&apos;" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.update()">
 					{{ u.getName() }}
 				</ion-toggle>
-				<ion-item ng-if="u.getType() == &apos;Button&apos;" ng-repeat="u in uiControls">
+				<ion-item ng-show="config.showDymoControls" ng-if="u.getType() == &apos;Button&apos;" ng-repeat="u in uiControls">
 					<button class="button button-calm" ng-model="u.value" ng-click="u.update()">
 						{{ u.getName() }}
 					</button>
 				</ion-item>
-				<ion-item>
+				<ion-item ng-show="config.showSensorSection">
 					<button class="button button-positive" ng-click="compassWatcher.reset(); geolocationWatcher.reset()">
 						Reset sensors
 					</button>
@@ -70,7 +66,7 @@
 						Show sensor data
 					</button>
 				</ion-item>
-				<ion-item ng-show="showSensorData">
+				<ion-item ng-show="config.showSensorSection&&showSensorData">
 					Latitude: {{ geolocationWatcher.latitudeControl.value }}<br>
 					Longitude: {{ geolocationWatcher.longitudeControl.value }}<br>
 					Distance: {{ geolocationWatcher.distanceControl.value }}<br>

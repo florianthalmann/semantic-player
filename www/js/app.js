@@ -20,9 +20,6 @@ angular.module('semanticplayer', ['ionic'])
 	$scope.audioContext = new AudioContext();
 	
 	$scope.showSensorData = false;
-	//container for model primitives (angular needs an object to contain them!?)
-	$scope.vars = {};
-	
 	var loadingAudio = false;
 	var loadingDymoAndRendering = false;
 	
@@ -30,24 +27,21 @@ angular.module('semanticplayer', ['ionic'])
 		if ($scope.rendering) {
 			$scope.rendering.stop();
 		}
-		$scope.rendering = null;
 		$scope.accelerometerWatcher = null;
 		$scope.geolocationWatcher = null;
 		$scope.compassWatcher = null;
 		$scope.uiControls = {};
 		$scope.manager;
-		loadingString = null;
 	}
 	
 	$scope.dymoSelected = function() {
-		if ($scope.vars.selectedDymo) {
+		if ($scope.selectedDymo) {
 			$scope.resetUI();
 			loadingAudio = true;
 			$scope.updateLoading();
-			var dymoUri = "dymos/"+$scope.vars.selectedDymo;
 			
 			$scope.manager = new DymoManager($scope.audioContext, undefined, 'lib/dymo-core/audio/impulse_rev.wav', $scope);
-			$scope.manager.loadDymoAndRendering(dymoUri+'/'+'dymo.json', 'rendering.json', function() {
+			$scope.manager.loadDymoAndRendering($scope.selectedDymo.dymoUri, $scope.selectedDymo.renderingUri, function() {
 				loadingAudio = false;
 				$scope.updateLoading();
 				$scope.uiControls = $scope.manager.getUIControls();
@@ -76,10 +70,9 @@ angular.module('semanticplayer', ['ionic'])
 		$scope.showSensorData = !$scope.showSensorData;
 	}
 	
-	//INIT SELECTION based on saved dymo list
-	$http.get('dymos/dymos.json').success(function(data) {
-		$scope.dymos = data.uris;
-		$scope.vars.selectedDymo = $scope.dymos[0];
+	$http.get('config.json').success(function(data) {
+		$scope.config = data;
+		$scope.selectedDymo = $scope.config.dymos[0];
 		$scope.dymoSelected();
 	});
 	
