@@ -34,4 +34,4 @@ Check out the [Ionic docs](http://ionicframework.com/docs/cli/run.html) to find 
 
 Add any of the [example dymos](https://github.com/florianthalmann/example-dymos.git) to the folder `www/dymos/` in the semantic-player project or build your own dymo, either by using the [Dymo Designer](https://github.com/florianthalmann/dymo-designer.git) or by defining files manually as described in the [dymo-core readme](https://github.com/florianthalmann/dymo-core.git).
 
-Declare the added dymos in the `www/dymos/dymos.json` file by adding their folder name to the `"uris"` list.
+Declare the added dymos in the `www/config.json` file by adding them to the `"dymos"` list.

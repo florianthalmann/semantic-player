@@ -5,9 +5,11 @@
 	"showPlaybackButtons": true,
 	"showDymoControls": true,
 	"showSensorSection": true,
-	"dymos":[{
-		"name": "example",
-		"dymoUri": "dymos/example/dymo.json",
-		"renderingUri": "dymos/example/rendering.json"
-	}]
+	"dymos":[
+		{
+			"name": "example",
+			"dymoUri": "dymos/example/dymo.json",
+			"renderingUri": "dymos/example/rendering.json"
+		}
+	]
 }
