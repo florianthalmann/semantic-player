@@ -19,7 +19,7 @@ $ git clone https://github.com/florianthalmann/semantic-player.git
 
 Go to the cloned project folder and run:
 ```bash
-$ bower update
+$ bower install
 ```
 and finally:
 ```bash
@@ -28,7 +28,18 @@ $ ionic serve
 
 Now you can navigate to http://localhost:8100 in your browser to view the example dymo.
 
-Check out the [Ionic docs](http://ionicframework.com/docs/cli/run.html) to find out how to build the app and run it on a mobile phone.
+## Running on a mobile device
+
+First add the platform you are interested in, for example for Android:
+```bash
+$ ionic platform add android
+```
+Then run build, install, and run it using:
+```bash
+$ ionic run android
+```
+
+Check out the [Ionic docs](http://ionicframework.com/docs/cli/run.html) to find out how to run the app on other devices or emulators.
 
 ## Creating your own dymos
 

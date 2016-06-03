@@ -1,33 +1,49 @@
 {
 	"@context":"http://tiny.cc/dymo-context",
 	"@id":"demoBeatRendering",
-	"@type":"Rendering",
+	"@@type":"Rendering",
 	"dymo":"demoBeat",
 	"mappings":[
 		{
 			"domainDims":[{
 				"name":"Rhythmicality",
-				"type":"Slider",
+				"@type":"Slider",
 				"value":0
 			}],
 			"dymos":["demoBeat"],
-			"parameter":"Rhythmicality"
+			"range":"Rhythmicality"
+		},
+		{
+			"domainDims":[{
+				"name":"AccelX",
+				"@type":"AccelerometerX"
+			}],
+			"dymos":["demoBeat"],
+			"range":"Rhythmicality"
 		},
 		{
 			"domainDims":[{
 				"name":"Space",
-				"type":"Slider"
+				"@type":"Slider"
 			}],
 			"dymos":["demoBeat"],
-			"parameter":"Space"
+			"range":"Space"
+		},
+		{
+			"domainDims":[{
+				"name":"AccelY",
+				"@type":"AccelerometerY"
+			}],
+			"dymos":["demoBeat"],
+			"range":"Space"
 		},
 		{
 			"domainDims":[{
 				"name":"Weirdness",
-				"type":"Slider"
+				"@type":"Slider"
 			}],
 			"dymos":["demoBeat"],
-			"parameter":"Weirdness"
+			"range":"Weirdness"
 		}
 	]
 }

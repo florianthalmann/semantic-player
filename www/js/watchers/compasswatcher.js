@@ -1,6 +1,6 @@
 function CompassWatcher($scope) {
 	
-	var headingControl = new Control();
+	var headingControl = new Control(COMPASS_HEADING, COMPASS_HEADING);
 	headingControl.setReferenceAverageCount(3);
 	var trueHeadingControl = new Control();
 	trueHeadingControl.setReferenceAverageCount(3);

@@ -2,119 +2,125 @@
 	"@context":"http://tiny.cc/dymo-context",
 	"@id":"demoBeat",
 	"@type":"Dymo",
-	"ct":"parallel",
+	"cdt":"parallel",
 	"mappings":[
 		{
-			"domainDims":[{"name":"Rhythmicality","type":"Parameter"}],
+			"domainDims":[{"name":"Rhythmicality","@type":"Parameter"}],
 			"function":{"args":["a"],"body":"return a/4;"},
 			"dymos":["bass", "drums", "flav"],
-			"parameter":"Amplitude"
+			"range":"Amplitude"
 		},
 		{
-			"domainDims":[{"name":"Rhythmicality","type":"Parameter"}],
+			"domainDims":[{"name":"Rhythmicality","@type":"Parameter"}],
 			"function":{"args":["a"],"body":"return 0.2-a;"},
 			"dymos":["pad"],
-			"parameter":"Amplitude"
+			"range":"Amplitude"
 		},
 		{
-			"domainDims":[{"name":"Space","type":"Parameter"}],
+			"domainDims":[{"name":"Space","@type":"Parameter"}],
 			"function":{"args":["a"],"body":"return 2*a-1;"},
 			"dymos":["piano"],
-			"parameter":"Pan"
+			"range":"Pan"
 		},
 		{
-			"domainDims":[{"name":"Space","type":"Parameter"}],
+			"domainDims":[{"name":"Space","@type":"Parameter"}],
 			"function":{"args":["a"],"body":"return -2*a+1;"},
 			"dymos":["pad"],
-			"parameter":"Pan"
+			"range":"Pan"
 		},
 		{
-			"domainDims":[{"name":"Space","type":"Parameter"}],
+			"domainDims":[{"name":"Space","@type":"Parameter"}],
 			"function":{"args":["a"],"body":"return 5*a;"},
 			"dymos":["piano", "pad"],
-			"parameter":"Reverb"
+			"range":"Reverb"
 		},
 		{
-			"domainDims":[{"name":"Space","type":"Parameter"}],
+			"domainDims":[{"name":"Space","@type":"Parameter"}],
 			"function":{"args":["a"],"body":"return a;"},
 			"dymos":["drums", "bass"],
-			"parameter":"Reverb"
+			"range":"Reverb"
 		},
 		{
-			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
+			"domainDims":[{"name":"Weirdness","@type":"Parameter"},{"name":"brownian","@type":"Brownian"}],
 			"function":{"args":["a","b"],"body":"return 1+a*(b*2-1);"},
 			"dymos":["blib","piano", "pad", "drums", "bass","flav"],
-			"parameter":"PlaybackRate"
+			"range":"PlaybackRate"
 		},
 		{
-			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
+			"domainDims":[{"name":"Weirdness","@type":"Parameter"},{"name":"brownian","@type":"Brownian"}],
 			"function":{"args":["a","b"],"body":"return a*(b-0.5);"},
 			"dymos":["piano", "flav"],
-			"parameter":"Pan"
+			"range":"Pan"
 		},
 		{
-			"domainDims":[{"name":"Weirdness","type":"Parameter"},{"name":"brownian","type":"Brownian"}],
+			"domainDims":[{"name":"Weirdness","@type":"Parameter"},{"name":"brownian","@type":"Brownian"}],
 			"function":{"args":["a","b"],"body":"return a*(-b+0.5);"},
 			"dymos":["pad", "drums"],
-			"parameter":"Pan"
+			"range":"Pan"
 		}
 	],
 	"parts":[
 		{
 			"@id":"pad",
 			"@type":"Dymo",
-			"parts":[],
 			"source":"pad.m4a",
-			"Loop":{"value":1,"type":"Parameter"},
-			"Amplitude":{"value":0.2,"type":"Parameter"},
-			"PlaybackRate":{"value":1,"type":"Parameter"}
+			"parameters":[
+				{"@type":"Loop", "value":1},
+				{"@type":"Amplitude", "value":0.2},
+				{"@type":"PlaybackRate", "value":1}
+			]
 		},
 		{
 			"@id":"piano",
 			"@type":"Dymo",
-			"parts":[],
 			"source":"piano.m4a",
-			"Loop":{"value":1,"type":"Parameter"},
-			"Amplitude":{"value":0.2,"type":"Parameter"},
-			"Reverb":{"value":0.2,"type":"Parameter"},
-			"PlaybackRate":{"value":1,"type":"Parameter"}
+			"parameters":[
+				{"@type":"Loop", "value":1},
+				{"@type":"Amplitude", "value":0.2},
+				{"@type":"Reverb", "value":0.2},
+				{"@type":"PlaybackRate", "value":1}
+			]
 		},
 		{
 			"@id":"bass",
 			"@type":"Dymo",
-			"parts":[],
 			"source":"bass.m4a",
-			"Loop":{"value":1,"type":"Parameter"},
-			"Amplitude":{"value":0,"type":"Parameter"},
-			"Reverb":{"value":0.2,"type":"Parameter"},
-			"PlaybackRate":{"value":1,"type":"Parameter"}
+			"parameters":[
+				{"@type":"Loop", "value":1},
+				{"@type":"Amplitude", "value":0},
+				{"@type":"Reverb", "value":0.2},
+				{"@type":"PlaybackRate", "value":1}
+			]
 		},
 		{
 			"@id":"drums",
 			"@type":"Dymo",
-			"parts":[],
 			"source":"drums.m4a",
-			"Loop":{"value":1,"type":"Parameter"},
-			"Amplitude":{"value":0,"type":"Parameter"},
-			"PlaybackRate":{"value":1,"type":"Parameter"}
+			"parameters":[
+				{"@type":"Loop", "value":1},
+				{"@type":"Amplitude", "value":0},
+				{"@type":"PlaybackRate", "value":1}
+			]
 		},
 		{
 			"@id":"flav",
 			"@type":"Dymo",
-			"parts":[],
 			"source":"flav.m4a",
-			"Loop":{"value":1,"type":"Parameter"},
-			"Amplitude":{"value":0,"type":"Parameter"},
-			"PlaybackRate":{"value":1,"type":"Parameter"}
+			"parameters":[
+				{"@type":"Loop", "value":1},
+				{"@type":"Amplitude", "value":0},
+				{"@type":"PlaybackRate", "value":1}
+			]
 		},
 		{
 			"@id":"blib",
 			"@type":"Dymo",
-			"parts":[],
 			"source":"blib.m4a",
-			"Loop":{"value":1,"type":"Parameter"},
-			"Amplitude":{"value":0.2,"type":"Parameter"},
-			"PlaybackRate":{"value":0.7,"type":"Parameter"}
+			"parameters":[
+				{"@type":"Loop", "value":1},
+				{"@type":"Amplitude", "value":0.2},
+				{"@type":"PlaybackRate", "value":0.7}
+			]
 		}
 	]
 }

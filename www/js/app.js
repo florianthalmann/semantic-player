@@ -6,7 +6,7 @@ angular.module('semanticplayer', ['ionic'])
 	$ionicPlatform.ready(function() {
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
 		if(window.cordova && window.cordova.plugins.Keyboard) {
-			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+			//cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 		}
 		if(window.StatusBar) {
 			StatusBar.styleDefault();
@@ -14,7 +14,7 @@ angular.module('semanticplayer', ['ionic'])
 	});
 })
 
-.controller('renderingController', function($scope, $ionicLoading) {
+.controller('renderingController', function($scope, $ionicLoading, $ionicPlatform) {
 	
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	$scope.audioContext = new AudioContext();
@@ -27,9 +27,7 @@ angular.module('semanticplayer', ['ionic'])
 		if ($scope.rendering) {
 			$scope.rendering.stop();
 		}
-		$scope.accelerometerWatcher = null;
-		$scope.geolocationWatcher = null;
-		$scope.compassWatcher = null;
+		$scope.sensorControls = {};
 		$scope.uiControls = {};
 		$scope.manager;
 	}
@@ -45,6 +43,10 @@ angular.module('semanticplayer', ['ionic'])
 				loadingAudio = false;
 				$scope.updateLoading();
 				$scope.uiControls = $scope.manager.getUIControls();
+				$scope.sensorControls = $scope.manager.getSensorControls();
+				for (control in $scope.sensorControls) {
+					$scope.sensorControls[control].setScopeAndStart($scope);
+				}
 				loadingDymoAndRendering = false;
 				$scope.updateLoading();
 				$scope.$apply();

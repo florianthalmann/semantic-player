@@ -10,15 +10,19 @@
 
 	<!-- ionic/angularjs/cordova, dymo-core, and other libs js -->
 	<script src="lib/ionic/js/ionic.bundle.js"></script>
+	<script src="cordova.js"></script>
 	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
 	<script src="lib/mathjs/dist/math.js"></script>
 	<script src="lib/dymo-core/dist/dymo-core.min.js"></script>
 
 	<!-- semantic player's js -->
 	<script src="js/app.js"></script>
-	<script src="js/watchers/accelerometerwatcher.js"></script>
-	<script src="js/watchers/geolocationwatcher.js"></script>
-	<script src="js/watchers/compasswatcher.js"></script>
+	<script src="js/sensorcontrol.js"></script>
+	<script src="js/controls/accelerometercontrol.js"></script>
+	<script src="js/controls/tiltcontrol.js"></script>
+	<script src="js/controls/compasscontrol.js"></script>
+	<script src="js/controls/geolocationcontrol.js"></script>
+	<script src="js/controls/distancecontrol.js"></script>
 </head>
 <body ng-app="semanticplayer" ng-controller="renderingController">
 	<ion-pane>

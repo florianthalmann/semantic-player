@@ -1,12 +1,14 @@
-function AccelerometerWatcher($scope) {
+function AccelerometerWatcher() {
+	
+	var $scope;
 	
 	var TILT_SENSITIVITY = 0.1;
 	
-	var xControl = new Control();
-	var yControl = new Control();
-	var zControl = new Control();
-	var tiltXControl = new Control();
-	var tiltYControl = new Control();
+	var xControl = new Control(ACCELEROMETER_X, ACCELEROMETER_X);
+	var yControl = new Control(ACCELEROMETER_Y, ACCELEROMETER_Y);
+	var zControl = new Control(ACCELEROMETER_Z, ACCELEROMETER_Z);
+	var tiltXControl = new Control(TILT_X, TILT_X);
+	var tiltYControl = new Control(TILT_Y, TILT_Y);
 	this.xControl = xControl;
 	this.yControl = yControl;
 	this.zControl = zControl;
@@ -18,17 +20,17 @@ function AccelerometerWatcher($scope) {
 	
 	// The watch id references the current `watchAcceleration`
 	var watchID = null;
-
-	// Wait for device API libraries to load
-	document.addEventListener("deviceready", onDeviceReady, false);
-
-	// device APIs are available
-	function onDeviceReady() {
-		startWatch();
+	
+	this.setScopeAndStart = function(scope, $ionicPlatform) {
+		$scope = scope;
+		// Wait for device API libraries to load
+		//document.addEventListener("deviceready", startWatch, false);
+		$ionicPlatform.ready(startWatch);
 	}
-
+	
 	// Start watching the acceleration
 	function startWatch() {
+		console.log("start")
 		// Update acceleration every 50 milliseconds
 		var options = { frequency: 50 };
 		watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
