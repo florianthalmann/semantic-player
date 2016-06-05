@@ -71,22 +71,9 @@
 					</button>
 				</ion-item>
 				<ion-item ng-show="config.showSensorSection&&showSensorData">
-					Latitude: {{ geolocationWatcher.latitudeControl.value }}<br>
-					Longitude: {{ geolocationWatcher.longitudeControl.value }}<br>
-					Distance: {{ geolocationWatcher.distanceControl.value }}<br>
-					Accuracy: {{ geolocationWatcher.accuracyControl.value }}<br><br>
-					
-					HeadingRef: {{ compassWatcher.headingControl.referenceValue }}<br>
-					Heading: {{ compassWatcher.headingControl.value }}<br>
-					TrueHeading: {{ compassWatcher.trueHeadingControl.value }}<br>
-					Accuracy: {{ compassWatcher.accuracyControl.value }}<br><br>
-					
-					AccelerometerX: {{ accelerometerWatcher.xControl.value }}<br>
-					AccelerometerY: {{ accelerometerWatcher.yControl.value }}<br>
-					AccelerometerZ: {{ accelerometerWatcher.zControl.value }}<br><br>
-					
-					Stats Random: {{ statsControls.randomControl.value }}<br>
-					Graph: {{ graphControls.nextNodeControl.value }}
+					<div class="input-label" ng-repeat="s in sensorControls">
+						{{ s.getName() }}: {{ s.getValue() }}
+					</div>
 				</ion-item>
 			</ion-list>
 		</ion-content>
