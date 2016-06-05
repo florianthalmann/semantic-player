@@ -6,8 +6,8 @@
 function GeolocationControl(controlName) {
 	
 	SensorControl.call(this, controlName,
-		navigator.geolocation,
-		navigator.geolocation.watchPosition,
+		"geolocation",
+		"watchPosition",
 		function(position) {
 			var newValue;
 			if (controlName == GEOLOCATION_LATITUDE) {

@@ -8,8 +8,8 @@ function CompassControl() {
 	var self = this;
 	
 	SensorControl.call(this, COMPASS_HEADING,
-		navigator.compass,
-		navigator.compass.watchHeading,
+		"compass",
+		"watchHeading",
 		function(heading) {
 			self.update(heading.trueHeading);
 		},

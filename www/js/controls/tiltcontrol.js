@@ -10,8 +10,8 @@ function TiltControl(dimension) {
 	var TILT_SENSITIVITY = 0.1;
 	
 	SensorControl.call(this, dimension,
-		navigator.accelerometer,
-		navigator.accelerometer.watchAcceleration,
+		"accelerometer",
+		"watchAcceleration",
 		function(acceleration) {
 			var delta;
 			if (dimension == TILT_X) {

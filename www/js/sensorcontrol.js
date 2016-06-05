@@ -32,8 +32,6 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 		if (!options) {
 			options = { frequency: parameters[AUTO_CONTROL_FREQUENCY].getValue() };
 		}
-		console.log(window["navigator"][sensorName])
-		console.log(navigator.accelerometer)
 		if (window["navigator"][sensorName]) {
 			watchID = window["navigator"][sensorName][watchFunctionName](function(data) {
 				updateFunction(data);
@@ -51,7 +49,7 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	
 	this.setScopeAndStart = function(scope) {
 		$scope = scope;
-		// Wait for device API libraries to load
+		// Wait for device API libraries to load (Cordova needs this)
 		document.addEventListener("deviceready", this.startUpdate, false);
 	}
 	

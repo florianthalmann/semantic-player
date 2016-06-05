@@ -41,6 +41,12 @@ $ ionic run android
 
 Check out the [Ionic docs](http://ionicframework.com/docs/cli/run.html) to find out how to run the app on other devices or emulators.
 
+## Customizing the Interface
+
+The interface of the player can be customized by editing the `www/config.json` file. The `showTitle` and `title` attributes allow you to edit and show or hide the title. With `showDymoSelector` the dymo selector element can be hidden, so that the player simply contains a fixed dymo. Using `showPlaybackButtons`, `showDymoControls`, and `showSensorSection` can be used to show the various parts of the interface, the playback buttons, any UI controls the dymo may define, and the section that can be used to show and debug sensor values.
+
+You can also set a background picture by replacing the file `www/img/background.png` with another file with the same name and extension. This works especially well if only few or none of the interface elements are shown.
+
 ## Creating your own dymos
 
 Add any of the [example dymos](https://github.com/florianthalmann/example-dymos.git) to the folder `www/dymos/` in the semantic-player project or build your own dymo, either by using the [Dymo Designer](https://github.com/florianthalmann/dymo-designer.git) or by defining files manually as described in the [dymo-core readme](https://github.com/florianthalmann/dymo-core.git).

@@ -14,7 +14,7 @@ angular.module('semanticplayer', ['ionic'])
 	});
 })
 
-.controller('renderingController', function($scope, $ionicLoading, $ionicPlatform) {
+.controller('renderingController', function($scope, $ionicLoading) {
 	
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	$scope.audioContext = new AudioContext();

@@ -10,8 +10,8 @@ function DistanceControl() {
 	var reference;
 	
 	SensorControl.call(this, GEOLOCATION_DISTANCE,
-		navigator.geolocation,
-		navigator.geolocation.watchPosition,
+		"geolocation",
+		"watchPosition",
 		function(position) {
 			if (!reference) {
 				reference = [position.coords.latitude, position.coords.longitude];
