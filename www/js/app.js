@@ -1,6 +1,6 @@
 var $http = angular.injector(['ng']).get('$http');
 
-angular.module('semanticplayer', ['ionic'])
+angular.module('semanticplayer', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
@@ -14,10 +14,16 @@ angular.module('semanticplayer', ['ionic'])
 	});
 })
 
-.controller('renderingController', function($scope, $ionicLoading) {
+.controller('renderingController', function($scope, $ionicLoading, $cordovaDeviceMotion, $cordovaDeviceOrientation, $cordovaGeolocation, $cordovaBeacon) {
 	
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	$scope.audioContext = new AudioContext();
+	
+	var ngSensors = {};
+	ngSensors["$cordovaDeviceMotion"] = $cordovaDeviceMotion;
+	ngSensors["$cordovaDeviceOrientation"] = $cordovaDeviceOrientation;
+	ngSensors["$cordovaGeolocation"] = $cordovaGeolocation;
+	ngSensors["$cordovaBeacon"] = $cordovaBeacon;
 	
 	$scope.showSensorData = false;
 	var loadingAudio = false;
@@ -45,7 +51,8 @@ angular.module('semanticplayer', ['ionic'])
 				$scope.uiControls = $scope.manager.getUIControls();
 				$scope.sensorControls = $scope.manager.getSensorControls();
 				for (control in $scope.sensorControls) {
-					$scope.sensorControls[control].setScopeAndStart($scope);
+					control = $scope.sensorControls[control];
+					control.setScopeNgSensorAndStart($scope, ngSensors[control.getSensorName()]);
 				}
 				loadingDymoAndRendering = false;
 				$scope.updateLoading();

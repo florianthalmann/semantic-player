@@ -15,8 +15,8 @@
 		},
 		{
 			"domainDims":[{
-				"name":"AccelX",
-				"@type":"AccelerometerX"
+				"name":"Beacon",
+				"@type":"Beacon"
 			}],
 			"dymos":["demoBeat"],
 			"range":"Rhythmicality"
@@ -25,14 +25,6 @@
 			"domainDims":[{
 				"name":"Space",
 				"@type":"Slider"
-			}],
-			"dymos":["demoBeat"],
-			"range":"Space"
-		},
-		{
-			"domainDims":[{
-				"name":"AccelY",
-				"@type":"AccelerometerY"
 			}],
 			"dymos":["demoBeat"],
 			"range":"Space"

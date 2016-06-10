@@ -5,8 +5,10 @@
  */
 function GeolocationControl(controlName) {
 	
+	var self = this;
+	
 	SensorControl.call(this, controlName,
-		"geolocation",
+		"$cordovaGeolocation",
 		"watchPosition",
 		function(position) {
 			var newValue;

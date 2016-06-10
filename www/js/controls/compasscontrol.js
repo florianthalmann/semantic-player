@@ -8,7 +8,7 @@ function CompassControl() {
 	var self = this;
 	
 	SensorControl.call(this, COMPASS_HEADING,
-		"compass",
+		"$cordovaDeviceOrientation",
 		"watchHeading",
 		function(heading) {
 			self.update(heading.trueHeading);

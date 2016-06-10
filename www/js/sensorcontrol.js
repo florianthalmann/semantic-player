@@ -8,14 +8,14 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	
 	var self = this;
 	
-	var $scope;
+	var $scope, $ngSensor;
 	
 	var parameters = {};
 	addParameter(new Parameter(AUTO_CONTROL_FREQUENCY, 100));
 	addParameter(new Parameter(AUTO_CONTROL_TRIGGER, 0));
 	Control.call(this, controlName, controlName, parameters);
 	
-	var watchID;
+	var watch;
 	
 	function addParameter(param) {
 		var paramName = param.getName();
@@ -32,31 +32,45 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 		if (!options) {
 			options = { frequency: parameters[AUTO_CONTROL_FREQUENCY].getValue() };
 		}
-		if (window["navigator"][sensorName]) {
-			watchID = window["navigator"][sensorName][watchFunctionName](function(data) {
-				updateFunction(data);
+		if ($ngSensor) {
+			watch = $ngSensor[watchFunctionName](options);
+			watch.then(null, onError, function(result) {
+				updateFunction(result);
 				if ($scope) {
 					//scope apply here whenever something changes
 					setTimeout(function() {
 						$scope.$apply();
 					}, 10);
 				}
-			}, onError, options);
+			});
 		} else {
 			console.log(controlName + " not available");
 		}
 	}
 	
-	this.setScopeAndStart = function(scope) {
+	this.getSensorName = function() {
+		return sensorName;
+	}
+	
+	this.getSensor = function() {
+		return $ngSensor;
+	}
+	
+	this.getScope = function() {
+		return $scope;
+	}
+	
+	this.setScopeNgSensorAndStart = function(scope, ngSensor) {
 		$scope = scope;
+		$ngSensor = ngSensor;
 		// Wait for device API libraries to load (Cordova needs this)
 		document.addEventListener("deviceready", this.startUpdate, false);
 	}
 	
 	this.reset = function() {
-		if (watchID) {
-			window["navigator"][sensorName].clearWatch(watchID);
-			watchID = null;
+		if (watch) {
+			$ngSensor.clearWatch(watch);
+			watch = null;
 			if (resetFunction) {
 				resetFunction();
 			}

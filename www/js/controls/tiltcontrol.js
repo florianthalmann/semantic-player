@@ -10,7 +10,7 @@ function TiltControl(dimension) {
 	var TILT_SENSITIVITY = 0.1;
 	
 	SensorControl.call(this, dimension,
-		"accelerometer",
+		"$cordovaDeviceMotion",
 		"watchAcceleration",
 		function(acceleration) {
 			var delta;

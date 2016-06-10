@@ -8,7 +8,7 @@ function AccelerometerControl(dimension) {
 	var self = this;
 	
 	SensorControl.call(this, dimension,
-		"accelerometer",
+		"$cordovaDeviceMotion",
 		"watchAcceleration",
 		function(acceleration) {
 			var newValue;
