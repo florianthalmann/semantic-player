@@ -15,8 +15,11 @@
 		},
 		{
 			"domainDims":[{
-				"name":"Beacon",
-				"@type":"Beacon"
+				"name":"beacon1",
+				"@type":"Beacon",
+				"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+				"major":51727,
+				"minor":20124
 			}],
 			"dymos":["demoBeat"],
 			"range":"Rhythmicality"
@@ -25,6 +28,17 @@
 			"domainDims":[{
 				"name":"Space",
 				"@type":"Slider"
+			}],
+			"dymos":["demoBeat"],
+			"range":"Space"
+		},
+		{
+			"domainDims":[{
+				"name":"beacon2",
+				"@type":"Beacon",
+				"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+				"major":14437,
+				"minor":16445
 			}],
 			"dymos":["demoBeat"],
 			"range":"Space"

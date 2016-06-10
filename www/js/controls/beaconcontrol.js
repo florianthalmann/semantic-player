@@ -5,10 +5,6 @@
  */
 function BeaconControl(uuid, major, minor) {
 	
-	uuid = "f7826da6-4fa2-4e98-8024-bc5b71e0893e";
-	major = 51727;
-	minor = 20124;
-	
 	var self = this;
 	
 	SensorControl.call(this, BEACON,
@@ -25,7 +21,6 @@ function BeaconControl(uuid, major, minor) {
 			for (var b in region.beacons) {
 				b = region.beacons[b]
 				if (b.major == major && b.minor == minor) {
-					console.log(b.major, b.minor, b.proximity, b.accuracy);
 					self.update(b.accuracy);
 				}
 			}
