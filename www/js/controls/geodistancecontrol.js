@@ -10,7 +10,7 @@ function DistanceControl() {
 	var reference;
 	
 	SensorControl.call(this, GEOLOCATION_DISTANCE,
-		"geolocation",
+		"$cordovaGeolocation",
 		"watchPosition",
 		function(position) {
 			if (!reference) {

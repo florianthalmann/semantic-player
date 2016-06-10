@@ -9,7 +9,7 @@ function BeaconControl(uuid, major, minor) {
 	
 	SensorControl.call(this, BEACON,
 		"$cordovaBeacon",
-		"$on",
+		null,
 		function(region) {
 		}
 	);

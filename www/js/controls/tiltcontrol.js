@@ -20,7 +20,11 @@ function TiltControl(dimension) {
 				delta = acceleration.y;
 			}
 			delta = normalizeAcceleration(delta);
-			newValue = self.getValue() + TILT_SENSITIVITY*(2*delta-1);//counteract normalization
+			var newValue = self.getValue() + TILT_SENSITIVITY*(2*delta-1);//counteract normalization
+			if (isNaN(newValue)) {
+				newValue = 0;
+			}
+			console.log(delta, newValue);
 			self.update(newValue);
 		}
 	);
