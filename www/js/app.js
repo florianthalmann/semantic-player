@@ -57,6 +57,9 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 				loadingDymoAndRendering = false;
 				$scope.updateLoading();
 				$scope.$apply();
+				if ($scope.config.autoplay) {
+					$scope.manager.startPlaying();
+				}
 			});
 		}
 	}
