@@ -18,6 +18,7 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	if (ramp) {
 		ramp  = new Ramp();
 	}
+	var message = "not available";
 	
 	var parameters = {};
 	addParameter(new Parameter(AUTO_CONTROL_FREQUENCY, 100));
@@ -35,6 +36,14 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	
 	this.getParameter = function(paramName) {
 		return parameters[paramName];
+	}
+	
+	this.getValue = function() {
+		var value = Control.prototype.getValue.call(this);
+		if (isNaN(value)) {
+			return message;
+		}
+		return value;
 	}
 	
 	this.setReferenceAverageOf = function(count) {
@@ -73,6 +82,7 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	}
 	
 	this.update = function(newValue) {
+		message = "calibrating";
 		//still measuring reference value
 		if (referenceAverageOf && previousValues.length < referenceAverageOf) {
 			previousValues.push(newValue);
