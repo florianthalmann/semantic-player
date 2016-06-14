@@ -48,14 +48,15 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	
 	this.setReferenceAverageOf = function(count) {
 		referenceAverageOf = count;
-		resetReferenceValue();
+		resetReferenceValueAndAverage();
 	}
 	
 	this.setAverageOf = function(count) {
 		averageOf = count;
+		resetReferenceValueAndAverage();
 	}
 	
-	function resetReferenceValue() {
+	function resetReferenceValueAndAverage() {
 		value = undefined;
 		referenceValue = undefined;
 		previousValues = [];

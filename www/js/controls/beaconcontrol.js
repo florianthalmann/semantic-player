@@ -10,8 +10,10 @@ function BeaconControl(uuid, major, minor) {
 	SensorControl.call(this, BEACON,
 		"$cordovaBeacon",
 		null,
-		function(region) {
-		}
+		function() {},
+		null,
+		null,
+		true
 	);
 	this.setAverageOf(3);
 	

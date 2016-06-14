@@ -16,13 +16,17 @@ function Ramp() {
 	
 	this.startOrUpdate = function(targetValue, duration, frequency, callback) {
 		if (duration > frequency) {
-			if (intervalID) {
-				clearInterval(intervalID);
-			}
+			clearInterval(intervalID);
 			delta = (targetValue-currentValue)/(duration/frequency);
 			intervalID = setInterval(function() {
-				currentValue += delta;
-				callback(currentValue);
+				var nextValue = currentValue+delta;
+				if (Math.abs(targetValue-nextValue) < Math.abs(targetValue-currentValue)) {
+					currentValue = nextValue;
+					callback(currentValue);
+				} else {
+					//can't get closer..
+					clearInterval(intervalID);
+				}
 			}, frequency);
 		}/* else {
 			currentValue = targetValue;
