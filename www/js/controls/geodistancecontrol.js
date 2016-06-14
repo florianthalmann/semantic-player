@@ -29,6 +29,8 @@ function DistanceControl() {
 			maximumAge: 3000
 		}
 	);
+	this.setReferenceAverageOf(5);
+	this.setAverageOf(5);
 	
 	function latLonToMeters(lat1, lon1, lat2, lon2){  // generally used geo measurement function :)
 		var R = 6378.137; // Radius of earth in KM

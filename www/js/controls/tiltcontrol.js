@@ -24,7 +24,6 @@ function TiltControl(dimension) {
 			if (isNaN(newValue)) {
 				newValue = 0;
 			}
-			console.log(delta, newValue);
 			self.update(newValue);
 		}
 	);

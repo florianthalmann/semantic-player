@@ -13,6 +13,7 @@ function BeaconControl(uuid, major, minor) {
 		function(region) {
 		}
 	);
+	this.setAverageOf(3);
 	
 	this.startUpdate = function() {
 		var region = self.getSensor().createBeaconRegion("estimote", uuid)

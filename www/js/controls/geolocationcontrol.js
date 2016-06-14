@@ -26,9 +26,11 @@ function GeolocationControl(controlName) {
 			enableHighAccuracy: true,
 			timeout: 30000,
 			maximumAge: 3000
-		}
+		},
+		true
 	);
-	this.setReferenceAverageCount(5);
+	this.setReferenceAverageOf(10);
+	this.setAverageOf(10);
 	
 }
 inheritPrototype(GeolocationControl, SensorControl);

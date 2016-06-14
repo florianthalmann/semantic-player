@@ -3,12 +3,21 @@
  * @constructor
  * @extends {Control}
  * @param {Function=} resetFunction (optional)
+ * @param {Boolean=} ramp if true then the values will be smoothly updated at AUTO_CONTROL_FREQUENCY (optional)
  */
-function SensorControl(controlName, sensorName, watchFunctionName, updateFunction, resetFunction, options) {
+function SensorControl(controlName, sensorName, watchFunctionName, updateFunction, resetFunction, options, ramp) {
 	
 	var self = this;
 	
 	var $scope, $ngSensor;
+	var referenceValue;
+	var referenceAverageOf;
+	var averageOf;
+	var previousValues;
+	var previousUpdateTime;
+	if (ramp) {
+		ramp  = new Ramp();
+	}
 	
 	var parameters = {};
 	addParameter(new Parameter(AUTO_CONTROL_FREQUENCY, 100));
@@ -26,6 +35,21 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	
 	this.getParameter = function(paramName) {
 		return parameters[paramName];
+	}
+	
+	this.setReferenceAverageOf = function(count) {
+		referenceAverageOf = count;
+		resetReferenceValue();
+	}
+	
+	this.setAverageOf = function(count) {
+		averageOf = count;
+	}
+	
+	function resetReferenceValue() {
+		value = undefined;
+		referenceValue = undefined;
+		previousValues = [];
 	}
 	
 	this.startUpdate = function() {
@@ -46,6 +70,64 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 		} else {
 			console.log(controlName + " not available");
 		}
+	}
+	
+	this.update = function(newValue) {
+		//still measuring reference value
+		if (referenceAverageOf && previousValues.length < referenceAverageOf) {
+			previousValues.push(newValue);
+			//done collecting values. calculate average and adjust previous values
+			if (previousValues.length == referenceAverageOf) {
+				referenceValue = getAverage(previousValues);
+				previousValues = previousValues.map(function(a) { return a - referenceValue; });
+			}
+		//done measuring. adjust value if initialvalue taken
+		} else {
+			//take value relative to referenceValue (optional)
+			if (referenceValue) {
+				newValue -= referenceValue;
+			}
+			//take average of last averageOf values (optional)
+			if (averageOf) {
+				previousValues.push(newValue);
+				//remove oldest unneeded values
+				while (previousValues.length > averageOf) {
+					previousValues.shift();
+				}
+				//calculate average
+				if (previousValues.length == averageOf) {
+					newValue = getAverage(previousValues);
+				}
+			}
+			//update via smoothening ramp (optional)
+			if (ramp) {
+				var now = Date.now();
+				var duration;
+				if (!previousUpdateTime) {
+					duration = 1000; //one second initially
+				} else {
+					duration = now-previousUpdateTime;
+				}
+				startUpdateRamp(newValue, duration);
+				previousUpdateTime = now;
+			} else {
+				//call regular super method
+				Control.prototype.update.call(this, newValue);
+			}
+		}
+	}
+	
+	function getAverage(list) {
+		var sum = list.reduce(function(a, b) { return a + b; });
+		return sum / list.length;
+	}
+	
+	function startUpdateRamp(targetValue, duration) {
+		frequency = parameters[AUTO_CONTROL_FREQUENCY].getValue();
+		ramp.startOrUpdate(targetValue, duration, frequency, function(value) {
+			//call regular super method
+			Control.prototype.update.call(self, value);
+		});
 	}
 	
 	this.getSensorName = function() {
