@@ -19,6 +19,7 @@ $ git clone https://github.com/florianthalmann/semantic-player.git
 
 Go to the cloned project folder and run:
 ```bash
+$ npm install
 $ bower install
 ```
 and finally:
