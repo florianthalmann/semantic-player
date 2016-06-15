@@ -37,7 +37,7 @@
 					<div class="input-label">
 						Select Dynamic Music Object
 					</div>
-					<select ng-model="selectedDymo" ng-options="d as d.name for d in config.dymos" ng-change="dymoSelected()"></select>
+					<select ng-model="state.selectedDymo" ng-options="d as d.name for d in config.dymos" ng-change="dymoSelected()"></select>
 				</ion-item>
 				<ion-item ng-show="config.showPlaybackButtons">
 					<button class="button button-balanced" ng-click="manager.startPlaying()">

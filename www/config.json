@@ -8,11 +8,6 @@
 	"autoplay": false,
 	"dymos":[
 		{
-			"name": "beacons",
-			"dymoUri": "dymos/beacons/dymo.json",
-			"renderingUri": "dymos/beacons/rendering.json"
-		},
-		{
 			"name": "example",
 			"dymoUri": "dymos/example/dymo.json",
 			"renderingUri": "dymos/example/rendering.json"
