@@ -25,7 +25,8 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 	ngSensors["$cordovaGeolocation"] = $cordovaGeolocation;
 	ngSensors["$cordovaBeacon"] = $cordovaBeacon;
 	
-	$scope.showSensorData = false;
+	$scope.state = {};
+	$scope.state.showSensorData = false;
 	var loadingAudio = false;
 	var loadingDymoAndRendering = false;
 	
@@ -39,13 +40,13 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 	}
 	
 	$scope.dymoSelected = function() {
-		if ($scope.selectedDymo) {
+		if ($scope.state.selectedDymo) {
 			$scope.resetUI();
 			loadingAudio = true;
 			$scope.updateLoading();
 			
 			$scope.manager = new DymoManager($scope.audioContext, undefined, 'lib/dymo-core/audio/impulse_rev.wav', $scope);
-			$scope.manager.loadDymoAndRendering($scope.selectedDymo.dymoUri, $scope.selectedDymo.renderingUri, function() {
+			$scope.manager.loadDymoAndRendering($scope.state.selectedDymo.dymoUri, $scope.state.selectedDymo.renderingUri, function() {
 				loadingAudio = false;
 				$scope.updateLoading();
 				$scope.uiControls = $scope.manager.getUIControls();
@@ -84,7 +85,7 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 	
 	$http.get('config.json').success(function(data) {
 		$scope.config = data;
-		$scope.selectedDymo = $scope.config.dymos[0];
+		$scope.state.selectedDymo = $scope.config.dymos[1];
 		$scope.dymoSelected();
 	});
 	
