@@ -85,7 +85,7 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 	
 	$http.get('config.json').success(function(data) {
 		$scope.config = data;
-		$scope.state.selectedDymo = $scope.config.dymos[1];
+		$scope.state.selectedDymo = $scope.config.dymos[0];
 		$scope.dymoSelected();
 	});
 	
