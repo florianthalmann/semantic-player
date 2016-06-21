@@ -31,7 +31,11 @@ Now you can navigate to http://localhost:8100 in your browser to view the exampl
 
 ## Running on a mobile device
 
-First add the platform you are interested in, for example for Android:
+First run:
+```bash
+$ ionic browser add crosswalk
+```
+Then add the platform you are interested in, for example for Android:
 ```bash
 $ ionic platform add android
 ```
@@ -58,19 +62,19 @@ Declare the added dymos in the `www/config.json` file by adding them to the `"dy
 
 The following table lists the sensor controls currently available for dymos in the Semantic Music Player, along with the ranges of their output values:
 
-| Control              | @types                                         | values  | unit |
-|----------------------|------------------------------------------------|---------|------|
-| Slider               | Slider                                         | [0,1]   |      |
-| Toggle               | Toggle                                         | {0,1}   |      |
-| Button               | Button                                         | {0,1}   |      |
-| Accelerometer        | AccelerometerX, AccelerometerY, AccelerometerZ | [-1,1]  |      |
-| Tilt                 | TiltX, TiltY                                   | [-∞,∞]  |      |
-| Compass              | CompassHeading                                 | [0,360] | °    |
-| Geolocation          | GeolocationLongitude, GeolocationLatitude      | [0,360] | °    |
-| Distance traveled    | GeolocationDistance                            | [0,∞]   | m    |
-| Distance from Beacon | Beacon                                         | [0,∞]   | m    |
-| Random generator     | Random                                         | [0,1]   |      |
-| Random walk          | Brownian                                       | [0,1]   |      |
-| Interpolating   Ramp | Ramp                                           | [0,1]   |      |
+| Control              | @types                                         | values     | unit |
+|----------------------|------------------------------------------------|------------|------|
+| Slider               | Slider                                         | [0,1]      |      |
+| Toggle               | Toggle                                         | {0,1}      |      |
+| Button               | Button                                         | {0,1}      |      |
+| Accelerometer        | AccelerometerX, AccelerometerY, AccelerometerZ | [-1,1]     |      |
+| Tilt                 | TiltX, TiltY                                   | [-∞,∞]     |      |
+| Compass              | CompassHeading                                 | [-180,180] | °    |
+| Geolocation          | GeolocationLongitude, GeolocationLatitude      | [-180,180] | °    |
+| Distance traveled    | GeolocationDistance                            | [0,∞]      | m    |
+| Distance from Beacon | Beacon                                         | [0,∞]      | m    |
+| Random generator     | Random                                         | [0,1]      |      |
+| Random walk          | Brownian                                       | [0,1]      |      |
+| Interpolating   Ramp | Ramp                                           | [0,1]      |      |
 
 For any controls, one can set an initial value using the `value` attribute. Some of the controls can be further customized: `Beacon` can be customized using the attributes `uuid`, `major`, and `minor`. `Ramp` can be customized using `duration`.
