@@ -1,0 +1,202 @@
+{
+	"@context": "http://tiny.cc/dymo-context",
+	"@id": "beacons",
+	"@type": "Dymo",
+	"cdt": "parallel",
+	"parts": [
+		{
+			"@id": "dirty",
+			"@type": "Dymo",
+			"cdt": "parallel",
+			"parts": [
+				{
+					"@id": "dirtyArea0",
+					"@type": "Dymo",
+					"source": "pad.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "dirtyArea1",
+					"@type": "Dymo",
+					"source": "piano.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "dirtyArea2",
+					"@type": "Dymo",
+					"source": "blib.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "dirtyArea3",
+					"@type": "Dymo",
+					"source": "drums.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "dirtyArea4",
+					"@type": "Dymo",
+					"source": "bass.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "dirtyArea5",
+					"@type": "Dymo",
+					"source": "flav.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				}
+			]
+		},
+		{
+			"@id": "clean",
+			"@type": "Dymo",
+			"cdt": "parallel",
+			"parts": [
+				{
+					"@id": "cleanArea0",
+					"@type": "Dymo",
+					"source": "pad.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "cleanArea1",
+					"@type": "Dymo",
+					"source": "piano.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "cleanArea2",
+					"@type": "Dymo",
+					"source": "blib.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "cleanArea3",
+					"@type": "Dymo",
+					"source": "drums.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "cleanArea4",
+					"@type": "Dymo",
+					"source": "bass.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				},
+				{
+					"@id": "cleanArea5",
+					"@type": "Dymo",
+					"source": "flav.m4a",
+					"parameters": [
+						{
+							"@type": "Loop",
+							"value": 1
+						},
+						{
+							"@type": "Amplitude",
+							"value": 1
+						}
+					]
+				}
+			]
+		}
+	]
+}

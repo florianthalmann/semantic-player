@@ -1,0 +1,281 @@
+{
+	"@context": "http://tiny.cc/dymo-context",
+	"@id": "beaconsRendering",
+	"@type": "Rendering",
+	"dymo": "beacons",
+	"mappings": [
+		{
+			"domainDims": [
+				{
+					"name": "centerBeacon",
+					"@type": "Beacon",
+					"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+					"major": 51727,
+					"minor": 20124
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return a<0.5?0.5:0;"
+			},
+			"dymos": [
+				"clean"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "centerBeacon",
+					"@type": "Beacon"
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return a<0.5?0:0.5;"
+			},
+			"dymos": [
+				"dirty"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "beacon0",
+					"@type": "Beacon",
+					"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+					"major": 14437,
+					"minor": 16445
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return Math.max(3-a, 0)/3*0.5;"
+			},
+			"dymos": [
+				"dirtyArea0"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "beacon1",
+					"@type": "Beacon",
+					"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+					"major": 12756,
+					"minor": 18735
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return Math.max(3-a, 0)/3*0.5;"
+			},
+			"dymos": [
+				"dirtyArea1"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "beacon2",
+					"@type": "Beacon",
+					"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+					"major": 97625,
+					"minor": 28753
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return Math.max(3-a, 0)/3*0.5;"
+			},
+			"dymos": [
+				"dirtyArea2"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "beacon3",
+					"@type": "Beacon",
+					"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+					"major": 14869,
+					"minor": 24875
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return Math.max(3-a, 0)/3*0.5;"
+			},
+			"dymos": [
+				"dirtyArea3"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "beacon4",
+					"@type": "Beacon",
+					"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+					"major": 29375,
+					"minor": 97634
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return Math.max(3-a, 0)/3*0.5;"
+			},
+			"dymos": [
+				"dirtyArea4"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "beacon5",
+					"@type": "Beacon",
+					"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+					"major": 23764,
+					"minor": 38754
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return Math.max(3-a, 0)/3*0.5;"
+			},
+			"dymos": [
+				"dirtyArea5"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "compass",
+					"@type": "CompassHeading"
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return (30-Math.min(Math.abs(a-0),30))/30*0.5;"
+			},
+			"dymos": [
+				"cleanArea0"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "compass",
+					"@type": "CompassHeading"
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return (30-Math.min(Math.abs(a-6),30))/30*0.5;"
+			},
+			"dymos": [
+				"cleanArea1"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "compass",
+					"@type": "CompassHeading"
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return (30-Math.min(Math.abs(a-12),30))/30*0.5;"
+			},
+			"dymos": [
+				"cleanArea2"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "compass",
+					"@type": "CompassHeading"
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return (30-Math.min(Math.abs(a-18),30))/30*0.5;"
+			},
+			"dymos": [
+				"cleanArea3"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "compass",
+					"@type": "CompassHeading"
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return (30-Math.min(Math.abs(a-24),30))/30*0.5;"
+			},
+			"dymos": [
+				"cleanArea4"
+			],
+			"range": "Amplitude"
+		},
+		{
+			"domainDims": [
+				{
+					"name": "compass",
+					"@type": "CompassHeading"
+				}
+			],
+			"function": {
+				"args": [
+					"a"
+				],
+				"body": "return (30-Math.min(Math.abs(a-30),30))/30*0.5;"
+			},
+			"dymos": [
+				"cleanArea5"
+			],
+			"range": "Amplitude"
+		}
+	]
+}

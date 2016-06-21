@@ -1,16 +1,16 @@
 {
 	"showTitle": true,
-	"title": "Semantic Music Player",
-	"showDymoSelector": true,
-	"showPlaybackButtons": true,
-	"showDymoControls": true,
+	"title": "B076",
+	"showDymoSelector": false,
+	"showPlaybackButtons": false,
+	"showDymoControls": false,
 	"showSensorSection": true,
-	"autoplay": false,
+	"autoplay": true,
 	"dymos":[
 		{
-			"name": "example",
-			"dymoUri": "dymos/example/dymo.json",
-			"renderingUri": "dymos/example/rendering.json"
+			"name": "beacons",
+			"dymoUri": "dymos/beacons/dymo.json",
+			"renderingUri": "dymos/beacons/rendering.json"
 		}
 	]
 }

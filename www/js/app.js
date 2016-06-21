@@ -59,7 +59,9 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 				$scope.updateLoading();
 				$scope.$apply();
 				if ($scope.config.autoplay) {
-					$scope.manager.startPlaying();
+					setTimeout(function() {
+						$scope.manager.startPlaying();
+					}, 2000);
 				}
 			});
 		}
