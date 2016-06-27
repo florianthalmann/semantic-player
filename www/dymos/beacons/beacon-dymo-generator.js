@@ -122,7 +122,7 @@ for (var i = 0; i < cleanSoundFiles.length; i++) {
 			"name":"compass",
 			"@type":"CompassHeading",
 			"average":3,
-			"smooth":false
+			"smooth":true
 		}],
 		"function":{"args":["a"],"body":"return ("+compassRayWidth/2+"-Math.min(Math.abs(a-"+i*cleanSoundFiles.length+"),"+compassRayWidth/2+"))/"+compassRayWidth/2+"*"+maxAmplitude+";"},
 		"dymos":["cleanArea"+i],

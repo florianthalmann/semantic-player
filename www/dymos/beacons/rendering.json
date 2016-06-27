@@ -173,7 +173,9 @@
 			"domainDims": [
 				{
 					"name": "compass",
-					"@type": "CompassHeading"
+					"@type": "CompassHeading",
+					"average": 3,
+					"smooth": true
 				}
 			],
 			"function": {
@@ -191,7 +193,9 @@
 			"domainDims": [
 				{
 					"name": "compass",
-					"@type": "CompassHeading"
+					"@type": "CompassHeading",
+					"average": 3,
+					"smooth": true
 				}
 			],
 			"function": {
@@ -209,7 +213,9 @@
 			"domainDims": [
 				{
 					"name": "compass",
-					"@type": "CompassHeading"
+					"@type": "CompassHeading",
+					"average": 3,
+					"smooth": true
 				}
 			],
 			"function": {
@@ -227,7 +233,9 @@
 			"domainDims": [
 				{
 					"name": "compass",
-					"@type": "CompassHeading"
+					"@type": "CompassHeading",
+					"average": 3,
+					"smooth": true
 				}
 			],
 			"function": {
@@ -245,7 +253,9 @@
 			"domainDims": [
 				{
 					"name": "compass",
-					"@type": "CompassHeading"
+					"@type": "CompassHeading",
+					"average": 3,
+					"smooth": true
 				}
 			],
 			"function": {
@@ -263,7 +273,9 @@
 			"domainDims": [
 				{
 					"name": "compass",
-					"@type": "CompassHeading"
+					"@type": "CompassHeading",
+					"average": 3,
+					"smooth": true
 				}
 			],
 			"function": {
