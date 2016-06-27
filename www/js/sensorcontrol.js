@@ -5,7 +5,7 @@
  * @param {Function=} resetFunction (optional)
  * @param {Boolean=} ramp if true then the values will be smoothly updated at AUTO_CONTROL_FREQUENCY (optional)
  */
-function SensorControl(controlName, sensorName, watchFunctionName, updateFunction, resetFunction, options, ramp) {
+function SensorControl(controlName, sensorName, watchFunctionName, updateFunction, resetFunction, options) {
 	
 	var self = this;
 	
@@ -15,9 +15,7 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	var averageOf;
 	var previousValues;
 	var previousUpdateTime;
-	if (ramp) {
-		ramp  = new Ramp();
-	}
+	var ramp;
 	var message = "not available";
 	
 	var parameters = {};
@@ -54,6 +52,14 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	this.setAverageOf = function(count) {
 		averageOf = count;
 		resetReferenceValueAndAverage();
+	}
+	
+	this.setSmooth = function(smooth) {
+		if (smooth) {
+			ramp = new Ramp();
+		} else {
+			ramp = undefined;
+		}
 	}
 	
 	function resetReferenceValueAndAverage() {
