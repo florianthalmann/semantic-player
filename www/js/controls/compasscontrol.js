@@ -17,7 +17,6 @@ function CompassControl() {
 			this.resetReferenceValue();
 		}
 	);
-	//this.setReferenceAverageOf(3);
 	
 }
 inheritPrototype(CompassControl, SensorControl);
