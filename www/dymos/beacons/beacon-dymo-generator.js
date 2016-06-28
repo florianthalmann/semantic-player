@@ -11,21 +11,21 @@ var beacons = [
 	{"major":29375,"minor":97634},
 	{"major":23764,"minor":38754}
 ];
-var dirtySoundFiles = [
-	"birds.m4a",
-	"churrasqueria.m4a",
-	"cafeteria.m4a",
-	"man.m4a",
-	"outside.m4a",
-	"station.m4a"
+var warpedSoundFiles = [
+	"Region1b_conversationWarped.m4a",
+	"Region2b_birdSongWarped.m4a",
+	"Region3b_songA.m4a",
+	"Region4b_kitchenWarped.m4a",
+	"Region5b_bandSoundcheckWarped.m4a",
+	"Region6b_doorWarped.m4a"
 ];
 var cleanSoundFiles = [
-	"birds.m4a",
-	"churrasqueria.m4a",
-	"cafeteria.m4a",
-	"man.m4a",
-	"outside.m4a",
-	"station.m4a"
+	"Region1a_conversation.m4a",
+	"Region2a_birdSong.m4a",
+	"Region3b_songA.m4a",
+	"Region4a_kitchen.m4a",
+	"Region5a_bandSoundcheck.m4a",
+	"Region6a_door.m4a"
 ];
 
 //generate dymo
@@ -35,7 +35,7 @@ var dymo = {
 	"@type":"Dymo",
 	"cdt":"parallel",
 	"parts":[{
-		"@id":"dirty",
+		"@id":"warped",
 		"@type":"Dymo",
 		"cdt":"parallel",
 		"parts":[]
@@ -46,11 +46,11 @@ var dymo = {
 		"parts":[]
 	}]
 };
-for (var i = 0; i < dirtySoundFiles.length; i++) {
+for (var i = 0; i < warpedSoundFiles.length; i++) {
 	dymo["parts"][0]["parts"].push({
-		"@id":"dirtyArea"+i,
+		"@id":"warpedArea"+i,
 		"@type":"Dymo",
-		"source":dirtySoundFiles[i],
+		"source":warpedSoundFiles[i],
 		"parameters":[
 			{"@type":"Loop", "value":1},
 			{"@type":"Amplitude", "value":1}
@@ -96,11 +96,11 @@ rendering["mappings"].push({
 		"@type":"Beacon"
 	}],
 	"function":{"args":["a"],"body":"return a<"+centerBeaconRange+"?0:"+maxAmplitude+";"},
-	"dymos":["dirty"],
+	"dymos":["warped"],
 	"range":"Amplitude"
 });
 //add mappings for beacon areas
-for (var i = 0; i < dirtySoundFiles.length; i++) {
+for (var i = 0; i < warpedSoundFiles.length; i++) {
 	rendering["mappings"].push({
 		"domainDims":[{
 			"name":"beacon"+i,
@@ -110,7 +110,7 @@ for (var i = 0; i < dirtySoundFiles.length; i++) {
 			"minor":beacons[i+1].minor
 		}],
 		"function":{"args":["a"],"body":"return Math.max("+areaBeaconRange+"-a, 0)/"+areaBeaconRange+"*"+maxAmplitude+";"},
-		"dymos":["dirtyArea"+i],
+		"dymos":["warpedArea"+i],
 		"range":"Amplitude"
 	});
 }

@@ -12,7 +12,7 @@
 				{
 					"@id": "dirtyArea0",
 					"@type": "Dymo",
-					"source": "birds.m4a",
+					"source": "Region1b_conversationWarped.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -27,7 +27,7 @@
 				{
 					"@id": "dirtyArea1",
 					"@type": "Dymo",
-					"source": "churrasqueria.m4a",
+					"source": "Region2b_birdSongWarped.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -42,7 +42,7 @@
 				{
 					"@id": "dirtyArea2",
 					"@type": "Dymo",
-					"source": "cafeteria.m4a",
+					"source": "Region3b_songA.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -57,7 +57,7 @@
 				{
 					"@id": "dirtyArea3",
 					"@type": "Dymo",
-					"source": "man.m4a",
+					"source": "Region4b_kitchenWarped.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -72,7 +72,7 @@
 				{
 					"@id": "dirtyArea4",
 					"@type": "Dymo",
-					"source": "outside.m4a",
+					"source": "Region5b_bandSoundcheckWarped.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -87,7 +87,7 @@
 				{
 					"@id": "dirtyArea5",
 					"@type": "Dymo",
-					"source": "station.m4a",
+					"source": "Region6b_doorWarped.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -109,7 +109,7 @@
 				{
 					"@id": "cleanArea0",
 					"@type": "Dymo",
-					"source": "birds.m4a",
+					"source": "Region1a_conversation.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -124,7 +124,7 @@
 				{
 					"@id": "cleanArea1",
 					"@type": "Dymo",
-					"source": "churrasqueria.m4a",
+					"source": "Region2a_birdSong.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -139,7 +139,7 @@
 				{
 					"@id": "cleanArea2",
 					"@type": "Dymo",
-					"source": "cafeteria.m4a",
+					"source": "Region3b_songA.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -154,7 +154,7 @@
 				{
 					"@id": "cleanArea3",
 					"@type": "Dymo",
-					"source": "man.m4a",
+					"source": "Region4a_kitchen.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -169,7 +169,7 @@
 				{
 					"@id": "cleanArea4",
 					"@type": "Dymo",
-					"source": "outside.m4a",
+					"source": "Region5a_bandSoundcheck.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -184,7 +184,7 @@
 				{
 					"@id": "cleanArea5",
 					"@type": "Dymo",
-					"source": "station.m4a",
+					"source": "Region6a_door.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
