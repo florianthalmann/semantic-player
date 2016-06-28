@@ -12,20 +12,20 @@ var beacons = [
 	{"major":23764,"minor":38754}
 ];
 var dirtySoundFiles = [
-	"pad.m4a",
-	"piano.m4a",
-	"blib.m4a",
-	"drums.m4a",
-	"bass.m4a",
-	"flav.m4a"
+	"birds.m4a",
+	"churrasqueria.m4a",
+	"cafeteria.m4a",
+	"man.m4a",
+	"outside.m4a",
+	"station.m4a"
 ];
 var cleanSoundFiles = [
-	"pad.m4a",
-	"piano.m4a",
-	"blib.m4a",
-	"drums.m4a",
-	"bass.m4a",
-	"flav.m4a"
+	"birds.m4a",
+	"churrasqueria.m4a",
+	"cafeteria.m4a",
+	"man.m4a",
+	"outside.m4a",
+	"station.m4a"
 ];
 
 //generate dymo
@@ -120,9 +120,7 @@ for (var i = 0; i < cleanSoundFiles.length; i++) {
 	rendering["mappings"].push({
 		"domainDims":[{
 			"name":"compass",
-			"@type":"CompassHeading",
-			"average":3,
-			"smooth":true
+			"@type":"CompassHeading"
 		}],
 		"function":{"args":["a"],"body":"return ("+compassRayWidth/2+"-Math.min(Math.abs(a-"+i*cleanSoundFiles.length+"),"+compassRayWidth/2+"))/"+compassRayWidth/2+"*"+maxAmplitude+";"},
 		"dymos":["cleanArea"+i],

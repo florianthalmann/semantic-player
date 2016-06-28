@@ -12,7 +12,7 @@
 				{
 					"@id": "dirtyArea0",
 					"@type": "Dymo",
-					"source": "pad.m4a",
+					"source": "birds.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -27,7 +27,7 @@
 				{
 					"@id": "dirtyArea1",
 					"@type": "Dymo",
-					"source": "piano.m4a",
+					"source": "churrasqueria.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -42,7 +42,7 @@
 				{
 					"@id": "dirtyArea2",
 					"@type": "Dymo",
-					"source": "blib.m4a",
+					"source": "cafeteria.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -57,7 +57,7 @@
 				{
 					"@id": "dirtyArea3",
 					"@type": "Dymo",
-					"source": "drums.m4a",
+					"source": "man.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -72,7 +72,7 @@
 				{
 					"@id": "dirtyArea4",
 					"@type": "Dymo",
-					"source": "bass.m4a",
+					"source": "outside.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -87,7 +87,7 @@
 				{
 					"@id": "dirtyArea5",
 					"@type": "Dymo",
-					"source": "flav.m4a",
+					"source": "station.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -109,7 +109,7 @@
 				{
 					"@id": "cleanArea0",
 					"@type": "Dymo",
-					"source": "pad.m4a",
+					"source": "birds.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -124,7 +124,7 @@
 				{
 					"@id": "cleanArea1",
 					"@type": "Dymo",
-					"source": "piano.m4a",
+					"source": "churrasqueria.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -139,7 +139,7 @@
 				{
 					"@id": "cleanArea2",
 					"@type": "Dymo",
-					"source": "blib.m4a",
+					"source": "cafeteria.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -154,7 +154,7 @@
 				{
 					"@id": "cleanArea3",
 					"@type": "Dymo",
-					"source": "drums.m4a",
+					"source": "man.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -169,7 +169,7 @@
 				{
 					"@id": "cleanArea4",
 					"@type": "Dymo",
-					"source": "bass.m4a",
+					"source": "outside.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",
@@ -184,7 +184,7 @@
 				{
 					"@id": "cleanArea5",
 					"@type": "Dymo",
-					"source": "flav.m4a",
+					"source": "station.m4a",
 					"parameters": [
 						{
 							"@type": "Loop",

@@ -42,13 +42,12 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 	$scope.dymoSelected = function() {
 		if ($scope.state.selectedDymo) {
 			$scope.resetUI();
+			loadingDymoAndRendering = true;
 			loadingAudio = true;
 			$scope.updateLoading();
 			
 			$scope.manager = new DymoManager($scope.audioContext, undefined, 'lib/dymo-core/audio/impulse_rev.wav', $scope);
 			$scope.manager.loadDymoAndRendering($scope.state.selectedDymo.dymoUri, $scope.state.selectedDymo.renderingUri, function() {
-				loadingAudio = false;
-				$scope.updateLoading();
 				$scope.uiControls = $scope.manager.getUIControls();
 				$scope.sensorControls = $scope.manager.getSensorControls();
 				for (control in $scope.sensorControls) {
@@ -58,23 +57,24 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 				loadingDymoAndRendering = false;
 				$scope.updateLoading();
 				$scope.$apply();
+			}, function() {
 				if ($scope.config.autoplay) {
-					setTimeout(function() {
-						$scope.manager.startPlaying();
-					}, 2000);
+					loadingAudio = false;
+					$scope.updateLoading();
+					$scope.manager.startPlaying();
 				}
 			});
 		}
 	}
 	
 	$scope.updateLoading = function() {
-		if (loadingAudio) {
+		if (loadingDymoAndRendering) {
+			$ionicLoading.show({
+				template: 'Loading dymo...'
+			});
+		} else if (loadingAudio) {
 			$ionicLoading.show({
 				template: 'Loading audio...'
-			});
-		} else if (loadingDymoAndRendering) {
-			$ionicLoading.show({
-				template: 'Loading mappings...'
 			});
 		} else {
 			$ionicLoading.hide();
