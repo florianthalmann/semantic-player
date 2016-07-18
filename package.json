@@ -26,10 +26,13 @@
     "cordova-plugin-device-motion",
     "cordova-plugin-device-orientation",
     "cordova-plugin-geolocation",
-    "com.unarin.cordova.beacon"
+    {
+      "locator": "https://github.com/petermetz/cordova-plugin-ibeacon.git",
+      "id": "com.unarin.cordova.beacon"
+    }
   ],
   "cordovaPlatforms": [
-    "android",
-    "ios"
+    "ios",
+    "android"
   ]
 }

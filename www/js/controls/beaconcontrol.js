@@ -16,7 +16,7 @@ function BeaconControl(uuid, major, minor) {
 	);
 	
 	this.startUpdate = function() {
-		var region = self.getSensor().createBeaconRegion("estimote", uuid)
+		var region = self.getSensor().createBeaconRegion("smpBeacons", uuid)
 		self.getSensor().startRangingBeaconsInRegion(region);
 		self.getScope().$on("$cordovaBeacon:didRangeBeaconsInRegion", function(event, region) {
 			for (var b in region.beacons) {
