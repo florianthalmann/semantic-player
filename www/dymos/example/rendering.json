@@ -1,7 +1,7 @@
 {
 	"@context":"http://tiny.cc/dymo-context",
 	"@id":"demoBeatRendering",
-	"@@type":"Rendering",
+	"@type":"Rendering",
 	"dymo":"demoBeat",
 	"mappings":[
 		{
@@ -10,7 +10,7 @@
 				"@type":"Slider",
 				"value":0
 			}],
-			"dymos":["demoBeat"],
+			"targets":["demoBeat"],
 			"range":"Rhythmicality"
 		},
 		{
@@ -19,7 +19,7 @@
 				"@type":"GeolocationLatitude"
 			}],
 			"function":{"args":["a"],"body":"return a*10000;"},
-			"dymos":["demoBeat"],
+			"targets":["demoBeat"],
 			"range":"Rhythmicality"
 		},
 		{
@@ -27,7 +27,7 @@
 				"name":"Space",
 				"@type":"Slider"
 			}],
-			"dymos":["demoBeat"],
+			"targets":["demoBeat"],
 			"range":"Space"
 		},
 		{
@@ -35,7 +35,7 @@
 				"name":"Weirdness",
 				"@type":"Slider"
 			}],
-			"dymos":["demoBeat"],
+			"targets":["demoBeat"],
 			"range":"Weirdness"
 		}
 	]

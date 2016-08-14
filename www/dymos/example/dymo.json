@@ -2,60 +2,60 @@
 	"@context":"http://tiny.cc/dymo-context",
 	"@id":"demoBeat",
 	"@type":"Dymo",
-	"cdt":"parallel",
+	"cdt":"Conjunction",
 	"mappings":[
 		{
-			"domainDims":[{"name":"Rhythmicality","@type":"Parameter"}],
+			"domainDims":[{"@id":"Rhythmicality","@type":"CustomParameter"}],
 			"function":{"args":["a"],"body":"return a/4;"},
-			"dymos":["bass", "drums", "flav"],
+			"targets":["bass", "drums", "flav"],
 			"range":"Amplitude"
 		},
 		{
-			"domainDims":[{"name":"Rhythmicality","@type":"Parameter"}],
+			"domainDims":["Rhythmicality"],
 			"function":{"args":["a"],"body":"return 0.2-a;"},
-			"dymos":["pad"],
+			"targets":["pad"],
 			"range":"Amplitude"
 		},
 		{
-			"domainDims":[{"name":"Space","@type":"Parameter"}],
+			"domainDims":[{"@id":"Space","@type":"CustomParameter"}],
 			"function":{"args":["a"],"body":"return 2*a-1;"},
-			"dymos":["piano"],
+			"targets":["piano"],
 			"range":"Pan"
 		},
 		{
-			"domainDims":[{"name":"Space","@type":"Parameter"}],
+			"domainDims":["Space"],
 			"function":{"args":["a"],"body":"return -2*a+1;"},
-			"dymos":["pad"],
+			"targets":["pad"],
 			"range":"Pan"
 		},
 		{
-			"domainDims":[{"name":"Space","@type":"Parameter"}],
+			"domainDims":["Space"],
 			"function":{"args":["a"],"body":"return 5*a;"},
-			"dymos":["piano", "pad"],
+			"targets":["piano", "pad"],
 			"range":"Reverb"
 		},
 		{
-			"domainDims":[{"name":"Space","@type":"Parameter"}],
+			"domainDims":["Space"],
 			"function":{"args":["a"],"body":"return a;"},
-			"dymos":["drums", "bass"],
+			"targets":["drums", "bass"],
 			"range":"Reverb"
 		},
 		{
-			"domainDims":[{"name":"Weirdness","@type":"Parameter"},{"name":"brownian","@type":"Brownian"}],
+			"domainDims":[{"@id":"Weirdness","@type":"CustomParameter"},{"@id":"brownian","@type":"Brownian"}],
 			"function":{"args":["a","b"],"body":"return 1+a*(b*2-1);"},
-			"dymos":["blib","piano", "pad", "drums", "bass","flav"],
+			"targets":["blib","piano", "pad", "drums", "bass","flav"],
 			"range":"PlaybackRate"
 		},
 		{
-			"domainDims":[{"name":"Weirdness","@type":"Parameter"},{"name":"brownian","@type":"Brownian"}],
+			"domainDims":["Weirdness","brownian"],
 			"function":{"args":["a","b"],"body":"return a*(b-0.5);"},
-			"dymos":["piano", "flav"],
+			"targets":["piano", "flav"],
 			"range":"Pan"
 		},
 		{
-			"domainDims":[{"name":"Weirdness","@type":"Parameter"},{"name":"brownian","@type":"Brownian"}],
+			"domainDims":["Weirdness","brownian"],
 			"function":{"args":["a","b"],"body":"return a*(-b+0.5);"},
-			"dymos":["pad", "drums"],
+			"targets":["pad", "drums"],
 			"range":"Pan"
 		}
 	],

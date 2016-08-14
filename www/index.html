@@ -12,6 +12,8 @@
 	<script src="lib/ionic/js/ionic.bundle.js"></script>
 	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
 	<script src="cordova.js"></script>
+	<script src="lib/n3/n3-browser.js"></script>
+	<script src="lib/jsonld/js/jsonld.js"></script>
 	<script src="lib/mathjs/dist/math.js"></script>
 	<script src="lib/dymo-core/dist/dymo-core.min.js"></script>
 
@@ -50,16 +52,16 @@
 						<i class="icon ion-stop"></i>
 					</button>
 				</ion-item>
-				<ion-item ng-show="config.showDymoControls" ng-if="u.getType() == &apos;Slider&apos;" class="item range range-energized" ng-repeat="u in uiControls">
+				<ion-item ng-show="config.showDymoControls" ng-if="u.getType() == SLIDER" class="item range range-energized" ng-repeat="u in uiControls">
 					<div class="input-label">
 						{{ u.getName() }}
 					</div>
 					<input type="range" name="slider" min="0" max="1" step=".001" ng-model="u.value" ng-change="u.update()">
 				</ion-item>
-				<ion-toggle ng-show="config.showDymoControls" ng-if="u.getType() == &apos;Toggle&apos;" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.update()">
+				<ion-toggle ng-show="config.showDymoControls" ng-if="u.getType() == TOGGLE" ng-repeat="u in uiControls" ng-model="u.value" ng-change="u.update()">
 					{{ u.getName() }}
 				</ion-toggle>
-				<ion-item ng-show="config.showDymoControls" ng-if="u.getType() == &apos;Button&apos;" ng-repeat="u in uiControls">
+				<ion-item ng-show="config.showDymoControls" ng-if="u.getType() == BUTTON" ng-repeat="u in uiControls">
 					<button class="button button-calm" ng-model="u.value" ng-click="u.update()">
 						{{ u.getName() }}
 					</button>

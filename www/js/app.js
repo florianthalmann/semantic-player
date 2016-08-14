@@ -19,6 +19,11 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	$scope.audioContext = new AudioContext();
 	
+	//make ui type globals accessible from frontend
+	$scope.SLIDER = SLIDER;
+	$scope.TOGGLE = TOGGLE;
+	$scope.BUTTON = BUTTON;
+	
 	var ngSensors = {};
 	ngSensors["$cordovaDeviceMotion"] = $cordovaDeviceMotion;
 	ngSensors["$cordovaDeviceOrientation"] = $cordovaDeviceOrientation;
@@ -58,9 +63,9 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 				$scope.updateLoading();
 				$scope.$apply();
 			}, function() {
+				loadingAudio = false;
+				$scope.updateLoading();
 				if ($scope.config.autoplay) {
-					loadingAudio = false;
-					$scope.updateLoading();
 					$scope.manager.startPlaying();
 				}
 			});
