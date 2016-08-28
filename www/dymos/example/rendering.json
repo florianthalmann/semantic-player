@@ -8,7 +8,7 @@
 			"domainDims":[{
 				"name":"Rhythmicality",
 				"@type":"Slider",
-				"value":0
+				"init":0
 			}],
 			"targets":["demoBeat"],
 			"range":"Rhythmicality"
@@ -25,7 +25,8 @@
 		{
 			"domainDims":[{
 				"name":"Space",
-				"@type":"Slider"
+				"@type":"Slider",
+				"init":0
 			}],
 			"targets":["demoBeat"],
 			"range":"Space"
@@ -33,7 +34,8 @@
 		{
 			"domainDims":[{
 				"name":"Weirdness",
-				"@type":"Slider"
+				"@type":"Slider",
+				"init":0
 			}],
 			"targets":["demoBeat"],
 			"range":"Weirdness"
