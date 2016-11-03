@@ -4,9 +4,9 @@
  * @extends {SensorControl}
  */
 function GeolocationControl(controlName) {
-	
+
 	var self = this;
-	
+
 	SensorControl.call(this, controlName,
 		"$cordovaGeolocation",
 		"watchPosition",
@@ -20,7 +20,7 @@ function GeolocationControl(controlName) {
 			self.update(newValue);
 		},
 		function() {
-			this.resetReferenceValue();
+			self.resetReferenceValueAndAverage();
 		},
 		{
 			enableHighAccuracy: true,
@@ -30,6 +30,6 @@ function GeolocationControl(controlName) {
 	);
 	//this.setReferenceAverageOf(10);
 	//this.setAverageOf(10);
-	
+
 }
 inheritPrototype(GeolocationControl, SensorControl);

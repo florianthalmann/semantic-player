@@ -5,38 +5,34 @@
 	"dymo":"demoBeat",
 	"mappings":[
 		{
-			"domainDims":[{
-				"name":"Rhythmicality",
-				"@type":"Slider",
-				"init":0
-			}],
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":{"name":"Rhythmicality", "@type":"Slider", "init":0}}
+			],"body": "return a;"},
 			"targets":["demoBeat"],
 			"range":"Rhythmicality"
 		},
 		{
-			"domainDims":[{
-				"name":"geo",
-				"@type":"GeolocationLatitude"
-			}],
-			"function":{"args":["a"],"body":"return a*10000;"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":{"name":"geo", "@type":"GeolocationLatitude"}}
+			],"body": "return a*10000;"},
 			"targets":["demoBeat"],
 			"range":"Rhythmicality"
 		},
 		{
-			"domainDims":[{
-				"name":"Space",
-				"@type":"Slider",
-				"init":0
-			}],
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":{"name":"Space", "@type":"Slider", "init":0}}
+			],"body": "return a;"},
 			"targets":["demoBeat"],
 			"range":"Space"
 		},
 		{
-			"domainDims":[{
-				"name":"Weirdness",
-				"@type":"Slider",
-				"init":0
-			}],
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":{"name":"Weirdness", "@type":"Slider", "init":0}}
+			],"body": "return a;"},
 			"targets":["demoBeat"],
 			"range":"Weirdness"
 		}

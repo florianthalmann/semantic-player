@@ -5,61 +5,82 @@
 	"cdt":"Conjunction",
 	"mappings":[
 		{
-			"domainDims":[{"@id":"Rhythmicality","@type":"CustomParameter"}],
-			"function":{"args":["a"],"body":"return a/4;"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":{"@id":"Rhythmicality","@type":"CustomParameter"}}
+			],"body": "return a/4;"},
 			"targets":["bass", "drums", "flav"],
 			"range":"Amplitude"
 		},
 		{
-			"domainDims":["Rhythmicality"],
-			"function":{"args":["a"],"body":"return 0.2-a;"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":"Rhythmicality"}
+			],"body": "return 0.2-a;"},
 			"targets":["pad"],
 			"range":"Amplitude"
 		},
 		{
-			"domainDims":[{"@id":"Space","@type":"CustomParameter"}],
-			"function":{"args":["a"],"body":"return 2*a-1;"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":{"@id":"Space","@type":"CustomParameter"}}
+			],"body": "return 2*a-1;"},
 			"targets":["piano"],
 			"range":"Pan"
 		},
 		{
-			"domainDims":["Space"],
-			"function":{"args":["a"],"body":"return -2*a+1;"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":"Space"}
+			],"body": "return -2*a+1;"},
 			"targets":["pad"],
 			"range":"Pan"
 		},
 		{
-			"domainDims":["Space"],
-			"function":{"args":["a"],"body":"return 5*a;"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":"Space"}
+			],"body": "return 5*a;"},
 			"targets":["piano", "pad"],
 			"range":"Reverb"
 		},
 		{
-			"domainDims":["Space"],
-			"function":{"args":["a"],"body":"return a;"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":"Space"}
+			],"body": "return a;"},
 			"targets":["drums", "bass"],
 			"range":"Reverb"
 		},
 		{
-			"domainDims":[{"@id":"Weirdness","@type":"CustomParameter"},{"@id":"brownian","@type":"Brownian"}],
-			"function":{"args":["a","b"],"body":"return 1+a*(b*2-1);"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":{"@id":"Weirdness","@type":"CustomParameter"}},
+				{"var":"b", "val":{"@id":"brownian","@type":"Brownian"}}
+			],"body": "return 1+a*(b*2-1);"},
 			"targets":["blib","piano", "pad", "drums", "bass","flav"],
 			"range":"PlaybackRate"
 		},
 		{
-			"domainDims":["Weirdness","brownian"],
-			"function":{"args":["a","b"],"body":"return a*(b-0.5);"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":"Weirdness"},
+				{"var":"b", "val":"brownian"}
+			],"body": "return a*(b-0.5);"},
 			"targets":["piano", "flav"],
 			"range":"Pan"
 		},
 		{
-			"domainDims":["Weirdness","brownian"],
-			"function":{"args":["a","b"],"body":"return a*(-b+0.5);"},
+			"@type":"Mapping",
+			"function":{"args":[
+				{"var":"a", "val":"Weirdness"},
+				{"var":"b", "val":"brownian"}
+			],"body": "return a*(-b+0.5);"},
 			"targets":["pad", "drums"],
 			"range":"Pan"
 		}
 	],
-	"parts":[
+	"parts":{"@list":[
 		{
 			"@id":"pad",
 			"@type":"Dymo",
@@ -122,5 +143,5 @@
 				{"@type":"PlaybackRate", "value":0.7}
 			]
 		}
-	]
+	]}
 }

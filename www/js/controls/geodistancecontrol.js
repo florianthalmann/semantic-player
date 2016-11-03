@@ -4,11 +4,11 @@
  * @extends {SensorControl}
  */
 function DistanceControl() {
-	
+
 	var self = this;
-	
+
 	var reference;
-	
+
 	SensorControl.call(this, GEOLOCATION_DISTANCE,
 		"$cordovaGeolocation",
 		"watchPosition",
@@ -16,12 +16,12 @@ function DistanceControl() {
 			if (!reference) {
 				reference = [position.coords.latitude, position.coords.longitude];
 			} else {
-				currentDistance = latLonToMeters(reference[0], reference[1], position.coords.latitude, position.coords.longitude);
+				var currentDistance = latLonToMeters(reference[0], reference[1], position.coords.latitude, position.coords.longitude);
 				self.update(currentDistance);
 			}
 		},
 		function() {
-			this.resetReferenceValue();
+			self.resetReferenceValueAndAverage();
 		},
 		{
 			enableHighAccuracy: true,
@@ -31,7 +31,7 @@ function DistanceControl() {
 	);
 	this.setReferenceAverageOf(5);
 	//this.setAverageOf(5);
-	
+
 	function latLonToMeters(lat1, lon1, lat2, lon2){  // generally used geo measurement function :)
 		var R = 6378.137; // Radius of earth in KM
 		var dLat = (lat2 - lat1) * Math.PI / 180;
@@ -43,6 +43,6 @@ function DistanceControl() {
 		var d = R * c;
 		return d * 1000; // meters
 	}
-	
+
 }
 inheritPrototype(DistanceControl, SensorControl);

@@ -4,11 +4,11 @@
  * @extends {SensorControl}
  */
 function TiltControl(dimension) {
-	
+
 	var self = this;
-	
+
 	var TILT_SENSITIVITY = 0.1;
-	
+
 	SensorControl.call(this, dimension,
 		"$cordovaDeviceMotion",
 		"watchAcceleration",
@@ -27,11 +27,11 @@ function TiltControl(dimension) {
 			self.update(newValue);
 		}
 	);
-	
+
 	// normalizes acceleration to interval [0,1]
 	function normalizeAcceleration(acceleration) {
 		return (acceleration / 9.81 + 1) / 2;
 	}
-	
+
 }
 inheritPrototype(TiltControl, SensorControl);

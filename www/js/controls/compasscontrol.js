@@ -4,9 +4,9 @@
  * @extends {SensorControl}
  */
 function CompassControl() {
-	
+
 	var self = this;
-	
+
 	SensorControl.call(this, COMPASS_HEADING,
 		"$cordovaDeviceOrientation",
 		"watchHeading",
@@ -14,10 +14,10 @@ function CompassControl() {
 			self.update(heading.trueHeading);
 		},
 		function() {
-			this.resetReferenceValue();
+			self.resetReferenceValueAndAverage();
 		}
 	);
 	this.setReferenceAverageOf(3);
-	
+
 }
 inheritPrototype(CompassControl, SensorControl);

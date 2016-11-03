@@ -1,14 +1,14 @@
 /**
  * Sensor controls that read their values from sensors.
  * @constructor
- * @extends {Control}
+ * @extends {AutoControl}
  * @param {Function=} resetFunction (optional)
- * @param {Boolean=} ramp if true then the values will be smoothly updated at AUTO_CONTROL_FREQUENCY (optional)
+ * @param {Object=} options (optional)
  */
-function SensorControl(controlName, sensorName, watchFunctionName, updateFunction, resetFunction, options) {
-	
+function SensorControl(uri, sensorName, watchFunctionName, updateFunction, resetFunction, options) {
+
 	var self = this;
-	
+
 	var $scope, $ngSensor;
 	var referenceValue;
 	var referenceAverageOf;
@@ -17,25 +17,11 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 	var previousUpdateTime;
 	var ramp;
 	var message = "not available";
-	
-	var parameters = {};
-	addParameter(new Parameter(AUTO_CONTROL_FREQUENCY, 100));
-	addParameter(new Parameter(AUTO_CONTROL_TRIGGER, 0));
-	Control.call(this, controlName, controlName, parameters);
-	
+
+	AutoControl.call(this, uri, sensorName);
+
 	var watch;
-	
-	function addParameter(param) {
-		var paramName = param.getName();
-		parameters[paramName] = param;
-		parameters[paramName].addObserver(self);
-	}
-	this.addParameter = addParameter;
-	
-	this.getParameter = function(paramName) {
-		return parameters[paramName];
-	}
-	
+
 	this.getValue = function() {
 		var value = Control.prototype.getValue.call(this);
 		if (isNaN(value)) {
@@ -43,17 +29,17 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 		}
 		return value;
 	}
-	
+
 	this.setReferenceAverageOf = function(count) {
 		referenceAverageOf = count;
-		resetReferenceValueAndAverage();
+		this.resetReferenceValueAndAverage();
 	}
-	
+
 	this.setAverageOf = function(count) {
 		averageOf = count;
-		resetReferenceValueAndAverage();
+		this.resetReferenceValueAndAverage();
 	}
-	
+
 	this.setSmooth = function(smooth) {
 		if (smooth) {
 			ramp = new Ramp();
@@ -61,16 +47,15 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 			ramp = undefined;
 		}
 	}
-	
-	function resetReferenceValueAndAverage() {
-		value = undefined;
+
+	this.resetReferenceValueAndAverage = function() {
 		referenceValue = undefined;
 		previousValues = [];
 	}
-	
+
 	this.startUpdate = function() {
 		if (!options) {
-			options = { frequency: parameters[AUTO_CONTROL_FREQUENCY].getValue() };
+			options = { frequency: DYMO_STORE.findParameterValue(uri, AUTO_CONTROL_FREQUENCY) };
 		}
 		if ($ngSensor) {
 			watch = $ngSensor[watchFunctionName](options);
@@ -84,10 +69,10 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 				}
 			});
 		} else {
-			console.log(controlName + " not available");
+			console.log(uri + " not available");
 		}
 	}
-	
+
 	this.update = function(newValue) {
 		message = "calibrating";
 		//still measuring reference value
@@ -133,39 +118,39 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 			}
 		}
 	}
-	
+
 	function getAverage(list) {
 		var sum = list.reduce(function(a, b) { return a + b; });
 		return sum / list.length;
 	}
-	
+
 	function startUpdateRamp(targetValue, duration) {
-		frequency = parameters[AUTO_CONTROL_FREQUENCY].getValue();
+		var frequency = DYMO_STORE.findParameterValue(uri, AUTO_CONTROL_FREQUENCY);
 		ramp.startOrUpdate(targetValue, duration, frequency, function(value) {
 			//call regular super method
 			Control.prototype.update.call(self, value);
 		});
 	}
-	
+
 	this.getSensorName = function() {
 		return sensorName;
 	}
-	
+
 	this.getSensor = function() {
 		return $ngSensor;
 	}
-	
+
 	this.getScope = function() {
 		return $scope;
 	}
-	
+
 	this.setScopeNgSensorAndStart = function(scope, ngSensor) {
 		$scope = scope;
 		$ngSensor = ngSensor;
 		// Wait for device API libraries to load (Cordova needs this)
 		document.addEventListener("deviceready", this.startUpdate, false);
 	}
-	
+
 	this.reset = function() {
 		if (watch) {
 			$ngSensor.clearWatch(watch);
@@ -175,25 +160,10 @@ function SensorControl(controlName, sensorName, watchFunctionName, updateFunctio
 			}
 		}
 	}
-	
+
 	function onError() {
-		console.log(controlName + ' control error!');
+		console.log(uri + ' control error!');
 	}
-	
-	this.observedParameterChanged = function(param) {
-		if (param == parameters[AUTO_CONTROL_FREQUENCY]) {
-			if (watchID) {
-				this.reset();
-				this.startUpdate();
-			}
-		} else if (param == parameters[AUTO_CONTROL_TRIGGER]) {
-			if (!watchID) {
-				this.startUpdate();
-			} else {
-				this.reset();
-			}
-		}
-	}
-	
+
 }
-inheritPrototype(SensorControl, Control);
+inheritPrototype(SensorControl, AutoControl);
