@@ -15,8 +15,8 @@
 		{
 			"@type":"Mapping",
 			"function":{"args":[
-				{"var":"a", "val":{"name":"geo", "@type":"GeolocationLatitude"}}
-			],"body": "return a*10000;"},
+				{"var":"a", "val":{"name":"accX", "@type":"AccelerometerX"}}
+			],"body": "return a;"},
 			"targets":["demoBeat"],
 			"range":"Rhythmicality"
 		},

@@ -51,7 +51,7 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 			loadingAudio = true;
 			$scope.updateLoading();
 
-			$scope.manager = new DymoManager($scope.audioContext, undefined, 'lib/dymo-core/audio/impulse_rev.wav', function(){
+			$scope.manager = new DymoManager($scope.audioContext, undefined, true, 'lib/dymo-core/audio/impulse_rev.wav', function(){
 				$scope.manager.loadDymoAndRendering($scope.state.selectedDymo.dymoUri, $scope.state.selectedDymo.renderingUri, function() {
 					$scope.uiControls = $scope.manager.getUIControls();
 					$scope.sensorControls = $scope.manager.getSensorControls();
@@ -59,6 +59,7 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 						control = $scope.sensorControls[control];
 						control.setScopeNgSensorAndStart($scope, ngSensors[control.getSensorName()]);
 					}
+					console.log($scope.manager.getSensorControls(), $scope.manager.getSensorControls().size)
 					loadingDymoAndRendering = false;
 					$scope.updateLoading();
 					$scope.$apply();

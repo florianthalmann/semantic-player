@@ -18,7 +18,7 @@ function SensorControl(uri, sensorName, watchFunctionName, updateFunction, reset
 	var ramp;
 	var message = "not available";
 
-	AutoControl.call(this, uri, sensorName);
+	Control.call(this, uri, uri, uri);
 
 	var watch;
 
@@ -166,4 +166,4 @@ function SensorControl(uri, sensorName, watchFunctionName, updateFunction, reset
 	}
 
 }
-inheritPrototype(SensorControl, AutoControl);
+inheritPrototype(SensorControl, Control);
