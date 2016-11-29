@@ -17,7 +17,7 @@ function GeolocationControl(controlName) {
 			} else {
 				newValue = position.coords.longitude;
 			}
-			self.update(newValue);
+			self.updateValue(newValue);
 		},
 		function() {
 			self.resetReferenceValueAndAverage();

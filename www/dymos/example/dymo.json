@@ -10,6 +10,7 @@
 				{"var":"a", "val":{"@id":"Rhythmicality","@type":"CustomParameter"}}
 			],"body": "return a/4;"},
 			"targets":["bass", "drums", "flav"],
+			"unidirectional": true,
 			"range":"Amplitude"
 		},
 		{
@@ -18,6 +19,7 @@
 				{"var":"a", "val":"Rhythmicality"}
 			],"body": "return 0.2-a;"},
 			"targets":["pad"],
+			"unidirectional": true,
 			"range":"Amplitude"
 		},
 		{
@@ -26,6 +28,7 @@
 				{"var":"a", "val":{"@id":"Space","@type":"CustomParameter"}}
 			],"body": "return 2*a-1;"},
 			"targets":["piano"],
+			"unidirectional": true,
 			"range":"Pan"
 		},
 		{
@@ -34,6 +37,7 @@
 				{"var":"a", "val":"Space"}
 			],"body": "return -2*a+1;"},
 			"targets":["pad"],
+			"unidirectional": true,
 			"range":"Pan"
 		},
 		{
@@ -42,6 +46,7 @@
 				{"var":"a", "val":"Space"}
 			],"body": "return 5*a;"},
 			"targets":["piano", "pad"],
+			"unidirectional": true,
 			"range":"Reverb"
 		},
 		{
@@ -50,6 +55,7 @@
 				{"var":"a", "val":"Space"}
 			],"body": "return a;"},
 			"targets":["drums", "bass"],
+			"unidirectional": true,
 			"range":"Reverb"
 		},
 		{
@@ -59,6 +65,7 @@
 				{"var":"b", "val":{"@id":"brownian","@type":"Brownian"}}
 			],"body": "return 1+a*(b*2-1);"},
 			"targets":["blib","piano", "pad", "drums", "bass","flav"],
+			"unidirectional": true,
 			"range":"PlaybackRate"
 		},
 		{
@@ -68,6 +75,7 @@
 				{"var":"b", "val":"brownian"}
 			],"body": "return a*(b-0.5);"},
 			"targets":["piano", "flav"],
+			"unidirectional": true,
 			"range":"Pan"
 		},
 		{
@@ -77,6 +85,7 @@
 				{"var":"b", "val":"brownian"}
 			],"body": "return a*(-b+0.5);"},
 			"targets":["pad", "drums"],
+			"unidirectional": true,
 			"range":"Pan"
 		}
 	],

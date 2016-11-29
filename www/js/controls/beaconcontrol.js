@@ -4,9 +4,9 @@
  * @extends {SensorControl}
  */
 function BeaconControl(uuid, major, minor) {
-	
+
 	var self = this;
-	
+
 	SensorControl.call(this, BEACON,
 		"$cordovaBeacon",
 		null,
@@ -14,7 +14,7 @@ function BeaconControl(uuid, major, minor) {
 		null,
 		null
 	);
-	
+
 	this.startUpdate = function() {
 		var region = self.getSensor().createBeaconRegion("smpBeacons", uuid)
 		self.getSensor().startRangingBeaconsInRegion(region);
@@ -22,11 +22,11 @@ function BeaconControl(uuid, major, minor) {
 			for (var b in region.beacons) {
 				b = region.beacons[b]
 				if (b.major == major && b.minor == minor) {
-					self.update(b.accuracy);
+					self.updateValue(b.accuracy);
 				}
 			}
 		});
 	}
-	
+
 }
 inheritPrototype(BeaconControl, SensorControl);

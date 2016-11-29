@@ -55,7 +55,8 @@ function SensorControl(uri, sensorName, watchFunctionName, updateFunction, reset
 
 	this.startUpdate = function() {
 		if (!options) {
-			options = { frequency: DYMO_STORE.findParameterValue(uri, AUTO_CONTROL_FREQUENCY) };
+			var freq = DYMO_STORE.findParameterValue(uri, AUTO_CONTROL_FREQUENCY);
+			options = { frequency: freq? freq: 100 };
 		}
 		if ($ngSensor) {
 			watch = $ngSensor[watchFunctionName](options);
@@ -101,7 +102,7 @@ function SensorControl(uri, sensorName, watchFunctionName, updateFunction, reset
 					newValue = getAverage(previousValues);
 				}
 			}
-			//update via smoothening ramp (optional)
+			//update via smoothing ramp (optional)
 			if (ramp) {
 				var now = Date.now();
 				var duration;
@@ -114,7 +115,7 @@ function SensorControl(uri, sensorName, watchFunctionName, updateFunction, reset
 				previousUpdateTime = now;
 			} else {
 				//call regular super method
-				Control.prototype.update.call(this, newValue);
+				Control.prototype.updateValue.call(this, newValue);
 			}
 		}
 	}
@@ -126,9 +127,9 @@ function SensorControl(uri, sensorName, watchFunctionName, updateFunction, reset
 
 	function startUpdateRamp(targetValue, duration) {
 		var frequency = DYMO_STORE.findParameterValue(uri, AUTO_CONTROL_FREQUENCY);
-		ramp.startOrUpdate(targetValue, duration, frequency, function(value) {
+		ramp.startOrUpdate(targetValue, duration, frequency? frequency: 100, function(value) {
 			//call regular super method
-			Control.prototype.update.call(self, value);
+			Control.prototype.updateValue.call(self, value);
 		});
 	}
 

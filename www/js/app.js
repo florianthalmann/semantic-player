@@ -59,7 +59,6 @@ angular.module('semanticplayer', ['ionic', 'ngCordova'])
 						control = $scope.sensorControls[control];
 						control.setScopeNgSensorAndStart($scope, ngSensors[control.getSensorName()]);
 					}
-					console.log($scope.manager.getSensorControls(), $scope.manager.getSensorControls().size)
 					loadingDymoAndRendering = false;
 					$scope.updateLoading();
 					$scope.$apply();

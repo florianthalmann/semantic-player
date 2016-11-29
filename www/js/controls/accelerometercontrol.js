@@ -19,7 +19,7 @@ function AccelerometerControl(dimension) {
 			} else {
 				newValue = acceleration.z;
 			}
-			self.update(normalizeAcceleration(newValue));
+			self.updateValue(normalizeAcceleration(newValue));
 		}
 	);
 

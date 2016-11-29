@@ -11,7 +11,7 @@ function CompassControl() {
 		"$cordovaDeviceOrientation",
 		"watchHeading",
 		function(heading) {
-			self.update(heading.trueHeading);
+			self.updateValue(heading.trueHeading);
 		},
 		function() {
 			self.resetReferenceValueAndAverage();

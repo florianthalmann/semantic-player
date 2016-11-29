@@ -17,7 +17,7 @@ function DistanceControl() {
 				reference = [position.coords.latitude, position.coords.longitude];
 			} else {
 				var currentDistance = latLonToMeters(reference[0], reference[1], position.coords.latitude, position.coords.longitude);
-				self.update(currentDistance);
+				self.updateValue(currentDistance);
 			}
 		},
 		function() {
